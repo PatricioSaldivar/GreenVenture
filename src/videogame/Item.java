@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public abstract class Item {
 

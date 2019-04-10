@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public class Game implements Runnable {
 
@@ -35,9 +35,9 @@ public class Game implements Runnable {
     private boolean running;        // to set the game
     private Player player;          // to use a player
     private KeyManager keyManager;  // to manage the keyboard
-    private Screen screen;
-    private ArrayList<Item> list;
-    private Font fontx;
+    private Screen screen;          //to manage screen
+    private ArrayList<Item> list;   // to manage all items in the game
+    private Font fontx;             //to manage a custom font
 
     /**
      * to create title, width and height and set the game is still not running
@@ -79,7 +79,12 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
-
+    /**
+     * To get the custom font
+     *
+     * @return an <code>.ttf</code> value with the height
+     */
+    
     public Font getFontx() {
         return fontx;
     }

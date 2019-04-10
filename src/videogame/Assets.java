@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public class Assets {
     public static BufferedImage background; // to store background image

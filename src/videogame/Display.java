@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public class Display {
     private JFrame jframe;  // this is the app class

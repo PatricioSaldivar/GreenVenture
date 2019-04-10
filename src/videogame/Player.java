@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public class Player extends Item {
 
@@ -35,63 +35,123 @@ public class Player extends Item {
         this.height = height;
         this.game = game;
     }
-
+        /**
+     * To get the size of the inventory that has the player
+     *
+     * @return an <code>int</code> value with the inventory
+     */
     public int getInventory() {
         return inventory;
     }
-
+    /**
+     * To get the width of the player
+     *
+     * @return an <code>int</code> value with the width
+     */
     public int getWidth() {
         return width;
     }
-
+    /**
+     * To set the camara movement in x
+     *
+     * @param <code>SMoveX</code> value with SMovex
+     */
     public void setSMoveX(int SMoveX) {
         this.SMoveX = SMoveX;
     }
-
+    /**
+     * To set the camara movement in y
+     *
+     * @param <code>SMoveY</code> value with SMoveY
+     */
     public void setSMoveY(int SMoveY) {
         this.SMoveY = SMoveY;
     }
-
+    /**
+     * To set the money of the player
+     *
+     * @param <code>money</code> value with the money
+     */
     public void setMoney(int money) {
         this.money = money;
     }
-
+    /**
+     * To set the speed of the player
+     *
+     * @param <code>speed</code> value with speed
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
+    /**
+     * To set the camara movement speed
+     *
+     * @param <code>SpeedCamara</code> value with speed of camara
+     */
     public void setSpeedCamara(int speedCamara) {
         this.speedCamara = speedCamara;
     }
-
+       /**
+     * To get the money
+     *
+     * @return an <code>int</code> value with the money
+     */
     public double getMoney() {
         return money;
     }
-
+       /**
+     * To get the speed of the player
+     *
+     * @return an <code>int</code> value with the speed
+     */
     public int getSpeed() {
         return speed;
     }
-
+       /**
+     * To get the capacity 
+     *
+     * @return an <code>int</code> value with the capacity
+     */
     public int getCapacity() {
         return capacity;
     }
-
+       /**
+     * To get the height of the player
+     *
+     * @return an <code>int</code> value with the height 
+     */
     public int getHeight() {
         return height;
     }
-
+    /**
+     * To set the width of the plyer
+     *
+     * @param <code>width</code> value with width
+     */
     public void setWidth(int width) {
         this.width = width;
     }
-
+     /**
+     * To set the height of the plyer
+     *
+     * @param <code>height</code> value with height
+     */
     public void setHeight(int height) {
         this.height = height;
     }
-
+       /**
+     * To get the x coordinate of the camara
+     *
+     * @return an <code>int</code> value with the x coordinate of the camara
+     */
     public int getSMoveX() {
         return SMoveX;
     }
-
+       /**
+     * To get the y coordinate of the camara
+     *
+     * @return an <code>int</code> value with the y coordinate of the camara
+     */
     public int getSMoveY() {
         return SMoveY;
     }
@@ -99,6 +159,7 @@ public class Player extends Item {
     @Override
     public void tick() {
         // moving player depending on flags
+        //Also moves the camara coordinates depending on flags
         if (game.getKeyManager().up) {
             if (getY() > game.getHeight() / 2 - height / 2) {
                 if (getY() - speed <= game.getHeight() / 2 - height / 2) {
@@ -183,9 +244,6 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
-
-        
-       
     }
 
     @Override

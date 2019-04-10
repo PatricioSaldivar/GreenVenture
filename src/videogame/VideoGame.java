@@ -7,7 +7,7 @@ package videogame;
 
 /**
  *
- * @author antoniomejorado
+ * @author BonfireStudios
  */
 public class VideoGame {
 
