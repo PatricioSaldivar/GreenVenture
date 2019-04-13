@@ -1,6 +1,6 @@
 # Bonfire Studios
-Bonfire Studios es un equipo de desarolladores con el proposito de crear videojuegos de alta gama y competitivos. 
-La mision de Bonfire Studios es crear un centro de entretenimiento que apoye la comunicacion entre compañeros al igual que fortalecer valores de liderazgo y respeto. 
+Bonfire Studios es un equipo de desarollo con el proposito de crear videojuegos competitivos y de alta gama. 
+La misión de Bonfire Studios es convertirse en el centro del entretenimiento de miles de personas y aportar a la construcción  y el fortaleciendo de los valores de un ciudadano global.
 # GreenVenture
-Es un videojuego para mejorar el medio ambiente
+Es un videojuego que pretende sensibilizar y crear conciencia en jóvenes, sobre la preservación del medio ambiente.
 
