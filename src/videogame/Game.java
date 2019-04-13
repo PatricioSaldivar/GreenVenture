@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +39,7 @@ public class Game implements Runnable {
     private Screen screen;          //to manage screen
     private ArrayList<Item> list;   // to manage all items in the game
     private Font fontx;             //to manage a custom font
+    private LinkedList<Trash> trash;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -53,6 +55,7 @@ public class Game implements Runnable {
         running = false;
         keyManager = new KeyManager();
         list = new ArrayList<>(0);
+        trash = new LinkedList<>();
 
         //Adds font from fonts package
     try {
@@ -96,8 +99,15 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
         player = new Player(0, 0, 64, 64, this);
-        screen = new Screen(0, 0, width, height, this, list, player);
-        display.getJframe().addKeyListener(keyManager);
+        screen = new Screen(0, 0, width, height, this, list, player, trash);
+        display.getJframe().addKeyListener(keyManager); 
+        // Generates trash * ONLY ON SCREEN - NEED FIX*
+        for(int i = 0; i < 30; i++){
+            int randX = (int)(Math.random() * ((width - 0) + 1)) + 0;
+            int randY = (int)(Math.random() * ((height - 0) + 1)) + 0;
+            int randType = (int)(Math.random() * ((5 - 0) + 1)) + 0;
+            trash.add(new Trash(randX, randY, 32, 32, randType, this));
+        }
 
     }
 

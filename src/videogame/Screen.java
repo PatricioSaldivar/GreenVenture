@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Screen {
     private ArrayList <Item> list;       // to store all the items except the player
     private int RectangleInfoHeight=48;  // to store the height of the rectangle info
     private KeyManager keyManager;  // to manage the keyboard
+    private LinkedList<Trash> trash;
     
     /**
      * to create the screen with his attributes
@@ -37,9 +39,9 @@ public class Screen {
      * @param y2 to set the y2 position
      * @param game to set the game where the brick is created
      * @param list to set the array of items
-     * @param player to set the plager
+     * @param player to set the player
      */
-    public Screen(int x, int y, int x2, int y2, Game game, ArrayList<Item> list, Player player) {
+    public Screen(int x, int y, int x2, int y2, Game game, ArrayList<Item> list, Player player, LinkedList<Trash> trash) {
         this.x = x;
         this.y = y;
         this.x2 = x2;
@@ -47,6 +49,7 @@ public class Screen {
         this.game = game;
         this.list = list;
         this.player = player;
+        this.trash = trash;
     }
 
      /**
@@ -189,6 +192,12 @@ public class Screen {
         for(int i=0; i<list.size(); i++){
             if(getPerimetro().contains(list.get(i).getPerimetro())){
                 list.get(i).render(g);
+            }
+        }
+        // Renders trash * FIX CAMERA AREA*
+        for(int i = 0; i < trash.size(); i++){
+            if(getPerimetro().contains(trash.get(i).getPerimetro())){
+                trash.get(i).render(g);
             }
         }
           player.render(g);
