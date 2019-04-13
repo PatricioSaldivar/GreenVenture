@@ -101,7 +101,8 @@ public class Game implements Runnable {
         player = new Player(0, 0, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, list, player, trash);
         display.getJframe().addKeyListener(keyManager); 
-        for(int i = 0; i < 100; i++){
+        // Generates trash * ONLY ON SCREEN - NEED FIX*
+        for(int i = 0; i < 30; i++){
             int randX = (int)(Math.random() * ((width - 0) + 1)) + 0;
             int randY = (int)(Math.random() * ((height - 0) + 1)) + 0;
             int randType = (int)(Math.random() * ((5 - 0) + 1)) + 0;

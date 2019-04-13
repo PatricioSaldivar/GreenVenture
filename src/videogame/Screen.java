@@ -194,7 +194,7 @@ public class Screen {
                 list.get(i).render(g);
             }
         }
-        
+        // Renders trash * FIX CAMERA AREA*
         for(int i = 0; i < trash.size(); i++){
             if(getPerimetro().contains(trash.get(i).getPerimetro())){
                 trash.get(i).render(g);
