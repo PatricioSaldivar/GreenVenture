@@ -17,6 +17,7 @@ public class Assets {
     public static BufferedImage playerPortait; // to store the portrait picture of the player
     public static BufferedImage mainMenu;       // to store the main menu
     public static BufferedImage pause;       // to store the pause
+    public static BufferedImage trash[]; // to store the trash
 
     /**
      * initializing the images of the game
@@ -27,6 +28,13 @@ public class Assets {
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
         mainMenu = ImageLoader.loadImage("/images/Menu.png");
         pause = ImageLoader.loadImage("/images/Pausa.png");
+        trash = new BufferedImage[6];
+        trash[0] = ImageLoader.loadImage("/images/Can.png");
+        trash[1] = ImageLoader.loadImage("/images/Gbottle-1.png");
+        trash[2] = ImageLoader.loadImage("/images/Litro.png");
+        trash[3] = ImageLoader.loadImage("/images/Pbag.png");
+        trash[4] = ImageLoader.loadImage("/images/Pbottle.png");
+        trash[5] = ImageLoader.loadImage("/images/Tcan.png");
     }
     
 }

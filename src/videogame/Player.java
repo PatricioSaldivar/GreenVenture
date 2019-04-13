@@ -124,7 +124,7 @@ public class Player extends Item {
         return height;
     }
     /**
-     * To set the width of the plyer
+     * To set the width of the player
      *
      * @param <code>width</code> value with width
      */
@@ -132,7 +132,7 @@ public class Player extends Item {
         this.width = width;
     }
      /**
-     * To set the height of the plyer
+     * To set the height of the player
      *
      * @param <code>height</code> value with height
      */
