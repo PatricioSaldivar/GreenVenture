@@ -14,7 +14,9 @@ import java.awt.image.BufferedImage;
 public class Assets {
     public static BufferedImage background; // to store background image
     public static BufferedImage player;     // to store the player image
-    public static BufferedImage playerPortait; //to stor the portrait picture of the player
+    public static BufferedImage playerPortait; // to store the portrait picture of the player
+    public static BufferedImage mainMenu;       // to store the main menu
+    public static BufferedImage pause;       // to store the pause
 
     /**
      * initializing the images of the game
@@ -23,6 +25,8 @@ public class Assets {
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
+        mainMenu = ImageLoader.loadImage("/images/Menu.png");
+        pause = ImageLoader.loadImage("/images/Pausa.png");
     }
     
 }

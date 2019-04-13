@@ -26,6 +26,7 @@ public class Screen {
     private Player player;               // to store the player
     private ArrayList <Item> list;       // to store all the items except the player
     private int RectangleInfoHeight=48;  // to store the height of the rectangle info
+    private KeyManager keyManager;  // to manage the keyboard
     
     /**
      * to create the screen with his attributes
@@ -171,6 +172,7 @@ public class Screen {
       
         
        public void render(Graphics g) {
+               
            //Variable to create transparency on images and to create 2 dimensional graphics effects
            Graphics2D g2d = (Graphics2D) g;
            //Assigns values to screen parameters to follow the player
@@ -181,6 +183,8 @@ public class Screen {
         
         //Draws the background depending of the screen parameter   
         g.drawImage(Assets.background,0,0,game.getWidth(),game.getHeight(),x, y, x2, y2, Color.black, null);
+         
+        
         //Cycle to render items that are only in the screen
         for(int i=0; i<list.size(); i++){
             if(getPerimetro().contains(list.get(i).getPerimetro())){

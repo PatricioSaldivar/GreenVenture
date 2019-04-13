@@ -18,6 +18,8 @@ public class KeyManager implements KeyListener {
     public boolean down;    // flag to move down the player
     public boolean left;    // flag to move left the player
     public boolean right;   // flag to move right the player
+    public boolean pause = false;   //flag to pause the game
+    public int startGame = 1; //flag to start game in MainMenu
 
     private boolean keys[];  // to store all the flags for every key
     
@@ -31,6 +33,15 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        // set true or false depending on the pause botton
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            pause = !pause;
+        }
+        
+        // set true or false depending on the start botton
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            startGame++;
+        }
         // set true to every key pressed
         keys[e.getKeyCode()] = true;
     }

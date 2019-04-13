@@ -138,8 +138,10 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        // avancing player with colision
-        player.tick();
+        if (!keyManager.pause){
+            // avancing player with colision
+            player.tick();
+        }
     }
 
     private void render() {
@@ -156,11 +158,23 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
-            screen.render(g);
+            //Draws main menu image (Need to erase because it doesnt work, only used for beta purpose)
+            if(keyManager.startGame == 1){
+               g.drawImage(Assets.mainMenu,0,0,512,512,null);  
+            } else {
+                //Draws Pause image when pausing game
+                if (keyManager.pause) {
+                    g.drawImage(Assets.pause, 0, 0,512,512, null);  
+                } else {
+                //Draws the screen that follows the player   
+                    screen.render(g);
+                }
+            }
             bs.show();
             g.dispose();
         }
-
+       
+        
     }
 
     /**
