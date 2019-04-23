@@ -212,10 +212,10 @@ public class Screen {
             g2d.setColor(new Color(114, 24, 23));
             g2d.setFont(game.getFontx());
             DecimalFormat dform = new DecimalFormat("0.00");
-            String message = "Money:" + dform.format(player.getMoney());
+            String message = "Dinero:" + dform.format(player.getMoney());
             g2d.drawString(message, 64, RectangleInfoHeight*2/3);
             g2d.setFont(game.getFontx());
-            message = "Inventory:"+player.getInventory()+"/" + player.getCapacity();
+            message = "Inventario:"+player.getInventory()+"/" + player.getCapacity();
             g2d.drawString(message, 272, RectangleInfoHeight*2/3);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
     }

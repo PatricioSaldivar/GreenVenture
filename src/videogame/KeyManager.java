@@ -39,7 +39,7 @@ public class KeyManager implements KeyListener {
         }
         
         // set true or false depending on the start botton
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             startGame++;
         }
         // set true to every key pressed
