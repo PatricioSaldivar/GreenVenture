@@ -25,7 +25,6 @@ public class Screen {
     private int y2;                      // to store the y position plus the height of the display
     private Game game;                   // to store the game
     private Player player;               // to store the player
-    private ArrayList <Item> list;       // to store all the items except the player
     private int RectangleInfoHeight=48;  // to store the height of the rectangle info
     private KeyManager keyManager;  // to manage the keyboard
     private LinkedList<Trash> trash;
@@ -41,13 +40,12 @@ public class Screen {
      * @param list to set the array of items
      * @param player to set the player
      */
-    public Screen(int x, int y, int x2, int y2, Game game, ArrayList<Item> list, Player player, LinkedList<Trash> trash) {
+    public Screen(int x, int y, int x2, int y2, Game game, Player player, LinkedList<Trash> trash) {
         this.x = x;
         this.y = y;
         this.x2 = x2;
         this.y2 = y2;
         this.game = game;
-        this.list = list;
         this.player = player;
         this.trash = trash;
     }
@@ -100,13 +98,6 @@ public class Screen {
         return player;
     }
 
-    /**
-     * To get the item list
-     * @return an <code>ArrayList</code> value with the item list
-     */
-    public ArrayList getList() {
-        return list;
-    }
 
     /**
      * Set the x of the screen
@@ -156,13 +147,6 @@ public class Screen {
         this.player = player;
     }
 
-    /**
-     * Set the items list
-     * @param list <b>list</b> value with the item list
-     */
-    public void setList(ArrayList list) {
-        this.list = list;
-    }
     
     /**
      * To get the rectangle that covers the perimeter of the screen 
@@ -170,7 +154,8 @@ public class Screen {
      */
     public Rectangle getPerimetro() {
         //creates rectangle 
-        return new Rectangle(getX(), getY(), getX2() , getY2());
+        
+        return new Rectangle(-32,-32,game.getWidth()+64,game.getHeight()+64);
     }
       
         
@@ -180,23 +165,20 @@ public class Screen {
            Graphics2D g2d = (Graphics2D) g;
            //Assigns values to screen parameters to follow the player
            x=player.getSMoveX();
-           x2=player.getSMoveX()+Assets.background.getWidth()/4;
+           x2=player.getSMoveX()+Assets.background.getWidth()/8;
            y=player.getSMoveY();
-           y2=player.getSMoveY()+ Assets.background.getHeight()/4;
+           y2=player.getSMoveY()+ Assets.background.getHeight()/8;
         
         //Draws the background depending of the screen parameter   
         g.drawImage(Assets.background,0,0,game.getWidth(),game.getHeight(),x, y, x2, y2, Color.black, null);
          
         
-        //Cycle to render items that are only in the screen
-        for(int i=0; i<list.size(); i++){
-            if(getPerimetro().contains(list.get(i).getPerimetro())){
-                list.get(i).render(g);
-            }
-        }
         // Renders trash * FIX CAMERA AREA*
         for(int i = 0; i < trash.size(); i++){
-            if(getPerimetro().contains(trash.get(i).getPerimetro())){
+            trash.get(i).tick();
+            if(trash.get(i).isDead()){
+                trash.remove(i);
+            }else if(getPerimetro().contains(trash.get(i).getPerimetro())){
                 trash.get(i).render(g);
             }
         }

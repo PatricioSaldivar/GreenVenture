@@ -74,6 +74,10 @@ public class Game implements Runnable {
         return width;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     /**
      * To get the height of the game window
      *
@@ -99,14 +103,14 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
         player = new Player(0, 0, 64, 64, this);
-        screen = new Screen(0, 0, width, height, this, list, player, trash);
+        screen = new Screen(0, 0, width, height, this, player, trash);
         display.getJframe().addKeyListener(keyManager); 
         // Generates trash * ONLY ON SCREEN - NEED FIX*
         for(int i = 0; i < 30; i++){
             int randX = (int)(Math.random() * ((width - 0) + 1)) + 0;
             int randY = (int)(Math.random() * ((height - 0) + 1)) + 0;
             int randType = (int)(Math.random() * ((5 - 0) + 1)) + 0;
-            trash.add(new Trash(randX, randY, 32, 32, randType, this));
+            trash.add(new Trash(randX, randY, 32, 32, randType, this, screen));
         }
 
     }

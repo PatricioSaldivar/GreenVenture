@@ -20,6 +20,9 @@ public class KeyManager implements KeyListener {
     public boolean right;   // flag to move right the player
     public boolean pause = false;   //flag to pause the game
     public int startGame = 1; //flag to start game in MainMenu
+    public boolean space;   // flag to mark the space button
+    public boolean helperSpace;   // flag to mark the space button just clicked
+    
 
     private boolean keys[];  // to store all the flags for every key
     
@@ -37,11 +40,12 @@ public class KeyManager implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_P) {
             pause = !pause;
         }
-        
-        // set true or false depending on the start botton
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+          if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+              space = helperSpace;
             startGame++;
-        }
+            helperSpace=false;
+        }else
+              helperSpace=true;
         // set true to every key pressed
         keys[e.getKeyCode()] = true;
     }
@@ -60,5 +64,6 @@ public class KeyManager implements KeyListener {
         down = keys[KeyEvent.VK_DOWN];
         left = keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_RIGHT];
+        space = keys[KeyEvent.VK_SPACE];
     }
 }
