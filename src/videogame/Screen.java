@@ -185,6 +185,7 @@ public class Screen {
           player.render(g);
          
            //Displays the top rectangle with information of the player
+           if(!game.getKeyManager().pause){
             g2d.setColor(new Color(249, 171, 85));
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 5 * 0.1f));
             g2d.fillRect(0, 0, game.getWidth(), RectangleInfoHeight);
@@ -200,5 +201,6 @@ public class Screen {
             message = "Inventario:"+player.getInventory()+"/" + player.getCapacity();
             g2d.drawString(message, 272, RectangleInfoHeight*2/3);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+           }
     }
 }

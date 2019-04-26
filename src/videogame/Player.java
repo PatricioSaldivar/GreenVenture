@@ -181,7 +181,7 @@ public class Player extends Item {
     public void tick() {
         // moving player depending on flags
         //Also moves the camara coordinates depending on flags
-        pick= game.getKeyManager().space;
+        pick= game.getKeyManager().space && !game.getKeyManager().helperSpace;
         
         if (game.getKeyManager().up) {
             if (getY() > game.getHeight() / 2 - height / 2) {
