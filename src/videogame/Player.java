@@ -116,7 +116,7 @@ public class Player extends Item {
     public int getCapacity() {
         return capacity;
     }
-       /**
+     /**
      * To get the height of the player
      *
      * @return an <code>int</code> value with the height 

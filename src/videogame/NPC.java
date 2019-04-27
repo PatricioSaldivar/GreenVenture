@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Bonfire
+ * @author BonfireStudios
  */
 public class NPC extends Item {
 private int width;

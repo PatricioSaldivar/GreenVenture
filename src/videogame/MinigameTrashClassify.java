@@ -5,6 +5,7 @@
  */
 package videogame;
 
+import MinigameClassify.TrashCan;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -39,7 +40,9 @@ public class MinigameTrashClassify implements Runnable {
     private boolean running;        // to set the game
     private Player player;          // to use a player
     private KeyManager keyManager;  // to manage the keyboard
-    private Font fontx;             //to manage a custom font
+    private Font fontx;             // to manage a custom font
+    private TrashCan inTrashCan;    // to create inorganic trash can
+    private TrashCan orTrashCan;    // to create organic trash can
    
     
    
@@ -112,6 +115,9 @@ public class MinigameTrashClassify implements Runnable {
      */
     private void init() {
         Assets.init();
+        //creates organinc an inorganic trash cans
+        inTrashCan = new TrashCan(64, 384, 128, 128, false, null);
+        orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, null);
     }
 
     @Override
@@ -150,10 +156,7 @@ public class MinigameTrashClassify implements Runnable {
     }
 
     private void tick() {
-        keyManager.tick();
-        
-            
-                
+        keyManager.tick();        
     }
 
     private void render() {
@@ -178,10 +181,13 @@ public class MinigameTrashClassify implements Runnable {
                     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
                     g2d.fillRect(0, 0, width, height); 
                     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-                    g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null); 
-                    
+                    g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null);
                     */
-                    }
+                    } else {
+                    g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
+                    inTrashCan.render(g);
+                    orTrashCan.render(g);
+                }
             bs.show();
             g.dispose();
         }
