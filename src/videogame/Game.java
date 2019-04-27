@@ -178,7 +178,7 @@ public class Game implements Runnable {
             if(keyManager.menu){
                  MainMenu m = new MainMenu("MainMenu", 512, 512,display);
                  m.start();
-                this.stop();
+                running=false;
                     }
         }
             
