@@ -11,6 +11,11 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
 /**
@@ -113,10 +118,10 @@ public class MainMenu implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        if(keyManager.space==true && !keyManager.helperSpace){
+        if(keyManager.space==true){
             Game g = new Game("Juego", 512,512, display,keyManager);
             g.start();
-            this.stop();
+            running=false;
         }
     }
 
@@ -133,8 +138,8 @@ public class MainMenu implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.drawImage(Assets.mainMenu, 0, 0, width, height,null);
-            
+            g.clearRect(0, 0, width, height);        
+           g.drawImage(Assets.mainMenu, 0, 0, width, height,null);
             bs.show();
             g.dispose();
         }
