@@ -18,13 +18,23 @@ public class Trash extends Item{
     private int height;
     private Game game;
     private int type;
+    private Screen screen;
+    private final int iniX;
+    private final int iniY;
+    public boolean dead=false;
+    private int npcId;
+            
 
-    public Trash(int x, int y, int width, int height, int type, Game game) {
+    public Trash(int x, int y, int width, int height, int type, Game game, Screen screen, int npcId) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.type = type;
         this.game = game;
+        this.screen = screen;
+        this.npcId = npcId;
+        iniX=x;
+        iniY=y;
     }
     
     public int getX(){
@@ -47,12 +57,29 @@ public class Trash extends Item{
         return type;
     }
 
-    @Override
-    public void tick() {
-        
+    public boolean isDead() {
+        return dead;
     }
 
+    public int getNpcId() {
+        return npcId;
+    }
+    
+
     @Override
+    public void tick() {
+        x= iniX-screen.getX();
+        y= iniY-screen.getY();
+        
+        if(game.getPlayer().intersectsTrash(this) && game.getPlayer().isPick() && 
+                game.getPlayer().getCapacity()>game.getPlayer().getInventory()){
+            game.getPlayer().setInventory(game.getPlayer().getInventory()+1);
+            dead=true;
+        }
+
+          
+    }
+
     public void render(Graphics g) {
         g.drawImage(Assets.trash[getType()], getX(), getY(), getWidth(), getHeight(), null);
     }

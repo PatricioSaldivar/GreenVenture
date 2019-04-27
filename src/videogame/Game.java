@@ -5,16 +5,19 @@
  */
 package videogame;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -37,9 +40,10 @@ public class Game implements Runnable {
     private Player player;          // to use a player
     private KeyManager keyManager;  // to manage the keyboard
     private Screen screen;          //to manage screen
-    private ArrayList<Item> list;   // to manage all items in the game
+    private ArrayList<NPC> npcs;   // to manage all items in the game
     private Font fontx;             //to manage a custom font
     private LinkedList<Trash> trash;
+   
 
     /**
      * to create title, width and height and set the game is still not running
@@ -54,15 +58,19 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        list = new ArrayList<>(0);
+        npcs = new ArrayList<>(0);
         trash = new LinkedList<>();
 
         //Adds font from fonts package
-    try {
-        fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
-    } catch (FontFormatException | IOException ex) {
+        try {
+            fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
+        } catch (FontFormatException | IOException ex) {
+        }
+
     }
 
+    public Graphics getG() {
+        return g;
     }
 
     /**
@@ -74,6 +82,10 @@ public class Game implements Runnable {
         return width;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     /**
      * To get the height of the game window
      *
@@ -82,15 +94,26 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
+
     /**
      * To get the custom font
      *
      * @return an <code>.ttf</code> value with the height
      */
-    
+
     public Font getFontx() {
         return fontx;
     }
+
+    public LinkedList<Trash> getTrash() {
+        return trash;
+    }
+
+    public ArrayList<NPC> getNpcs() {
+        return npcs;
+    }
+    
+    
 
     /**
      * initializing the display window of the game
@@ -99,15 +122,20 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         Assets.init();
         player = new Player(0, 0, 64, 64, this);
-        screen = new Screen(0, 0, width, height, this, list, player, trash);
-        display.getJframe().addKeyListener(keyManager); 
+        screen = new Screen(0, 0, width, height, this, player, trash);
+        display.getJframe().addKeyListener(keyManager);
         // Generates trash * ONLY ON SCREEN - NEED FIX*
-        for(int i = 0; i < 30; i++){
-            int randX = (int)(Math.random() * ((width - 0) + 1)) + 0;
-            int randY = (int)(Math.random() * ((height - 0) + 1)) + 0;
-            int randType = (int)(Math.random() * ((5 - 0) + 1)) + 0;
-            trash.add(new Trash(randX, randY, 32, 32, randType, this));
+       /* for (int i = 0; i < 100; i++) {
+            int randX = (int) (Math.random() * ((Assets.background.getWidth() - 64) + 1)) + 0;
+            int randY = (int) (Math.random() * ((Assets.background.getHeight() - 64) + 1)) + 0;
+            int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
+            trash.add(new Trash(randX, randY, 32, 32, randType, this, screen));
         }
+        */
+
+       npcs.add(new NPC(400, 400, 64, 64, 0, this,screen,0));
+       npcs.add(new NPC(650, 400, 64, 64, 0, this,screen,1));
+       npcs.add(new NPC(800, 400, 64, 64, 0, this,screen,2));
 
     }
 
@@ -148,9 +176,12 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        if (!keyManager.pause){
+        if (!keyManager.pause) {
             // avancing player with colision
             player.tick();
+            for(int i=0; i<npcs.size(); i++){
+                npcs.get(i).tick();
+            }
         }
     }
 
@@ -169,22 +200,27 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
             //Draws main menu image (Need to erase because it doesnt work, only used for beta purpose)
-            if(keyManager.startGame == 1){
-               g.drawImage(Assets.mainMenu,0,0,512,512,null);  
+            if (keyManager.startGame == 1) {
+                g.drawImage(Assets.mainMenu, 0, 0, 512, 512, null);
             } else {
+                screen.render(g); //Draws the screen that follows the player
+                
                 //Draws Pause image when pausing game
                 if (keyManager.pause) {
-                    g.drawImage(Assets.pause, 0, 0,512,512, null);  
-                } else {
-                //Draws the screen that follows the player   
-                    screen.render(g);
-                }
+                    //g.drawImage(Assets.pause,0,0,512,512,null); 
+                    Graphics2D g2d = (Graphics2D) g;
+                    g2d.setColor(Color.BLACK);
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
+                    g2d.fillRect(0, 0, width, height); 
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+                    //g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null); 
+                    g.drawImage(Assets.pause,0,0,width,height,null); 
+                    }
             }
             bs.show();
             g.dispose();
         }
-       
-        
+
     }
 
     /**

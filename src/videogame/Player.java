@@ -23,11 +23,12 @@ public class Player extends Item {
     private Game game;
     private int SMoveX = 0;
     private int SMoveY = 0;
-    private double money = 1000.10;
+    private double money = 00.00;
     private int speed = 5;
-    private int speedCamara = 10;
-    private int capacity = 100;
-    private int inventory = 100;
+    private int speedCamara = 5;
+    private int capacity = 10;
+    private int inventory = 0;
+    private boolean pick = false;
 
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y);
@@ -156,10 +157,32 @@ public class Player extends Item {
         return SMoveY;
     }
 
+    public boolean isPick() {
+        return pick;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setPick(boolean pick) {
+        this.pick = pick;
+    }
+
     @Override
     public void tick() {
         // moving player depending on flags
         //Also moves the camara coordinates depending on flags
+        pick= game.getKeyManager().space && !game.getKeyManager().helperSpace;
+        
         if (game.getKeyManager().up) {
             if (getY() > game.getHeight() / 2 - height / 2) {
                 if (getY() - speed <= game.getHeight() / 2 - height / 2) {
@@ -182,7 +205,7 @@ public class Player extends Item {
                 if (getY() + speed >= game.getHeight() / 2 - height / 2) {
                     setY(game.getHeight() / 2 - height / 2);
                 } else {
-                    setY(getY() + speed);
+                    setY( (getY() + speed));
                 }
             } else {
                 if (SMoveY + speedCamara >= Assets.background.getHeight() * 3 / 4) {
@@ -239,6 +262,9 @@ public class Player extends Item {
             setY(0);
         }
          
+        
+        
+        
     }
 
     @Override
@@ -250,5 +276,9 @@ public class Player extends Item {
     public Rectangle getPerimetro() {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
 
+    }
+    
+    public boolean intersectsTrash(Trash t) {
+    return  getPerimetro().intersects(t.getPerimetro());
     }
 }
