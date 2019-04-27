@@ -177,12 +177,16 @@ public class Screen {
         for(int i = 0; i < trash.size(); i++){
             trash.get(i).tick();
             if(trash.get(i).isDead()){
+                game.getNpcs().get(trash.get(i).getNpcId()).setTrashThrown();
                 trash.remove(i);
             }else if(getPerimetro().contains(trash.get(i).getPerimetro())){
                 trash.get(i).render(g);
             }
         }
           player.render(g);
+          for(int i=0; i<game.getNpcs().size(); i++){
+                game.getNpcs().get(i).render(g);
+            }
          
            //Displays the top rectangle with information of the player
            if(!game.getKeyManager().pause){

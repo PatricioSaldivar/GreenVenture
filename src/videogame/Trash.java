@@ -22,15 +22,17 @@ public class Trash extends Item{
     private final int iniX;
     private final int iniY;
     public boolean dead=false;
+    private int npcId;
             
 
-    public Trash(int x, int y, int width, int height, int type, Game game, Screen screen) {
+    public Trash(int x, int y, int width, int height, int type, Game game, Screen screen, int npcId) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.type = type;
         this.game = game;
         this.screen = screen;
+        this.npcId = npcId;
         iniX=x;
         iniY=y;
     }
@@ -57,6 +59,10 @@ public class Trash extends Item{
 
     public boolean isDead() {
         return dead;
+    }
+
+    public int getNpcId() {
+        return npcId;
     }
     
 

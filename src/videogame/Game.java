@@ -40,9 +40,10 @@ public class Game implements Runnable {
     private Player player;          // to use a player
     private KeyManager keyManager;  // to manage the keyboard
     private Screen screen;          //to manage screen
-    private ArrayList<Item> list;   // to manage all items in the game
+    private ArrayList<NPC> npcs;   // to manage all items in the game
     private Font fontx;             //to manage a custom font
     private LinkedList<Trash> trash;
+   
 
     /**
      * to create title, width and height and set the game is still not running
@@ -57,7 +58,7 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        list = new ArrayList<>(0);
+        npcs = new ArrayList<>(0);
         trash = new LinkedList<>();
 
         //Adds font from fonts package
@@ -104,6 +105,16 @@ public class Game implements Runnable {
         return fontx;
     }
 
+    public LinkedList<Trash> getTrash() {
+        return trash;
+    }
+
+    public ArrayList<NPC> getNpcs() {
+        return npcs;
+    }
+    
+    
+
     /**
      * initializing the display window of the game
      */
@@ -114,12 +125,17 @@ public class Game implements Runnable {
         screen = new Screen(0, 0, width, height, this, player, trash);
         display.getJframe().addKeyListener(keyManager);
         // Generates trash * ONLY ON SCREEN - NEED FIX*
-        for (int i = 0; i < 100; i++) {
+       /* for (int i = 0; i < 100; i++) {
             int randX = (int) (Math.random() * ((Assets.background.getWidth() - 64) + 1)) + 0;
             int randY = (int) (Math.random() * ((Assets.background.getHeight() - 64) + 1)) + 0;
             int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
             trash.add(new Trash(randX, randY, 32, 32, randType, this, screen));
         }
+        */
+
+       npcs.add(new NPC(400, 400, 64, 64, 0, this,screen,0));
+       npcs.add(new NPC(650, 400, 64, 64, 0, this,screen,1));
+       npcs.add(new NPC(800, 400, 64, 64, 0, this,screen,2));
 
     }
 
@@ -163,6 +179,9 @@ public class Game implements Runnable {
         if (!keyManager.pause) {
             // avancing player with colision
             player.tick();
+            for(int i=0; i<npcs.size(); i++){
+                npcs.get(i).tick();
+            }
         }
     }
 
@@ -191,14 +210,11 @@ public class Game implements Runnable {
                     //g.drawImage(Assets.pause,0,0,512,512,null); 
                     Graphics2D g2d = (Graphics2D) g;
                     g2d.setColor(Color.BLACK);
-                    
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 5 * 0.1f));
-                    g2d.fillRect(0, 0, width, height);
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 7 * 0.1f));
-                    g2d.setColor(Color.WHITE);
-                    g2d.fillRect(width/4,height/6,width/2,height*2/3);       
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
+                    g2d.fillRect(0, 0, width, height); 
                     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-                    g.drawImage(Assets.pause,width/4,height/6,width/2,height*2/3,null);               
+                    //g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null); 
+                    g.drawImage(Assets.pause,0,0,width,height,null); 
                     }
             }
             bs.show();
