@@ -16,8 +16,8 @@ public class VideoGame {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Game g = new Game("Juego", 512,512);
-        g.start();
+        MainMenu m = new MainMenu("MainMenu", 512, 512,new Display("Menu", 512, 512));
+        m.start();
     }
     
 }
