@@ -18,6 +18,11 @@ public class Assets {
     public static BufferedImage mainMenu;       // to store the main menu
     public static BufferedImage pause;       // to store the pause
     public static BufferedImage trash[]; // to store the trash
+    
+    //Miinigame 1 Assests
+    public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
+    public static BufferedImage orTrashCan;         // to store the image of the organic trash can
+    public static BufferedImage minigameWallpaper;  // to store the image of the minigame wallpaper
 
     /**
      * initializing the images of the game
@@ -36,6 +41,11 @@ public class Assets {
         trash[3] = ImageLoader.loadImage("/images/Pbag.png");
         trash[4] = ImageLoader.loadImage("/images/Pbottle.png");
         trash[5] = ImageLoader.loadImage("/images/Tcan.png");
+        
+        //Minigame 1 loader
+        inTrashCan = ImageLoader.loadImage("/images_minigame1/inorganicTrashCan.png");
+        orTrashCan = ImageLoader.loadImage("/images_minigame1/organicTrashCan.png");
+        minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
     }
     
 }
