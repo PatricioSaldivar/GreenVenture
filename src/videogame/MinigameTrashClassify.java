@@ -7,17 +7,28 @@ package videogame;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
+import java.awt.image.ImageObserver;
+import java.io.File;
 import java.io.IOException;
-
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author yeyog
+ * @author BonfireStudios
  */
-public class MainMenu implements Runnable {
+public class MinigameTrashClassify implements Runnable {
+
     private BufferStrategy bs;      // to have several buffers when displaying
     private Graphics g;             // to paint objects
     private Display display;        // to display in the game
@@ -25,8 +36,14 @@ public class MainMenu implements Runnable {
     private int width;              // width of the window
     private int height;             // height of the window
     private Thread thread;          // thread to create the game
-    private boolean running;        // to set the gamer
+    private boolean running;        // to set the game
+    private Player player;          // to use a player
     private KeyManager keyManager;  // to manage the keyboard
+    private Font fontx;             //to manage a custom font
+   
+    
+   
+
     /**
      * to create title, width and height and set the game is still not running
      *
@@ -34,14 +51,21 @@ public class MainMenu implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public MainMenu(String title, int width, int height, Display display) {
+    public MinigameTrashClassify(String title, int width, int height, Display display, KeyManager keyManager) {
         this.title = title;
         this.width = width;
         this.height = height;
         running = false;
-        keyManager = new KeyManager();
+        this.keyManager = keyManager;
         this.display = display;
-        display.setTitle("Menu");
+        display.setTitle("Ciudad");
+
+        //Adds font from fonts package
+        try {
+            fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
+        } catch (FontFormatException | IOException ex) {
+        }
+
     }
 
     public Graphics getG() {
@@ -56,6 +80,11 @@ public class MainMenu implements Runnable {
     public int getWidth() {
         return width;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
     /**
      * To get the height of the game window
      *
@@ -63,15 +92,26 @@ public class MainMenu implements Runnable {
      */
     public int getHeight() {
         return height;
-    }    
+    }
+
+    /**
+     * To get the custom font
+     *
+     * @return an <code>.ttf</code> value with the height
+     */
+
+    public Font getFontx() {
+        return fontx;
+    }
+
+    
+    
 
     /**
      * initializing the display window of the game
      */
     private void init() {
         Assets.init();
-        display.getJframe().addKeyListener(keyManager);
-
     }
 
     @Override
@@ -99,10 +139,8 @@ public class MainMenu implements Runnable {
             if (delta >= 1) {
                 tick();
                 render();
-                
                 delta--;
             }
-            
         }
         stop();
     }
@@ -113,11 +151,9 @@ public class MainMenu implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        if(keyManager.space==true && !keyManager.helperSpace){
-            Game g = new Game("Juego", 512,512, display,keyManager);
-            g.start();
-            this.stop();
-        }
+        
+            
+                
     }
 
     private void render() {
@@ -133,8 +169,19 @@ public class MainMenu implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.drawImage(Assets.mainMenu, 0, 0, width, height,null);
-            
+            g.clearRect(0, 0, width, height);   
+                //Draws Pause image when pausing game
+                if (keyManager.pause) {
+                    g.drawImage(Assets.pause,0,0,512,512,null); 
+                    /*Graphics2D g2d = (Graphics2D) g;
+                    g2d.setColor(Color.BLACK);
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
+                    g2d.fillRect(0, 0, width, height); 
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+                    g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null); 
+                    
+                    */
+                    }
             bs.show();
             g.dispose();
         }
@@ -163,9 +210,7 @@ public class MainMenu implements Runnable {
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
-
         }
     }
 
 }
-    

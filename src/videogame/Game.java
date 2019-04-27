@@ -43,7 +43,7 @@ public class Game implements Runnable {
     private ArrayList<NPC> npcs;   // to manage all items in the game
     private Font fontx;             //to manage a custom font
     private LinkedList<Trash> trash;
-    MainMenu mainMenu;
+    
    
 
     /**
@@ -53,7 +53,7 @@ public class Game implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public Game(String title, int width, int height, Display display, KeyManager keyManager, MainMenu mainMenu) {
+    public Game(String title, int width, int height, Display display, KeyManager keyManager) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -63,7 +63,6 @@ public class Game implements Runnable {
         trash = new LinkedList<>();
         this.display = display;
         display.setTitle("Ciudad");
-        this.mainMenu = mainMenu;
 
         //Adds font from fonts package
         try {
