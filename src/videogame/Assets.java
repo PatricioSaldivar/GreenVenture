@@ -26,7 +26,7 @@ public class Assets {
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
-        mainMenu = ImageLoader.loadImage("/images/Menu.png");
+        mainMenu = ImageLoader.loadImage("/images/MainMenu.png");
         pause = ImageLoader.loadImage("/images/Pausa.png");
         // Trash sprite array
         trash = new BufferedImage[6];

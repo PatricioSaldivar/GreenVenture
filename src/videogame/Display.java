@@ -78,4 +78,9 @@ public class Display {
     public Canvas getCanvas() {
         return canvas;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
 }
