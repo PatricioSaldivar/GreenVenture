@@ -42,9 +42,9 @@ public class Game implements Runnable {
     private Screen screen;          //to manage screen
     private ArrayList<NPC> npcs;   // to manage all items in the game
     private Font fontx;             //to manage a custom font
-    private LinkedList<Trash> trash;
-    
-   
+    private LinkedList<Trash> trash; // to manage the trash taht is in the game
+    private Animation animation;     // to manage the animations of the objects
+    private int pauseIndex = 5;          // to storw the index of the pause selector
 
     /**
      * to create title, width and height and set the game is still not running
@@ -52,6 +52,8 @@ public class Game implements Runnable {
      * @param title to set the title of the window
      * @param width to set the width of the window
      * @param height to set the height of the window
+     * @param display
+     * @param keyManager
      */
     public Game(String title, int width, int height, Display display, KeyManager keyManager) {
         this.title = title;
@@ -103,7 +105,6 @@ public class Game implements Runnable {
      *
      * @return an <code>.ttf</code> value with the height
      */
-
     public Font getFontx() {
         return fontx;
     }
@@ -115,8 +116,6 @@ public class Game implements Runnable {
     public ArrayList<NPC> getNpcs() {
         return npcs;
     }
-    
-    
 
     /**
      * initializing the display window of the game
@@ -125,9 +124,10 @@ public class Game implements Runnable {
         Assets.init();
         player = new Player(0, 0, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, player, trash);
-       npcs.add(new NPC(400, 400, 64, 64, 0, this,screen,0));
-       npcs.add(new NPC(650, 400, 64, 64, 0, this,screen,1));
-       npcs.add(new NPC(800, 400, 64, 64, 0, this,screen,2));
+        npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
+        npcs.add(new NPC(650, 400, 64, 64, 0, this, screen, 1));
+        npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
+        animation = new Animation(Assets.pausaSave, 100);
 
     }
 
@@ -171,18 +171,35 @@ public class Game implements Runnable {
         if (!keyManager.pause) {
             // avancing player with colision
             player.tick();
-            for(int i=0; i<npcs.size(); i++){
+            for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
             }
-        }else{
-            if(keyManager.menu){
-                 MainMenu m = new MainMenu("MainMenu", 512, 512,display);
-                 m.start();
+        } else {
+            animation.tick();
+            if (pauseIndex != keyManager.pauseSelector) {
+                switch (keyManager.pauseSelector) {
+                    case 0:
+                        animation = new Animation(Assets.pausaSave, 300);
+                        break;
+                    case 1:
+                        animation = new Animation(Assets.pausaStats, 300);
+                        break;
+                    case 2:
+                        animation = new Animation(Assets.pausaMenuInstructions, 300);
+                        break;
+                    case 3:
+                        animation = new Animation(Assets.pausaMainMenu, 300);
+                        break;
+                }
+                pauseIndex = keyManager.pauseSelector;
+            }
+            if(keyManager.space && pauseIndex==3){
+                MainMenu m = new MainMenu("MainMenu", 512, 512,display);
+                m.start();
                 running=false;
-                    }
+                }
         }
-            
-                
+
     }
 
     private void render() {
@@ -200,18 +217,10 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
             screen.render(g); //Draws the screen that follows the player    
-                //Draws Pause image when pausing game
-                if (keyManager.pause) {
-                    g.drawImage(Assets.pause,0,0,512,512,null); 
-                    /*Graphics2D g2d = (Graphics2D) g;
-                    g2d.setColor(Color.BLACK);
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
-                    g2d.fillRect(0, 0, width, height); 
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-                    g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null); 
-                    
-                    */
-                    }
+            //Draws Pause image when pausing game
+            if (keyManager.pause) {
+                g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
+            }
             bs.show();
             g.dispose();
         }

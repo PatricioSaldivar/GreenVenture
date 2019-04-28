@@ -15,13 +15,17 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener {
     
     public boolean up;      // flag to move up the player
+    public boolean helperUp;// flag to mark the up just clicked
+    public boolean helperDown;// flag to mark the down just clicked
     public boolean down;    // flag to move down the player
     public boolean left;    // flag to move left the player
     public boolean right;   // flag to move right the player
     public boolean pause = false;   //flag to pause the game
     public boolean space;   // flag to mark the space button
     public boolean helperSpace;   // flag to mark the space button just clicked
-    public boolean menu;
+    public boolean menu;            
+    public int pauseSelector=0;   //flag to select which pause selection of the pause is being selected
+    public int pauseSelectorHelper;   //flag help the pause selector
     
 
     private boolean keys[];  // to store all the flags for every key
@@ -45,6 +49,7 @@ public class KeyManager implements KeyListener {
         // set false to every key released
         if(e.getKeyCode() == KeyEvent.VK_P){
             pause = !pause;
+            pauseSelector=0;
         }
         keys[e.getKeyCode()] = false;
     }
@@ -54,6 +59,9 @@ public class KeyManager implements KeyListener {
      */
     public void tick() {
         helperSpace = space;
+        helperUp = up;
+        helperDown = down;
+        
         space = keys[KeyEvent.VK_SPACE];
         up = keys[KeyEvent.VK_UP];
         down = keys[KeyEvent.VK_DOWN];
@@ -61,5 +69,20 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_RIGHT];
         menu = keys[KeyEvent.VK_M];
         
+        if(pause){
+        if(!helperDown && down){
+            pauseSelectorHelper++;
+        }
+        if(!helperUp && up){
+            pauseSelectorHelper--;
+        }
+        pauseSelector+= pauseSelectorHelper;
+        if(pauseSelector<0){
+            pauseSelector=3;
+        }
+        pauseSelector= pauseSelector%4;
+        pauseSelectorHelper=0;
+        
+        }
     }
 }
