@@ -6,6 +6,7 @@
 package videogame;
 
 import MinigameClassify.TrashCan;
+import MinigameClassify.TrashMinigameClassify;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -30,19 +31,20 @@ import java.util.logging.Logger;
  */
 public class MinigameTrashClassify implements Runnable {
 
-    private BufferStrategy bs;      // to have several buffers when displaying
-    private Graphics g;             // to paint objects
-    private Display display;        // to display in the game
-    String title;                   // title of the window
-    private int width;              // width of the window
-    private int height;             // height of the window
-    private Thread thread;          // thread to create the game
-    private boolean running;        // to set the game
-    private Player player;          // to use a player
-    private KeyManager keyManager;  // to manage the keyboard
-    private Font fontx;             // to manage a custom font
-    private TrashCan inTrashCan;    // to create inorganic trash can
-    private TrashCan orTrashCan;    // to create organic trash can
+    private BufferStrategy bs;              // to have several buffers when displaying
+    private Graphics g;                     // to paint objects
+    private Display display;                // to display in the game
+    String title;                           // title of the window
+    private int width;                      // width of the window
+    private int height;                     // height of the window
+    private Thread thread;                  // thread to create the game
+    private boolean running;                // to set the game
+        private Player player;              // to use a player
+    private KeyManager keyManager;          // to manage the keyboard
+    private Font fontx;                     // to manage a custom font
+    private TrashCan inTrashCan;            // to create inorganic trash can
+    private TrashCan orTrashCan;            // to create organic trash can
+    private TrashMinigameClassify trash;    // to create trash in minigame
    
     
    
@@ -118,6 +120,8 @@ public class MinigameTrashClassify implements Runnable {
         //creates organinc an inorganic trash cans
         inTrashCan = new TrashCan(64, 384, 128, 128, false, null);
         orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, null);
+        trash = new TrashMinigameClassify(getWidth()/2 - 34, 0, 64, 64, 3, true, null);
+        
     }
 
     @Override
@@ -156,7 +160,8 @@ public class MinigameTrashClassify implements Runnable {
     }
 
     private void tick() {
-        keyManager.tick();        
+        keyManager.tick();
+        trash.tick();
     }
 
     private void render() {
@@ -187,6 +192,7 @@ public class MinigameTrashClassify implements Runnable {
                     g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
                     inTrashCan.render(g);
                     orTrashCan.render(g);
+                    trash.render(g);
                 }
             bs.show();
             g.dispose();
