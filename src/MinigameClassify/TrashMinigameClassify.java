@@ -63,17 +63,49 @@ public class TrashMinigameClassify extends Item {
      */
     public int getWidth() {
         return width;
-    }     
+    }  
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public boolean isTrashType() {
+        return trashType;
+    }
+
+    public void setTrashType(boolean trashType) {
+        this.trashType = trashType;
+    }
+    
+    
+    
+    
+    
      
-      @Override
+    @Override
     public void tick() {
+        
+           // change direction of x position and y position if colision         
+//            if (getY()+getHeight() > minigame.getHeight()) {
+                
+// } 
+      
+        setY(getY() + getSpeed());
         
     }
     
     @Override
     public void render(Graphics g) {
         //draws image of trash can depending if it is organic or inorganic
-        g.drawImage(Assets.trash[1], getX(), getY(), getWidth(), getHeight(), null);
+        if(this.isTrashType()){
+            g.drawImage(Assets.trash[1], getX(), getY(), getWidth(), getHeight(), null);
+        } else {
+            g.drawImage(Assets.trash[2], getX(), getY(), getWidth(), getHeight(), null);
+        }
     }
 
     @Override
