@@ -119,7 +119,7 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         if(trashThrown<5){
             if(trashMaker>trashMakerHelper){
             int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
-            game.getTrash().add(new Trash(x+screen.getX(), y+screen.getY(), 32, 32, randType, game, screen, id));
+            game.getTrash().add(new Trash(x+screen.getX()+16, y+screen.getY()+16, 32, 32, randType, game, screen, id));
             trashMaker=0;
             trashThrown++;
         }
