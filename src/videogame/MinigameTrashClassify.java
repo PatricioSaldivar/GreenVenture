@@ -7,23 +7,13 @@ package videogame;
 
 import MinigameClassify.TrashCan;
 import MinigameClassify.TrashMinigameClassify;
-import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
-import java.awt.image.ImageObserver;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -39,13 +29,12 @@ public class MinigameTrashClassify implements Runnable {
     private int height;                     // height of the window
     private Thread thread;                  // thread to create the game
     private boolean running;                // to set the game
-        //Crear PlayerMinigame no ese
-    private Player player;              // to use a player
     private KeyManager keyManager;          // to manage the keyboard
     private Font fontx;                     // to manage a custom font
     private TrashCan inTrashCan;            // to create inorganic trash can
     private TrashCan orTrashCan;            // to create organic trash can
-    private TrashMinigameClassify trash;    // to create trash in minigame
+   // private TrashMinigameClassify trash;   
+    private LinkedList<TrashMinigameClassify> trash; // to create trash in the minigame
     private Animation animationPause;        //To animate the pause
     private Game game;                      //To store the game in which it was before
    
@@ -90,10 +79,6 @@ public class MinigameTrashClassify implements Runnable {
         return width;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     /**
      * To get the height of the game window
      *
@@ -113,9 +98,20 @@ public class MinigameTrashClassify implements Runnable {
         return fontx;
     }
 
-    
-    
+    public LinkedList<TrashMinigameClassify> getTrash() {
+        return trash;
+    }
 
+    public void setTrash(LinkedList<TrashMinigameClassify> trash) {
+        this.trash = trash;
+    }
+
+    public Rectangle getPerimetro() {
+        return new Rectangle(0, -64, getWidth(), getHeight());
+
+    }
+
+    
     /**
      * initializing the display window of the game
      */
@@ -124,7 +120,13 @@ public class MinigameTrashClassify implements Runnable {
         //creates organinc an inorganic trash cans
         inTrashCan = new TrashCan(64, 384, 128, 128, false, null);
         orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, null);
-        trash = new TrashMinigameClassify(getWidth()/2 - 34, 0, 64, 64, 3, true, null);
+        //creating Trash list
+        trash = new LinkedList<TrashMinigameClassify>();
+        int iJump = -64;
+        for(int i = 0; i < 20; i++){
+            trash.add(new TrashMinigameClassify(getWidth()/2 - 34,iJump, 64, 64, 3, true, null));
+            iJump -= 128;
+        }
         keyManager.setPauseMax(1);
         keyManager.pause=false;
         animationPause= new Animation(Assets.minigame1PauseEnd, 300);
@@ -170,7 +172,13 @@ public class MinigameTrashClassify implements Runnable {
         keyManager.tick();
          if (!keyManager.pause) {
             // avancing minigame
-            trash.tick();
+            for(int i = 0; i < trash.size(); i++){
+                if(trash.get(i).getY()> (512-64) ){
+                    trash.remove(i);
+                } else { 
+                    trash.get(i).tick();
+                }
+            }
         } else {
             animationPause.tick();
             if (keyManager.space) {
@@ -204,14 +212,17 @@ public class MinigameTrashClassify implements Runnable {
                     g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
                     inTrashCan.render(g);
                     orTrashCan.render(g);
-                    trash.render(g);
+                    for(int i = 0; i < trash.size(); i++){
+                       trash.get(i).render(g);
+                    }
+                    
                 }
             bs.show();
             g.dispose();
         }
 
     }
-
+    
     /**
      * setting the thead for the game
      */
