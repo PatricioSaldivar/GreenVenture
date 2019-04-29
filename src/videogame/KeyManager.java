@@ -26,9 +26,18 @@ public class KeyManager implements KeyListener {
     public boolean menu;            
     public int pauseSelector=0;   //flag to select which pause selection of the pause is being selected
     public int pauseSelectorHelper;   //flag help the pause selector
+    public int pauseMax;            //To store the maximum number of possble selections on a menu
     
 
     private boolean keys[];  // to store all the flags for every key
+
+    public int getPauseMax() {
+        return pauseMax;
+    }
+
+    public void setPauseMax(int pauseMax) {
+        this.pauseMax = pauseMax;
+    }
     
     public KeyManager() {
         keys = new boolean[256];
@@ -69,7 +78,7 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_RIGHT];
         menu = keys[KeyEvent.VK_M];
         
-        if(pause){
+       
         if(!helperDown && down){
             pauseSelectorHelper++;
         }
@@ -78,11 +87,10 @@ public class KeyManager implements KeyListener {
         }
         pauseSelector+= pauseSelectorHelper;
         if(pauseSelector<0){
-            pauseSelector=3;
+            pauseSelector=pauseMax-1;
         }
-        pauseSelector= pauseSelector%4;
+        pauseSelector = pauseSelector%pauseMax;
         pauseSelectorHelper=0;
         
-        }
     }
 }

@@ -45,6 +45,7 @@ public class Game implements Runnable {
     private LinkedList<Trash> trash; // to manage the trash taht is in the game
     private Animation animation;     // to manage the animations of the objects
     private int pauseIndex = 5;          // to storw the index of the pause selector
+    private boolean cont = false;       // to continue the game
 
     /**
      * to create title, width and height and set the game is still not running
@@ -117,6 +118,11 @@ public class Game implements Runnable {
         return npcs;
     }
 
+    public void setCont(boolean cont) {
+        this.cont = cont;
+    }
+    
+
     /**
      * initializing the display window of the game
      */
@@ -127,13 +133,23 @@ public class Game implements Runnable {
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
         npcs.add(new NPC(650, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
-        animation = new Animation(Assets.pausaSave, 100);
+        animation = new Animation(Assets.pausaSave, 300);
+        keyManager.setPauseMax(4);
 
     }
 
     @Override
     public void run() {
+        //If the game is called to resume the init wont be called 
+        if(!cont){
         init();
+    }else{
+        animation = new Animation(Assets.pausaSave, 300);
+        keyManager.setPauseMax(4);
+        //this code may be used on the return to game function for better eficiency
+        keyManager.pause=false;
+        
+        }
         // frames per second
         int fps = 50;
         // time for each tick in nano segs
@@ -144,7 +160,7 @@ public class Game implements Runnable {
         long now;
         // initializing last time to the computer time in nanosecs
         long lastTime = System.nanoTime();
-        while (running) {
+                while (running) {
             // setting the time now to the actual time
             now = System.nanoTime();
             // acumulating to delta the difference between times in timeTick units
@@ -198,6 +214,11 @@ public class Game implements Runnable {
                 m.start();
                 running=false;
                 }
+            if(keyManager.space&& pauseIndex == 2){
+            MinigameTrashClassify mct = new MinigameTrashClassify("Minigame",512,512,display,keyManager,this);
+            mct.start();
+            running=false;
+            }
         }
 
     }
