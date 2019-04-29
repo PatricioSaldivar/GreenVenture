@@ -88,12 +88,7 @@ public class TrashMinigameClassify extends Item {
      
     @Override
     public void tick() {
-        
-           // change direction of x position and y position if colision         
-//            if (getY()+getHeight() > minigame.getHeight()) {
-                
-// } 
-      
+        // change direction of x position and y position if colision         
         setY(getY() + getSpeed());
         
     }
