@@ -39,12 +39,15 @@ public class MinigameTrashClassify implements Runnable {
     private int height;                     // height of the window
     private Thread thread;                  // thread to create the game
     private boolean running;                // to set the game
-        private Player player;              // to use a player
+        //Crear PlayerMinigame no ese
+    private Player player;              // to use a player
     private KeyManager keyManager;          // to manage the keyboard
     private Font fontx;                     // to manage a custom font
     private TrashCan inTrashCan;            // to create inorganic trash can
     private TrashCan orTrashCan;            // to create organic trash can
     private TrashMinigameClassify trash;    // to create trash in minigame
+    private Animation animationPause;        //To animate the pause
+    private Game game;                      //To store the game in which it was before
    
     
    
@@ -56,7 +59,7 @@ public class MinigameTrashClassify implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public MinigameTrashClassify(String title, int width, int height, Display display, KeyManager keyManager) {
+    public MinigameTrashClassify(String title, int width, int height, Display display, KeyManager keyManager, Game game) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -64,6 +67,7 @@ public class MinigameTrashClassify implements Runnable {
         this.keyManager = keyManager;
         this.display = display;
         display.setTitle("Ciudad");
+        this.game = game;
 
         //Adds font from fonts package
         try {
@@ -121,6 +125,9 @@ public class MinigameTrashClassify implements Runnable {
         inTrashCan = new TrashCan(64, 384, 128, 128, false, null);
         orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, null);
         trash = new TrashMinigameClassify(getWidth()/2 - 34, 0, 64, 64, 3, true, null);
+        keyManager.setPauseMax(1);
+        keyManager.pause=false;
+        animationPause= new Animation(Assets.minigame1PauseEnd, 300);
         
     }
 
@@ -161,7 +168,19 @@ public class MinigameTrashClassify implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        trash.tick();
+         if (!keyManager.pause) {
+            // avancing minigame
+            trash.tick();
+        } else {
+            animationPause.tick();
+            if (keyManager.space) {
+                //Resume the game
+                game.setCont(true);
+                game.start();
+                running=false;
+            }
+        
+    }
     }
 
     private void render() {
@@ -180,14 +199,7 @@ public class MinigameTrashClassify implements Runnable {
             g.clearRect(0, 0, width, height);   
                 //Draws Pause image when pausing game
                 if (keyManager.pause) {
-                    g.drawImage(Assets.pause,0,0,512,512,null); 
-                    /*Graphics2D g2d = (Graphics2D) g;
-                    g2d.setColor(Color.BLACK);
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 8 * 0.1f));
-                    g2d.fillRect(0, 0, width, height); 
-                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-                    g.drawImage(Assets.pause,width*1/8,height*1/8,width*3/4,height*3/4,null);
-                    */
+                    g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
                     } else {
                     g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
                     inTrashCan.render(g);

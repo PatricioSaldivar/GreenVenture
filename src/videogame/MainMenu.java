@@ -32,6 +32,8 @@ public class MainMenu implements Runnable {
     private Thread thread;          // thread to create the game
     private boolean running;        // to set the gamer
     private KeyManager keyManager;  // to manage the keyboard
+    private Animation animation;    // to animate the main menu
+    private int index=0;            // to establish the index of the option to be 
     /**
      * to create title, width and height and set the game is still not running
      *
@@ -76,6 +78,8 @@ public class MainMenu implements Runnable {
     private void init() {
         Assets.init();
         display.getJframe().addKeyListener(keyManager);
+        animation = new Animation(Assets.mainMenuPlay, 300);
+        keyManager.setPauseMax(5);
 
     }
 
@@ -118,7 +122,29 @@ public class MainMenu implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        if(keyManager.space==true){
+        animation.tick();
+            if (index != keyManager.pauseSelector) {
+                switch (keyManager.pauseSelector) {
+                    case 0:
+                        animation = new Animation(Assets.mainMenuPlay, 300);
+                        break;
+                    case 1:
+                        animation = new Animation(Assets.mainMenuLoad, 300);
+                        break;
+                    case 2:
+                        animation = new Animation(Assets.mainMenuInstructions, 300);
+                        break;
+                    case 3:
+                        animation = new Animation(Assets.mainMenuCredits, 300);
+                        break;
+                    case 4:
+                        animation = new Animation(Assets.mainMenuQuit, 300);
+                        break;
+                }
+                index = keyManager.pauseSelector;
+
+    }
+           if(index==0 && keyManager.space==true){
             Game g = new Game("Juego", 512,512, display,keyManager);
             g.start();
             running=false;
@@ -139,7 +165,7 @@ public class MainMenu implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);        
-           g.drawImage(Assets.mainMenu, 0, 0, width, height,null);
+           g.drawImage(animation.getCurrentFrame(), 0, 0, width, height,null);
             bs.show();
             g.dispose();
         }

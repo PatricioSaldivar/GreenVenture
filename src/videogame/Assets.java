@@ -31,6 +31,16 @@ public class Assets {
     public static BufferedImage pausaStats[];        // to store the image of the pause when Stats is selected
     public static BufferedImage pausaMenuInstructions[];   // to store the image of the pause when Instructions is selected
 
+    // Main Menu
+    public static BufferedImage mainMenuPlay[];          // to store the image of the MainMenu when play is selected
+    public static BufferedImage mainMenuLoad[];             // to store the image of the MainMenu when load is selected
+    public static BufferedImage mainMenuCredits[];        // to store the image of the MainMenu when credits is selected
+    public static BufferedImage mainMenuInstructions[];   // to store the image of the MainMenu when instructions is selected
+    public static BufferedImage mainMenuQuit[];   // to store the image of the MainMenu when quit is selected
+
+    //Minigame Pause
+    public static BufferedImage minigame1PauseEnd[];   // to store the image of the Minigame1 pause when end is selected
+
     /**
      * initializing the images of the game
      */
@@ -54,22 +64,48 @@ public class Assets {
         orTrashCan = ImageLoader.loadImage("/images_minigame1/organicTrashCan.png");
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
 
+        minigame1PauseEnd = new BufferedImage[2];
+        minigame1PauseEnd[0] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame.png");
+        minigame1PauseEnd[1] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame2.png");
+
         //Pause sprites loader
         pausaMainMenu = new BufferedImage[2];
-        pausaMainMenu[0] = ImageLoader.loadImage("/images_pause/menuHover.png");
-        pausaMainMenu[1] = ImageLoader.loadImage("/images_pause/menuHover2.png");
+        pausaMainMenu[0] = ImageLoader.loadImage("/imagesPause/menuHover.png");
+        pausaMainMenu[1] = ImageLoader.loadImage("/imagesPause/menuHover2.png");
 
         pausaSave = new BufferedImage[2];
-        pausaSave[0] = ImageLoader.loadImage("/images_pause/saveHover.png");
-        pausaSave[1] = ImageLoader.loadImage("/images_pause/saveHover2.png");
+        pausaSave[0] = ImageLoader.loadImage("/imagesPause/saveHover.png");
+        pausaSave[1] = ImageLoader.loadImage("/imagesPause/saveHover2.png");
 
         pausaStats = new BufferedImage[2];
-        pausaStats[0] = ImageLoader.loadImage("/images_pause/statsHover.png");
-        pausaStats[1] = ImageLoader.loadImage("/images_pause/statsHover2.png");
+        pausaStats[0] = ImageLoader.loadImage("/imagesPause/statsHover.png");
+        pausaStats[1] = ImageLoader.loadImage("/imagesPause/statsHover2.png");
 
         pausaMenuInstructions = new BufferedImage[2];
-        pausaMenuInstructions[0] = ImageLoader.loadImage("/images_pause/instructionsHover.png");
-        pausaMenuInstructions[1] = ImageLoader.loadImage("/images_pause/instructionsHover2.png");
+        pausaMenuInstructions[0] = ImageLoader.loadImage("/imagesPause/instructionsHover.png");
+        pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
+
+        //Main Menu 
+        mainMenuPlay = new BufferedImage[2];
+        mainMenuPlay[0] = ImageLoader.loadImage("/imagesMainMenu/playHover.png");
+        mainMenuPlay[1] = ImageLoader.loadImage("/imagesMainMenu/playHover2.png");
+
+        mainMenuLoad = new BufferedImage[2];
+        mainMenuLoad[0] = ImageLoader.loadImage("/imagesMainMenu/loadHover.png");
+        mainMenuLoad[1] = ImageLoader.loadImage("/imagesMainMenu/loadHover2.png");
+
+        mainMenuCredits = new BufferedImage[2];
+        mainMenuCredits[0] = ImageLoader.loadImage("/imagesMainMenu/creditsHover.png");
+        mainMenuCredits[1] = ImageLoader.loadImage("/imagesMainMenu/creditsHover2.png");
+
+        mainMenuInstructions = new BufferedImage[2];
+        mainMenuInstructions[0] = ImageLoader.loadImage("/imagesMainMenu/instructionsHover.png");
+        mainMenuInstructions[1] = ImageLoader.loadImage("/imagesMainMenu/instructionsHover2.png");
+
+        mainMenuQuit = new BufferedImage[2];
+        mainMenuQuit[0] = ImageLoader.loadImage("/imagesMainMenu/exitHover.png");
+        mainMenuQuit[1] = ImageLoader.loadImage("/imagesMainMenu/exitHover2.png");
+
     }
 
 }
