@@ -17,6 +17,8 @@ public class KeyManager implements KeyListener {
     public boolean up;      // flag to move up the player
     public boolean helperUp;// flag to mark the up just clicked
     public boolean helperDown;// flag to mark the down just clicked
+    public boolean helperRight;// flag to mark the up just clicked
+    public boolean helperLeft;// flag to mark the down just clicked
     public boolean down;    // flag to move down the player
     public boolean left;    // flag to move left the player
     public boolean right;   // flag to move right the player
@@ -70,6 +72,8 @@ public class KeyManager implements KeyListener {
         helperSpace = space;
         helperUp = up;
         helperDown = down;
+        helperRight = right;
+        helperLeft = left;
         
         space = keys[KeyEvent.VK_SPACE];
         up = keys[KeyEvent.VK_UP];

@@ -24,6 +24,8 @@ public class Assets {
     public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
     public static BufferedImage orTrashCan;         // to store the image of the organic trash can
     public static BufferedImage minigameWallpaper;  // to store the image of the minigame wallpaper
+    public static BufferedImage rightBox;           // to store the image of the right box glove
+    public static BufferedImage leftBox;            // to store the image of the left box glove
 
     //Pause of game assets
     public static BufferedImage pausaMainMenu[];          // to store the image of the pause when MainMenu is selected
@@ -37,6 +39,7 @@ public class Assets {
     public static BufferedImage mainMenuCredits[];        // to store the image of the MainMenu when credits is selected
     public static BufferedImage mainMenuInstructions[];   // to store the image of the MainMenu when instructions is selected
     public static BufferedImage mainMenuQuit[];   // to store the image of the MainMenu when quit is selected
+    
 
     //Minigame Pause
     public static BufferedImage minigame1PauseEnd[];   // to store the image of the Minigame1 pause when end is selected
@@ -63,6 +66,8 @@ public class Assets {
         inTrashCan = ImageLoader.loadImage("/images_minigame1/inorganicTrashCan.png");
         orTrashCan = ImageLoader.loadImage("/images_minigame1/organicTrashCan.png");
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
+        rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
+        leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
 
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame.png");
