@@ -34,15 +34,11 @@ public class MinigameTrashClassify implements Runnable {
     private Font fontx;                     // to manage a custom font
     private TrashCan inTrashCan;            // to create inorganic trash can
     private TrashCan orTrashCan;            // to create organic trash can
-    private Box rightBoxGuantlet;           // to create right box guantlet
-    private Box leftBoxGuantlet;            // to create left box guantlet
-   // private TrashMinigameClassify trash;   
+    private Box boxGuantlets;            // to create box guantlets
+    // private TrashMinigameClassify trash;   
     private LinkedList<TrashMinigameClassify> trash; // to create trash in the minigame
     private Animation animationPause;        //To animate the pause
     private Game game;                      //To store the game in which it was before
-   
-    
-   
 
     /**
      * to create title, width and height and set the game is still not running
@@ -96,7 +92,6 @@ public class MinigameTrashClassify implements Runnable {
      *
      * @return an <code>.ttf</code> value with the height
      */
-
     public Font getFontx() {
         return fontx;
     }
@@ -125,29 +120,11 @@ public class MinigameTrashClassify implements Runnable {
         this.orTrashCan = orTrashCan;
     }
 
-    public Box getRightBoxGuantlet() {
-        return rightBoxGuantlet;
-    }
-
-    public void setRightBoxGuantlet(Box rightBoxGuantlet) {
-        this.rightBoxGuantlet = rightBoxGuantlet;
-    }
-
-    public Box getLeftBoxGuantlet() {
-        return leftBoxGuantlet;
-    }
-
-    public void setLeftBoxGuantlet(Box leftBoxGuantlet) {
-        this.leftBoxGuantlet = leftBoxGuantlet;
-    }
-    
- 
     public Rectangle getPerimetro() {
         return new Rectangle(0, -64, getWidth(), getHeight());
 
     }
 
-    
     /**
      * initializing the display window of the game
      */
@@ -159,23 +136,23 @@ public class MinigameTrashClassify implements Runnable {
         //creating Trash list
         trash = new LinkedList<TrashMinigameClassify>();
         //creats right and left guantlet
-        rightBoxGuantlet = new Box(0,(getHeight() / 2) - 32, 64, 64, true, this);
-        leftBoxGuantlet = new Box(448,(getHeight() / 2) - 32, 64, 64, false, this);
+        boxGuantlets = new Box(0, (getHeight() / 2) - 32, 64, 64, this);
         //Cycle to create trash in game
         int iJump = -64;
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             //random cycle to create organic or inorganic trash every new game (there is a great change that all garabge can be organic or inogranic)
-            if( ((int)(Math.random() * 3) + 1) == 1){
+            /*if( ((int)(Math.random() * 3) + 1) == 1){
                 trash.add(new TrashMinigameClassify(getWidth()/2 - 32,iJump, 64, 64, 3, true, this));
             } else {
-                 trash.add(new TrashMinigameClassify(getWidth()/2 - 32,iJump, 64, 64, 3, false, this));
-            }
-            iJump -= 128;
+             */
+            trash.add(new TrashMinigameClassify(getWidth() / 2 - 32, iJump, 64, 64, 3, false, this));
+            //}
+            iJump -= 152;
         }
         keyManager.setPauseMax(1);
-        keyManager.pause=false;
-        animationPause= new Animation(Assets.minigame1PauseEnd, 300);
-        
+        keyManager.pause = false;
+        animationPause = new Animation(Assets.minigame1PauseEnd, 300);
+
     }
 
     @Override
@@ -215,15 +192,21 @@ public class MinigameTrashClassify implements Runnable {
 
     private void tick() {
         keyManager.tick();
-         if (!keyManager.pause) {
+        if (!keyManager.pause) {
             // avancing minigame
-            rightBoxGuantlet.tick();
-            leftBoxGuantlet.tick();
-            for(int i = 0; i < trash.size(); i++){
-                if(trash.get(i).getY()> (512-64) ){
+            boxGuantlets.tick();
+
+            for (int i = 0; i < trash.size(); i++) {
+                if (trash.get(i).getY() > (512 - 64)) {
                     trash.remove(i);
-                } else { 
+                } else {
+                    if (boxGuantlets.getPerimetro().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
+                        trash.get(i).setMovingRight(true);
+                    } else if (boxGuantlets.getPerimetroLeft().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
+                        trash.get(i).setMovingLeft(true);
+                    }
                     trash.get(i).tick();
+
                 }
             }
         } else {
@@ -232,10 +215,10 @@ public class MinigameTrashClassify implements Runnable {
                 //Resume the game
                 game.setCont(true);
                 game.start();
-                running=false;
+                running = false;
             }
-        
-    }
+
+        }
     }
 
     private void render() {
@@ -251,27 +234,26 @@ public class MinigameTrashClassify implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.clearRect(0, 0, width, height);   
-                //Draws Pause image when pausing game
-                if (keyManager.pause) {
-                    g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
-                    } else {
-                    g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
-                    inTrashCan.render(g);
-                    orTrashCan.render(g);
-                    rightBoxGuantlet.render(g);
-                    leftBoxGuantlet.render(g);
-                    for(int i = 0; i < trash.size(); i++){
-                       trash.get(i).render(g);
-                    }
-                    
+            g.clearRect(0, 0, width, height);
+            //Draws Pause image when pausing game
+            if (keyManager.pause) {
+                g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
+            } else {
+                g.drawImage(Assets.minigameWallpaper, 0, 0, 512, 512, null);
+                inTrashCan.render(g);
+                orTrashCan.render(g);
+                for (int i = 0; i < trash.size(); i++) {
+                    trash.get(i).render(g);
                 }
+                boxGuantlets.render(g);
+
+            }
             bs.show();
             g.dispose();
         }
 
     }
-    
+
     /**
      * setting the thead for the game
      */

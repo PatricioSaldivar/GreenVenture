@@ -16,13 +16,17 @@ import videogame.MinigameTrashClassify;
  * @author BonfireStudios
  */
 public class TrashMinigameClassify extends Item {
+
     private int width;
     private int height;
     private int speed;
     private boolean trashType;   // True = Organic Trash, Flase = Inorganic Trash
     private MinigameTrashClassify minigame;
-   
-     public TrashMinigameClassify(int x, int y, int width, int height, int speed, boolean trashType, MinigameTrashClassify minigame) {
+    private boolean movingRight = false;
+    private boolean movingLeft = false;
+    private boolean moved = false;
+
+    public TrashMinigameClassify(int x, int y, int width, int height, int speed, boolean trashType, MinigameTrashClassify minigame) {
         super(x, y);
         this.width = width;
         this.height = height;
@@ -30,16 +34,17 @@ public class TrashMinigameClassify extends Item {
         this.speed = speed;
         this.trashType = trashType;
     }
-     
-      /**
+
+    /**
      * To get the height of the trashcan
      *
-     * @return an <code>int</code> value with the height 
+     * @return an <code>int</code> value with the height
      */
     public int getHeight() {
         return height;
     }
-     /**
+
+    /**
      * To set the height of the trashcan
      *
      * @param <code>height</code> value with height
@@ -47,7 +52,7 @@ public class TrashMinigameClassify extends Item {
     public void setHeight(int height) {
         this.height = height;
     }
-    
+
     /**
      * To set the width of the trashcan
      *
@@ -56,6 +61,7 @@ public class TrashMinigameClassify extends Item {
     public void setWidth(int width) {
         this.width = width;
     }
+
     /**
      * To get the width of the trashcan
      *
@@ -63,7 +69,7 @@ public class TrashMinigameClassify extends Item {
      */
     public int getWidth() {
         return width;
-    }  
+    }
 
     public int getSpeed() {
         return speed;
@@ -80,23 +86,49 @@ public class TrashMinigameClassify extends Item {
     public void setTrashType(boolean trashType) {
         this.trashType = trashType;
     }
-    
-    
-    
-    
-    
-     
+
+    public void setMovingRight(boolean movingRight) {
+        this.movingRight = movingRight;
+    }
+
+    public void setMovingLeft(boolean movingLeft) {
+        this.movingLeft = movingLeft;
+    }
+
     @Override
     public void tick() {
         // change direction of x position and y position if colision         
-        setY(getY() + getSpeed());
-        
+        //IF the trash hasnt been moved from the middle
+        if (!moved) {
+            //IF it hasnt compelte the moving process but it is moving to the left or right its position will move according to where its moving
+            if ((movingLeft || movingRight)) {
+                if (movingLeft) {
+                    setX(getX() - 20);
+                } else {
+                    setX(getX() + 20);
+                }
+                //IF it hasnt been moved or is being move the trash will move down
+            }else {
+            setY(getY() + getSpeed());
+        }
+                //If its X has passed its position it will reposition to its final point
+            if (getX() > minigame.getWidth() - 128 - width / 2) {
+                moved = true;
+                setX(352);
+            } else if (getX() <= 96) {
+                moved = true;
+                setX(96);
+            }
+            //If the trash has been moved it will only move down
+        } else {
+            setY(getY() + getSpeed());
+        }
     }
-    
+
     @Override
     public void render(Graphics g) {
         //draws image of trash can depending if it is organic or inorganic
-        if(this.isTrashType()){
+        if (this.isTrashType()) {
             g.drawImage(Assets.trash[1], getX(), getY(), getWidth(), getHeight(), null);
         } else {
             g.drawImage(Assets.trash[2], getX(), getY(), getWidth(), getHeight(), null);
@@ -108,9 +140,5 @@ public class TrashMinigameClassify extends Item {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
 
     }
-      
-     
-     
-     
-    
+
 }

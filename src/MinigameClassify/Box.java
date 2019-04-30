@@ -21,15 +21,18 @@ public class Box extends Item {
     private int width;
     private int height;
     private boolean boxMoving = false;
-    private boolean boxSide;   // True = RightSide, Flase = LeftSide
+    private boolean boxReturn = false;
     private MinigameTrashClassify minigame;
+    private int leftX = 448;
+    private boolean boxSide = false;
+    private int speed = 20;
 
-    public Box(int x, int y, int width, int height, boolean BoxSide, MinigameTrashClassify minigame) {
+    public Box(int x, int y, int width, int height, MinigameTrashClassify minigame) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.minigame = minigame;
-        this.boxSide = BoxSide;
+        
     }
 
     /**
@@ -67,77 +70,92 @@ public class Box extends Item {
     public int getWidth() {
         return width;
     }
-
-    public void setBoxSide(boolean BoxSide) {
-        this.boxSide = BoxSide;
-    }
-
-    public boolean isBoxSide() {
-        return boxSide;
-    }
-
     public boolean isBoxMoving() {
         return boxMoving;
     }
 
+    public boolean isBoxReturn() {
+        return boxReturn;
+    }
+    
+    
+
     @Override
     public void tick() {
+        //IF a box glove is moving
         if (boxMoving) {
-            if (isBoxSide()) {
-                setX(getX() + 5);
+            //If it is the right glove the right glove x will move
+            if (boxSide) {
+                setX(getX() + speed);
                 /*Calculate the position of the guantlet after hitting the trash, if pisition is true return the guantlet to original position
             this.getWidth was multiply 2 times because the guantlet is subract two times
                  */
                 if (getX() > (minigame.getWidth() - (this.getWidth() * 2) - (minigame.getInTrashCan().getWidth() / 2) - 32)) {
                     //Original Position
-                    setX(0);
+                    boxReturn=true;
                     boxMoving = false;
                 }
+                //if it is the left glove the left glove x will move
             } else {
-                setX(getX() - 5);
+                leftX-= speed;
             
             //Calculate the position of the guantlet after hitting the trash, if pisition is true return the guantlet to original position
-            if (getX() < ((minigame.getInTrashCan().getWidth() / 2) + 32 + this.getWidth())) {
+            if (leftX < ((minigame.getInTrashCan().getWidth() / 2) + 32 + this.getWidth())) {
                 //Original position
-                setX(448);
+                boxReturn=true;
                 boxMoving = false;
             }
             }
-        } else {
+            //If a box glove is returning from hitting a trash
+        }else if(boxReturn){
+            //If the box glove is the right one the x will be modified
+            if (boxSide) {
+                x-=speed;
+                if(x<=0){
+                    x=0;
+                boxReturn=false;
+                }
+                //If the left glove is returning its x will be modified until it reaches its inital position
+            }else{
+                leftX+=speed;
+                if(leftX>=448){
+                    leftX=448;
+                    boxReturn=false;
+                }
+            }
+            //IF any box guantlet is moving or returning you may press the arrows for a gauntlet be set to moving
+        }else {
 
-            //Movement of guantlet in right side
-            if (isBoxSide()) {
                 // If the guantlet is in the initial position the player can press right to move the guantlet so it can hit the trash
                 if (minigame.getKeyManager().right && !minigame.getKeyManager().helperRight) {
                     boxMoving = true;
-                    // setX(minigame.getWidth() - (this.getWidth()*2) - (minigame.getInTrashCan().getWidth()/2) - 32);
+                    boxSide=true;
+                    
                 }
-                //Movement of guantlet in left side
-            } else {
 
                 // If the guantlet is in the initial position the player can press right to move the guantlet so it can hit the trash
                 if (minigame.getKeyManager().left && !minigame.getKeyManager().helperLeft) {
                     boxMoving = true;
-                    //setX((minigame.getInTrashCan().getWidth()/2) + 32 + this.getWidth());
+                    boxSide=false;
                 }
 
             }
         }
-    }
 
     @Override
     public void render(Graphics g) {
         //draws image of box guantlet depending if it goes to the right or left
-        if (isBoxSide()) {
             g.drawImage(Assets.rightBox, getX(), getY(), getWidth(), getHeight(), null);
-        } else {
-            g.drawImage(Assets.leftBox, getX(), getY(), getWidth(), getHeight(), null);
-        }
+            g.drawImage(Assets.leftBox, leftX, getY(), getWidth(), getHeight(), null);
     }
 
     @Override
     public Rectangle getPerimetro() {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
+
+    }
+        public Rectangle getPerimetroLeft() {
+        return new Rectangle(leftX, getY(), getWidth(), getHeight());
 
     }
 
