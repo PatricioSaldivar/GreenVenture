@@ -240,13 +240,12 @@ public class MinigameTrashClassify implements Runnable {
                 g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
             } else {
                 g.drawImage(Assets.minigameWallpaper, 0, 0, 512, 512, null);
-                inTrashCan.render(g);
-                orTrashCan.render(g);
                 for (int i = 0; i < trash.size(); i++) {
                     trash.get(i).render(g);
                 }
                 boxGuantlets.render(g);
-
+                inTrashCan.render(g);
+                orTrashCan.render(g);
             }
             bs.show();
             g.dispose();

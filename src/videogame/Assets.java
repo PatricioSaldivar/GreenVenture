@@ -63,8 +63,8 @@ public class Assets {
         trash[5] = ImageLoader.loadImage("/images/Tcan.png");
 
         //Minigame 1 loader
-        inTrashCan = ImageLoader.loadImage("/images_minigame1/inorganicTrashCan.png");
-        orTrashCan = ImageLoader.loadImage("/images_minigame1/organicTrashCan.png");
+        inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
+        orTrashCan = ImageLoader.loadImage("/images_minigame1/binOr.png");
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");

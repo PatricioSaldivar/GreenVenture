@@ -37,8 +37,8 @@ public class Screen {
      * @param x2 to set the x2 position
      * @param y2 to set the y2 position
      * @param game to set the game where the brick is created
-     * @param list to set the array of items
      * @param player to set the player
+     * @param trash to set the array of items
      */
     public Screen(int x, int y, int x2, int y2, Game game, Player player, LinkedList<Trash> trash) {
         this.x = x;
