@@ -5,6 +5,7 @@
  */
 package videogame;
 
+import MinigameClassify.Box;
 import MinigameClassify.TrashCan;
 import MinigameClassify.TrashMinigameClassify;
 import java.awt.Font;
@@ -33,6 +34,8 @@ public class MinigameTrashClassify implements Runnable {
     private Font fontx;                     // to manage a custom font
     private TrashCan inTrashCan;            // to create inorganic trash can
     private TrashCan orTrashCan;            // to create organic trash can
+    private Box rightBoxGuantlet;           // to create right box guantlet
+    private Box leftBoxGuantlet;            // to create left box guantlet
    // private TrashMinigameClassify trash;   
     private LinkedList<TrashMinigameClassify> trash; // to create trash in the minigame
     private Animation animationPause;        //To animate the pause
@@ -106,6 +109,39 @@ public class MinigameTrashClassify implements Runnable {
         this.trash = trash;
     }
 
+    public TrashCan getInTrashCan() {
+        return inTrashCan;
+    }
+
+    public void setInTrashCan(TrashCan inTrashCan) {
+        this.inTrashCan = inTrashCan;
+    }
+
+    public TrashCan getOrTrashCan() {
+        return orTrashCan;
+    }
+
+    public void setOrTrashCan(TrashCan orTrashCan) {
+        this.orTrashCan = orTrashCan;
+    }
+
+    public Box getRightBoxGuantlet() {
+        return rightBoxGuantlet;
+    }
+
+    public void setRightBoxGuantlet(Box rightBoxGuantlet) {
+        this.rightBoxGuantlet = rightBoxGuantlet;
+    }
+
+    public Box getLeftBoxGuantlet() {
+        return leftBoxGuantlet;
+    }
+
+    public void setLeftBoxGuantlet(Box leftBoxGuantlet) {
+        this.leftBoxGuantlet = leftBoxGuantlet;
+    }
+    
+ 
     public Rectangle getPerimetro() {
         return new Rectangle(0, -64, getWidth(), getHeight());
 
@@ -118,13 +154,22 @@ public class MinigameTrashClassify implements Runnable {
     private void init() {
         Assets.init();
         //creates organinc an inorganic trash cans
-        inTrashCan = new TrashCan(64, 384, 128, 128, false, null);
-        orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, null);
+        inTrashCan = new TrashCan(64, 384, 128, 128, false, this);
+        orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, this);
         //creating Trash list
         trash = new LinkedList<TrashMinigameClassify>();
+        //creats right and left guantlet
+        rightBoxGuantlet = new Box(0,(getHeight() / 2) - 32, 64, 64, true, this);
+        leftBoxGuantlet = new Box(448,(getHeight() / 2) - 32, 64, 64, false, this);
+        //Cycle to create trash in game
         int iJump = -64;
         for(int i = 0; i < 20; i++){
-            trash.add(new TrashMinigameClassify(getWidth()/2 - 34,iJump, 64, 64, 3, true, null));
+            //random cycle to create organic or inorganic trash every new game (there is a great change that all garabge can be organic or inogranic)
+            if( ((int)(Math.random() * 3) + 1) == 1){
+                trash.add(new TrashMinigameClassify(getWidth()/2 - 32,iJump, 64, 64, 3, true, this));
+            } else {
+                 trash.add(new TrashMinigameClassify(getWidth()/2 - 32,iJump, 64, 64, 3, false, this));
+            }
             iJump -= 128;
         }
         keyManager.setPauseMax(1);
@@ -172,6 +217,8 @@ public class MinigameTrashClassify implements Runnable {
         keyManager.tick();
          if (!keyManager.pause) {
             // avancing minigame
+            rightBoxGuantlet.tick();
+            leftBoxGuantlet.tick();
             for(int i = 0; i < trash.size(); i++){
                 if(trash.get(i).getY()> (512-64) ){
                     trash.remove(i);
@@ -212,6 +259,8 @@ public class MinigameTrashClassify implements Runnable {
                     g.drawImage(Assets.minigameWallpaper,0,0,512,512,null);
                     inTrashCan.render(g);
                     orTrashCan.render(g);
+                    rightBoxGuantlet.render(g);
+                    leftBoxGuantlet.render(g);
                     for(int i = 0; i < trash.size(); i++){
                        trash.get(i).render(g);
                     }
