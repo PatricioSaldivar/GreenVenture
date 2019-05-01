@@ -13,12 +13,19 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
 
-    public static BufferedImage background; // to store background image
-    public static BufferedImage player;     // to store the player image
-    public static BufferedImage playerPortait; // to store the portrait picture of the player
-    public static BufferedImage mainMenu;       // to store the main menu
-    public static BufferedImage pause;       // to store the pause
-    public static BufferedImage trash[]; // to store the trash
+    //Game 1 Assets
+    public static BufferedImage background;         // to store background image
+    public static BufferedImage player;             // to store the player image
+    public static BufferedImage playerPortait;      // to store the portrait picture of the player
+    public static BufferedImage mainMenu;           // to store the main menu
+    public static BufferedImage pause;              // to store the pause
+    public static BufferedImage trash[];            // to store the trash
+    
+    //Money Asset
+    public static BufferedImage coin[];             // to store the coin animation asset
+    
+    //NPC Assets
+    public static BufferedImage npcAlert[];         // to store the alert image
 
     //Minigame 1 Assests
     public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
@@ -51,12 +58,23 @@ public class Assets {
      * initializing the images of the game
      */
     public static void init() {
+        //Game 1 loader
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
         mainMenu = ImageLoader.loadImage("/images/MainMenu.png");
         pause = ImageLoader.loadImage("/images/Pausa.png");
-        // Trash sprite array
+        
+        //Money coin image loader
+        coin = new BufferedImage[6];
+        coin[0] = ImageLoader.loadImage("/images/coin1.png");
+        coin[1] = ImageLoader.loadImage("/images/coin2.png");
+        coin[2] = ImageLoader.loadImage("/images/coin3.png");
+        coin[3] = ImageLoader.loadImage("/images/coin4.png");
+        coin[4] = ImageLoader.loadImage("/images/coin5.png");
+        coin[5] = ImageLoader.loadImage("/images/coin6.png");
+        
+        // Trash in Game 1 sprite array loader
         trash = new BufferedImage[6];
         trash[0] = ImageLoader.loadImage("/images/Can.png");
         trash[1] = ImageLoader.loadImage("/images/Gbottle-1.png");
@@ -64,7 +82,14 @@ public class Assets {
         trash[3] = ImageLoader.loadImage("/images/Pbag.png");
         trash[4] = ImageLoader.loadImage("/images/Pbottle.png");
         trash[5] = ImageLoader.loadImage("/images/Tcan.png");
-
+        
+        //NPC loader
+        npcAlert = new BufferedImage[4];
+        npcAlert[0] = ImageLoader.loadImage("/images_NPC/alert.png");
+        npcAlert[1] = ImageLoader.loadImage("/images_NPC/alert2.png");
+        npcAlert[2] = ImageLoader.loadImage("/images_NPC/alert3.png");
+        npcAlert[3] = ImageLoader.loadImage("/images_NPC/alert4.png");
+        
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
         orTrashCan = ImageLoader.loadImage("/images_minigame1/binOr.png");
