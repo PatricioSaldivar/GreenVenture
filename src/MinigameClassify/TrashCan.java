@@ -90,7 +90,7 @@ public class TrashCan extends Item {
 
     @Override
     public Rectangle getPerimetro() {
-        return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        return new Rectangle(getX(), getY()+64, getWidth(), getHeight());
 
     }
      

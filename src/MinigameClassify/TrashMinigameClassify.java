@@ -94,6 +94,7 @@ public class TrashMinigameClassify extends Item {
     public void setMovingLeft(boolean movingLeft) {
         this.movingLeft = movingLeft;
     }
+    
 
     @Override
     public void tick() {
