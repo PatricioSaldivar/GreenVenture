@@ -26,6 +26,7 @@ public class Assets {
     public static BufferedImage minigameWallpaper;  // to store the image of the minigame wallpaper
     public static BufferedImage rightBox;           // to store the image of the right box glove
     public static BufferedImage leftBox;            // to store the image of the left box glove
+    public static SoundClip gloveHit;               // to store the sound of the glove hit
 
     //Pause of game assets
     public static BufferedImage pausaMainMenu[];          // to store the image of the pause when MainMenu is selected
@@ -68,6 +69,7 @@ public class Assets {
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
+        gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
 
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame.png");
