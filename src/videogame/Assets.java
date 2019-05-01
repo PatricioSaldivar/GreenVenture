@@ -20,12 +20,17 @@ public class Assets {
     public static BufferedImage mainMenu;           // to store the main menu
     public static BufferedImage pause;              // to store the pause
     public static BufferedImage trash[];            // to store the trash
+    public static SoundClip playerWalk;             // to store the sound of player walking
     
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
     
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
+    public static BufferedImage npcDown[][];        // to store the NPC going down assets
+    public static BufferedImage npcUp[][];          // to store the NPC going up assets
+    public static BufferedImage npcRight[][];       // to store the NPC going right assets
+    public static BufferedImage npcLeft[][];        // to store the NPC going left assets
 
     //Minigame 1 Assests
     public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
@@ -38,17 +43,19 @@ public class Assets {
     public static SoundClip gloveHit;               // to store the glove hit sound
     
     //Pause of game assets
-    public static BufferedImage pausaMainMenu[];          // to store the image of the pause when MainMenu is selected
-    public static BufferedImage pausaSave[];             // to store the image of the pause when Save is selected
-    public static BufferedImage pausaStats[];        // to store the image of the pause when Stats is selected
+    public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
+    public static BufferedImage pausaSave[];                // to store the image of the pause when Save is selected
+    public static BufferedImage pausaStats[];               // to store the image of the pause when Stats is selected
     public static BufferedImage pausaMenuInstructions[];   // to store the image of the pause when Instructions is selected
 
     // Main Menu
-    public static BufferedImage mainMenuPlay[];          // to store the image of the MainMenu when play is selected
-    public static BufferedImage mainMenuLoad[];             // to store the image of the MainMenu when load is selected
+    public static BufferedImage mainMenuPlay[];           // to store the image of the MainMenu when play is selected
+    public static BufferedImage mainMenuLoad[];           // to store the image of the MainMenu when load is selected
     public static BufferedImage mainMenuCredits[];        // to store the image of the MainMenu when credits is selected
     public static BufferedImage mainMenuInstructions[];   // to store the image of the MainMenu when instructions is selected
-    public static BufferedImage mainMenuQuit[];   // to store the image of the MainMenu when quit is selected
+    public static BufferedImage mainMenuQuit[];           // to store the image of the MainMenu when quit is selected
+    public static SoundClip gameStart;                    // to store the sound of new game or continue game button
+    public static SoundClip selectSound;                // to store the sound of the menu selector
     
 
     //Minigame Pause
@@ -61,6 +68,7 @@ public class Assets {
         //Game 1 loader
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
+        playerWalk = new SoundClip("/global_sounds/playerWalk.wav");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
         mainMenu = ImageLoader.loadImage("/images/MainMenu.png");
         pause = ImageLoader.loadImage("/images/Pausa.png");
@@ -103,7 +111,7 @@ public class Assets {
         minigame1PauseEnd[1] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame2.png");
 
         //Minigame 1 inorganic trash loader
-        inTrash = new BufferedImage[15];
+        inTrash = new BufferedImage[19];
         inTrash[0] = ImageLoader.loadImage("/images_minigame1/beer.png");
         inTrash[1] = ImageLoader.loadImage("/images_minigame1/bigCan.png");
         inTrash[2] = ImageLoader.loadImage("/images_minigame1/bottle.png");
@@ -119,6 +127,11 @@ public class Assets {
         inTrash[12] = ImageLoader.loadImage("/images_minigame1/paperBag.png");
         inTrash[13] = ImageLoader.loadImage("/images_minigame1/spray.png");
         inTrash[14] = ImageLoader.loadImage("/images_minigame1/starbucks.png");
+        inTrash[15] = ImageLoader.loadImage("/images_minigame1/radio.png");
+        inTrash[16] = ImageLoader.loadImage("/images_minigame1/gameboy.png");
+        inTrash[17] = ImageLoader.loadImage("/images_minigame1/battery.png");
+        inTrash[18] = ImageLoader.loadImage("/images_minigame1/smartphone.png");
+        
         
         //Minigame 1 organic trash loader
         orTrash = new BufferedImage[9];
@@ -151,6 +164,8 @@ public class Assets {
         pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
 
         //Main Menu 
+        selectSound = new SoundClip("/global_sounds/select.wav");
+        gameStart = new SoundClip("/global_sounds/gameStart.wav");
         mainMenuPlay = new BufferedImage[2];
         mainMenuPlay[0] = ImageLoader.loadImage("/imagesMainMenu/playHover.png");
         mainMenuPlay[1] = ImageLoader.loadImage("/imagesMainMenu/playHover2.png");

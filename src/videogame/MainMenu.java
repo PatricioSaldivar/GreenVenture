@@ -127,18 +127,23 @@ public class MainMenu implements Runnable {
                 switch (keyManager.pauseSelector) {
                     case 0:
                         animation = new Animation(Assets.mainMenuPlay, 300);
+                        Assets.selectSound.play();
                         break;
                     case 1:
                         animation = new Animation(Assets.mainMenuLoad, 300);
+                        Assets.selectSound.play();
                         break;
                     case 2:
                         animation = new Animation(Assets.mainMenuInstructions, 300);
+                        Assets.selectSound.play();
                         break;
                     case 3:
                         animation = new Animation(Assets.mainMenuCredits, 300);
+                        Assets.selectSound.play();
                         break;
                     case 4:
                         animation = new Animation(Assets.mainMenuQuit, 300);
+                        Assets.selectSound.play();
                         break;
                 }
                 index = keyManager.pauseSelector;
@@ -146,9 +151,14 @@ public class MainMenu implements Runnable {
     }
            if(index==0 && keyManager.space==true){
             Game g = new Game("Juego", 512,512, display,keyManager);
+            Assets.gameStart.play();
             g.start();
             running=false;
         }
+           if(index==4 && keyManager.space==true){
+               //Closes the game
+               display.getJframe().dispose();
+           }
     }
 
     private void render() {

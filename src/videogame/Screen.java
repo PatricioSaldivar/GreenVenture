@@ -32,6 +32,7 @@ public class Screen {
     private int talkingNPC;
     private boolean finishedConversationText = false;
     private int conversationTextIndex = 0;
+    private Animation coin;
 
     /**
      * to create the screen with his attributes
@@ -52,6 +53,7 @@ public class Screen {
         this.game = game;
         this.player = player;
         this.trash = trash;
+        coin = new Animation(Assets.coin, 100);
     }
 
     /**
@@ -216,16 +218,17 @@ public class Screen {
             }
             g.drawImage(Assets.inTrashCan, 0, 416, 64, 64, null);
         }
-                if (conversationTextIndex < message.length() && message.charAt(conversationTextIndex) == '\''){
-                    conversationTextIndex++;
-                }
-                for (String line : message.substring(0, conversationTextIndex).split("\n"))
-            g.drawString(line, 128, yPaint+= g.getFontMetrics().getHeight());
-    
+        if (conversationTextIndex < message.length() && message.charAt(conversationTextIndex) == '\'') {
+            conversationTextIndex++;
+        }
+        for (String line : message.substring(0, conversationTextIndex).split("\n")) {
+            g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
+        }
+
     }
 
     public void render(Graphics g) {
-
+        
         //Variable to create transparency on images and to create 2 dimensional graphics effects
         Graphics2D g2d = (Graphics2D) g;
         //Assigns values to screen parameters to follow the player
@@ -270,8 +273,10 @@ public class Screen {
             g2d.setColor(new Color(114, 24, 23));
             g2d.setFont(game.getFontx());
             DecimalFormat dform = new DecimalFormat("0.00");
-            String message = "Dinero:" + dform.format(player.getMoney());
-            g2d.drawString(message, 64, RectangleInfoHeight * 2 / 3);
+            String message = ": " + dform.format(player.getMoney());
+            coin.tick();
+            g.drawImage(coin.getCurrentFrame(), 88,12, 24, RectangleInfoHeight/2, null);
+            g2d.drawString(message, 112, RectangleInfoHeight * 2 / 3);
             g2d.setFont(game.getFontx());
             message = "Inventario:" + player.getInventory() + "/" + player.getCapacity();
             g2d.drawString(message, 272, RectangleInfoHeight * 2 / 3);
