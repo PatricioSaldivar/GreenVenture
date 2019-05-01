@@ -94,6 +94,19 @@ public class TrashMinigameClassify extends Item {
     public void setMovingLeft(boolean movingLeft) {
         this.movingLeft = movingLeft;
     }
+
+    public boolean isMovingRight() {
+        return movingRight;
+    }
+
+    public boolean isMovingLeft() {
+        return movingLeft;
+    }
+
+    public boolean isMoved() {
+        return moved;
+    }
+    
     
 
     @Override

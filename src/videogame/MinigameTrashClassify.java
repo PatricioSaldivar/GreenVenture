@@ -42,7 +42,8 @@ public class MinigameTrashClassify implements Runnable {
     private Animation animationPause;        //To animate the pause
     private Game game;                      //To store the game in which it was before
     private int score=0;                    // To store the game score
-    private boolean finalScore = false;     // To store boolean so game knows when to show final score
+    private boolean endGame = false;
+    private int endGameHelper = 0;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -187,6 +188,7 @@ public class MinigameTrashClassify implements Runnable {
                 delta--;
             }
         }
+        
         stop();
     }
 
@@ -204,11 +206,16 @@ public class MinigameTrashClassify implements Runnable {
                     trash.remove(i);
                 } else {
                     if (boxGuantlets.getPerimetro().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
+                      if(!trash.get(i).isMovingRight() && !trash.get(i).isMoved() ) {
+                        Assets.gloveHit.play();
+                    }
                         trash.get(i).setMovingRight(true);
-                        Assets.gloveHit.play();
                     } else if (boxGuantlets.getPerimetroLeft().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
-                        trash.get(i).setMovingLeft(true);
+                        if(!trash.get(i).isMovingLeft() && !trash.get(i).isMoved()) {
                         Assets.gloveHit.play();
+                    }
+                        trash.get(i).setMovingLeft(true);
+                       
                     }
                     trash.get(i).tick();
                     if(trash.get(i).getPerimetro().intersects(inTrashCan.getPerimetro()) && !trash.get(i).isTrashType()){
@@ -221,17 +228,14 @@ public class MinigameTrashClassify implements Runnable {
                 }
             }
             //If theres no more trash, a countdown start before the game return the player to the map when he was before starting the minigame
-            if(trash.isEmpty()){
-                try{
-                finalScore = true;    
-                Thread.sleep(5000);
-                }catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
+            if(endGame){
+            endGameHelper++;
                 //Resume the game
+                if(endGameHelper>150){
                 game.setCont(true);
                 game.start();
                 running = false;
+                }
             }
         } else {
             animationPause.tick();
@@ -243,6 +247,7 @@ public class MinigameTrashClassify implements Runnable {
             }
 
         }
+        endGame = trash.isEmpty();
     }
 
     private void render() {
@@ -270,14 +275,16 @@ public class MinigameTrashClassify implements Runnable {
                 boxGuantlets.render(g);
                 inTrashCan.render(g);
                 orTrashCan.render(g);
+                  
                 //Score values por painting
                 g.setFont(fontx);
                 g.setColor(Color.BLACK);
                 g.getFont().isBold();
                 //Draws final score when there is no more trash in the game
-                if(finalScore){
-                    g.getFont().deriveFont(128f);
-                    g.drawString("Puntaje Final: " + score, this.getWidth()/2 - 128, this.getHeight()/2);
+                if(endGame){
+                   g.setFont(fontx.deriveFont(38f));
+                    String message = "Puntaje Final: " + score;
+                    g.drawString( message, (this.getWidth() - ((message.length()/2) * g.getFont().getSize()))/2, this.getHeight()/2);
                 } else {
                     //Draws Score in display
                     g.getFont().deriveFont(36f);
