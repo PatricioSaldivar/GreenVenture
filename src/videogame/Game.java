@@ -189,9 +189,9 @@ public class Game implements Runnable {
         if (!keyManager.pause) {
             // avancing player with colision
             for (int i = 0; i < npcs.size(); i++) {
+                npcs.get(i).tick();
                 if(!npcs.get(i).isTalking()){
-                    npcs.get(i).tick();
-            if(npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick()){
+            if(npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()){
                     npcs.get(i).setTalking(true);
                     player.setConversation(true);
                 }

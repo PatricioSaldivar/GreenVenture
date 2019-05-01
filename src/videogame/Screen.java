@@ -28,6 +28,7 @@ public class Screen {
     private int RectangleInfoHeight=48;  // to store the height of the rectangle info
     private KeyManager keyManager;  // to manage the keyboard
     private LinkedList<Trash> trash;
+    private int talkingNPC;
     
     /**
      * to create the screen with his attributes
@@ -199,10 +200,13 @@ public class Screen {
           player.render(g);
           for(int i=0; i<game.getNpcs().size(); i++){
                 game.getNpcs().get(i).render(g);
-                if(game.getNpcs().get(i).isTalking() && player.isConversation() ){
-                    conversation(game.getNpcs().get(i), player, g);
+                if(game.getNpcs().get(i).isTalking()){
+                    talkingNPC=i;
                 }
             }
+          if(player.isConversation()){
+          conversation(game.getNpcs().get(talkingNPC), player, g);
+          }
          
            //Displays the top rectangle with information of the player
            if(!game.getKeyManager().pause){

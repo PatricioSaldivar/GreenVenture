@@ -144,7 +144,7 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
             if(justThrowedTrash)
             justThrowedTrashHelper--;
         }
-        if(justThrowedTrashHelper<1){
+        if(justThrowedTrash && justThrowedTrashHelper<1){
             justThrowedTrash=false;
         }
         
@@ -172,7 +172,7 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     @Override
     public void render(Graphics g) {
        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
-       if(justThrowedTrash){
+       if(justThrowedTrash || talking){
            g.drawImage(Assets.leftBox,getX(),getY()-16,16,16,null);
        }
     }
