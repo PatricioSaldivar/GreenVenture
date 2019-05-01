@@ -19,17 +19,20 @@ import java.util.LinkedList;
  * @author BonfireStudio
  */
 public class Screen {
+
     private int x;                       // to store the position in x
     private int y;                       // to store the positon in y
     private int x2;                      // to store the x position plus the width of the display
     private int y2;                      // to store the y position plus the height of the display
     private Game game;                   // to store the game
     private Player player;               // to store the player
-    private int RectangleInfoHeight=48;  // to store the height of the rectangle info
+    private int RectangleInfoHeight = 48;  // to store the height of the rectangle info
     private KeyManager keyManager;  // to manage the keyboard
     private LinkedList<Trash> trash;
     private int talkingNPC;
-    
+    private boolean finishedConversationText = false;
+    private int conversationTextIndex = 0;
+
     /**
      * to create the screen with his attributes
      *
@@ -51,8 +54,9 @@ public class Screen {
         this.trash = trash;
     }
 
-     /**
+    /**
      * To get the x of the screen
+     *
      * @return an <code>int</code> value with the x
      */
     public int getX() {
@@ -61,6 +65,7 @@ public class Screen {
 
     /**
      * To get the y of the screen
+     *
      * @return an <code>int</code> value with the y
      */
     public int getY() {
@@ -69,6 +74,7 @@ public class Screen {
 
     /**
      * To get the x2 of the screen
+     *
      * @return an <code>int</code> value with the x2
      */
     public int getX2() {
@@ -77,6 +83,7 @@ public class Screen {
 
     /**
      * To get the y2 of the screen
+     *
      * @return an <code>int</code> value with the y2
      */
     public int getY2() {
@@ -84,7 +91,8 @@ public class Screen {
     }
 
     /**
-     * To get the game 
+     * To get the game
+     *
      * @return an <code>Game</code> value with the game
      */
     public Game getGame() {
@@ -92,16 +100,17 @@ public class Screen {
     }
 
     /**
-     * To get the player 
+     * To get the player
+     *
      * @return an <code>Player</code> value with the player
      */
     public Player getPlayer() {
         return player;
     }
 
-
     /**
      * Set the x of the screen
+     *
      * @param x <b>x</b> value with the x
      */
     public void setX(int x) {
@@ -110,6 +119,7 @@ public class Screen {
 
     /**
      * Set the y of the screen
+     *
      * @param y <b>y</b> value with the y
      */
     public void setY(int y) {
@@ -118,6 +128,7 @@ public class Screen {
 
     /**
      * Set the x2 of the screen
+     *
      * @param x2 <b>x2</b> value with the x2
      */
     public void setX2(int x2) {
@@ -126,6 +137,7 @@ public class Screen {
 
     /**
      * Set the y2 of the screen
+     *
      * @param y2 <b>x</b> value with the y2
      */
     public void setY2(int y2) {
@@ -134,6 +146,7 @@ public class Screen {
 
     /**
      * Set the game
+     *
      * @param game <b>Game</b> value with the game
      */
     public void setGame(Game game) {
@@ -142,89 +155,127 @@ public class Screen {
 
     /**
      * Set the player
+     *
      * @param player <b>Player</b> value with the player
      */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    
     /**
-     * To get the rectangle that covers the perimeter of the screen 
+     * To get the rectangle that covers the perimeter of the screen
+     *
      * @return an <code>Game</code> value with the game
      */
     public Rectangle getPerimetro() {
         //creates rectangle 
-        
-        return new Rectangle(-32,-32,game.getWidth()+64,game.getHeight()+64);
+
+        return new Rectangle(-32, -32, game.getWidth() + 64, game.getHeight() + 64);
     }
-    public void conversation(NPC npc, Player player, Graphics g){
-        
+
+    public boolean isFinishedConversationText() {
+        return finishedConversationText;
+    }
+
+    public void setFinishedConversationText(boolean finishedConversationText) {
+        this.finishedConversationText = finishedConversationText;
+    }
+
+    public void setConversationTextIndex(int conversationTextIndex) {
+        this.conversationTextIndex = conversationTextIndex;
+    }
+
+    public void conversation(NPC npc, Player player, Graphics2D g) {
+        int yPaint = 416;
+        String message;
         g.setColor(Color.red);
         g.fillRect(0, 384, 512, 128);
         g.setColor(Color.BLACK);
-        if(!player.isTalking()){
-        g.drawImage(Assets.player, 0, 416, 64,64,null);
-        g.drawString("Hey que te pasa porque tiras basura, mejor tirala en un bote", 128, 416);
-        }else{
-        g.drawImage(Assets.inTrashCan, 0, 416, 64,64,null);
-        g.drawString("Oh vaya, perdon no lo volvere a hacer", 128, 416);
+        if (!player.isTalking()) {
+            g.drawImage(Assets.player, 0, 416, 64, 64, null);
+            message = "Hey que te pasa porque tiras basura mejor tirala en un bote\n o a la otra te parto toda EHHH!\nNo quiero verte hacerlo de nuevo ";
+            if (!finishedConversationText) {
+                if (conversationTextIndex < message.length()) {
+                    conversationTextIndex++;
+                } else {
+                    finishedConversationText = true;
+                }
+            } else {
+                conversationTextIndex = message.length() - 1;
+            }
+        } else {
+            message = "Oh vaya, perdon no lo volvere a hacer\n que bueno que te importa el ambiente\n ten una gratificacion ";
+            if (!finishedConversationText) {
+                if (conversationTextIndex < message.length()) {
+                    conversationTextIndex++;
+                } else {
+                    finishedConversationText = true;
+                }
+            } else {
+                conversationTextIndex = message.length() - 1;
+            }
+            g.drawImage(Assets.inTrashCan, 0, 416, 64, 64, null);
         }
+                if (conversationTextIndex < message.length() && message.charAt(conversationTextIndex) == '\''){
+                    conversationTextIndex++;
+                }
+                for (String line : message.substring(0, conversationTextIndex).split("\n"))
+            g.drawString(line, 128, yPaint+= g.getFontMetrics().getHeight());
+    
     }
-      
-        
-       public void render(Graphics g) {
-               
-           //Variable to create transparency on images and to create 2 dimensional graphics effects
-           Graphics2D g2d = (Graphics2D) g;
-           //Assigns values to screen parameters to follow the player
-           x=player.getSMoveX();
-           x2=player.getSMoveX()+Assets.background.getWidth()/8;
-           y=player.getSMoveY();
-           y2=player.getSMoveY()+ Assets.background.getHeight()/8;
-        
+
+    public void render(Graphics g) {
+
+        //Variable to create transparency on images and to create 2 dimensional graphics effects
+        Graphics2D g2d = (Graphics2D) g;
+        //Assigns values to screen parameters to follow the player
+        x = player.getSMoveX();
+        x2 = player.getSMoveX() + Assets.background.getWidth() / 8;
+        y = player.getSMoveY();
+        y2 = player.getSMoveY() + Assets.background.getHeight() / 8;
+
         //Draws the background depending of the screen parameter   
-        g.drawImage(Assets.background,0,0,game.getWidth(),game.getHeight(),x, y, x2, y2, Color.black, null);
-         
-        
+        g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), x, y, x2, y2, Color.black, null);
+
         // Renders trash * FIX CAMERA AREA*
-        for(int i = 0; i < trash.size(); i++){
+        for (int i = 0; i < trash.size(); i++) {
             trash.get(i).tick();
-            if(trash.get(i).isDead()){
+            if (trash.get(i).isDead()) {
                 game.getNpcs().get(trash.get(i).getNpcId()).setTrashThrown();
                 trash.remove(i);
-            }else if(getPerimetro().contains(trash.get(i).getPerimetro())){
+            } else if (getPerimetro().contains(trash.get(i).getPerimetro())) {
                 trash.get(i).render(g);
             }
         }
-          player.render(g);
-          for(int i=0; i<game.getNpcs().size(); i++){
-                game.getNpcs().get(i).render(g);
-                if(game.getNpcs().get(i).isTalking()){
-                    talkingNPC=i;
-                }
+        player.render(g);
+        for (int i = 0; i < game.getNpcs().size(); i++) {
+            game.getNpcs().get(i).render(g);
+            if (game.getNpcs().get(i).isTalking()) {
+                talkingNPC = i;
             }
-          if(player.isConversation()){
-          conversation(game.getNpcs().get(talkingNPC), player, g);
-          }
-         
-           //Displays the top rectangle with information of the player
-           if(!game.getKeyManager().pause){
+        }
+        if (player.isConversation()) {
+
+            conversation(game.getNpcs().get(talkingNPC), player, g2d);
+        }
+
+        //Displays the top rectangle with information of the player
+        if (!game.getKeyManager().pause) {
             g2d.setColor(new Color(249, 171, 85));
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 5 * 0.1f));
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 7 * 0.1f));
             g2d.fillRect(0, 0, game.getWidth(), RectangleInfoHeight);
-            g2d.drawImage(Assets.playerPortait, 0, 0 ,48, RectangleInfoHeight, null);
+            g2d.drawImage(Assets.playerPortait, 0, 0, 48, RectangleInfoHeight, null);
             g2d.setColor(Color.black);
-            g2d.drawRect(0, 0, game.getWidth(),RectangleInfoHeight);
+            g2d.drawRect(0, 0, game.getWidth(), RectangleInfoHeight);
             g2d.setColor(new Color(114, 24, 23));
             g2d.setFont(game.getFontx());
             DecimalFormat dform = new DecimalFormat("0.00");
             String message = "Dinero:" + dform.format(player.getMoney());
-            g2d.drawString(message, 64, RectangleInfoHeight*2/3);
+            g2d.drawString(message, 64, RectangleInfoHeight * 2 / 3);
             g2d.setFont(game.getFontx());
-            message = "Inventario:"+player.getInventory()+"/" + player.getCapacity();
-            g2d.drawString(message, 272, RectangleInfoHeight*2/3);
+            message = "Inventario:" + player.getInventory() + "/" + player.getCapacity();
+            g2d.drawString(message, 272, RectangleInfoHeight * 2 / 3);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-           }
+        }
     }
 }
