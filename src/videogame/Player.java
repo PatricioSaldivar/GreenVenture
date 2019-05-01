@@ -29,6 +29,8 @@ public class Player extends Item {
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
+    private boolean conversation = false;
+    private boolean talking = false;
 
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y);
@@ -177,12 +179,30 @@ public class Player extends Item {
         this.pick = pick;
     }
 
+    public void setTalking(boolean talking) {
+        this.talking = talking;
+    }
+
+    public boolean isConversation() {
+        return conversation;
+    }
+
+    public void setConversation(boolean conversation) {
+        this.conversation = conversation;
+    }
+
+    public boolean isTalking() {
+        return talking;
+    }
+    
+    
+
     @Override
     public void tick() {
         // moving player depending on flags
         //Also moves the camara coordinates depending on flags
         pick= game.getKeyManager().space && !game.getKeyManager().helperSpace;
-        
+        if (!talking && !conversation){
         if (game.getKeyManager().up) {
             if (getY() > game.getHeight() / 2 - height / 2) {
                 if (getY() - speed <= game.getHeight() / 2 - height / 2) {
@@ -264,7 +284,7 @@ public class Player extends Item {
          
         
         
-        
+        }
     }
 
     @Override

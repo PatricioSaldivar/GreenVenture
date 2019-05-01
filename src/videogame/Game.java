@@ -138,6 +138,8 @@ public class Game implements Runnable {
 
     }
 
+    
+    
     @Override
     public void run() {
         //If the game is called to resume the init wont be called 
@@ -186,10 +188,27 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
-            player.tick();
             for (int i = 0; i < npcs.size(); i++) {
-                npcs.get(i).tick();
+                if(!npcs.get(i).isTalking()){
+                    npcs.get(i).tick();
+            if(npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick()){
+                    npcs.get(i).setTalking(true);
+                    player.setConversation(true);
+                }
+                
+                }else if(player.isPick() && player.isConversation()){
+                    if(!player.isTalking()){
+                    player.setTalking(true);
+                    }
+                    else{
+                         player.setConversation(false);
+                         npcs.get(i).setTalking(false);
+                         player.setTalking(false);
+                    }
+                }
             }
+           
+             player.tick();
         } else {
             animation.tick();
             if (pauseIndex != keyManager.pauseSelector) {
