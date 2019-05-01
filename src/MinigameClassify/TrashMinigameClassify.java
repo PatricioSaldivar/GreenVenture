@@ -25,6 +25,7 @@ public class TrashMinigameClassify extends Item {
     private boolean movingRight = false;
     private boolean movingLeft = false;
     private boolean moved = false;
+    private int imageIndex;     // to store the index of the image that will be choose in a random way
 
     public TrashMinigameClassify(int x, int y, int width, int height, int speed, boolean trashType, MinigameTrashClassify minigame) {
         super(x, y);
@@ -33,6 +34,12 @@ public class TrashMinigameClassify extends Item {
         this.minigame = minigame;
         this.speed = speed;
         this.trashType = trashType;
+        //Random index generator depending of the trash type
+        if(trashType){
+            imageIndex = (int)(Math.random() * 8);
+        } else {
+            imageIndex = (int)(Math.random() * 14);
+        }
     }
 
     /**
@@ -142,10 +149,12 @@ public class TrashMinigameClassify extends Item {
     @Override
     public void render(Graphics g) {
         //draws image of trash can depending if it is organic or inorganic
+        int i;
+ 
         if (this.isTrashType()) {
-            g.drawImage(Assets.trash[1], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.orTrash[imageIndex], getX(), getY(), getWidth(), getHeight(), null);
         } else {
-            g.drawImage(Assets.trash[2], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.inTrash[imageIndex], getX(), getY(), getWidth(), getHeight(), null);
         }
     }
 
