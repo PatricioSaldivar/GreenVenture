@@ -16,6 +16,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -40,7 +41,8 @@ public class MinigameTrashClassify implements Runnable {
     private LinkedList<TrashMinigameClassify> trash; // to create trash in the minigame
     private Animation animationPause;        //To animate the pause
     private Game game;                      //To store the game in which it was before
-    private int score=0;
+    private int score=0;                    // To store the game score
+    private boolean finalScore = false;     // To store boolean so game knows when to show final score
 
     /**
      * to create title, width and height and set the game is still not running
@@ -197,15 +199,16 @@ public class MinigameTrashClassify implements Runnable {
         if (!keyManager.pause) {
             // avancing minigame
             boxGuantlets.tick();
-
             for (int i = 0; i < trash.size(); i++) {
                 if (trash.get(i).getY() > (512 - 64)) {
                     trash.remove(i);
                 } else {
                     if (boxGuantlets.getPerimetro().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
                         trash.get(i).setMovingRight(true);
+                        Assets.gloveHit.play();
                     } else if (boxGuantlets.getPerimetroLeft().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
                         trash.get(i).setMovingLeft(true);
+                        Assets.gloveHit.play();
                     }
                     trash.get(i).tick();
                     if(trash.get(i).getPerimetro().intersects(inTrashCan.getPerimetro()) && !trash.get(i).isTrashType()){
@@ -216,6 +219,19 @@ public class MinigameTrashClassify implements Runnable {
                         trash.remove(i);
                     }
                 }
+            }
+            //If theres no more trash, a countdown start before the game return the player to the map when he was before starting the minigame
+            if(trash.isEmpty()){
+                try{
+                finalScore = true;    
+                Thread.sleep(5000);
+                }catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+                //Resume the game
+                game.setCont(true);
+                game.start();
+                running = false;
             }
         } else {
             animationPause.tick();
@@ -248,18 +264,26 @@ public class MinigameTrashClassify implements Runnable {
                 g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
             } else {
                 g.drawImage(Assets.minigameWallpaper, 0, 0, 512, 512, null);
-                //g.drawString("HOLAAAAAAA", 20, 40);
                 for (int i = 0; i < trash.size(); i++) {
                     trash.get(i).render(g);
                 }
                 boxGuantlets.render(g);
                 inTrashCan.render(g);
                 orTrashCan.render(g);
+                //Score values por painting
                 g.setFont(fontx);
                 g.setColor(Color.BLACK);
                 g.getFont().isBold();
-                g.getFont().deriveFont(36f);
-                g.drawString("Score: "+ score,0, 40);
+                //Draws final score when there is no more trash in the game
+                if(finalScore){
+                    g.getFont().deriveFont(128f);
+                    g.drawString("Puntaje Final: " + score, this.getWidth()/2 - 128, this.getHeight()/2);
+                } else {
+                    //Draws Score in display
+                    g.getFont().deriveFont(36f);
+                    g.drawString("Puntaje: "+ score,0, 40);
+                }
+                
             }
             bs.show();
             g.dispose();
