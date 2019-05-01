@@ -131,13 +131,15 @@ public class Game implements Runnable {
         player = new Player(0, 0, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, player, trash);
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
-        npcs.add(new NPC(650, 400, 64, 64, 0, this, screen, 1));
+        npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
     }
 
+    
+    
     @Override
     public void run() {
         //If the game is called to resume the init wont be called 
@@ -186,10 +188,27 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
-            player.tick();
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
+                if(!npcs.get(i).isTalking()){
+            if(npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()){
+                    npcs.get(i).setTalking(true);
+                    player.setConversation(true);
+                }
+                
+                }else if(player.isPick() && player.isConversation()){
+                    if(!player.isTalking()){
+                    player.setTalking(true);
+                    }
+                    else{
+                         player.setConversation(false);
+                         npcs.get(i).setTalking(false);
+                         player.setTalking(false);
+                    }
+                }
             }
+           
+             player.tick();
         } else {
             animation.tick();
             if (pauseIndex != keyManager.pauseSelector) {

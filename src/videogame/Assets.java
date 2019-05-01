@@ -69,7 +69,7 @@ public class Assets {
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
-        gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
+        gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav    ");
 
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame.png");
