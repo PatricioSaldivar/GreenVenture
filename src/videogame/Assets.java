@@ -20,12 +20,14 @@ public class Assets {
     public static BufferedImage pause;       // to store the pause
     public static BufferedImage trash[]; // to store the trash
 
-    //Miinigame 1 Assests
+    //Minigame 1 Assests
     public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
     public static BufferedImage orTrashCan;         // to store the image of the organic trash can
     public static BufferedImage minigameWallpaper;  // to store the image of the minigame wallpaper
     public static BufferedImage rightBox;           // to store the image of the right box glove
     public static BufferedImage leftBox;            // to store the image of the left box glove
+    public static BufferedImage inTrash[];          // to store the images of the inorganic trash
+    public static BufferedImage orTrash[];           // to store the images of the organic trash
     public static SoundClip gloveHit;               // to store the sound of the glove hit
 
     //Pause of game assets
@@ -69,12 +71,42 @@ public class Assets {
         minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
-        gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav    ");
-
+        gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame.png");
         minigame1PauseEnd[1] = ImageLoader.loadImage("/imagesMinigame1Pause/pauseMiniGame2.png");
 
+        //Minigame 1 inorganic trash loader
+        inTrash = new BufferedImage[15];
+        inTrash[0] = ImageLoader.loadImage("/images_minigame1/beer.png");
+        inTrash[1] = ImageLoader.loadImage("/images_minigame1/bigCan.png");
+        inTrash[2] = ImageLoader.loadImage("/images_minigame1/bottle.png");
+        inTrash[3] = ImageLoader.loadImage("/images_minigame1/can.png");
+        inTrash[4] = ImageLoader.loadImage("/images_minigame1/coke.png");
+        inTrash[5] = ImageLoader.loadImage("/images_minigame1/cup.png");
+        inTrash[6] = ImageLoader.loadImage("/images_minigame1/detergent.png");
+        inTrash[7] = ImageLoader.loadImage("/images_minigame1/gallon.png");
+        inTrash[8] = ImageLoader.loadImage("/images_minigame1/glassBottle.png");
+        inTrash[9] = ImageLoader.loadImage("/images_minigame1/jar.png");
+        inTrash[10] = ImageLoader.loadImage("/images_minigame1/litre.png");
+        inTrash[11] = ImageLoader.loadImage("/images_minigame1/newspaper.png");
+        inTrash[12] = ImageLoader.loadImage("/images_minigame1/paperBag.png");
+        inTrash[13] = ImageLoader.loadImage("/images_minigame1/spray.png");
+        inTrash[14] = ImageLoader.loadImage("/images_minigame1/starbucks.png");
+        
+        //Minigame 1 organic trash loader
+        orTrash = new BufferedImage[9];
+        orTrash[0] = ImageLoader.loadImage("/images_minigame1/bone.png");
+        orTrash[1] = ImageLoader.loadImage("/images_minigame1/burguer.png");
+        orTrash[2] = ImageLoader.loadImage("/images_minigame1/chicken.png");
+        orTrash[3] = ImageLoader.loadImage("/images_minigame1/cookie.png");
+        orTrash[4] = ImageLoader.loadImage("/images_minigame1/fish.png");
+        orTrash[5] = ImageLoader.loadImage("/images_minigame1/greenApple.png");
+        orTrash[6] = ImageLoader.loadImage("/images_minigame1/pizza.png");
+        orTrash[7] = ImageLoader.loadImage("/images_minigame1/redApple.png");
+        orTrash[8] = ImageLoader.loadImage("/images_minigame1/watermelon.png");
+        
+        
         //Pause sprites loader
         pausaMainMenu = new BufferedImage[2];
         pausaMainMenu[0] = ImageLoader.loadImage("/imagesPause/menuHover.png");
