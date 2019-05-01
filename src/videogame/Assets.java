@@ -35,6 +35,7 @@ public class Assets {
     public static BufferedImage leftBox;            // to store the image of the left box glove
     public static BufferedImage inTrash[];          // to store the images of the inorganic trash
     public static BufferedImage orTrash[];           // to store the images of the organic trash
+    public static SoundClip gloveHit;               // to store the glove hit sound
     
     //Pause of game assets
     public static BufferedImage pausaMainMenu[];          // to store the image of the pause when MainMenu is selected
