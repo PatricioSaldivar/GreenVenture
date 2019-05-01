@@ -31,6 +31,8 @@ private int xMove=0;
 private int yMove=0;
 private int trashMakerHelper;
 private int id;
+private boolean justThrowedTrash = false;
+private int justThrowedTrashHelper=0;
 
 
 public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
@@ -98,20 +100,33 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         if(flagUp<150){
             yMove-=speed;
             flagUp++;
+            if(justThrowedTrash)
+            justThrowedTrashHelper--;
         }else if(flagRight<150){
             xMove+=speed;
             flagRight++;
+            if(justThrowedTrash)
+            justThrowedTrashHelper--;
         }else if(flagDown<150){
             yMove+=speed;
             flagDown++;
+            if(justThrowedTrash)
+            justThrowedTrashHelper--;
         }else if(flagLeft<150){
             xMove-=speed;
             flagLeft++;
+            if(justThrowedTrash)
+            justThrowedTrashHelper--;
         }else{
             flagUp=0;
             flagRight=0;
             flagDown=0;
             flagLeft=0;
+            if(justThrowedTrash)
+            justThrowedTrashHelper--;
+        }
+        if(justThrowedTrashHelper<1){
+            justThrowedTrash=false;
         }
         x= iniX-screen.getX()+xMove;
         y= iniY-screen.getY()+yMove;
@@ -122,6 +137,8 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
             game.getTrash().add(new Trash(x+screen.getX()+16, y+screen.getY()+16, 32, 32, randType, game, screen, id));
             trashMaker=0;
             trashThrown++;
+            justThrowedTrash=true;
+            justThrowedTrashHelper=50;
         }
         trashMaker++;
         }
@@ -130,6 +147,9 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     @Override
     public void render(Graphics g) {
        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+       if(justThrowedTrash){
+           g.drawImage(Assets.leftBox,getX(),getY()-16,16,16,null);
+       }
     }
 
     @Override

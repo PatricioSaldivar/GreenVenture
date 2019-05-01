@@ -8,6 +8,7 @@ package videogame;
 import MinigameClassify.Box;
 import MinigameClassify.TrashCan;
 import MinigameClassify.TrashMinigameClassify;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -39,6 +40,7 @@ public class MinigameTrashClassify implements Runnable {
     private LinkedList<TrashMinigameClassify> trash; // to create trash in the minigame
     private Animation animationPause;        //To animate the pause
     private Game game;                      //To store the game in which it was before
+    private int score=0;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -141,12 +143,12 @@ public class MinigameTrashClassify implements Runnable {
         int iJump = -64;
         for (int i = 0; i < 20; i++) {
             //random cycle to create organic or inorganic trash every new game (there is a great change that all garabge can be organic or inogranic)
-            /*if( ((int)(Math.random() * 3) + 1) == 1){
+            //IF true is organic, else is inorganic
+            if( ((int)(Math.random() * 2) + 1) == 1){
                 trash.add(new TrashMinigameClassify(getWidth()/2 - 32,iJump, 64, 64, 3, true, this));
             } else {
-             */
             trash.add(new TrashMinigameClassify(getWidth() / 2 - 32, iJump, 64, 64, 3, false, this));
-            //}
+            }
             iJump -= 152;
         }
         keyManager.setPauseMax(1);
@@ -206,7 +208,13 @@ public class MinigameTrashClassify implements Runnable {
                         trash.get(i).setMovingLeft(true);
                     }
                     trash.get(i).tick();
-
+                    if(trash.get(i).getPerimetro().intersects(inTrashCan.getPerimetro()) && !trash.get(i).isTrashType()){
+                        score+=100;
+                        trash.remove(i);
+                    }else if(trash.get(i).getPerimetro().intersects(orTrashCan.getPerimetro()) && trash.get(i).isTrashType()){
+                        score+=100;
+                        trash.remove(i);
+                    }
                 }
             }
         } else {
@@ -240,12 +248,18 @@ public class MinigameTrashClassify implements Runnable {
                 g.drawImage(animationPause.getCurrentFrame(), 0, 0, width, height, null);
             } else {
                 g.drawImage(Assets.minigameWallpaper, 0, 0, 512, 512, null);
+                //g.drawString("HOLAAAAAAA", 20, 40);
                 for (int i = 0; i < trash.size(); i++) {
                     trash.get(i).render(g);
                 }
                 boxGuantlets.render(g);
                 inTrashCan.render(g);
                 orTrashCan.render(g);
+                g.setFont(fontx);
+                g.setColor(Color.BLACK);
+                g.getFont().isBold();
+                g.getFont().deriveFont(36f);
+                g.drawString("Score: "+ score,0, 40);
             }
             bs.show();
             g.dispose();
