@@ -121,7 +121,6 @@ public class Game implements Runnable {
     public void setCont(boolean cont) {
         this.cont = cont;
     }
-    
 
     /**
      * initializing the display window of the game
@@ -138,19 +137,17 @@ public class Game implements Runnable {
 
     }
 
-    
-    
     @Override
     public void run() {
         //If the game is called to resume the init wont be called 
-        if(!cont){
-        init();
-    }else{
-        animation = new Animation(Assets.pausaSave, 300);
-        keyManager.setPauseMax(4);
-        //this code may be used on the return to game function for better eficiency
-        keyManager.pause=false;
-        
+        if (!cont) {
+            init();
+        } else {
+            animation = new Animation(Assets.pausaSave, 300);
+            keyManager.setPauseMax(4);
+            //this code may be used on the return to game function for better eficiency
+            keyManager.pause = false;
+
         }
         // frames per second
         int fps = 50;
@@ -162,7 +159,7 @@ public class Game implements Runnable {
         long now;
         // initializing last time to the computer time in nanosecs
         long lastTime = System.nanoTime();
-                while (running) {
+        while (running) {
             // setting the time now to the actual time
             now = System.nanoTime();
             // acumulating to delta the difference between times in timeTick units
@@ -190,25 +187,39 @@ public class Game implements Runnable {
             // avancing player with colision
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
-                if(!npcs.get(i).isTalking()){
-            if(npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()){
-                    npcs.get(i).setTalking(true);
-                    player.setConversation(true);
-                }
-                
-                }else if(player.isPick() && player.isConversation()){
-                    if(!player.isTalking()){
-                    player.setTalking(true);
+                if (!npcs.get(i).isTalking()) {
+                    if (npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()) {
+                        npcs.get(i).setTalking(true);
+                        player.setConversation(true);
+                        screen.setFinishedConversationText(false);
+                        screen.setConversationTextIndex(0);
                     }
-                    else{
-                         player.setConversation(false);
-                         npcs.get(i).setTalking(false);
-                         player.setTalking(false);
+
+                } else if (player.isPick() && player.isConversation()) {
+
+                    if (!player.isTalking()) {
+                        if (!screen.isFinishedConversationText()) {
+                            screen.setFinishedConversationText(true);
+                        }else {
+                            player.setTalking(true);
+                            screen.setConversationTextIndex(0);
+                            screen.setFinishedConversationText(false);
+                            
+                        }
+                    } else {
+                        if (!screen.isFinishedConversationText()) {
+                            screen.setFinishedConversationText(true);
+                        }else{
+                        player.setConversation(false);
+                        npcs.get(i).setTalking(false);
+                        player.setTalking(false);
+                        }
                     }
+
                 }
             }
-           
-             player.tick();
+
+            player.tick();
         } else {
             animation.tick();
             if (pauseIndex != keyManager.pauseSelector) {
@@ -228,15 +239,15 @@ public class Game implements Runnable {
                 }
                 pauseIndex = keyManager.pauseSelector;
             }
-            if(keyManager.space && pauseIndex==3){
-                MainMenu m = new MainMenu("MainMenu", 512, 512,display);
+            if (keyManager.space && pauseIndex == 3) {
+                MainMenu m = new MainMenu("MainMenu", 512, 512, display);
                 m.start();
-                running=false;
-                }
-            if(keyManager.space&& pauseIndex == 2){
-            MinigameTrashClassify mct = new MinigameTrashClassify("Minigame",512,512,display,keyManager,this);
-            mct.start();
-            running=false;
+                running = false;
+            }
+            if (keyManager.space && pauseIndex == 2) {
+                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                mct.start();
+                running = false;
             }
         }
 
