@@ -33,6 +33,7 @@ private int trashMakerHelper;
 private int id;
 private boolean justThrowedTrash = false;
 private int justThrowedTrashHelper=0;
+private boolean talking;
 
 
 public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
@@ -91,12 +92,30 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     public void setType(int type) {
         this.type = type;
     }
+
+    public void setTalking(boolean talking) {
+        this.talking = talking;
+    }
+
+    public void setJustThrowedTrash(boolean justThrowedTrash) {
+        this.justThrowedTrash = justThrowedTrash;
+    }
+
+    public boolean isJustThrowedTrash() {
+        return justThrowedTrash;
+    }
+
+    public boolean isTalking() {
+        return talking;
+    }
+    
     
     
 
 
     @Override
     public void tick() {
+        if(!talking){
         if(flagUp<150){
             yMove-=speed;
             flagUp++;
@@ -125,11 +144,10 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
             if(justThrowedTrash)
             justThrowedTrashHelper--;
         }
-        if(justThrowedTrashHelper<1){
+        if(justThrowedTrash && justThrowedTrashHelper<1){
             justThrowedTrash=false;
         }
-        x= iniX-screen.getX()+xMove;
-        y= iniY-screen.getY()+yMove;
+        
         
         if(trashThrown<5){
             if(trashMaker>trashMakerHelper){
@@ -142,12 +160,19 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         }
         trashMaker++;
         }
+        }else{
+        justThrowedTrash=false;
+        justThrowedTrashHelper=0;
+        }
+        
+        x= iniX-screen.getX()+xMove;
+        y= iniY-screen.getY()+yMove;
     }
 
     @Override
     public void render(Graphics g) {
        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
-       if(justThrowedTrash){
+       if(justThrowedTrash || talking){
            g.drawImage(Assets.leftBox,getX(),getY()-16,16,16,null);
        }
     }

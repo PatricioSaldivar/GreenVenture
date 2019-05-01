@@ -28,6 +28,7 @@ public class Screen {
     private int RectangleInfoHeight=48;  // to store the height of the rectangle info
     private KeyManager keyManager;  // to manage the keyboard
     private LinkedList<Trash> trash;
+    private int talkingNPC;
     
     /**
      * to create the screen with his attributes
@@ -157,6 +158,19 @@ public class Screen {
         
         return new Rectangle(-32,-32,game.getWidth()+64,game.getHeight()+64);
     }
+    public void conversation(NPC npc, Player player, Graphics g){
+        
+        g.setColor(Color.red);
+        g.fillRect(0, 384, 512, 128);
+        g.setColor(Color.BLACK);
+        if(!player.isTalking()){
+        g.drawImage(Assets.player, 0, 416, 64,64,null);
+        g.drawString("Hey que te pasa porque tiras basura, mejor tirala en un bote", 128, 416);
+        }else{
+        g.drawImage(Assets.inTrashCan, 0, 416, 64,64,null);
+        g.drawString("Oh vaya, perdon no lo volvere a hacer", 128, 416);
+        }
+    }
       
         
        public void render(Graphics g) {
@@ -186,7 +200,13 @@ public class Screen {
           player.render(g);
           for(int i=0; i<game.getNpcs().size(); i++){
                 game.getNpcs().get(i).render(g);
+                if(game.getNpcs().get(i).isTalking()){
+                    talkingNPC=i;
+                }
             }
+          if(player.isConversation()){
+          conversation(game.getNpcs().get(talkingNPC), player, g);
+          }
          
            //Displays the top rectangle with information of the player
            if(!game.getKeyManager().pause){
