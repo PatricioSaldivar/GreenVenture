@@ -131,7 +131,7 @@ public class Game implements Runnable {
         player = new Player(0, 0, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, player, trash);
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
-        npcs.add(new NPC(650, 400, 64, 64, 0, this, screen, 1));
+        npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);

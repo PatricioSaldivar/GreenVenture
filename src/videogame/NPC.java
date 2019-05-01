@@ -45,7 +45,8 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         this.screen = screen;
         iniX=x;
         iniY=y;
-        trashMakerHelper = (int) (Math.random() *(500)+ 50);
+        //trashMakerHelper = (int) (Math.random() *(500)+ 50);
+        trashMakerHelper = 500;
         this.id = id;
     }
 
