@@ -35,6 +35,8 @@ public class MainMenu implements Runnable {
     private KeyManager keyManager;  // to manage the keyboard
     private Animation animation;    // to animate the main menu
     private int index=0;            // to establish the index of the option to be 
+    private boolean displayInst;     // To display Instrucctions
+    private boolean displayInstHelper;
     /**
      * to create title, width and height and set the game is still not running
      *
@@ -85,6 +87,8 @@ public class MainMenu implements Runnable {
         display.getJframe().addKeyListener(keyManager);
         animation = new Animation(Assets.mainMenuPlay, 300);
         keyManager.setPauseMax(5);
+        displayInst=false;
+        displayInstHelper=false;
 
     }
 
@@ -128,6 +132,7 @@ public class MainMenu implements Runnable {
     private void tick() {
         keyManager.tick();
         animation.tick();
+        if(!displayInst){
             if (index != keyManager.pauseSelector) {
                 switch (keyManager.pauseSelector) {
                     case 0:
@@ -154,13 +159,13 @@ public class MainMenu implements Runnable {
                 index = keyManager.pauseSelector;
 
     }
-           if(index==0 && keyManager.space==true){
+           if(index==0 && keyManager.space && !keyManager.helperSpace){
             Game g = new Game("Juego", 512,512, display,keyManager);
             Assets.gameStart.play();
             g.start();
             running=false;
         }
-            if(index==1 && keyManager.space==true){
+            if(index==1 && keyManager.space && !keyManager.helperSpace){
             Load l = new Load(this);
             try {
                 l.tick();
@@ -174,10 +179,29 @@ public class MainMenu implements Runnable {
             g.start();
             running=false;
         }
-           if(index==4 && keyManager.space==true){
-               //Closes the game
-               display.getJframe().dispose();
+
+          if(index==2 && keyManager.space && !keyManager.helperSpace){
+              displayInst=true;
+              displayInstHelper=false;
+
            }
+           if(index==4 && keyManager.space && !keyManager.helperSpace){
+                           //Closes the game
+               Runtime.getRuntime().exit(0);
+           }
+
+        }else{
+            if(!displayInstHelper){
+            animation = new Animation(Assets.mainMenuInstructionsImage, 300);
+            displayInstHelper = true;
+            }
+            if(keyManager.space && !keyManager.helperSpace){
+                animation = new Animation(Assets.mainMenuInstructions, 300);
+                index=2;
+                keyManager.pauseSelector=2;
+                displayInst=false;
+            }
+        }
     }
 
     private void render() {

@@ -276,11 +276,12 @@ public class Screen {
             DecimalFormat dform = new DecimalFormat("0.00");
             String message = ": " + dform.format(player.getMoney());
             coin.tick();
-            g.drawImage(coin.getCurrentFrame(), 88,12, 24, RectangleInfoHeight/2, null);
-            g2d.drawString(message, 112, RectangleInfoHeight * 2 / 3);
+            g.drawImage(coin.getCurrentFrame(), 112,12, 24, RectangleInfoHeight/2, null);
+            g2d.drawString(message, 136, RectangleInfoHeight * 2 / 3);
             g2d.setFont(game.getFontx());
-            message = "Inventario:" + player.getInventory() + "/" + player.getCapacity();
-            g2d.drawString(message, 272, RectangleInfoHeight * 2 / 3);
+             g.drawImage(Assets.backpack, 272,12, 24, RectangleInfoHeight/2, null);
+            message = player.getInventory() + "/" + player.getCapacity();
+            g2d.drawString(message, 304, RectangleInfoHeight * 2 / 3);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
         }
     }
