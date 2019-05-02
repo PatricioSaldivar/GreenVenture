@@ -31,10 +31,13 @@ public class Player extends Item {
     private boolean pick = false;
     private boolean conversation = false;
     private boolean talking = false;
-    private int previousX;
-    private int previousY;
-    private int previousSMoveX;
-    private int previousSMoveY;
+    private int glass = 0;
+    private int electronics = 0;
+    private int organic = 0;
+    private int paper = 0;
+    private int plastic = 0;
+    private int aluminum = 0;
+
 
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y);
@@ -214,16 +217,63 @@ public class Player extends Item {
         return talking;
     }
 
+    public int getGlass() {
+        return glass;
+    }
+
+    public void setGlass(int glass) {
+        this.glass = glass;
+    }
+
+    public int getElectronics() {
+        return electronics;
+    }
+
+    public void setElectronics(int electronics) {
+        this.electronics = electronics;
+    }
+
+    public int getOrganic() {
+        return organic;
+    }
+
+    public void setOrganic(int organic) {
+        this.organic = organic;
+    }
+
+    public int getPaper() {
+        return paper;
+    }
+
+    public void setPaper(int paper) {
+        this.paper = paper;
+    }
+
+    public int getPlastic() {
+        return plastic;
+    }
+
+    public void setPlastic(int plastic) {
+        this.plastic = plastic;
+    }
+
+    public int getAluminum() {
+        return aluminum;
+    }
+
+    public void setAluminum(int aluminum) {
+        this.aluminum = aluminum;
+    }
+    
+    
+    
+
     @Override
     public void tick() {
         // moving player depending on flags
         //Also moves the camara coordinates depending on flags
         pick = game.getKeyManager().space && !game.getKeyManager().helperSpace;
         if (!talking && !conversation) {
-            previousX = x;
-            previousY = y;
-            previousSMoveX = SMoveX;
-            previousSMoveY = SMoveY;
             if (game.getKeyManager().up) {
                 if (getY() > game.getHeight() / 2 - height / 2) {
                     if (getY() - speed <= game.getHeight() / 2 - height / 2) {
@@ -250,8 +300,8 @@ public class Player extends Item {
                         setY((getY() + speed));
                     }
                 } else {
-                    if (SMoveY + speedCamara >= Assets.background.getHeight() * 3 / 4) {
-                        SMoveY = (Assets.background.getHeight() * 3 / 4);
+                    if (SMoveY + speedCamara >= Assets.background.getHeight() * 7 / 8) {
+                        SMoveY = (Assets.background.getHeight() * 7 / 8);
                         setY(getY() + speed);
                     } else {
                         SMoveY = SMoveY + speedCamara;
@@ -284,8 +334,8 @@ public class Player extends Item {
                         setX(getX() + speed);
                     }
                 } else {
-                    if (SMoveX + speedCamara >= Assets.background.getWidth() * 3 / 4) {
-                        SMoveX = (Assets.background.getWidth() * 3 / 4);
+                    if (SMoveX + speedCamara >= Assets.background.getWidth() * 7 / 8) {
+                        SMoveX = (Assets.background.getWidth() * 7 / 8);
                         setX(getX() + speed);
                     } else {
                         SMoveX = SMoveX + speedCamara;

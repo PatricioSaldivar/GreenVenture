@@ -244,6 +244,7 @@ public class Screen {
         for (int i = 0; i < trash.size(); i++) {
             trash.get(i).tick();
             if (trash.get(i).isDead()) {
+                Assets.pickTrash.play();
                 game.getNpcs().get(trash.get(i).getNpcId()).setTrashThrown();
                 trash.remove(i);
             } else if (getPerimetro().contains(trash.get(i).getPerimetro())) {

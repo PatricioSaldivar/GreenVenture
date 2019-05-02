@@ -20,7 +20,9 @@ public class Assets {
     public static BufferedImage mainMenu;           // to store the main menu
     public static BufferedImage pause;              // to store the pause
     public static BufferedImage trash[];            // to store the trash
-    public static SoundClip playerWalk;             // to store the sound of player walking
+    public static SoundClip pickTrash;              // to store the picking trash sound
+    public static SoundClip pickDenied;             // to store the picking denied sound
+
     
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
@@ -68,10 +70,11 @@ public class Assets {
         //Game 1 loader
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
-        playerWalk = new SoundClip("/global_sounds/playerWalk.wav");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
         mainMenu = ImageLoader.loadImage("/images/MainMenu.png");
         pause = ImageLoader.loadImage("/images/Pausa.png");
+        pickTrash = new SoundClip("/global_sounds/pickTrash.wav");
+        pickDenied = new SoundClip("/global_sounds/pickDenied.wav");
         
         //Money coin image loader
         coin = new BufferedImage[6];
