@@ -10,8 +10,11 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,7 +41,6 @@ public class Game implements Runnable {
     private boolean cont = false;       // to continue the game
     private ArrayList<Solid> solids;   // to store all the solids
     private boolean loaded;
-    
 
     /**
      * to create title, width and height and set the game is still not running
@@ -135,22 +137,21 @@ public class Game implements Runnable {
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
-    
 
     /**
      * initializing the display window of the game
      */
     private void init() {
         Assets.init();
-        if(!loaded){
-        player = new Player(0, 0, 64, 64, this);
+        if (!loaded) {
+            player = new Player(0, 0, 64, 64, this);
         }
         screen = new Screen(0, 0, width, height, this, player, trash);
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
         animation = new Animation(Assets.pausaSave, 300);
-        keyManager.setPauseMax(4);  
+        keyManager.setPauseMax(4);
 
     }
 
@@ -200,8 +201,8 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        for(int i=0; i<solids.size(); i++){
-        solids.get(i).tick();
+        for (int i = 0; i < solids.size(); i++) {
+            solids.get(i).tick();
         }
         if (!keyManager.pause) {
             // avancing player with colision
@@ -220,19 +221,19 @@ public class Game implements Runnable {
                     if (!player.isTalking()) {
                         if (!screen.isFinishedConversationText()) {
                             screen.setFinishedConversationText(true);
-                        }else {
+                        } else {
                             player.setTalking(true);
                             screen.setConversationTextIndex(0);
                             screen.setFinishedConversationText(false);
-                            
+
                         }
                     } else {
                         if (!screen.isFinishedConversationText()) {
                             screen.setFinishedConversationText(true);
-                        }else{
-                        player.setConversation(false);
-                        npcs.get(i).setTalking(false);
-                        player.setTalking(false);
+                        } else {
+                            player.setConversation(false);
+                            npcs.get(i).setTalking(false);
+                            player.setTalking(false);
                         }
                     }
 
@@ -247,6 +248,7 @@ public class Game implements Runnable {
                     case 0:
                         animation = new Animation(Assets.pausaSave, 300);
                         Assets.selectSound.play();
+
                         break;
                     case 1:
                         animation = new Animation(Assets.pausaStats, 300);
@@ -273,6 +275,17 @@ public class Game implements Runnable {
                 mct.start();
                 running = false;
             }
+            if (keyManager.space && pauseIndex == 0) {
+
+                Save s = new Save(this);
+
+                try {
+                    s.tick();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
 
     }

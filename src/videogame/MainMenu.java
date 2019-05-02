@@ -161,14 +161,14 @@ public class MainMenu implements Runnable {
             running=false;
         }
             if(index==1 && keyManager.space==true){
-            Save s = new Save(this);
+            Load l = new Load(this);
             try {
-                s.tick();
+                l.tick();
             } catch (SQLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Game g = s.getGame();
-            g.setPlayer(s.getPlayer());
+            Game g = l.getGame();
+            g.setPlayer(l.getPlayer());
             g.setLoaded(true);
             Assets.gameStart.play();
             g.start();

@@ -9,6 +9,7 @@ package videogame;
  *
  * @author PatoSaldivar
  */
+
 import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,19 +30,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Save {
+
+public class Load {
 
     private Player player;
     private Game game;
     private ArrayList<NPC> npcs;
     private LinkedList<Trash> trash; // to manage the trash taht is in the game
     private KeyManager keyManager = new KeyManager();
-    private Game g;
-
-    public Save(Game g) {
-        this.g = g;
-    }
-
+    private MainMenu mm;
+    
+public Load(MainMenu mm){
+    this.mm = mm;
+}
     public void tick() throws SQLException {
 
         Connection myConn = null;
@@ -57,10 +58,35 @@ public class Save {
 
             // 2. Create a statement
             myStmt = myConn.createStatement();
-            int mon = (int)(g.getPlayer().getMoney());
+
             // 3. Execute SQL query
-            myStmt.executeLargeUpdate("UPDATE Player SET  mapId="+1+",  x="+g.getPlayer().getX()+",  y="+g.getPlayer().getY()+",  SMoveX="+g.getPlayer().getSMoveX()+", SMoveY="+g.getPlayer().getSMoveY()+", speed="+g.getPlayer().getSpeed()+", capacity="+g.getPlayer().getCapacity()+", inventory="+g.getPlayer().getInventory()+", glass="+g.getPlayer().getGlass()+", paper="+g.getPlayer().getPaper()+", plastic="+g.getPlayer().getPlastic()+", aluminum="+g.getPlayer().getAluminum()+", electronics="+g.getPlayer().getElectronics()+", organic="+g.getPlayer().getOrganic()+",  money="+mon+ " WHERE playerId=1;");
-               
+            myRs = myStmt.executeQuery("select *\n"
+                    + "from Player p\n"
+                    + "where p.playerId = (select playerId\n"
+                    + "  from Videogame)");
+
+            // 4. Process the result set (Player)
+            while (myRs.next()) {
+                //Agregar el mapa id para saber el mapa
+                game = new Game("Juego", 512,512, mm.getDisplay(),mm.getKeyManager());
+                player = new Player (0,0,64,64,game);
+                
+                player.setX(myRs.getInt(3));
+                player.setY(myRs.getInt(4));
+                player.setSMoveX(myRs.getInt(5));
+                player.setSMoveY(myRs.getInt(6));
+                player.setSpeed(myRs.getInt(7));
+                player.setCapacity(myRs.getInt(8));
+                player.setInventory(myRs.getInt(9));
+                player.setGlass(myRs.getInt(10));
+                player.setPaper(myRs.getInt(11));
+                player.setPlastic(myRs.getInt(12));
+                player.setAluminum(myRs.getInt(13));
+                player.setElectronics(myRs.getInt(14));
+                player.setOrganic(myRs.getInt(15));
+                player.setMoney(myRs.getInt(16));
+            }
+
 
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -86,5 +112,6 @@ public class Save {
     public Game getGame() {
         return game;
     }
+    
 
 }
