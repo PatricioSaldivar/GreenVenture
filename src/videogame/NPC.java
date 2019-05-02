@@ -34,6 +34,7 @@ private int id;
 private boolean justThrowedTrash = false;
 private int justThrowedTrashHelper=0;
 private boolean talking;
+private Animation alertAnimation;
 
 
 public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
@@ -48,6 +49,8 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         //trashMakerHelper = (int) (Math.random() *(500)+ 50);
         trashMakerHelper = 500;
         this.id = id;
+        alertAnimation = new Animation(Assets.npcAlert,100);
+        
     }
 
     public int getWidth() {
@@ -111,11 +114,9 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     }
     
     
-    
-
-
     @Override
     public void tick() {
+        alertAnimation.tick();
         if(!talking){
         if(flagUp<150){
             yMove-=speed;
@@ -174,7 +175,7 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     public void render(Graphics g) {
        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
        if(justThrowedTrash || talking){
-           g.drawImage(Assets.leftBox,getX(),getY()-16,16,16,null);
+           g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-16,16,16,null);
        }
     }
 
