@@ -37,6 +37,12 @@ public class Player extends Item {
     private int paper = 0;
     private int plastic = 0;
     private int aluminum = 0;
+    private Animation animationUp;
+    private Animation animationDown;
+    private Animation animationRight;
+    private Animation animationLeft;
+    private int direction; // 1 = Down , 2 = Up, 3 = Right, 4 = Left
+    
 
 
     public Player(int x, int y, int width, int height, Game game) {
@@ -44,6 +50,12 @@ public class Player extends Item {
         this.width = width;
         this.height = height;
         this.game = game;
+        //The speed of the animation need to be changed depending of the player speed
+        this.animationUp = new Animation(Assets.playerUp,100);
+        this.animationDown = new Animation(Assets.playerDown,100);
+        this.animationRight = new Animation(Assets.playerRight,100);
+        this.animationLeft = new Animation(Assets.playerLeft,100);
+        this.direction = 1;
     }
 
     /**
@@ -271,10 +283,15 @@ public class Player extends Item {
     @Override
     public void tick() {
         // moving player depending on flags
+        this.animationDown.tick();
+        this.animationUp.tick();
+        this.animationRight.tick();
+        this.animationLeft.tick();
         //Also moves the camara coordinates depending on flags
         pick = game.getKeyManager().space && !game.getKeyManager().helperSpace;
         if (!talking && !conversation) {
             if (game.getKeyManager().up) {
+                direction = 2;
                 if (getY() > game.getHeight() / 2 - height / 2) {
                     if (getY() - speed <= game.getHeight() / 2 - height / 2) {
                         setY(game.getHeight() / 2 - height / 2);
@@ -293,6 +310,7 @@ public class Player extends Item {
             }
 
             if (game.getKeyManager().down) {
+                direction = 1;
                 if (getY() < game.getHeight() / 2 - height / 2) {
                     if (getY() + speed >= game.getHeight() / 2 - height / 2) {
                         setY(game.getHeight() / 2 - height / 2);
@@ -310,6 +328,7 @@ public class Player extends Item {
             }
 
             if (game.getKeyManager().left) {
+                direction = 4;
                 if (getX() > game.getWidth() / 2 - width / 2) {
                     if (getX() - speed <= game.getWidth() / 2 - width / 2) {
                         setX(game.getWidth() / 2 - width / 2);
@@ -327,6 +346,7 @@ public class Player extends Item {
 
             }
             if (game.getKeyManager().right) {
+                direction = 3;
                 if (getX() < game.getWidth() / 2 - width / 2) {
                     if (getX() + speed >= game.getWidth() / 2 - width / 2) {
                         setX(game.getWidth() / 2 - width / 2);
@@ -394,7 +414,39 @@ public class Player extends Item {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        //Render down animation
+        if(direction == 1 && game.getKeyManager().down){
+            g.drawImage(animationDown.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        }
+        //Render down static
+        if(direction == 1 && !game.getKeyManager().down){
+            g.drawImage(Assets.playerDown[4], getX(), getY(), getWidth(), getHeight(), null);
+        }
+         //Render up animation
+        if(direction == 2  && game.getKeyManager().up){
+            g.drawImage(animationUp.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        }
+        //Render up static
+        if(direction == 2  && !game.getKeyManager().up){
+            g.drawImage(Assets.playerUp[4], getX(), getY(), getWidth(), getHeight(), null);
+        }
+         //Render right animation
+        if(direction == 3  && game.getKeyManager().right){
+            g.drawImage(animationRight.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        }
+        //Render right static
+        if(direction == 3  && !game.getKeyManager().right){
+            g.drawImage(Assets.playerRight[4], getX(), getY(), getWidth(), getHeight(), null);
+        }
+         //Render left animation
+        if(direction == 4 && game.getKeyManager().left){
+            g.drawImage(animationLeft.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        }
+        //Render left static
+        if(direction == 4 && !game.getKeyManager().left){
+            g.drawImage(Assets.playerLeft[4], getX(), getY(), getWidth(), getHeight(), null);
+        }
+
     }
 
     @Override
