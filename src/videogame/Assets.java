@@ -30,6 +30,7 @@ public class Assets {
     
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
+    public static BufferedImage backpack;           // to store the backpack image
     
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
@@ -62,7 +63,7 @@ public class Assets {
     public static BufferedImage mainMenuQuit[];           // to store the image of the MainMenu when quit is selected
     public static SoundClip gameStart;                    // to store the sound of new game or continue game button
     public static SoundClip selectSound;                // to store the sound of the menu selector
-    
+    public static BufferedImage mainMenuInstructionsImage[];
 
     //Minigame Pause
     public static BufferedImage minigame1PauseEnd[];   // to store the image of the Minigame1 pause when end is selected
@@ -107,6 +108,7 @@ public class Assets {
         coin[3] = ImageLoader.loadImage("/images/coin4.png");
         coin[4] = ImageLoader.loadImage("/images/coin5.png");
         coin[5] = ImageLoader.loadImage("/images/coin6.png");
+        backpack = ImageLoader.loadImage("/images/backpack.png");
         
         // Trash in Game 1 sprite array loader
         trash = new BufferedImage[6];
@@ -211,6 +213,10 @@ public class Assets {
         mainMenuQuit = new BufferedImage[2];
         mainMenuQuit[0] = ImageLoader.loadImage("/imagesMainMenu/exitHover.png");
         mainMenuQuit[1] = ImageLoader.loadImage("/imagesMainMenu/exitHover2.png");
+        
+        mainMenuInstructionsImage= new BufferedImage[2];
+        mainMenuInstructionsImage[0] = ImageLoader.loadImage("/imagesMainMenu/instructions.png");
+        mainMenuInstructionsImage[1] = ImageLoader.loadImage("/imagesMainMenu/instructions2.png");
 
     }
 
