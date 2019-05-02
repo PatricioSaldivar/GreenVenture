@@ -195,7 +195,7 @@ public class Screen {
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
             g.drawImage(Assets.player, 0, 416, 64, 64, null);
-            message = "Hey que te pasa porque tiras basura mejor tirala en un bote\n o a la otra te parto toda EHHH!\nNo quiero verte hacerlo de nuevo ";
+            message = "¡Hey! No tires la basura al suelo, mejor tírala en un bote,\nno cuesta mucho, y además, ayudas a mantener la ciudad limpia.";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;
@@ -206,7 +206,7 @@ public class Screen {
                 conversationTextIndex = message.length() - 1;
             }
         } else {
-            message = "Oh vaya, perdon no lo volvere a hacer\n que bueno que te importa el ambiente\n ten una gratificacion ";
+            message = "Oh vaya, una disculpa, no lo volveré a hacer.\nMe da gusto ver que hay gente que busca generar un cambio.";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;

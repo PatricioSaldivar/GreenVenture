@@ -11,6 +11,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -73,6 +74,10 @@ public class MainMenu implements Runnable {
     public int getHeight() {
         return height;
     }    
+
+    public Display getDisplay() {
+        return display;
+    }
 
     /**
      * initializing the display window of the game
@@ -160,15 +165,31 @@ public class MainMenu implements Runnable {
             g.start();
             running=false;
         }
+            if(index==1 && keyManager.space && !keyManager.helperSpace){
+            Load l = new Load(this);
+            try {
+                l.tick();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Game g = l.getGame();
+            g.setPlayer(l.getPlayer());
+            g.setLoaded(true);
+            Assets.gameStart.play();
+            g.start();
+            running=false;
+        }
+
           if(index==2 && keyManager.space && !keyManager.helperSpace){
               displayInst=true;
               displayInstHelper=false;
 
            }
            if(index==4 && keyManager.space && !keyManager.helperSpace){
-               //Closes the game
+                           //Closes the game
                Runtime.getRuntime().exit(0);
            }
+
         }else{
             if(!displayInstHelper){
             animation = new Animation(Assets.mainMenuInstructionsImage, 300);
