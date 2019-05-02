@@ -38,7 +38,7 @@ public class TrashMinigameClassify extends Item {
         if(trashType){
             imageIndex = (int)(Math.random() * 8);
         } else {
-            imageIndex = (int)(Math.random() * 14);
+            imageIndex = (int)(Math.random() * 18);
         }
     }
 
