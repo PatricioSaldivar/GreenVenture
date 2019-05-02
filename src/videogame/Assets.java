@@ -22,7 +22,11 @@ public class Assets {
     public static BufferedImage trash[];            // to store the trash
     public static SoundClip pickTrash;              // to store the picking trash sound
     public static SoundClip pickDenied;             // to store the picking denied sound
-
+    public static BufferedImage playerSpriteSheet;  // to store the player sprite sheet
+    public static BufferedImage playerUp[];           // to store the player sprite sheet
+    public static BufferedImage playerDown[];         // to store the player sprite sheet
+    public static BufferedImage playerRight[];        // to store the player sprite sheet
+    public static BufferedImage playerLeft[];         // to store the player sprite sheet
     
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
@@ -75,6 +79,25 @@ public class Assets {
         pause = ImageLoader.loadImage("/images/Pausa.png");
         pickTrash = new SoundClip("/global_sounds/pickTrash.wav");
         pickDenied = new SoundClip("/global_sounds/pickDenied.wav");
+        playerSpriteSheet = ImageLoader.loadImage("/images/player_spritesheet.png");
+        SpriteSheet playerSprites = new SpriteSheet(playerSpriteSheet);
+        playerDown = new BufferedImage[6];
+        playerUp = new BufferedImage[6];
+        playerLeft = new BufferedImage[6];
+        playerRight = new BufferedImage[6];
+        for(int i = 0; i < 6; i++){
+            playerDown[i] = playerSprites.crop(i*72,0,72,96);
+        }
+        for(int i = 0; i < 6; i++){
+            playerLeft[i] = playerSprites.crop(i*72,96,72,96);
+        }
+        for(int i = 0; i < 6; i++){
+            playerRight[i] = playerSprites.crop(i*72,192,72,96);
+        }
+        for(int i = 0; i < 6; i++){
+            playerUp[i] = playerSprites.crop(i*72,288,72,96);
+        }
+        
         
         //Money coin image loader
         coin = new BufferedImage[6];
