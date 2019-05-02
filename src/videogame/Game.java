@@ -140,10 +140,7 @@ public class Game implements Runnable {
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
         animation = new Animation(Assets.pausaSave, 300);
-        keyManager.setPauseMax(4);
-        solids.add(new Solid(100,100,100,100,screen));
-        solids.add(new Solid(800,800,100,100,screen));
-        
+        keyManager.setPauseMax(4);  
 
     }
 
@@ -239,15 +236,19 @@ public class Game implements Runnable {
                 switch (keyManager.pauseSelector) {
                     case 0:
                         animation = new Animation(Assets.pausaSave, 300);
+                        Assets.selectSound.play();
                         break;
                     case 1:
                         animation = new Animation(Assets.pausaStats, 300);
+                        Assets.selectSound.play();
                         break;
                     case 2:
                         animation = new Animation(Assets.pausaMenuInstructions, 300);
+                        Assets.selectSound.play();
                         break;
                     case 3:
                         animation = new Animation(Assets.pausaMainMenu, 300);
+                        Assets.selectSound.play();
                         break;
                 }
                 pauseIndex = keyManager.pauseSelector;
@@ -285,8 +286,6 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
-            g.drawRect(100-screen.getX(),100-screen.getY(),100,100);
-            g.drawRect(800-screen.getX(),800-screen.getY(),100,100);
             bs.show();
             g.dispose();
         }

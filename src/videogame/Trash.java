@@ -71,10 +71,13 @@ public class Trash extends Item{
         x= iniX-screen.getX();
         y= iniY-screen.getY();
         
-        if(game.getPlayer().intersectsTrash(this) && game.getPlayer().isPick() && 
-                game.getPlayer().getCapacity()>game.getPlayer().getInventory()){
-            game.getPlayer().setInventory(game.getPlayer().getInventory()+1);
-            dead=true;
+        if(game.getPlayer().intersectsTrash(this) && game.getPlayer().isPick()) {
+            if(game.getPlayer().getCapacity()>game.getPlayer().getInventory()){
+                game.getPlayer().setInventory(game.getPlayer().getInventory()+1);
+                dead=true;
+            } else {
+                Assets.pickDenied.play();
+            }
         }
 
           
