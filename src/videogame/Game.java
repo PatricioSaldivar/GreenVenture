@@ -5,23 +5,13 @@
  */
 package videogame;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
-import java.awt.image.ImageObserver;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,6 +37,8 @@ public class Game implements Runnable {
     private int pauseIndex = 5;          // to storw the index of the pause selector
     private boolean cont = false;       // to continue the game
     private ArrayList<Solid> solids;   // to store all the solids
+    private boolean loaded;
+    
 
     /**
      * to create title, width and height and set the game is still not running
@@ -94,6 +86,18 @@ public class Game implements Runnable {
         return player;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setNpcs(ArrayList<NPC> npcs) {
+        this.npcs = npcs;
+    }
+
+    public void setTrash(LinkedList<Trash> trash) {
+        this.trash = trash;
+    }
+
     /**
      * To get the height of the game window
      *
@@ -127,6 +131,10 @@ public class Game implements Runnable {
     public ArrayList<Solid> getSolids() {
         return solids;
     }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
     
 
     /**
@@ -134,7 +142,9 @@ public class Game implements Runnable {
      */
     private void init() {
         Assets.init();
+        if(!loaded){
         player = new Player(0, 0, 64, 64, this);
+        }
         screen = new Screen(0, 0, width, height, this, player, trash);
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
