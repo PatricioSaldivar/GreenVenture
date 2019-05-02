@@ -46,6 +46,7 @@ public class Game implements Runnable {
     private Animation animation;     // to manage the animations of the objects
     private int pauseIndex = 5;          // to storw the index of the pause selector
     private boolean cont = false;       // to continue the game
+    private ArrayList<Solid> solids;   // to store all the solids
 
     /**
      * to create title, width and height and set the game is still not running
@@ -64,6 +65,7 @@ public class Game implements Runnable {
         this.keyManager = keyManager;
         npcs = new ArrayList<>(0);
         trash = new LinkedList<>();
+        solids = new ArrayList<>();
         this.display = display;
         display.setTitle("Ciudad");
 
@@ -122,6 +124,11 @@ public class Game implements Runnable {
         this.cont = cont;
     }
 
+    public ArrayList<Solid> getSolids() {
+        return solids;
+    }
+    
+
     /**
      * initializing the display window of the game
      */
@@ -134,6 +141,9 @@ public class Game implements Runnable {
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
+        solids.add(new Solid(100,100,100,100,screen));
+        solids.add(new Solid(800,800,100,100,screen));
+        
 
     }
 
@@ -183,6 +193,9 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
+        for(int i=0; i<solids.size(); i++){
+        solids.get(i).tick();
+        }
         if (!keyManager.pause) {
             // avancing player with colision
             for (int i = 0; i < npcs.size(); i++) {
@@ -272,6 +285,8 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
+            g.drawRect(100-screen.getX(),100-screen.getY(),100,100);
+            g.drawRect(800-screen.getX(),800-screen.getY(),100,100);
             bs.show();
             g.dispose();
         }
