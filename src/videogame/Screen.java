@@ -33,7 +33,6 @@ public class Screen {
     private boolean finishedConversationText = false;
     private int conversationTextIndex = 0;
     private Animation coin;
-
     /**
      * to create the screen with his attributes
      *
@@ -244,13 +243,14 @@ public class Screen {
         for (int i = 0; i < trash.size(); i++) {
             trash.get(i).tick();
             if (trash.get(i).isDead()) {
-                Assets.pickTrash.play();
-                game.getNpcs().get(trash.get(i).getNpcId()).setTrashThrown();
+                game.getNpcs().get(trash.get(i).getNpcId()).setTrashThrown( game.getNpcs().get(trash.get(i).getNpcId()).getTrashThrown()-1);
                 trash.remove(i);
+                i--; 
             } else if (getPerimetro().contains(trash.get(i).getPerimetro())) {
                 trash.get(i).render(g);
             }
         }
+        
         player.render(g);
         for (int i = 0; i < game.getNpcs().size(); i++) {
             game.getNpcs().get(i).render(g);
@@ -259,7 +259,6 @@ public class Screen {
             }
         }
         if (player.isConversation()) {
-
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
         }
 
