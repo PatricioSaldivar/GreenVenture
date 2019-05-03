@@ -250,7 +250,7 @@ public class Game implements Runnable {
             player.tick();
             
             //If player intersects the npc and press space the minigame starts
-            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro()) && keyManager.space){
+            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro()) && keyManager.space && !keyManager.helperSpace){
                 MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
                 mct.start();
                 running = false;
