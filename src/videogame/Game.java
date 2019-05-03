@@ -22,25 +22,26 @@ import java.util.logging.Logger;
  */
 public class Game implements Runnable {
 
-    private BufferStrategy bs;      // to have several buffers when displaying
-    private Graphics g;             // to paint objects
-    private Display display;        // to display in the game
-    String title;                   // title of the window
-    private int width;              // width of the window
-    private int height;             // height of the window
-    private Thread thread;          // thread to create the game
-    private boolean running;        // to set the game
-    private Player player;          // to use a player
-    private KeyManager keyManager;  // to manage the keyboard
-    private Screen screen;          //to manage screen
-    private ArrayList<NPC> npcs;   // to manage all items in the game
-    private Font fontx;             //to manage a custom font
-    private LinkedList<Trash> trash; // to manage the trash taht is in the game
-    private Animation animation;     // to manage the animations of the objects
-    private int pauseIndex = 5;          // to storw the index of the pause selector
-    private boolean cont = false;       // to continue the game
-    private ArrayList<Solid> solids;   // to store all the solids
+    private BufferStrategy bs;                  // to have several buffers when displaying
+    private Graphics g;                         // to paint objects
+    private Display display;                    // to display in the game
+    String title;                               // title of the window
+    private int width;                          // width of the window
+    private int height;                         // height of the window
+    private Thread thread;                      // thread to create the game
+    private boolean running;                    // to set the game
+    private Player player;                      // to use a player
+    private KeyManager keyManager;              // to manage the keyboard
+    private Screen screen;                      //to manage screen
+    private ArrayList<NPC> npcs;                // to manage all items in the game
+    private Font fontx;                         //to manage a custom font
+    private LinkedList<Trash> trash;            // to manage the trash taht is in the game
+    private Animation animation;                // to manage the animations of the objects
+    private int pauseIndex = 5;                 // to storw the index of the pause selector
+    private boolean cont = false;               // to continue the game
+    private ArrayList<Solid> solids;            // to store all the solids
     private boolean loaded;
+    private NPCMinigame1 npcTrashClassify;      // to manage the NPC what gives you the TrashClassify Minigame  
 
     /**
      * to create title, width and height and set the game is still not running
@@ -126,6 +127,10 @@ public class Game implements Runnable {
         return npcs;
     }
 
+    public NPCMinigame1 getNpcTrashClassify() {
+        return npcTrashClassify;
+    }
+    
     public void setCont(boolean cont) {
         this.cont = cont;
     }
@@ -150,6 +155,7 @@ public class Game implements Runnable {
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
         npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
+        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
@@ -239,8 +245,18 @@ public class Game implements Runnable {
 
                 }
             }
-
+            
+            npcTrashClassify.tick();
             player.tick();
+            
+            //If player intersects the npc and press space the minigame starts
+            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro()) && keyManager.space){
+                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                mct.start();
+                running = false;
+            }
+            
+            
         } else {
             animation.tick();
             if (pauseIndex != keyManager.pauseSelector) {
@@ -267,6 +283,7 @@ public class Game implements Runnable {
             }
             if (keyManager.space && pauseIndex == 3) {
                 MainMenu m = new MainMenu("MainMenu", 512, 512, display);
+                Assets.gameStart.play();
                 m.start();
                 running = false;
             }
@@ -304,7 +321,8 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
-            screen.render(g); //Draws the screen that follows the player    
+            screen.render(g); //Draws the screen that follows the player   
+            npcTrashClassify.render(g);
             //Draws Pause image when pausing game
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);

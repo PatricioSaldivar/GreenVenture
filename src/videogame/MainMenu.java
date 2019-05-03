@@ -199,6 +199,7 @@ public class MainMenu implements Runnable {
                 animation = new Animation(Assets.mainMenuInstructions, 300);
                 index=2;
                 keyManager.pauseSelector=2;
+                Assets.selectSound.play();
                 displayInst=false;
             }
         }
