@@ -152,12 +152,19 @@ public class Game implements Runnable {
             player = new Player(0, 0, 64, 64, this);
         }
         screen = new Screen(0, 0, width, height, this, player, trash);
-        npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 0));
-        npcs.add(new NPC(400, 400, 64, 64, 0, this, screen, 1));
-        npcs.add(new NPC(800, 400, 64, 64, 0, this, screen, 2));
+        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 0));
+        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 1));
+        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 2));
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
+        /*
+        solids.add(new Solid(0,0,300,512,screen));
+        solids.add(new Solid(0,0,512,300,screen));
+        solids.add(new Solid(0,500,512,100,screen));
+        solids.add(new Solid(500,0,100,512,screen));
+        */
+        
 
     }
 
@@ -207,9 +214,6 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        for (int i = 0; i < solids.size(); i++) {
-            solids.get(i).tick();
-        }
         if (!keyManager.pause) {
             // avancing player with colision
             for (int i = 0; i < npcs.size(); i++) {
@@ -327,6 +331,12 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
+            /*
+            g.drawRect(0-screen.getX(),0-screen.getY(),300,512);
+            g.drawRect(0-screen.getX(),0-screen.getY(),512,300);
+            g.drawRect(0-screen.getX(),500-screen.getY(),512,100);
+            g.drawRect(500-screen.getX(),0-screen.getY(),100,512);
+            */
             bs.show();
             g.dispose();
         }
