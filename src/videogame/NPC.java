@@ -188,16 +188,16 @@ public class NPC extends Item {
                     direction = (int) (Math.random() * 4);
                     switch (direction) {
                         case 0:
-                            randomDist = (int) (Math.random() * (4096 - y));
-                            break;
-                        case 1:
-                            randomDist = (int) (Math.random() * (x));
-                            break;
-                        case 2:
                             randomDist = (int) (Math.random() * (y));
                             break;
-                        case 3:
+                        case 1:
                             randomDist = (int) (Math.random() * (4096 - x));
+                            break;
+                        case 2:
+                            randomDist = (int) (Math.random() * (4096 - y));
+                            break;
+                        case 3:
+                            randomDist = (int) (Math.random() * (x));
                             break;
                     }
 
@@ -216,7 +216,7 @@ public class NPC extends Item {
 
             if (trashThrown < 5) {
                 if (trashMaker > trashMakerHelper) {
-                    int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
+                    int randType = (int) (Math.random() * (19));
                     game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
                     trashMaker = 0;
                     trashThrown++;
