@@ -38,6 +38,7 @@ public class Assets {
     public static BufferedImage npcUp[][];          // to store the NPC going up assets
     public static BufferedImage npcRight[][];       // to store the NPC going right assets
     public static BufferedImage npcLeft[][];        // to store the NPC going left assets
+    public static BufferedImage npcMinigame1;       // to store the NPC of the minigame1 image
 
     //Minigame 1 Assests
     public static BufferedImage inTrashCan;         // to store the image of the inorganic trash can
@@ -124,6 +125,7 @@ public class Assets {
         npcAlert[1] = ImageLoader.loadImage("/images_NPC/alert2.png");
         npcAlert[2] = ImageLoader.loadImage("/images_NPC/alert3.png");
         npcAlert[3] = ImageLoader.loadImage("/images_NPC/alert4.png");
+        npcMinigame1 = ImageLoader.loadImage("/images_NPC/npc.png");
         
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");

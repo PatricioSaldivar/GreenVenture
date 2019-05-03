@@ -15,7 +15,7 @@ public class VideoGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        display = new Display("Menu", 512, 512);
+        display = new Display("Green Venture", 512, 512);
         // TODO code application logic here
         MainMenu m = new MainMenu("MainMenu", 512, 512, display);
         m.start();
