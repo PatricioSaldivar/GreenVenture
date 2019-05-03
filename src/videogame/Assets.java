@@ -50,13 +50,13 @@ public class Assets {
     public static BufferedImage orTrash[];           // to store the images of the organic trash
     public static SoundClip gloveHit;               // to store the glove hit sound
     
-    //Pause of game assets
+    //Pause of game Assets
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
     public static BufferedImage pausaSave[];                // to store the image of the pause when Save is selected
     public static BufferedImage pausaStats[];               // to store the image of the pause when Stats is selected
     public static BufferedImage pausaMenuInstructions[];   // to store the image of the pause when Instructions is selected
 
-    // Main Menu
+    // Main Menu Assets
     public static BufferedImage mainMenuPlay[];           // to store the image of the MainMenu when play is selected
     public static BufferedImage mainMenuLoad[];           // to store the image of the MainMenu when load is selected
     public static BufferedImage mainMenuCredits[];        // to store the image of the MainMenu when credits is selected
@@ -66,8 +66,10 @@ public class Assets {
     public static SoundClip selectSound;                // to store the sound of the menu selector
     public static BufferedImage mainMenuInstructionsImage[];
 
-    //Minigame Pause
+    //Minigame Pause Assets
     public static BufferedImage minigame1PauseEnd[];   // to store the image of the Minigame1 pause when end is selected
+    
+    //RecycleCo Assets
 
     /**
      * initializing the images of the game
