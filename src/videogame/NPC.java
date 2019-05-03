@@ -120,12 +120,10 @@ public class NPC extends Item {
             switch (direction) {
                 //Moves Up, checks colission
                 case 0:
-                    yMove -= speed;
-                    y = iniY - screen.getY() + yMove;
-                    x = iniX - screen.getX() + xMove + speed;
+                    yMove += speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
-                        if (getPerimetroForSolidsUp().intersects(game.getSolids().get(i).getPerimetroUp(screen.getX(), screen.getX()))) {
-                            y = iniY - screen.getX() + yMove + speed;
+                        if (getPerimetroForSolidsUp().intersects(game.getSolids().get(i).getPerimetroUp(screen.getX(), screen.getY()))) {
+                            yMove-=speed;
                             direction = 4;
                             break;
                         }
@@ -139,11 +137,9 @@ public class NPC extends Item {
                 case 1:
                     //Moves Right, checks colission
                     xMove += speed;
-                    x = iniX - screen.getX() + xMove + speed;
-                    y = iniY - screen.getY() + yMove;
                     for (int i = 0; i < game.getSolids().size(); i++) {
-                        if (getPerimetroForSolidsRight().intersects(game.getSolids().get(i).getPerimetroRight(screen.getX(), screen.getX()))) {
-                            x = iniX - screen.getX() + xMove - speed;
+                        if (getPerimetroForSolidsRight().intersects(game.getSolids().get(i).getPerimetroRight(screen.getX(), screen.getY()))) {
+                            xMove-=speed;
                             direction = 4;
                             break;
                         }
@@ -156,12 +152,10 @@ public class NPC extends Item {
 
                 case 2:
                     //Moves Down, checks colission
-                    yMove += speed;
-                    y = iniY - screen.getY() + yMove;
-                    x = iniX - screen.getX() + xMove + speed;
+                    yMove -= speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
-                        if (getPerimetroForSolidsDown().intersects(game.getSolids().get(i).getPerimetroDown(screen.getX(), screen.getX()))) {
-                            y = iniY - screen.getX() + yMove - speed;
+                        if (getPerimetroForSolidsDown().intersects(game.getSolids().get(i).getPerimetroDown(screen.getX(), screen.getY()))) {
+                            yMove+=speed;
                             direction = 4;
                             break;
                         }
@@ -175,11 +169,9 @@ public class NPC extends Item {
                 case 3:
                     //Moves Left, checks colission
                     xMove -= speed;
-                    x = iniX - screen.getX() + xMove;
-                    y = iniY - screen.getY() + yMove;
                     for (int i = 0; i < game.getSolids().size(); i++) {
-                        if (getPerimetroForSolidsLeft().intersects(game.getSolids().get(i).getPerimetroLeft(screen.getX(), screen.getX()))) {
-                            x = iniX - screen.getX() + xMove + speed;
+                        if (getPerimetroForSolidsLeft().intersects(game.getSolids().get(i).getPerimetroLeft(screen.getX(), screen.getY()))) {
+                            xMove+=speed;
                             direction = 4;
                             break;
                         }
@@ -211,6 +203,8 @@ public class NPC extends Item {
 
                     break;
             }
+            x = iniX - screen.getX() + xMove;
+            y = iniY - screen.getY() + yMove;
 
             if (justThrowedTrash) {
                 justThrowedTrashHelper--;
@@ -251,22 +245,22 @@ public class NPC extends Item {
     }
 
     public Rectangle getPerimetroForSolidsDown() {
-        return new Rectangle(getX(), getY(), getWidth(), speed);
+        return new Rectangle(getX(), getY(), getWidth(), 16);
 
     }
 
     public Rectangle getPerimetroForSolidsUp() {
-        return new Rectangle(getX(), getY() + getHeight() - speed, getWidth(), speed);
+        return new Rectangle(getX(), getY() + getHeight() - 16, getWidth(), 16);
 
     }
 
     public Rectangle getPerimetroForSolidsRight() {
-        return new Rectangle(getX() + getWidth() - speed, getY(), speed, getHeight());
+        return new Rectangle(getX() + getWidth() - 16, getY(), 16, getHeight());
 
     }
 
     public Rectangle getPerimetroForSolidsLeft() {
-        return new Rectangle(getX(), getY(), speed, getHeight());
+        return new Rectangle(getX(), getY(), 16, getHeight());
 
     }
 
