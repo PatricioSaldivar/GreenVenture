@@ -239,7 +239,7 @@ public class MinigameTrashClassify implements Runnable {
             }
         } else {
             animationPause.tick();
-            if (keyManager.space) {
+            if (keyManager.space && !keyManager.helperSpace) {
                 //Resume the game
                 game.setCont(true);
                 game.start();
