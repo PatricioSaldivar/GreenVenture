@@ -13,44 +13,44 @@ import java.awt.Rectangle;
  * @author BonfireStudios
  */
 public class NPC extends Item {
-private int width;
-private int height;
-private int trashMaker;
-private int trashThrown;
-private Game game;
-private int type;
-private Screen screen;
-private int speed = 1;
-private int flagUp=0;
-private int flagRight=0;
-private int flagDown=0;
-private int flagLeft=0;
-private int iniX;
-private int iniY;
-private int xMove=0;
-private int yMove=0;
-private int trashMakerHelper;
-private int id;
-private boolean justThrowedTrash = false;
-private int justThrowedTrashHelper=0;
-private boolean talking;
-private Animation alertAnimation;
 
+    private int width;
+    private int height;
+    private int trashMaker;
+    private int trashThrown;
+    private Game game;
+    private int type;
+    private Screen screen;
+    private int speed = 1;
+    private int direction;
+    private int iniX;
+    private int iniY;
+    private int xMove = 0;
+    private int yMove = 0;
+    private int trashMakerHelper;
+    private int id;
+    private boolean justThrowedTrash = false;
+    private int justThrowedTrashHelper = 0;
+    private boolean talking;
+    private Animation alertAnimation;
+    private int randomDist;
+    private int distanceTraveled;
 
-public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
+    public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.type = type;
         this.game = game;
         this.screen = screen;
-        iniX=x;
-        iniY=y;
+        iniX = x;
+        iniY = y;
         //trashMakerHelper = (int) (Math.random() *(500)+ 50);
         trashMakerHelper = 500;
         this.id = id;
-        alertAnimation = new Animation(Assets.npcAlert,100);
-        
+        alertAnimation = new Animation(Assets.npcAlert, 100);
+        direction =4;
+
     }
 
     public int getWidth() {
@@ -85,8 +85,8 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
         this.trashMaker = trashMaker;
     }
 
-    public void setTrashThrown() {
-        this.trashThrown= this.trashThrown-1;
+    public void setTrashThrown(int n) {
+        this.trashThrown = n;
     }
 
     public void setGame(Game game) {
@@ -112,76 +112,162 @@ public NPC(int x, int y, int width, int height, int type, Game game, Screen scre
     public boolean isTalking() {
         return talking;
     }
-    
-    
+
     @Override
     public void tick() {
         alertAnimation.tick();
-        if(!talking){
-        if(flagUp<150){
-            yMove-=speed;
-            flagUp++;
-            if(justThrowedTrash)
-            justThrowedTrashHelper--;
-        }else if(flagRight<150){
-            xMove+=speed;
-            flagRight++;
-            if(justThrowedTrash)
-            justThrowedTrashHelper--;
-        }else if(flagDown<150){
-            yMove+=speed;
-            flagDown++;
-            if(justThrowedTrash)
-            justThrowedTrashHelper--;
-        }else if(flagLeft<150){
-            xMove-=speed;
-            flagLeft++;
-            if(justThrowedTrash)
-            justThrowedTrashHelper--;
-        }else{
-            flagUp=0;
-            flagRight=0;
-            flagDown=0;
-            flagLeft=0;
-            if(justThrowedTrash)
-            justThrowedTrashHelper--;
+        if (!talking) {
+            switch (direction) {
+                //Moves Up, checks colission
+                case 0:
+                    yMove -= speed;
+                    y = iniY - screen.getY() + yMove;
+                    x = iniX - screen.getX() + xMove + speed;
+                    for (int i = 0; i < game.getSolids().size(); i++) {
+                        if (getPerimetroForSolidsUp().intersects(game.getSolids().get(i).getPerimetroUp(screen.getX(), screen.getX()))) {
+                            y = iniY - screen.getX() + yMove + speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    distanceTraveled++;
+                                        if(distanceTraveled>randomDist){
+                        direction = 4;
+                    }
+                    break;
+                    
+                case 1:
+                    //Moves Right, checks colission
+                    xMove += speed;
+                    x = iniX - screen.getX() + xMove + speed;
+                    y = iniY - screen.getY() + yMove;
+                    for (int i = 0; i < game.getSolids().size(); i++) {
+                        if (getPerimetroForSolidsRight().intersects(game.getSolids().get(i).getPerimetroRight(screen.getX(), screen.getX()))) {
+                            x = iniX - screen.getX() + xMove - speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    distanceTraveled++;
+                                        if(distanceTraveled>randomDist){
+                        direction = 4;
+                    }
+                    break;
+                    
+                case 2:
+                    //Moves Down, checks colission
+                    yMove += speed;
+                    y = iniY - screen.getY() + yMove;
+                    x = iniX - screen.getX() + xMove + speed;
+                    for (int i = 0; i < game.getSolids().size(); i++) {
+                        if (getPerimetroForSolidsDown().intersects(game.getSolids().get(i).getPerimetroDown(screen.getX(), screen.getX()))) {
+                            y = iniY - screen.getX() + yMove - speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    distanceTraveled++;
+                                        if(distanceTraveled>randomDist){
+                        direction = 4;
+                    }
+                    break;
+                    
+                case 3:
+                    //Moves Left, checks colission
+                    xMove -= speed;
+                    x = iniX - screen.getX() + xMove;
+                    y = iniY - screen.getY() + yMove;
+                    for (int i = 0; i < game.getSolids().size(); i++) {
+                        if (getPerimetroForSolidsLeft().intersects(game.getSolids().get(i).getPerimetroLeft(screen.getX(), screen.getX()))) {
+                            x = iniX - screen.getX() + xMove + speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    distanceTraveled++;
+                    if(distanceTraveled>randomDist){
+                        direction = 4;
+                    }
+                    
+                    break;
+                    //Restarts the random movement of each NPC
+                case 4:
+                    direction = (int) (Math.random() * 4);
+            switch (direction) {
+                case 0:
+                    randomDist = (int) (Math.random() *(y));
+                    break;
+                case 1:
+                    randomDist = (int) (Math.random() *(4096-x));
+                    break;
+                case 2:
+                    randomDist = (int) (Math.random() *(4096-y));
+                    break;
+                case 3:
+                    randomDist = (int) (Math.random() *(x));
+                    break;
+            }
+                        
+                    
+                    break;
+            }
+
+            if (justThrowedTrash) {
+                justThrowedTrashHelper--;
+            }
+
+            if (justThrowedTrash && justThrowedTrashHelper < 1) {
+                justThrowedTrash = false;
+            }
+
+            if (trashThrown < 5) {
+                if (trashMaker > trashMakerHelper) {
+                    int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
+                    game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
+                    trashMaker = 0;
+                    trashThrown++;
+                    justThrowedTrash = true;
+                    justThrowedTrashHelper = 50;
+                }
+                trashMaker++;
+            }
+        } else {
+            justThrowedTrash = false;
+            justThrowedTrashHelper = 0;
         }
-        if(justThrowedTrash && justThrowedTrashHelper<1){
-            justThrowedTrash=false;
-        }
-        
-        
-        if(trashThrown<5){
-            if(trashMaker>trashMakerHelper){
-            int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
-            game.getTrash().add(new Trash(x+screen.getX()+16, y+screen.getY()+16, 32, 32, randType, game, screen, id));
-            trashMaker=0;
-            trashThrown++;
-            justThrowedTrash=true;
-            justThrowedTrashHelper=50;
-        }
-        trashMaker++;
-        }
-        }else{
-        justThrowedTrash=false;
-        justThrowedTrashHelper=0;
-        }
-        
-        x= iniX-screen.getX()+xMove;
-        y= iniY-screen.getY()+yMove;
     }
 
     @Override
     public void render(Graphics g) {
-       g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
-       if(justThrowedTrash || talking){
-           g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-16,16,16,null);
-       }
+        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        if (justThrowedTrash || talking) {
+            g.drawImage(alertAnimation.getCurrentFrame(), getX(), getY() - 16, 16, 16, null);
+        }
     }
 
     @Override
     public Rectangle getPerimetro() {
-      return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
-    
+
+    public Rectangle getPerimetroForSolidsDown() {
+        return new Rectangle(getX(), getY(), getWidth(), speed);
+
+    }
+
+    public Rectangle getPerimetroForSolidsUp() {
+        return new Rectangle(getX(), getY() + getHeight() - speed, getWidth(), speed);
+
+    }
+
+    public Rectangle getPerimetroForSolidsRight() {
+        return new Rectangle(getX() + getWidth() - speed, getY(), speed, getHeight());
+
+    }
+
+    public Rectangle getPerimetroForSolidsLeft() {
+        return new Rectangle(getX(), getY(), speed, getHeight());
+
+    }
+
 }

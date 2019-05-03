@@ -415,35 +415,34 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         //Render down animation
-        if(direction == 1 && game.getKeyManager().down){
+        if(direction == 1 && game.getKeyManager().down && !conversation){
             g.drawImage(animationDown.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        }
+        
         //Render down static
-        if(direction == 1 && !game.getKeyManager().down){
+        }else if(direction == 1){
             g.drawImage(Assets.playerDown[4], getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render up animation
-        if(direction == 2  && game.getKeyManager().up){
+        if(direction == 2  && game.getKeyManager().up && !conversation){
             g.drawImage(animationUp.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        }
+        
         //Render up static
-        if(direction == 2  && !game.getKeyManager().up){
+    }else if(direction == 2 ){
             g.drawImage(Assets.playerUp[4], getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render right animation
-        if(direction == 3  && game.getKeyManager().right){
+        if(direction == 3  && game.getKeyManager().right && !conversation){
             g.drawImage(animationRight.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        }
         //Render right static
-        if(direction == 3  && !game.getKeyManager().right){
+        }else if(direction == 3){
             g.drawImage(Assets.playerRight[4], getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render left animation
-        if(direction == 4 && game.getKeyManager().left){
+        if(direction == 4 && game.getKeyManager().left && !conversation){
             g.drawImage(animationLeft.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        }
+        
         //Render left static
-        if(direction == 4 && !game.getKeyManager().left){
+        }else if(direction == 4){
             g.drawImage(Assets.playerLeft[4], getX(), getY(), getWidth(), getHeight(), null);
         }
 
