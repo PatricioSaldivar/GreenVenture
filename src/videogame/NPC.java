@@ -49,7 +49,7 @@ public class NPC extends Item {
         trashMakerHelper = 500;
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
-        direction =4;
+        direction = 4;
 
     }
 
@@ -131,11 +131,11 @@ public class NPC extends Item {
                         }
                     }
                     distanceTraveled++;
-                                        if(distanceTraveled>randomDist){
+                    if (distanceTraveled > randomDist) {
                         direction = 4;
                     }
                     break;
-                    
+
                 case 1:
                     //Moves Right, checks colission
                     xMove += speed;
@@ -149,11 +149,11 @@ public class NPC extends Item {
                         }
                     }
                     distanceTraveled++;
-                                        if(distanceTraveled>randomDist){
+                    if (distanceTraveled > randomDist) {
                         direction = 4;
                     }
                     break;
-                    
+
                 case 2:
                     //Moves Down, checks colission
                     yMove += speed;
@@ -167,11 +167,11 @@ public class NPC extends Item {
                         }
                     }
                     distanceTraveled++;
-                                        if(distanceTraveled>randomDist){
+                    if (distanceTraveled > randomDist) {
                         direction = 4;
                     }
                     break;
-                    
+
                 case 3:
                     //Moves Left, checks colission
                     xMove -= speed;
@@ -185,30 +185,30 @@ public class NPC extends Item {
                         }
                     }
                     distanceTraveled++;
-                    if(distanceTraveled>randomDist){
+                    if (distanceTraveled > randomDist) {
                         direction = 4;
                     }
-                    
+
                     break;
-                    //Restarts the random movement of each NPC
+                //Restarts the random movement of each NPC
                 case 4:
+                    distanceTraveled = 0;
                     direction = (int) (Math.random() * 4);
-            switch (direction) {
-                case 0:
-                    randomDist = (int) (Math.random() *(y));
-                    break;
-                case 1:
-                    randomDist = (int) (Math.random() *(4096-x));
-                    break;
-                case 2:
-                    randomDist = (int) (Math.random() *(4096-y));
-                    break;
-                case 3:
-                    randomDist = (int) (Math.random() *(x));
-                    break;
-            }
-                        
-                    
+                    switch (direction) {
+                        case 0:
+                            randomDist = (int) (Math.random() * (y));
+                            break;
+                        case 1:
+                            randomDist = (int) (Math.random() * (4096 - x));
+                            break;
+                        case 2:
+                            randomDist = (int) (Math.random() * (4096 - y));
+                            break;
+                        case 3:
+                            randomDist = (int) (Math.random() * (x));
+                            break;
+                    }
+
                     break;
             }
 
@@ -222,7 +222,7 @@ public class NPC extends Item {
 
             if (trashThrown < 5) {
                 if (trashMaker > trashMakerHelper) {
-                    int randType = (int) (Math.random() * ((5 - 0) + 1)) + 0;
+                    int randType = (int) (Math.random() * (19));
                     game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
                     trashMaker = 0;
                     trashThrown++;
