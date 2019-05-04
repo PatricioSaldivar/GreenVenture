@@ -158,12 +158,109 @@ public class Game implements Runnable {
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
-        /*
-        solids.add(new Solid(0,0,300,512,screen));
-        solids.add(new Solid(0,0,512,300,screen));
-        solids.add(new Solid(0,500,512,100,screen));
-        solids.add(new Solid(500,0,100,512,screen));
-        */
+        
+        //Boundaries of Map
+        solids.add(new Solid(0,-32,4096,32,screen));
+        solids.add(new Solid(-32,0,32,4096,screen));
+        solids.add(new Solid(4096,0,32,4096,screen));
+        solids.add(new Solid(0,4096,4096,32,screen));
+
+
+        //Arbol parque norte izquierdo
+        solids.add(new Solid(24,280,143,187,screen));
+        //Arbol parque norte derecho
+        solids.add(new Solid(930,0,143,187,screen));
+        //WaterFountain main plaza
+         solids.add(new Solid(848,932,97,34,screen));      
+         solids.add(new Solid(861,901,71,79,screen)); 
+         //Tacos Y Mas
+         solids.add(new Solid(0,1669,441,275,screen)); // Restaurant
+         solids.add(new Solid(226,1945,120,37,screen)); // Restauran's door
+         solids.add(new Solid(73, 1944, 88, 37, screen)); //Vending
+         
+         
+         //Mesas Tacos y Mas
+         solids.add(new Solid(88,2068,5,3,screen));
+         solids.add(new Solid(215,2068,5,3,screen));
+         solids.add(new Solid(349,2068,5,3,screen));
+         solids.add(new Solid(88,2174,5,3,screen));
+         solids.add(new Solid(215,2174,5,3,screen));
+         solids.add(new Solid(349,2174,5,3,screen));
+        
+         //Observatorio
+         solids.add(new Solid(65,2560,296,192,screen));
+         solids.add(new Solid(84,2501,250,271,screen));
+         
+         //Trees south park
+         solids.add(new Solid(128,2840,25,95,screen));
+         solids.add(new Solid(106,2858,70,77,screen));
+         
+         solids.add(new Solid(266,2840,25,95,screen));
+         solids.add(new Solid(244,2858,70,77,screen));
+         
+         solids.add(new Solid(410,2840,25,95,screen));
+         solids.add(new Solid(388,2858,70,77,screen));
+         
+         solids.add(new Solid(562,2840,25,95,screen));
+         solids.add(new Solid(539,2858,70,77,screen));
+         
+         solids.add(new Solid(719,2840,25,95,screen));
+         solids.add(new Solid(696,2858,70,77,screen));
+         
+         
+         //Bridge
+         solids.add(new Solid(507,3281,10,398,screen));
+         solids.add(new Solid(634,3281,10,398,screen));
+         
+         //Left South Corener Trees
+         solids.add(new Solid(0,3504,86,592,screen));
+         
+        //Left Corner Bushes
+        solids.add(new Solid(0,4071,1031,25,screen));
+        //Minibushes close to water
+        solids.add(new Solid(211,3561,25,5,screen));
+        solids.add(new Solid(420,3561,86,5,screen));
+        solids.add(new Solid(673,3561,25,5,screen));
+        
+        
+        
+        //Water
+        solids.add(new Solid(0,3404,506,60,screen));
+        solids.add(new Solid(645,3404,461,60,screen));
+        
+        solids.add(new Solid(1046,3428,78,669,screen));
+        
+        
+        //Cueva 
+        //*********************************************Por el momento solo es solido*
+        solids.add(new Solid(908,3464,138,130,screen));
+        solids.add(new Solid(908,3594,24,15,screen));
+        solids.add(new Solid(1002,3594,44,15,screen));
+        
+        //Lake
+        solids.add(new Solid(1124,3889,618,206,screen));
+        solids.add(new Solid(1312,3286,429,603,screen));
+        solids.add(new Solid(1369,3227,262,58,screen));
+        solids.add(new Solid(1711,3231,31,54,screen));
+        
+        //Truck
+        solids.add(new Solid(2852,3469,152,82,screen));
+        
+        //Right South Corner Buildings 
+        //*********************************************Falta detalle*
+        solids.add(new Solid(3854,2752,243,1087,screen));
+        
+        //Right South Corner Trees
+        solids.add(new Solid(3657,2821,120,377,screen));
+        
+        //Soccer Court Fence
+        //*********************************************Falta Correjir Escuela y Banqueta*
+        solids.add(new Solid(2122,2822,562,2,screen));
+        solids.add(new Solid(2120,2822,2,400,screen));
+        // ********************************************Faltan otros dos corners
+        //Aqui merito
+        
+        //
         
 
     }
@@ -331,12 +428,28 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
-            /*
-            g.drawRect(0-screen.getX(),0-screen.getY(),300,512);
-            g.drawRect(0-screen.getX(),0-screen.getY(),512,300);
-            g.drawRect(0-screen.getX(),500-screen.getY(),512,100);
-            g.drawRect(500-screen.getX(),0-screen.getY(),100,512);
-            */
+            
+            g.drawRect(24-screen.getX(),280-screen.getY(),143,187);
+            
+            g.drawRect(930-screen.getX(),0-screen.getY(),143,187);
+             
+            g.drawRect(848-screen.getX(),932-screen.getY(),97,34);
+            g.drawRect(861-screen.getX(),901-screen.getY(),71,79);
+            g.drawRect(0-screen.getX(),1669-screen.getY(),441,275); //Tacos y mas
+            g.drawRect(226-screen.getX(),1945-screen.getY(),120,37); //Tacos y mas door
+            g.drawRect(88-screen.getX(),2068-screen.getY(),5,3);
+            g.drawRect(215-screen.getX(),2068-screen.getY(),5,3);
+            g.drawRect(349-screen.getX(),2068-screen.getY(),5,3);
+            g.drawRect(88-screen.getX(),2174-screen.getY(),5,3);
+            g.drawRect(215-screen.getX(),2174-screen.getY(),5,3);
+            g.drawRect(349-screen.getX(),2174-screen.getY(),5,3);//              
+            g.drawRect(73-screen.getX(), 1944-screen.getY(), 88, 37); //vending
+            g.drawRect(0-screen.getX(), 1944-screen.getY(), 10, 37);//left building column
+            
+            
+            
+         
+         
             bs.show();
             g.dispose();
         }

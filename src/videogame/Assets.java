@@ -27,11 +27,15 @@ public class Assets {
     public static BufferedImage playerDown[];         // to store the player sprite sheet
     public static BufferedImage playerRight[];        // to store the player sprite sheet
     public static BufferedImage playerLeft[];         // to store the player sprite sheet
-    
+    public static BufferedImage playerFacingUp;
+    public static BufferedImage playerFacingDown;
+    public static BufferedImage playerFacingRight;
+    public static BufferedImage playerFacingLeft;
+
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
     public static BufferedImage backpack;           // to store the backpack image
-    
+
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
     public static BufferedImage npcDown[][];        // to store the NPC going down assets
@@ -49,7 +53,7 @@ public class Assets {
     public static BufferedImage inTrash[];          // to store the images of the inorganic trash
     public static BufferedImage orTrash[];           // to store the images of the organic trash
     public static SoundClip gloveHit;               // to store the glove hit sound
-    
+
     //Pause of game assets
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
     public static BufferedImage pausaSave[];                // to store the image of the pause when Save is selected
@@ -82,24 +86,30 @@ public class Assets {
         pickDenied = new SoundClip("/global_sounds/pickDenied.wav");
         playerSpriteSheet = ImageLoader.loadImage("/images/player_spritesheet.png");
         SpriteSheet playerSprites = new SpriteSheet(playerSpriteSheet);
-        playerDown = new BufferedImage[6];
-        playerUp = new BufferedImage[6];
-        playerLeft = new BufferedImage[6];
-        playerRight = new BufferedImage[6];
-        for(int i = 0; i < 6; i++){
-            playerDown[i] = playerSprites.crop(i*72,0,72,96);
+        playerDown = new BufferedImage[2];
+        playerUp = new BufferedImage[2];
+        playerLeft = new BufferedImage[2];
+        playerRight = new BufferedImage[2];
+        for (int i = 0; i < 2; i++) {
+                playerDown[i] = playerSprites.crop(i*2* 72 + 8, 32, 56, 64);
         }
-        for(int i = 0; i < 6; i++){
-            playerLeft[i] = playerSprites.crop(i*72,96,72,96);
+                playerFacingDown = playerSprites.crop(72 + 8, 32, 56, 64);
+        for (int i = 0; i < 2; i++) {
+                playerLeft[i] = playerSprites.crop(i*2 * 72 + 8, 128, 56, 64);
         }
-        for(int i = 0; i < 6; i++){
-            playerRight[i] = playerSprites.crop(i*72,192,72,96);
+                playerFacingLeft = playerSprites.crop(72 + 8, 128, 56, 64);
+           
+        for (int i = 0; i < 2; i++) {
+                playerRight[i] = playerSprites.crop(i*2 * 72 + 8, 224, 56, 64);
         }
-        for(int i = 0; i < 6; i++){
-            playerUp[i] = playerSprites.crop(i*72,288,72,96);
+                playerFacingRight = playerSprites.crop(72 + 8, 224, 56, 64);
+           
+        for (int i = 0; i < 2; i++) {
+                playerUp[i] = playerSprites.crop(i*2 * 72 + 8, 320, 56, 64);
         }
-        
-        
+                playerFacingUp = playerSprites.crop(72 + 8, 320, 56, 64);
+            
+
         //Money coin image loader
         coin = new BufferedImage[6];
         coin[0] = ImageLoader.loadImage("/images/coin1.png");
@@ -109,7 +119,7 @@ public class Assets {
         coin[4] = ImageLoader.loadImage("/images/coin5.png");
         coin[5] = ImageLoader.loadImage("/images/coin6.png");
         backpack = ImageLoader.loadImage("/images/backpack.png");
-        
+
         // Trash in Game 1 sprite array loader
         trash = new BufferedImage[27];
         // Glass items
@@ -145,7 +155,7 @@ public class Assets {
         trash[24] = ImageLoader.loadImage("/organicItems/redApple.png");
         trash[25] = ImageLoader.loadImage("/organicItems/pizza.png");
         trash[26] = ImageLoader.loadImage("/organicItems/watermelon.png");
-        
+
         //NPC alert loader
         npcAlert = new BufferedImage[4];
         npcAlert[0] = ImageLoader.loadImage("/images_NPC/alert.png");
@@ -153,7 +163,7 @@ public class Assets {
         npcAlert[2] = ImageLoader.loadImage("/images_NPC/alert3.png");
         npcAlert[3] = ImageLoader.loadImage("/images_NPC/alert4.png");
         npcMinigame1 = ImageLoader.loadImage("/images_NPC/npc.png");
-        
+
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
         orTrashCan = ImageLoader.loadImage("/images_minigame1/binOr.png");
@@ -188,8 +198,7 @@ public class Assets {
         inTrash[16] = ImageLoader.loadImage("/inorganicItems/gameboy.png");
         inTrash[17] = ImageLoader.loadImage("/inorganicItems/battery.png");
         inTrash[18] = ImageLoader.loadImage("/inorganicItems/smartphone.png");
-        
-        
+
         //Minigame 1 organic trash loader
         orTrash = new BufferedImage[9];
         orTrash[0] = ImageLoader.loadImage("/organicItems/bone.png");
@@ -201,8 +210,7 @@ public class Assets {
         orTrash[6] = ImageLoader.loadImage("/organicItems/pizza.png");
         orTrash[7] = ImageLoader.loadImage("/organicItems/redApple.png");
         orTrash[8] = ImageLoader.loadImage("/organicItems/watermelon.png");
-        
-        
+
         //Pause sprites loader
         pausaMainMenu = new BufferedImage[2];
         pausaMainMenu[0] = ImageLoader.loadImage("/imagesPause/menuHover.png");
@@ -242,8 +250,8 @@ public class Assets {
         mainMenuQuit = new BufferedImage[2];
         mainMenuQuit[0] = ImageLoader.loadImage("/imagesMainMenu/exitHover.png");
         mainMenuQuit[1] = ImageLoader.loadImage("/imagesMainMenu/exitHover2.png");
-        
-        mainMenuInstructionsImage= new BufferedImage[2];
+
+        mainMenuInstructionsImage = new BufferedImage[2];
         mainMenuInstructionsImage[0] = ImageLoader.loadImage("/imagesMainMenu/instructions.png");
         mainMenuInstructionsImage[1] = ImageLoader.loadImage("/imagesMainMenu/instructions2.png");
 

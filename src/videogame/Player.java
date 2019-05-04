@@ -51,10 +51,10 @@ public class Player extends Item {
         this.height = height;
         this.game = game;
         //The speed of the animation need to be changed depending of the player speed
-        this.animationUp = new Animation(Assets.playerUp,100);
-        this.animationDown = new Animation(Assets.playerDown,100);
-        this.animationRight = new Animation(Assets.playerRight,100);
-        this.animationLeft = new Animation(Assets.playerLeft,100);
+        this.animationUp = new Animation(Assets.playerUp,200);
+        this.animationDown = new Animation(Assets.playerDown,200);
+        this.animationRight = new Animation(Assets.playerRight,200);
+        this.animationLeft = new Animation(Assets.playerLeft,200);
         this.direction = 1;
     }
 
@@ -368,11 +368,11 @@ public class Player extends Item {
             } else if (getX() <= 0) {
                 setX(0);
             }
-            if (getY() + 64 >= game.getHeight()) {
-                setY(game.getHeight() - 64);
-            } else if (getY() <= 0) {
-                setY(0);
-            }
+            //if (getY() + 64 >= game.getHeight()) {
+             //   setY(game.getHeight() - 64);
+            //} else if (getY() <= 0) {
+             //   setY(0);
+            //}
 
             for (int i = 0; i < game.getSolids().size(); i++) {
                 //Checks collisions with solids when going from left to right
@@ -396,7 +396,7 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getSolids().get(i).y - game.getHeight() / 2 - height / 2;
                     } else {
-                        y = game.getSolids().get(i).y - height;
+                        y = game.getSolids().get(i).y- 64- SMoveY;
                     }
                 }
                 //Checks collisions with solids when going from down to top
@@ -404,7 +404,7 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getSolids().get(i).y + game.getSolids().get(i).getHeight() - game.getHeight() / 2 + height / 2;
                     } else {
-                        y = game.getSolids().get(i).y + game.getSolids().get(i).getHeight();
+                        y = game.getSolids().get(i).y + game.getSolids().get(i).getHeight()- SMoveY;
                     }
                 }
 
@@ -420,7 +420,7 @@ public class Player extends Item {
         
         //Render down static
         }else if(direction == 1){
-            g.drawImage(Assets.playerDown[4], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.playerFacingDown, getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render up animation
         if(direction == 2  && game.getKeyManager().up && !conversation){
@@ -428,14 +428,14 @@ public class Player extends Item {
         
         //Render up static
     }else if(direction == 2 ){
-            g.drawImage(Assets.playerUp[4], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.playerFacingUp, getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render right animation
         if(direction == 3  && game.getKeyManager().right && !conversation){
             g.drawImage(animationRight.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         //Render right static
         }else if(direction == 3){
-            g.drawImage(Assets.playerRight[4], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.playerFacingRight, getX(), getY(), getWidth(), getHeight(), null);
         }
          //Render left animation
         if(direction == 4 && game.getKeyManager().left && !conversation){
@@ -443,7 +443,7 @@ public class Player extends Item {
         
         //Render left static
         }else if(direction == 4){
-            g.drawImage(Assets.playerLeft[4], getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.playerFacingLeft, getX(), getY(), getWidth(), getHeight(), null);
         }
 
     }
