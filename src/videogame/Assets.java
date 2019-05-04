@@ -54,24 +54,35 @@ public class Assets {
     public static BufferedImage orTrash[];           // to store the images of the organic trash
     public static SoundClip gloveHit;               // to store the glove hit sound
 
-    //Pause of game assets
+    
+    //Pause of game Assets
+
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
     public static BufferedImage pausaSave[];                // to store the image of the pause when Save is selected
     public static BufferedImage pausaStats[];               // to store the image of the pause when Stats is selected
     public static BufferedImage pausaMenuInstructions[];   // to store the image of the pause when Instructions is selected
 
-    // Main Menu
+    // Main Menu Assets
     public static BufferedImage mainMenuPlay[];           // to store the image of the MainMenu when play is selected
     public static BufferedImage mainMenuLoad[];           // to store the image of the MainMenu when load is selected
     public static BufferedImage mainMenuCredits[];        // to store the image of the MainMenu when credits is selected
     public static BufferedImage mainMenuInstructions[];   // to store the image of the MainMenu when instructions is selected
     public static BufferedImage mainMenuQuit[];           // to store the image of the MainMenu when quit is selected
     public static SoundClip gameStart;                    // to store the sound of new game or continue game button
-    public static SoundClip selectSound;                // to store the sound of the menu selector
+    public static SoundClip selectSound;                  // to store the sound of the menu selector
     public static BufferedImage mainMenuInstructionsImage[];
 
-    //Minigame Pause
-    public static BufferedImage minigame1PauseEnd[];   // to store the image of the Minigame1 pause when end is selected
+    //Minigame Pause Assets
+    public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
+    
+    //RecycleCo Assets
+    public static BufferedImage recycleCoAluminum[];    // to store the images of the RecycleCo when Aluminum is selected
+    public static BufferedImage recycleCoElectronics[];    // to store the images of the RecycleCo when Electronics is selected
+    public static BufferedImage recycleCoGlass[];    // to store the images of the RecycleCo when Glass is selected
+    public static BufferedImage recycleCoOrganics[];    // to store the images of the RecycleCo when Organics is selected
+    public static BufferedImage recycleCoPaper[];    // to store the images of the RecycleCo when Papaer is selected
+    public static BufferedImage recycleCoPlastic[];    // to store the images of the RecycleCo when Plastic is selected
+    public static BufferedImage recycleCoReturn[];    // to store the images of the RecycleCo Return is selected
 
     /**
      * initializing the images of the game
@@ -228,7 +239,7 @@ public class Assets {
         pausaMenuInstructions[0] = ImageLoader.loadImage("/imagesPause/instructionsHover.png");
         pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
 
-        //Main Menu 
+        //Main Menu loader
         selectSound = new SoundClip("/global_sounds/select.wav");
         gameStart = new SoundClip("/global_sounds/gameStart.wav");
         mainMenuPlay = new BufferedImage[2];
@@ -254,6 +265,35 @@ public class Assets {
         mainMenuInstructionsImage = new BufferedImage[2];
         mainMenuInstructionsImage[0] = ImageLoader.loadImage("/imagesMainMenu/instructions.png");
         mainMenuInstructionsImage[1] = ImageLoader.loadImage("/imagesMainMenu/instructions2.png");
+        
+        //RecycleCo Loader
+        recycleCoAluminum  = new BufferedImage[2]; 
+        recycleCoAluminum[0] = ImageLoader.loadImage("/imagesRecycleCo/recAluminum.png");
+        recycleCoAluminum[1] = ImageLoader.loadImage("/imagesRecycleCo/recAluminum2.png");
+        
+        recycleCoElectronics = new BufferedImage[2];
+        recycleCoElectronics[0] = ImageLoader.loadImage("/imagesRecycleCo/recElectronics.png");
+        recycleCoElectronics[1] = ImageLoader.loadImage("/imagesRecycleCo/recElectronics2.png");
+        
+        recycleCoGlass = new BufferedImage[2];
+        recycleCoGlass[0] = ImageLoader.loadImage("/imagesRecycleCo/recGlass.png");
+        recycleCoGlass[1] = ImageLoader.loadImage("/imagesRecycleCo/recGlass2.png");
+        
+        recycleCoOrganics = new BufferedImage[2];
+        recycleCoOrganics[0] = ImageLoader.loadImage("/imagesRecycleCo/recOrganics.png");
+        recycleCoOrganics[1] = ImageLoader.loadImage("/imagesRecycleCo/recOrganics2.png");
+        
+        recycleCoPaper = new BufferedImage[2];
+        recycleCoPaper[0] = ImageLoader.loadImage("/imagesRecycleCo/recPaper.png");
+        recycleCoPaper[1] = ImageLoader.loadImage("/imagesRecycleCo/recPaper2.png");
+        
+        recycleCoPlastic = new BufferedImage[2];
+        recycleCoPlastic[0] = ImageLoader.loadImage("/imagesRecycleCo/recPlastic.png");
+        recycleCoPlastic[1] = ImageLoader.loadImage("/imagesRecycleCo/recPlastic2.png");
+        
+        recycleCoReturn = new BufferedImage[2];
+        recycleCoReturn[0] = ImageLoader.loadImage("/imagesRecycleCo/recReturn.png");
+        recycleCoReturn[1] = ImageLoader.loadImage("/imagesRecycleCo/recReturn2.png");
 
     }
 

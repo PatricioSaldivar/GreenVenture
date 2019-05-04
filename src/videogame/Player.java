@@ -37,6 +37,7 @@ public class Player extends Item {
     private int paper = 0;
     private int plastic = 0;
     private int aluminum = 0;
+    private int upgrade = 1; 
     private Animation animationUp;
     private Animation animationDown;
     private Animation animationRight;
@@ -276,8 +277,14 @@ public class Player extends Item {
     public void setAluminum(int aluminum) {
         this.aluminum = aluminum;
     }
-    
-    
+
+    public int getUpgrade() {
+        return upgrade;
+    }
+
+    public void setUpgrade(int upgrade) {
+        this.upgrade = upgrade;
+    }
     
 
     @Override
