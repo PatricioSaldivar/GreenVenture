@@ -258,9 +258,42 @@ public class Game implements Runnable {
         solids.add(new Solid(2122,2822,562,2,screen));
         solids.add(new Solid(2120,2822,2,400,screen));
         // ********************************************Faltan otros dos corners
-        //Aqui merito
         
-        //
+        
+        //Mansion Bushes
+        solids.add(new Solid(2126,1681,40,835,screen));
+        solids.add(new Solid(2169,1681,300,14,screen));
+        solids.add(new Solid(2469,1681,39,61,screen));
+        solids.add(new Solid(2517,1670,153,93,screen));
+        solids.add(new Solid(2576,1773,36,20,screen));
+        solids.add(new Solid(2941,1670,153,93,screen));
+        solids.add(new Solid(3000,1773,36,20,screen));
+        solids.add(new Solid(3102,1681,39,61,screen));
+        solids.add(new Solid(3141,1681,300,14,screen));
+        solids.add(new Solid(3444,1681,40,835,screen));
+        
+        solids.add(new Solid(2234,1792,10,7,screen));
+        solids.add(new Solid(2280,1944,10,7,screen));
+        solids.add(new Solid(2207,2081,10,7,screen));
+        solids.add(new Solid(2281,2299,10,7,screen));
+        solids.add(new Solid(2221,2454,10,7,screen));
+        
+        
+        solids.add(new Solid(3364,1808,10,7,screen));
+        solids.add(new Solid(3315,1963,10,7,screen));
+        solids.add(new Solid(3389,2101,10,7,screen));
+        solids.add(new Solid(3315,2318,10,7,screen));
+        solids.add(new Solid(3376,2472,10,7,screen));
+        
+        //Mansion house
+        
+        solids.add(new Solid(2327,1929,353,588,screen));
+        solids.add(new Solid(2679,1929,256,474,screen));
+        solids.add(new Solid(2936,1929,348,588,screen));
+        solids.add(new Solid(2679,2403,69,31,screen));
+        solids.add(new Solid(2867,2403,70,31,screen));
+
+        
         
 
     }
@@ -389,8 +422,9 @@ public class Game implements Runnable {
                 running = false;
             }
             if (keyManager.space && pauseIndex == 2) {
-                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
-                mct.start();
+            RecycleCo r = new RecycleCo("Store", 512,512, display,keyManager,this);
+            Assets.gameStart.play();
+            r.start();
                 running = false;
             }
             if (keyManager.space && pauseIndex == 0) {

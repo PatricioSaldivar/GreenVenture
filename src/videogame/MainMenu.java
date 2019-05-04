@@ -187,10 +187,7 @@ public class MainMenu implements Runnable {
            }
           
           if(index==3 && keyManager.space && !keyManager.helperSpace){
-            RecycleCo r = new RecycleCo("Store", 512,512, display,keyManager,this);
-            Assets.gameStart.play();
-            r.start();
-            running=false;
+              
            }
           
            if(index==4 && keyManager.space && !keyManager.helperSpace){
