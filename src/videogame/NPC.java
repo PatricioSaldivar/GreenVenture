@@ -188,16 +188,16 @@ public class NPC extends Item {
                     direction = (int) (Math.random() * 4);
                     switch (direction) {
                         case 0:
-                            randomDist = (int) (Math.random() * (y));
+                            randomDist = (int) (Math.random() * (4096-iniY-yMove));
                             break;
                         case 1:
-                            randomDist = (int) (Math.random() * (4096 - x));
+                            randomDist = (int) (Math.random() * (4096 - iniX-xMove));
                             break;
                         case 2:
-                            randomDist = (int) (Math.random() * (4096 - y));
+                            randomDist = (int) (Math.random() * (iniY+yMove));
                             break;
                         case 3:
-                            randomDist = (int) (Math.random() * (x));
+                            randomDist = (int) (Math.random() * (iniX+xMove));
                             break;
                     }
 
