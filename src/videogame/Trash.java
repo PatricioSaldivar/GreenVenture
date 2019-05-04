@@ -74,6 +74,21 @@ public class Trash extends Item{
         if(game.getPlayer().intersectsTrash(this) && game.getPlayer().isPick() && !game.getPlayer().isConversation()) {
             if(game.getPlayer().getCapacity()>game.getPlayer().getInventory()){
                 game.getPlayer().setInventory(game.getPlayer().getInventory()+1);
+                //Increments the trash acummulators of player depending of trash type
+                if(type <= 3){
+                    game.getPlayer().setGlass((game.getPlayer().getGlass())+1);
+                } else if (type > 3 && type <= 7) {
+                    game.getPlayer().setAluminum((game.getPlayer().getAluminum())+1);
+                } else if (type > 7 && type <= 10) {
+                    game.getPlayer().setPlastic((game.getPlayer().getPlastic())+1);
+                } else if (type > 10 && type <= 13){
+                    game.getPlayer().setPaper((game.getPlayer().getPaper())+1);
+                } else if (type > 13 && type <= 17) {
+                    game.getPlayer().setElectronics((game.getPlayer().getElectronics())+1);
+                } else if (type > 17) {
+                    game.getPlayer().setOrganic((game.getPlayer().getOrganic())+1);
+                }
+                //
                 Assets.pickTrash.play();
                 dead=true;
             } else {
