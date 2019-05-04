@@ -32,7 +32,13 @@ public class RecycleCo implements Runnable {
     private int index = 0;                  // to manage the index of the animations
     private Animation animation;            // to store the animations
     private MainMenu game;                      //To store the game in which it was before
-    private int indexHelper=10;
+    private int indexHelper=10;                 // To store an index helper to know when the game need to make noise
+    private double glassPrice = 0.03;           // To store the original price
+    private double aluminumPrice = 0.04;        // To store the original price
+    private double plasticPrice = 0.02;         // To store the original price
+    private double paperPrice = 0.02;           // To store the original price
+    private double electronicsPrice = 0.05;     // To store the original price
+    private double organicPrice = 0.01;         // To store the original price
 
 
 
@@ -305,6 +311,26 @@ public class RecycleCo implements Runnable {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);     
             g.drawImage(animation.getCurrentFrame(), 0, 0, width, height,null);
+            //Score values por painting
+            g.setFont(fontx);
+            g.setColor(Color.BLACK);
+            g.getFont().isBold();
+            g.getFont().deriveFont(36f);
+            //Draws the prices and the quantity of the trash the player has in his inventory
+           // g.drawString("X "+ (game.getPlayer().getGlass) ,110, 160);
+           // g.drawString("X "+ (game.getPlayer().getAluminum)   ,110, 160);
+           // g.drawString("X "+ (game.getPlayer().getPlastic)  ,110, 160);
+           // g.drawString("X "+ (game.getPlayer().getPaper)  ,110, 160);
+           // g.drawString("X "+ (game.getPlayer().getElectronics)   ,110, 160);
+           // g.drawString("X "+ (game.getPlayer().getOrganic)  ,110, 160);
+            
+           // g.drawString("$ "+ ( ((glassPrice) * game.getPlayer().getUpgrade() ) * game.getPlayer.getGlass()  ,110, 160);
+           // g.drawString("$ "+ ( ((aluminumPrice)  * game.getPlayer().getUpgrade()) * game.getPlayer.getAluminum() ,110, 160);
+           // g.drawString("$ "+ ( ((plasticPrice)  * game.getPlayer().getUpgrade()) * game.getPlayer.getPlastic()   ,110, 160);
+           // g.drawString("$ "+ ( ((paperPrice)  * game.getPlayer().getUpgrade()) game.getPlayer.getPaper()   ,110, 160);
+           // g.drawString("$ "+ ( ((electronicsPrice)  * game.getPlayer().getUpgrade() ) game.getPlayer.getElectronics()   ,110, 160);
+           // g.drawString("$ "+ ( ((organicPrice)  * game.getPlayer().getUpgrade() ) game.getPlayer.getOrganic()   ,110, 160);
+            
             bs.show();
             g.dispose();
         }
