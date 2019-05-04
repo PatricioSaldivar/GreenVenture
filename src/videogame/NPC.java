@@ -216,7 +216,7 @@ public class NPC extends Item {
 
             if (trashThrown < 5) {
                 if (trashMaker > trashMakerHelper) {
-                    int randType = (int) (Math.random() * (19));
+                    int randType = (int) (Math.random() * (27));
                     game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
                     trashMaker = 0;
                     trashThrown++;
