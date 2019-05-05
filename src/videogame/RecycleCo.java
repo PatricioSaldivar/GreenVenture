@@ -299,7 +299,7 @@ public class RecycleCo implements Runnable {
                 break;
             case 1:
                 if (keyManager.space && !keyManager.helperSpace) {
-                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPaper()*organicPrice*game.getPlayer().getUpgrade()));
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPaper()*organicPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getOrganic());
                     game.getPlayer().setOrganic(0);
 
@@ -307,14 +307,14 @@ public class RecycleCo implements Runnable {
                 break;
             case 2:
                 if (keyManager.space && !keyManager.helperSpace) {
-                  game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getElectronics()*electronicsPrice*game.getPlayer().getUpgrade()));
+                  game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getElectronics()*electronicsPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getElectronics());
                     game.getPlayer().setElectronics(0);
                 }
                 break;
             case 3:
                 if (keyManager.space && !keyManager.helperSpace) {
-                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getAluminum()*aluminumPrice*game.getPlayer().getUpgrade()));
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getAluminum()*aluminumPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getAluminum());
                     game.getPlayer().setAluminum(0);
 
@@ -323,21 +323,21 @@ public class RecycleCo implements Runnable {
             case 4:
                 if (keyManager.space && !keyManager.helperSpace) {
 
-                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPaper()*paperPrice*game.getPlayer().getUpgrade()));
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPaper()*paperPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getPaper());
                     game.getPlayer().setPaper(0);
                 }
                 break;
             case 5:
                 if (keyManager.space && !keyManager.helperSpace) {
-                   game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPlastic()*plasticPrice*game.getPlayer().getUpgrade()));
+                   game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPlastic()*plasticPrice*game.getPlayer().getTrashUpgrade()));
                game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getPlastic());
                     game.getPlayer().setPlastic(0);
                 }
                 break;
             case 6:
                 if (keyManager.space && !keyManager.helperSpace) {
-                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getGlass()*glassPrice*game.getPlayer().getUpgrade()));
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getGlass()*glassPrice*game.getPlayer().getTrashUpgrade()));
                game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getGlass());
                     game.getPlayer().setGlass(0);
                 }
@@ -374,12 +374,12 @@ public class RecycleCo implements Runnable {
             g.drawString("X " + (game.getPlayer().getElectronics()), 110, 160);
             g.drawString("X " + (game.getPlayer().getOrganic()), 110, 160);
 
-            g.drawString("$ " + (((glassPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getGlass()), 110, 160);
-            g.drawString("$ " + (((aluminumPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getAluminum()), 110, 160);
-            g.drawString("$ " + (((plasticPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getPlastic()), 110, 160);
-            g.drawString("$ " + (((paperPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getPaper()), 110, 160);
-            g.drawString("$ " + (((electronicsPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getElectronics()), 110, 160);
-            g.drawString("$ " + (((organicPrice) * game.getPlayer().getUpgrade()) * game.getPlayer().getOrganic()), 110, 160);
+            g.drawString("$ " + (((glassPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getGlass()), 110, 160);
+            g.drawString("$ " + (((aluminumPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getAluminum()), 110, 160);
+            g.drawString("$ " + (((plasticPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPlastic()), 110, 160);
+            g.drawString("$ " + (((paperPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPaper()), 110, 160);
+            g.drawString("$ " + (((electronicsPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getElectronics()), 110, 160);
+            g.drawString("$ " + (((organicPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getOrganic()), 110, 160);
 
             bs.show();
             g.dispose();
