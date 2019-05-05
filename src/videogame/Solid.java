@@ -38,7 +38,6 @@ public class Solid extends Item{
 
     @Override
     public void render(Graphics g) {
-        
     }
 
     public Rectangle getPerimetroLeft(int posX, int posY) {
