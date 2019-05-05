@@ -12,60 +12,25 @@ import java.awt.Rectangle;
  *
  * @author PatoSaldivar
  */
-public class Car extends Item {
+public class Car extends Solid {
 
-    private int x;
-    private int y;
-    private int SMoveX;
-    private int SMoveY;
+    private int xMove = 0;
+    private int yMove = 0;
     private int iniX;
     private int iniY;
-    private int width;
-    private int height;
+    private int speed = 5;
+    private Screen screen;
     private Game game;
     private int direction;
     private boolean destroy;
 
-    Car(int x, int y, int width, int height, Game game) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
+    Car(int x, int y, int width, int height, Screen screen, Game game) {
+        super(x, y, width, height, screen);
         this.game = game;
         iniX = x;
         iniY = y;
+        this.screen = screen;
 
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public Game getGame() {
@@ -77,19 +42,19 @@ public class Car extends Item {
     }
 
     public int getSMoveX() {
-        return SMoveX;
+        return xMove;
     }
 
     public void setSMoveX(int SMoveX) {
-        this.SMoveX = SMoveX;
+        this.xMove = SMoveX;
     }
 
     public int getSMoveY() {
-        return SMoveY;
+        return yMove;
     }
 
     public void setSMoveY(int SMoveY) {
-        this.SMoveY = SMoveY;
+        this.yMove = SMoveY;
     }
 
     public int getDirection() {
@@ -102,43 +67,47 @@ public class Car extends Item {
 
     @Override
     public void tick() {
-        
+
         //Movement in roads
         switch (direction) {
             case 1:
-                SMoveY -= 5;
+                yMove -= speed;
                 break;
             case 2:
-                SMoveY += 5;
+                yMove += speed;
                 break;
             case 3:
-                SMoveX -= 5;
+                xMove -= speed;
                 break;
             case 4:
-                SMoveX += 5;
+                xMove += speed;
                 break;
         }
+        x = iniX - screen.getX() + xMove;
+        y = iniY - screen.getY() + yMove;
 
-        x = iniX + SMoveX - game.getScreen().getX();
-        y = iniY + SMoveY - game.getScreen().getY();
         //Checks if theres a person on the Crosswalk
         for (int i = 0; i < game.getCrosswalks().size(); i++) {
-            if (getPerimetro().intersects(game.getCrosswalks().get(i).getPerimetro())) {
-                ///Add stop movement
-                        switch (direction) {
-            case 1:
-                y += 5;
-                break;
-            case 2:
-                y -= 5;
-                break;
-            case 3:
-                x += 5;
-                break;
-            case 4:
-                x -= 5;
-                break;
-        }
+            if (getPerimetro().intersects(game.getCrosswalks().get(i).getPerimetro()) && game.getCrosswalks().get(i).isSomeoneIn()) {
+
+                switch (direction) {
+                    case 1:
+                        y += speed;
+                        yMove += speed;
+                        break;
+                    case 2:
+                        y -= speed;
+                        yMove -= speed;
+                        break;
+                    case 3:
+                        x += speed;
+                        xMove += speed;
+                        break;
+                    case 4:
+                        x -= speed;
+                        xMove -= speed;
+                        break;
+                }
 
             }
 
@@ -148,20 +117,42 @@ public class Car extends Item {
                 direction = game.getRoadChanges().get(i).giveRandomDirection();
             }
         }
-        
-        if(iniX+SMoveX > 4096 || iniX+SMoveX < -128){
-            destroy=true;
-            
-        }
-        if(iniY +SMoveY > 4096 || iniY + SMoveY < -128){
-            destroy = true;
+
+        if (iniX + xMove > 4224 || iniX + xMove < -160 || iniY + yMove > 4224 || iniY + yMove < -160) {
+            xMove = 0;
+            yMove = 0;
+
+            int next;
+            next = (int) (Math.random()* 3);
+            switch (next) {
+                case 0:
+                    direction = 3;
+                    iniX = 4096;
+                    iniY = 320;
+                    break;
+
+                case 1:
+                    direction = 4;
+                    iniX = -128;
+                    iniY = 1472;
+                    break;
+
+                case 2:
+                    direction = 3;
+                    iniX = 4096;
+                    iniY = 3968;
+                    break;
+            }
+
         }
 
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.inTrashCan, getX()-game.getScreen().getX(), getY()-game.getScreen().getY(), getWidth(), getHeight(), null);
+        x = iniX - screen.getX() + xMove;
+        y = iniY - screen.getY() + yMove;
+        g.drawImage(Assets.inTrashCan, getX(), getY(), getWidth(), getHeight(), null);
 
     }
 

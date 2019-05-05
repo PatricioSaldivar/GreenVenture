@@ -15,13 +15,20 @@ import java.awt.Rectangle;
 public class Crosswalk extends Item{
     private int width;
     private int height;
-    private Game game;
+    private final Game game;
     private boolean someoneIn = false;
-    public Crosswalk(int x, int y, int width, int height, Game game) {
+    private final int iniX;
+    private final int iniY;
+    private Screen screen;
+    public Crosswalk(int x, int y, int width, int height, Game game, Screen screen) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.game = game;
+        this.screen = screen;
+        iniX = x;
+        iniY = y;
+        
     }
 
     public int getWidth() {
@@ -40,22 +47,29 @@ public class Crosswalk extends Item{
         this.height = height;
     }
 
+    public boolean isSomeoneIn() {
+        return someoneIn;
+    }
+    
+
     @Override
     public void tick() {
         someoneIn=false;
+        x = iniX - screen.getX();
+        y = iniY - screen.getY();
        for(int i=0; i<game.getNpcs().size(); i++){
-           if(getPerimetro().intersects(game.getNpcs().get(i).getPerimetro())){
+          if(getPerimetro().intersects(game.getNpcs().get(i).getPerimetro())){
                     someoneIn = true;
-                   }
+                  }
        }
             if(getPerimetro().intersects(game.getPlayer().getPerimetro())){
                 someoneIn = true;
-            }
+           }
     }
 
     @Override
     public void render(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        g.fillRect(x, y, width, height);
     }
 
     @Override
