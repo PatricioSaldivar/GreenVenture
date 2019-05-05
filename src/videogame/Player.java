@@ -23,9 +23,9 @@ public class Player extends Item {
     private Game game;
     private int SMoveX = 0;
     private int SMoveY = 0;
-    private double money = 00.00;
-    private int speed = 50;
-    private int speedCamara = 50;
+    private double money = 20.00;
+    private int speed = 5;
+
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
@@ -37,7 +37,9 @@ public class Player extends Item {
     private int paper = 0;
     private int plastic = 0;
     private int aluminum = 0;
-    private int upgrade = 1; 
+    private int trashUpgrade = 0;                // to save the level of trash price upgrade
+    private double speedUpgrade = 0;            // to save the level of speed upgrade
+    private double capacityUpgrade = 0;         // to save the level of the capacity upgrade
     private Animation animationUp;
     private Animation animationDown;
     private Animation animationRight;
@@ -113,14 +115,6 @@ public class Player extends Item {
         this.speed = speed;
     }
 
-    /**
-     * To set the camara movement speed
-     *
-     * @param <code>SpeedCamara</code> value with speed of camara
-     */
-    public void setSpeedCamara(int speedCamara) {
-        this.speedCamara = speedCamara;
-    }
 
     /**
      * To get the money
@@ -278,13 +272,32 @@ public class Player extends Item {
         this.aluminum = aluminum;
     }
 
-    public int getUpgrade() {
-        return upgrade;
+    public int getTrashUpgrade() {
+        return trashUpgrade;
     }
 
-    public void setUpgrade(int upgrade) {
-        this.upgrade = upgrade;
+    public void setTrashUpgrade(int trashUpgrade) {
+        this.trashUpgrade = trashUpgrade;
     }
+
+    public double getSpeedUpgrade() {
+        return speedUpgrade;
+    }
+
+    public void setSpeedUpgrade(double speedUpgrade) {
+        this.speedUpgrade = speedUpgrade;
+    }
+
+    public double getCapacityUpgrade() {
+        return capacityUpgrade;
+    }
+
+    public void setCapacityUpgrade(double capacityUpgrade) {
+        this.capacityUpgrade = capacityUpgrade;
+    }
+    
+    
+
     
 
     @Override
@@ -310,7 +323,7 @@ public class Player extends Item {
                         setY(getY() - speed);
                         SMoveY = 0;
                     } else {
-                        SMoveY = SMoveY - speedCamara;
+                        SMoveY = SMoveY - speed;
                     }
                 }
 
@@ -325,11 +338,11 @@ public class Player extends Item {
                         setY((getY() + speed));
                     }
                 } else {
-                    if (SMoveY + speedCamara >= Assets.background.getHeight() * 7 / 8) {
+                    if (SMoveY + speed >= Assets.background.getHeight() * 7 / 8) {
                         SMoveY = (Assets.background.getHeight() * 7 / 8);
                         setY(getY() + speed);
                     } else {
-                        SMoveY = SMoveY + speedCamara;
+                        SMoveY = SMoveY + speed;
                     }
                 }
             }
@@ -347,7 +360,7 @@ public class Player extends Item {
                         setX(getX() - speed);
                         SMoveX = 0;
                     } else {
-                        SMoveX = SMoveX - speedCamara;
+                        SMoveX = SMoveX - speed;
                     }
                 }
 
@@ -361,11 +374,11 @@ public class Player extends Item {
                         setX(getX() + speed);
                     }
                 } else {
-                    if (SMoveX + speedCamara >= Assets.background.getWidth() * 7 / 8) {
+                    if (SMoveX + speed >= Assets.background.getWidth() * 7 / 8) {
                         SMoveX = (Assets.background.getWidth() * 7 / 8);
                         setX(getX() + speed);
                     } else {
-                        SMoveX = SMoveX + speedCamara;
+                        SMoveX = SMoveX + speed;
                     }
                 }
             }

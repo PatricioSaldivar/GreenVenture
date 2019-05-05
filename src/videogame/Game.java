@@ -526,6 +526,12 @@ public class Game implements Runnable {
                 }
                 pauseIndex = keyManager.pauseSelector;
             }
+            if (keyManager.space && pauseIndex == 1) {
+                TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
+                Assets.gameStart.play();
+                tm.start();
+                running = false;
+            }
             if (keyManager.space && pauseIndex == 3) {
                 MainMenu m = new MainMenu("MainMenu", 512, 512, display);
                 Assets.gameStart.play();
@@ -533,7 +539,9 @@ public class Game implements Runnable {
                 running = false;
             }
             if (keyManager.space && pauseIndex == 2) {
-                RecycleCo r = new RecycleCo("Store", 512, 512, display, keyManager, this);
+
+                RecycleCo r = new RecycleCo("Store", 512,512, display,keyManager,this);
+
                 Assets.gameStart.play();
                 r.start();
                 running = false;
