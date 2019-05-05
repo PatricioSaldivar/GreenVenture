@@ -35,6 +35,7 @@ public class Assets {
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
     public static BufferedImage backpack;           // to store the backpack image
+    public static SoundClip moneySound;             // to store the sound of when buying or selling things
 
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
@@ -136,6 +137,7 @@ public class Assets {
         coin[4] = ImageLoader.loadImage("/images/coin5.png");
         coin[5] = ImageLoader.loadImage("/images/coin6.png");
         backpack = ImageLoader.loadImage("/images/backpack.png");
+        moneySound = new SoundClip("/global_sounds/cashSound.wav");
 
         // Trash in Game 1 sprite array loader
         trash = new BufferedImage[27];

@@ -11,13 +11,15 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import static java.lang.Math.pow;
+import java.text.DecimalFormat;
 
 /**
  *
  * @author yeyog
  */
 public class TodoMart implements Runnable {
-     private BufferStrategy bs;              // to have several buffers when displaying
+    private BufferStrategy bs;             // to have several buffers when displaying
     private Graphics g;                     // to paint objects
     private Display display;                // to display in the game
     String title;                           // title of the window
@@ -29,8 +31,13 @@ public class TodoMart implements Runnable {
     private Font fontx;                     // to manage a custom font
     private int index = 0;                  // to manage the index of the animations
     private Animation animation;            // to store the animations
-    private Game game;                      //To store the game in which it was before
-    private int indexHelper = 10;                 // To store an index helper to know when the game need to make noise
+    private Animation coinAnimation;         // to store the coin animations
+    private Game game;                      // to store the game in which it was before
+    private int indexHelper = 10;           // to store an index helper to know when the game need to make 
+    private double sneakersUpPrice = 4;         // to store the price of the sneakers upgrade
+    private double backPackUpPrice = 1;         // to store the price of the backpack upgrade
+    private double trashValueUpPrice = 1;       // to store the price of the trash value upgrade
+    private double binsUpPrice = 30;             // to store the price of the bins upgrade
 
     /**
      * to create title, width and height and set the game is still not running
@@ -48,6 +55,9 @@ public class TodoMart implements Runnable {
         this.display = display;
         display.setTitle("TodoxMart");
         this.game = game;
+        this.sneakersUpPrice = pow(2, game.getPlayer().getSpeedUpgrade()) * sneakersUpPrice;
+        this.backPackUpPrice = pow(2, game.getPlayer().getCapacityUpgrade()) * backPackUpPrice;
+        this.trashValueUpPrice = pow(2, game.getPlayer().getTrashUpgrade()) * trashValueUpPrice;
 
         //Adds font from fonts package
         try {
@@ -94,6 +104,7 @@ public class TodoMart implements Runnable {
     private void init() {
         Assets.init();
         animation = new Animation(Assets.todoMartReturn, 300);
+        coinAnimation = new Animation(Assets.coin,100);
 
     }
 
@@ -136,6 +147,7 @@ public class TodoMart implements Runnable {
     private void tick() {
         keyManager.tick();
         animation.tick();
+        coinAnimation.tick();
         switch (index) {
             //Return Menu Selection
             case 0:
@@ -226,31 +238,50 @@ public class TodoMart implements Runnable {
         switch (index) {
             case 0:
                 if (keyManager.space && !keyManager.helperSpace) {
+                    Assets.gameStart.play();
                     game.setCont(true);
                     game.start();
                     running = false;
                 }
                 break;
             case 1:
-                if (keyManager.space && !keyManager.helperSpace) {
-               
+                if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() >= binsUpPrice)) {
+                    
 
+                } else if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() < binsUpPrice)){
+                    Assets.pickDenied.play();
                 }
                 break;
             case 2:
-                if (keyManager.space && !keyManager.helperSpace) {
-
+                if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() >= trashValueUpPrice)) {
+                    Assets.moneySound.play();
+                    game.getPlayer().setTrashUpgrade(game.getPlayer().getTrashUpgrade() + 1); // increase the level of upgrade that the player saves
+                    game.getPlayer().setMoney(game.getPlayer().getMoney() - trashValueUpPrice);
+                    this.trashValueUpPrice *=  2;
+                } else if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() < trashValueUpPrice)){
+                    Assets.pickDenied.play();
                 }
                 break;
             case 3:
-                if (keyManager.space && !keyManager.helperSpace) {
-              
+                if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() >= backPackUpPrice)) {
+                    Assets.moneySound.play();
+                    game.getPlayer().setCapacity(game.getPlayer().getCapacity() + 10);
+                    game.getPlayer().setMoney(game.getPlayer().getMoney() - backPackUpPrice);
+                    game.getPlayer().setCapacityUpgrade(game.getPlayer().getCapacityUpgrade() + 1);  // increase the level of upgrade that the player saves
+                    this.backPackUpPrice *=  2;
+                } else if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() < backPackUpPrice)){
+                    Assets.pickDenied.play();
                 }
                 break;
             case 4:
-                if (keyManager.space && !keyManager.helperSpace) {
-
-                  
+                if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() >= sneakersUpPrice)) {
+                    Assets.moneySound.play();
+                    game.getPlayer().setSpeed(game.getPlayer().getSpeed() + 1);
+                    game.getPlayer().setMoney(game.getPlayer().getMoney() - sneakersUpPrice);
+                    game.getPlayer().setSpeedUpgrade(game.getPlayer().getSpeedUpgrade() + 1); // increase the level of upgrade that the player saves
+                    this.sneakersUpPrice *= 2; 
+                } else if ((keyManager.space && !keyManager.helperSpace) && (game.getPlayer().getMoney() < sneakersUpPrice)){
+                    Assets.pickDenied.play();
                 }
                 break;
         }
@@ -275,7 +306,15 @@ public class TodoMart implements Runnable {
             g.setFont(fontx);
             g.setColor(Color.BLACK);
             g.getFont().isBold();
-            g.getFont().deriveFont(36f);
+            g.getFont().deriveFont(16f);
+            //Draws messages
+            g.drawImage(coinAnimation.getCurrentFrame(), 10, 470, 30, 30, null);
+            DecimalFormat dform = new DecimalFormat("0.00");
+            g.drawString("" + dform.format(game.getPlayer().getMoney()), 45 , 492);
+            g.drawString("$" + dform.format(sneakersUpPrice), 352, 170);
+            g.drawString("$" + dform.format(backPackUpPrice), 352, 250);
+            g.drawString("$" + dform.format(trashValueUpPrice), 352, 330);
+            g.drawString("$" + dform.format(binsUpPrice), 352, 410);
             bs.show();
             g.dispose();
         }
