@@ -35,6 +35,7 @@ public class Assets {
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
     public static BufferedImage backpack;           // to store the backpack image
+    public static SoundClip moneySound;             // to store the sound of when buying or selling things
 
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
@@ -76,14 +77,20 @@ public class Assets {
     public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
     
     //RecycleCo Assets
-    public static BufferedImage recycleCoAluminum[];    // to store the images of the RecycleCo when Aluminum is selected
-    public static BufferedImage recycleCoElectronics[];    // to store the images of the RecycleCo when Electronics is selected
-    public static BufferedImage recycleCoGlass[];    // to store the images of the RecycleCo when Glass is selected
-    public static BufferedImage recycleCoOrganics[];    // to store the images of the RecycleCo when Organics is selected
-    public static BufferedImage recycleCoPaper[];    // to store the images of the RecycleCo when Papaer is selected
-    public static BufferedImage recycleCoPlastic[];    // to store the images of the RecycleCo when Plastic is selected
-    public static BufferedImage recycleCoReturn[];    // to store the images of the RecycleCo Return is selected
-
+    public static BufferedImage recycleCoAluminum[];        // to store the images of the RecycleCo when Aluminum is selected
+    public static BufferedImage recycleCoElectronics[];     // to store the images of the RecycleCo when Electronics is selected
+    public static BufferedImage recycleCoGlass[];           // to store the images of the RecycleCo when Glass is selected
+    public static BufferedImage recycleCoOrganics[];        // to store the images of the RecycleCo when Organics is selected
+    public static BufferedImage recycleCoPaper[];           // to store the images of the RecycleCo when Papaer is selected
+    public static BufferedImage recycleCoPlastic[];         // to store the images of the RecycleCo when Plastic is selected
+    public static BufferedImage recycleCoReturn[];          // to store the images of the RecycleCo Return is selected
+    
+    //TodoXMart Assets
+    public static BufferedImage todoMartBackPackUp[];       // to store the images fo the TodoMart when BackPack upgrade is selected
+    public static BufferedImage todoMartBinUp[];            // to store the images fo the TodoMart when Bins upgrade is selected
+    public static BufferedImage todoMartReturn[];           // to store the images fo the TodoMart when Return is selected
+    public static BufferedImage todoMartSneakersUp[];       // to store the images fo the TodoMart when Sneakers upgrade is selected
+    public static BufferedImage todoMartValueUp[];          // to store the images fo the TodoMart when Trash Value upgrade is selected
     /**
      * initializing the images of the game
      */
@@ -130,6 +137,7 @@ public class Assets {
         coin[4] = ImageLoader.loadImage("/images/coin5.png");
         coin[5] = ImageLoader.loadImage("/images/coin6.png");
         backpack = ImageLoader.loadImage("/images/backpack.png");
+        moneySound = new SoundClip("/global_sounds/cashSound.wav");
 
         // Trash in Game 1 sprite array loader
         trash = new BufferedImage[27];
@@ -294,6 +302,27 @@ public class Assets {
         recycleCoReturn = new BufferedImage[2];
         recycleCoReturn[0] = ImageLoader.loadImage("/imagesRecycleCo/recReturn.png");
         recycleCoReturn[1] = ImageLoader.loadImage("/imagesRecycleCo/recReturn2.png");
+        
+        //TodoxMart loader
+        todoMartBackPackUp = new BufferedImage[2];
+        todoMartBackPackUp[0] = ImageLoader.loadImage("/imagesTodoMart/backpackUp.png");
+        todoMartBackPackUp[1] = ImageLoader.loadImage("/imagesTodoMart/backpackUp2.png");
+        
+        todoMartBinUp = new BufferedImage[2] ;    
+        todoMartBinUp[0] = ImageLoader.loadImage("/imagesTodoMart/binUp.png");
+        todoMartBinUp[1] = ImageLoader.loadImage("/imagesTodoMart/binUp2.png");
+        
+        todoMartReturn = new BufferedImage[2];
+        todoMartReturn[0] = ImageLoader.loadImage("/imagesTodoMart/returnUp.png");
+        todoMartReturn[1] = ImageLoader.loadImage("/imagesTodoMart/retrurnUp2.png");
+        
+        todoMartSneakersUp = new BufferedImage[2];
+        todoMartSneakersUp[0] = ImageLoader.loadImage("/imagesTodoMart/sneakerUp.png");
+        todoMartSneakersUp[1] = ImageLoader.loadImage("/imagesTodoMart/sneakerUp2.png");
+        
+        todoMartValueUp = new BufferedImage[2];  
+        todoMartValueUp[0] = ImageLoader.loadImage("/imagesTodoMart/valueUp.png");
+        todoMartValueUp[1] = ImageLoader.loadImage("/imagesTodoMart/valueUp2.png");
 
     }
 
