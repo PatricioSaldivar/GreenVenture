@@ -24,8 +24,8 @@ public class Player extends Item {
     private int SMoveX = 0;
     private int SMoveY = 0;
     private double money = 00.00;
-    private int speed = 5;
-    private int speedCamara = 5;
+    private int speed = 50;
+    private int speedCamara = 50;
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;

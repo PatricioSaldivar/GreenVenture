@@ -12,20 +12,44 @@ import java.awt.Rectangle;
  *
  * @author PatoSaldivar
  */
-public class roadChange extends Solid {
-    private final int width;
-    private final int height;
+public class roadChange extends Item {
+    private int width;
+    private int height;
+    private int iniX;
+    private int iniY;
     private Screen screen;
-    
     private final int possibleDirections[];
     
     roadChange(int x, int y, int width, int height, Screen screen, int possibleDirections[]){
-        super(x,y,width,height,screen);
+        super(x,y);
         this.width = width;
         this.height = height;
         this.possibleDirections = possibleDirections;
+        this.screen = screen;
+        iniX = x;
+        iniY =y;
  
+        
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+
+    
 
     public int giveRandomDirection(){
        return possibleDirections[(int) (Math.random() * possibleDirections.length)];
@@ -33,18 +57,19 @@ public class roadChange extends Solid {
     
     @Override
     public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        x = iniX - screen.getX();
+        y = iniY - screen.getY();
     }
 
     @Override
     public void render(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        g.fillRect(x, y, width, height);
     }
 
     
     @Override
     public Rectangle getPerimetro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
     
 }
