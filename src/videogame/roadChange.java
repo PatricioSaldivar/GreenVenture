@@ -71,5 +71,17 @@ public class roadChange extends Item {
     public Rectangle getPerimetro() {
          return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
+        public Rectangle getPerimetroUp() {
+         return new Rectangle(getX(), getY(), getWidth(), 10);
+    }
+            public Rectangle getPerimetroDown() {
+         return new Rectangle(getX(), getY()+ height - 10, getWidth(), 10);
+    }
+                public Rectangle getPerimetroRight() {
+         return new Rectangle(getX() + width -10, getY(), 10, getHeight());
+    }
+                    public Rectangle getPerimetroLeft() {
+         return new Rectangle(getX(), getY(), 10, getHeight());
+    }
     
 }

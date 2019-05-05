@@ -180,12 +180,14 @@ public class Game implements Runnable {
         npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 0));
         npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 1));
         npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 2));
-        car = new Car(2270, 320, 128, 128, screen, this);
-        car.setDirection(3);
+        car = new Car(512, 320, 128, 128, screen, this);
+        car.setDirection(2);
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
+        
+        /*
         //Boundaries of Map
         solids.add(new Solid(0, -32, 4096, 32, screen));
         solids.add(new Solid(-32, 0, 32, 4096, screen));
@@ -313,18 +315,89 @@ public class Game implements Runnable {
 
         //Solids for roadChangers
         solids.add(new Solid(1167, 326, 98, 82, screen));
-        
+
         //CrossWalks
         //First from left to right north (Complete square)
-        crosswalks.add(new Crosswalk(1095, 310, 57, 138, this,screen));
-
-        //roadChange
+        crosswalks.add(new Crosswalk(1095, 310, 57, 138, this, screen));
+*/
+        //RoadChanges
         int possibleDirections[];
+       
         possibleDirections = new int[2];
         possibleDirections[0] = 1;
         possibleDirections[1] = 3;
-
-        roadChanges.add(new roadChange(1152, 320, 128, 128, screen, possibleDirections));
+        roadChanges.add(new roadChange(1142, 310, 148, 148, screen, possibleDirections));
+                
+        possibleDirections = new int[1];
+        possibleDirections[0] = 2;
+        roadChanges.add(new roadChange(502, 310, 148, 148, screen, possibleDirections));
+                
+        possibleDirections = new int[2];
+        possibleDirections[0] = 2;
+        possibleDirections[1] = 3;
+        roadChanges.add(new roadChange(502, 630, 148, 148, screen, possibleDirections));
+        
+            
+        possibleDirections = new int[2];
+        possibleDirections[0] = 4;
+        possibleDirections[1] = 2;
+        roadChanges.add(new roadChange(502, 1462, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 2;
+        possibleDirections[1] = 3;
+        roadChanges.add(new roadChange(502, 2294, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[1];
+        possibleDirections[0] = 4;
+        roadChanges.add(new roadChange(502, 2614, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 4;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(1142, 1462, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 4;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(1142, 2614, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 3;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(1910, 310, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 4;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(1910, 1462, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 4;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(1910, 2614, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[1];
+        possibleDirections[0] = 1;
+        roadChanges.add(new roadChange(1910, 3958, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[1];
+        possibleDirections[0] = 1;
+        roadChanges.add(new roadChange(1910, 3319, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[1];
+        possibleDirections[0] = 3;
+        roadChanges.add(new roadChange(3637, 3319, 148, 148, screen, possibleDirections));
+        
+        possibleDirections = new int[2];
+        possibleDirections[0] = 3;
+        possibleDirections[1] = 1;
+        roadChanges.add(new roadChange(3637, 3948, 148, 148, screen, possibleDirections));
+        
+        
+        
+        
+        
 
     }
 
@@ -379,12 +452,12 @@ public class Game implements Runnable {
             for (int i = 0; i < crosswalks.size(); i++) {
                 crosswalks.get(i).tick();
             }
-            for(int i =0; i<roadChanges.size(); i++){
+            for (int i = 0; i < roadChanges.size(); i++) {
                 roadChanges.get(i).tick();
             }
-            
+
             car.tick();
-            
+
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
                 if (!npcs.get(i).isTalking()) {
@@ -428,7 +501,6 @@ public class Game implements Runnable {
                 mct.start();
                 running = false;
             }
-
 
         } else {
             animation.tick();
@@ -522,7 +594,6 @@ public class Game implements Runnable {
             
              */
             car.render(g);
-            solids.get(solids.size()-1).render(g);
             bs.show();
             g.dispose();
         }

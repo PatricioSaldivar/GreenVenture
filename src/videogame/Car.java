@@ -18,11 +18,11 @@ public class Car extends Solid {
     private int yMove = 0;
     private int iniX;
     private int iniY;
-    private int speed = 5;
+    private int speed = 2;
     private Screen screen;
     private Game game;
     private int direction;
-    private boolean destroy;
+    private int alreadyChecked = -1;
 
     Car(int x, int y, int width, int height, Screen screen, Game game) {
         super(x, y, width, height, screen);
@@ -113,8 +113,50 @@ public class Car extends Solid {
 
         }
         for (int i = 0; i < game.getRoadChanges().size(); i++) {
-            if (getPerimetro().contains(game.getRoadChanges().get(i).getPerimetro())) {
-                direction = game.getRoadChanges().get(i).giveRandomDirection();
+             if (i != alreadyChecked) {
+                switch (direction) {
+                    case 1:
+                        if (getPerimetro().intersects(game.getRoadChanges().get(i).getPerimetroUp())) {
+                            iniX = game.getRoadChanges().get(i).getX() + 10 + screen.getX();
+                            iniY = game.getRoadChanges().get(i).getY() + 10 + screen.getY();
+                            xMove = 0;
+                            yMove = 0;
+                            direction = game.getRoadChanges().get(i).giveRandomDirection();
+                            alreadyChecked = i;
+                        }
+                        break;
+                    case 2:
+                        if (getPerimetro().intersects(game.getRoadChanges().get(i).getPerimetroDown())) {
+                            iniX = game.getRoadChanges().get(i).getX() + 10 + screen.getX();
+                            iniY = game.getRoadChanges().get(i).getY() + 10 + screen.getY();
+                            xMove = 0;
+                            yMove = 0;
+                            direction = game.getRoadChanges().get(i).giveRandomDirection();
+                            alreadyChecked = i;
+                        }
+
+                        break;
+                    case 3:
+                        if (getPerimetro().intersects(game.getRoadChanges().get(i).getPerimetroLeft())) {
+                            iniX = game.getRoadChanges().get(i).getX() + 10 + screen.getX();
+                            iniY = game.getRoadChanges().get(i).getY() + 10 + screen.getY();
+                            xMove = 0;
+                            yMove = 0;
+                            direction = game.getRoadChanges().get(i).giveRandomDirection();
+                            alreadyChecked = i;
+                        }
+                        break;
+                    case 4:
+                        if (getPerimetro().intersects(game.getRoadChanges().get(i).getPerimetroRight())) {
+                            iniX = game.getRoadChanges().get(i).getX() + 10 + screen.getX();
+                            iniY = game.getRoadChanges().get(i).getY() + 10 + screen.getY();
+                            xMove = 0;
+                            yMove = 0;
+                            direction = game.getRoadChanges().get(i).giveRandomDirection();
+                            alreadyChecked = i;
+                        }
+                        break;
+                }
             }
         }
 
@@ -123,7 +165,7 @@ public class Car extends Solid {
             yMove = 0;
 
             int next;
-            next = (int) (Math.random()* 3);
+            next = (int) (Math.random() * 3);
             switch (next) {
                 case 0:
                     direction = 3;
