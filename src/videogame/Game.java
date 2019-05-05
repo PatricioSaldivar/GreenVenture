@@ -462,7 +462,7 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
-            
+            /*
             g.drawRect(24-screen.getX(),280-screen.getY(),143,187);
             
             g.drawRect(930-screen.getX(),0-screen.getY(),143,187);
@@ -481,7 +481,7 @@ public class Game implements Runnable {
             g.drawRect(0-screen.getX(), 1944-screen.getY(), 10, 37);//left building column
             
             
-            
+            */
          
          
             bs.show();
