@@ -24,8 +24,7 @@ public class Player extends Item {
     private int SMoveX = 0;
     private int SMoveY = 0;
     private double money = 00.00;
-    private int speed = 50;
-    private int speedCamara = 50;
+    private int speed = 5;
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
@@ -113,14 +112,7 @@ public class Player extends Item {
         this.speed = speed;
     }
 
-    /**
-     * To set the camara movement speed
-     *
-     * @param <code>SpeedCamara</code> value with speed of camara
-     */
-    public void setSpeedCamara(int speedCamara) {
-        this.speedCamara = speedCamara;
-    }
+
 
     /**
      * To get the money
@@ -310,7 +302,7 @@ public class Player extends Item {
                         setY(getY() - speed);
                         SMoveY = 0;
                     } else {
-                        SMoveY = SMoveY - speedCamara;
+                        SMoveY = SMoveY - speed;
                     }
                 }
 
@@ -325,11 +317,11 @@ public class Player extends Item {
                         setY((getY() + speed));
                     }
                 } else {
-                    if (SMoveY + speedCamara >= Assets.background.getHeight() * 7 / 8) {
+                    if (SMoveY + speed >= Assets.background.getHeight() * 7 / 8) {
                         SMoveY = (Assets.background.getHeight() * 7 / 8);
                         setY(getY() + speed);
                     } else {
-                        SMoveY = SMoveY + speedCamara;
+                        SMoveY = SMoveY + speed;
                     }
                 }
             }
@@ -347,7 +339,7 @@ public class Player extends Item {
                         setX(getX() - speed);
                         SMoveX = 0;
                     } else {
-                        SMoveX = SMoveX - speedCamara;
+                        SMoveX = SMoveX - speed;
                     }
                 }
 
@@ -361,11 +353,11 @@ public class Player extends Item {
                         setX(getX() + speed);
                     }
                 } else {
-                    if (SMoveX + speedCamara >= Assets.background.getWidth() * 7 / 8) {
+                    if (SMoveX + speed >= Assets.background.getWidth() * 7 / 8) {
                         SMoveX = (Assets.background.getWidth() * 7 / 8);
                         setX(getX() + speed);
                     } else {
-                        SMoveX = SMoveX + speedCamara;
+                        SMoveX = SMoveX + speed;
                     }
                 }
             }
