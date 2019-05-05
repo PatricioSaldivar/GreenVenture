@@ -92,17 +92,17 @@ public class Car extends Item{
     @Override
     public void tick() {
         //Movement in roads
-       for(int i=0; i<game.getWalkers().size();i++){
-           for(int j=0; j<game.getNpcs().size(); j++){
-           if(game.getWalkers().get(i).getPerimetro().intersects(game.getNpcs().get(j).getPerimetro()) || game.getWalkers().get(i).getPerimetro().intersects(game.getPlayer().getPerimetro())){
+     //  for(int i=0; i<game.getWalkers().size();i++){
+      //     for(int j=0; j<game.getNpcs().size(); j++){
+        //   if(game.getWalkers().get(i).getPerimetro().intersects(game.getNpcs().get(j).getPerimetro()) || game.getWalkers().get(i).getPerimetro().intersects(game.getPlayer().getPerimetro())){
                //PAusar movimiento de carro
-           }
-               }
-       }
+         //  }
+          //     }
+      // }
         //Checks if theres a person on the Walker
        
-        x = iniX + SMoveX - game.getScreen().getX();
-        y = iniY + SMoveY - game.getScreen().getY();
+      //  x = iniX + SMoveX - game.getScreen().getX();
+      //  y = iniY + SMoveY - game.getScreen().getY();
     }
 
     @Override
