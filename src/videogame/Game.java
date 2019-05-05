@@ -41,7 +41,9 @@ public class Game implements Runnable {
     private boolean cont = false;               // to continue the game
     private ArrayList<Solid> solids;            // to store all the solids
     private boolean loaded;
-    private NPCMinigame1 npcTrashClassify;      // to manage the NPC what gives you the TrashClassify Minigame  
+    private NPCMinigame1 npcTrashClassify;      // to manage the NPC what gives you the TrashClassify Minigame
+    private ArrayList<Crosswalk> crosswalks;          // To manage the walkers of the street;
+    private ArrayList<roadChange> roadChanges;  //Used to change direction of a car
 
     /**
      * to create title, width and height and set the game is still not running
@@ -61,6 +63,8 @@ public class Game implements Runnable {
         npcs = new ArrayList<>(0);
         trash = new LinkedList<>();
         solids = new ArrayList<>();
+        crosswalks = new ArrayList<>();
+        roadChanges = new ArrayList<>();
         this.display = display;
         display.setTitle("Ciudad");
 
@@ -142,6 +146,27 @@ public class Game implements Runnable {
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public ArrayList<Crosswalk> getCrosswalks() {
+        return crosswalks;
+    }
+
+    public void setWalkers(ArrayList<Crosswalk> crosswalks) {
+        this.crosswalks = crosswalks;
+    }
+
+    public ArrayList<roadChange> getRoadChanges() {
+        return roadChanges;
+    }
+
+    public void setRoadChanges(ArrayList<roadChange> roadChanges) {
+        this.roadChanges = roadChanges;
+    }
+    
 
     /**
      * initializing the display window of the game

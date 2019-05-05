@@ -12,7 +12,8 @@ import java.awt.Rectangle;
  *
  * @author PatoSaldivar
  */
-public class Car extends Item{
+public class Car extends Item {
+
     private int x;
     private int y;
     private int SMoveX;
@@ -22,14 +23,17 @@ public class Car extends Item{
     private int width;
     private int height;
     private Game game;
-    Car(int x, int y, int width, int height, Game game){
-        super(x,y);
+    private int direction;
+    private boolean destroy;
+
+    Car(int x, int y, int width, int height, Game game) {
+        super(x, y);
         this.width = width;
         this.height = height;
         this.game = game;
         iniX = x;
-        iniY =y;
-                
+        iniY = y;
+
     }
 
     public int getX() {
@@ -87,32 +91,83 @@ public class Car extends Item{
     public void setSMoveY(int SMoveY) {
         this.SMoveY = SMoveY;
     }
-    
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
 
     @Override
     public void tick() {
+        
         //Movement in roads
-     //  for(int i=0; i<game.getWalkers().size();i++){
-      //     for(int j=0; j<game.getNpcs().size(); j++){
-        //   if(game.getWalkers().get(i).getPerimetro().intersects(game.getNpcs().get(j).getPerimetro()) || game.getWalkers().get(i).getPerimetro().intersects(game.getPlayer().getPerimetro())){
-               //PAusar movimiento de carro
-         //  }
-          //     }
-      // }
-        //Checks if theres a person on the Walker
-       
-      //  x = iniX + SMoveX - game.getScreen().getX();
-      //  y = iniY + SMoveY - game.getScreen().getY();
+        switch (direction) {
+            case 1:
+                SMoveY -= 5;
+                break;
+            case 2:
+                SMoveY += 5;
+                break;
+            case 3:
+                SMoveX -= 5;
+                break;
+            case 4:
+                SMoveX += 5;
+                break;
+        }
+
+        x = iniX + SMoveX - game.getScreen().getX();
+        y = iniY + SMoveY - game.getScreen().getY();
+        //Checks if theres a person on the Crosswalk
+        for (int i = 0; i < game.getCrosswalks().size(); i++) {
+            if (getPerimetro().intersects(game.getCrosswalks().get(i).getPerimetro())) {
+                ///Add stop movement
+                        switch (direction) {
+            case 1:
+                y += 5;
+                break;
+            case 2:
+                y -= 5;
+                break;
+            case 3:
+                x += 5;
+                break;
+            case 4:
+                x -= 5;
+                break;
+        }
+
+            }
+
+        }
+        for (int i = 0; i < game.getRoadChanges().size(); i++) {
+            if (getPerimetro().contains(game.getRoadChanges().get(i).getPerimetro())) {
+                direction = game.getRoadChanges().get(i).giveRandomDirection();
+            }
+        }
+        
+        if(iniX+SMoveX > 4096 || iniX+SMoveX < -128){
+            destroy=true;
+            
+        }
+        if(iniY +SMoveY > 4096 || iniY + SMoveY < -128){
+            destroy = true;
+        }
+
     }
 
     @Override
     public void render(Graphics g) {
-        
+        g.drawImage(Assets.inTrashCan, getX()-game.getScreen().getX(), getY()-game.getScreen().getY(), getWidth(), getHeight(), null);
+
     }
 
     @Override
     public Rectangle getPerimetro() {
-         return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
-    
+
 }
