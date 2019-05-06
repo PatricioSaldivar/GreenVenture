@@ -32,19 +32,20 @@ public class Game implements Runnable {
     private boolean running;                    // to set the game
     private Player player;                      // to use a player
     private KeyManager keyManager;              // to manage the keyboard
-    private Screen screen;                      //to manage screen
+    private Screen screen;                      // to manage screen
     private ArrayList<NPC> npcs;                // to manage all items in the game
-    private Font fontx;                         //to manage a custom font
+    private Font fontx;                         // to manage a custom font
     private LinkedList<Trash> trash;            // to manage the trash taht is in the game
     private Animation animation;                // to manage the animations of the objects
     private int pauseIndex = 5;                 // to storw the index of the pause selector
     private boolean cont = false;               // to continue the game
     private ArrayList<Solid> solids;            // to store all the solids
-    private boolean loaded;
+    private boolean loaded;                     // to load the game
     private NPCMinigame1 npcTrashClassify;      // to manage the NPC what gives you the TrashClassify Minigame
-    private ArrayList<Crosswalk> crosswalks;          // To manage the walkers of the street;
-    private ArrayList<roadChange> roadChanges;  //Used to change direction of a car
-    private Car car;
+    private ArrayList<Crosswalk> crosswalks;    // to manage the walkers of the street;
+    private ArrayList<roadChange> roadChanges;  // used to change direction of a car
+    private Car car;                            // used to create the car
+    private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
 
     /**
      * to create title, width and height and set the game is still not running
@@ -66,6 +67,7 @@ public class Game implements Runnable {
         solids = new ArrayList<>();
         crosswalks = new ArrayList<>();
         roadChanges = new ArrayList<>();
+        storeDoors = new ArrayList<>();
         this.display = display;
         display.setTitle("Ciudad");
 
@@ -174,7 +176,7 @@ public class Game implements Runnable {
     private void init() {
         Assets.init();
         if (!loaded) {
-            player = new Player(0, 0, 64, 64, this);
+            player = new Player(40, 40, 64, 64, this);
         }
         screen = new Screen(0, 0, width, height, this, player, trash);
         npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 0));
@@ -185,8 +187,15 @@ public class Game implements Runnable {
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
+        
+        //Creates doors to enter to the stores
+        storeDoors.add(new StoreDoor(0, 0, 10, 10, this, screen, 0));           // TodoxMart door
+        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCo door    
+        
+
 
         /*
+
         //Boundaries of Map
         solids.add(new Solid(0, -32, 4096, 32, screen));
         solids.add(new Solid(-32, 0, 32, 4096, screen));
@@ -449,8 +458,12 @@ public class Game implements Runnable {
                 roadChanges.get(i).tick();
             }
 
+            for(int i = 0; i < storeDoors.size(); i++){
+                storeDoors.get(i).tick();
+            }
+            
             car.tick();
-
+       
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
                 if (!npcs.get(i).isTalking()) {
@@ -487,6 +500,23 @@ public class Game implements Runnable {
 
             npcTrashClassify.tick();
             player.tick();
+
+
+            
+            //If player intersects the TodoMart door
+            if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
+                    TodoMartRoom tmr = new TodoMartRoom("TodoxMartRoom",512,512,display,keyManager,this,player);
+                    tmr.start();
+                    // TodoMart tm = new TodoMart("TodoxMart", 512, 512, display, keyManager, this);
+                    //tm.start();
+                    running = false;
+            }
+            //If player intersects the RecycleCo door
+            if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
+                    RecycleCo rc = new RecycleCo("RecycleCo", 512, 512, display, keyManager, this);
+                    rc.start();
+                    running = false;
+            }
 
             //If player intersects the npc and press space the minigame starts, but first they start a conversation
             if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
@@ -551,10 +581,11 @@ public class Game implements Runnable {
                 pauseIndex = keyManager.pauseSelector;
             }
             if (keyManager.space && pauseIndex == 1) {
-                TodoMart tm = new TodoMart("TodoMart", 512, 512, display, keyManager, this);
-                Assets.gameStart.play();
-                tm.start();
-                running = false;
+                //TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
+                //Assets.gameStart.play();
+                //tm.start();
+                //running = false;
+
             }
             if (keyManager.space && pauseIndex == 3) {
                 MainMenu m = new MainMenu("MainMenu", 512, 512, display);

@@ -33,6 +33,7 @@ public class TodoMart implements Runnable {
     private Animation animation;            // to store the animations
     private Animation coinAnimation;         // to store the coin animations
     private Game game;                      // to store the game in which it was before
+    private TodoMartRoom room;              // to store the room in which it was before
     private int indexHelper = 10;           // to store an index helper to know when the game need to make 
     private double sneakersUpPrice = 4;         // to store the price of the sneakers upgrade
     private double backPackUpPrice = 1;         // to store the price of the backpack upgrade
@@ -46,7 +47,7 @@ public class TodoMart implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public TodoMart(String title, int width, int height, Display display, KeyManager keyManager, Game game) {
+    public TodoMart(String title, int width, int height, Display display, KeyManager keyManager, Game game, TodoMartRoom room) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -55,6 +56,7 @@ public class TodoMart implements Runnable {
         this.display = display;
         display.setTitle("TodoxMart");
         this.game = game;
+        this.room = room;
         this.sneakersUpPrice = pow(2, game.getPlayer().getSpeedUpgrade()) * sneakersUpPrice;
         this.backPackUpPrice = pow(2, game.getPlayer().getCapacityUpgrade()) * backPackUpPrice;
         this.trashValueUpPrice = pow(2, game.getPlayer().getTrashUpgrade()-1) * trashValueUpPrice;
@@ -239,8 +241,8 @@ public class TodoMart implements Runnable {
             case 0:
                 if (keyManager.space && !keyManager.helperSpace) {
                     Assets.gameStart.play();
-                    game.setCont(true);
-                    game.start();
+                    room.setCont(true);
+                    room.start();
                     running = false;
                 }
                 break;
