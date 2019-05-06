@@ -198,42 +198,44 @@ public class Game implements Runnable {
 
         //Creates doors to enter to the stores
         storeDoors.add(new StoreDoor(0, 0, 10, 10, this, screen, 0));           // TodoxMart door
-        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCo door    
+        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCo. door    
 
-        //Boundaries of Map
+        //Map boundaries
         solids.add(new Solid(0, -32, 4096, 32, screen));
         solids.add(new Solid(-32, 0, 32, 4096, screen));
         solids.add(new Solid(4096, 0, 32, 4096, screen));
         solids.add(new Solid(0, 4096, 4096, 32, screen));
 
-        //North Park
-        //Arbol parque norte izquierdo
+        //North park
+        //Left tree
         solids.add(new Solid(24, 280, 143, 187, screen));
-        //Arbol parque norte derecho
+        //Right Tree
         solids.add(new Solid(930, 0, 143, 187, screen));
         //Lights
         solids.add(new Solid(60, 7, 22, 43, screen));
         solids.add(new Solid(272, 263, 22, 43, screen));
         solids.add(new Solid(272, 477, 22, 43, screen));
-
-        //Cave North
+        //Trash Can
+        solids.add(new Solid(277, 386, 12, 4, screen));
+        //Cave
         solids.add(new Solid(787, 0, 143, 105, screen));
         solids.add(new Solid(787, 105, 23, 23, screen));
         solids.add(new Solid(887, 105, 43, 23, screen));
 
-        //WaterFountain main plaza
+        //Main plaza
+        //Fountain
         solids.add(new Solid(848, 932, 97, 34, screen));
         solids.add(new Solid(861, 901, 71, 79, screen));
-        //Lights main plaza
+        //Lights
         solids.add(new Solid(718, 519, 22, 41, screen));
         solids.add(new Solid(718, 1233, 22, 41, screen));
         solids.add(new Solid(1053, 519, 22, 41, screen));
         solids.add(new Solid(1053, 1233, 22, 41, screen));
 
         //Tacos Y Mas
-        solids.add(new Solid(0, 1669, 441, 275, screen)); // Restaurant
-        solids.add(new Solid(226, 1945, 120, 37, screen)); // Restauran's door
-        solids.add(new Solid(73, 1944, 88, 37, screen)); //Vending
+        solids.add(new Solid(0, 1669, 443, 275, screen)); // Restaurant
+        solids.add(new Solid(228, 1944, 118, 37, screen)); //Door
+        solids.add(new Solid(0, 1944, 162, 37, screen)); //Vending & Trash Can
         //Tables Tacos y Mas
         solids.add(new Solid(88, 2068, 5, 3, screen));
         solids.add(new Solid(215, 2068, 5, 3, screen));
@@ -245,11 +247,11 @@ public class Game implements Runnable {
         solids.add(new Solid(3, 2143, 18, 43, screen));
         solids.add(new Solid(414, 2144, 22, 43, screen));
 
-        //Observatorio
+        //Observatory
         solids.add(new Solid(65, 2560, 296, 192, screen));
         solids.add(new Solid(84, 2501, 250, 271, screen));
 
-        //Trees south park
+        //South West park
         solids.add(new Solid(128, 2840, 25, 95, screen));
         solids.add(new Solid(106, 2858, 70, 77, screen));
 
@@ -269,15 +271,16 @@ public class Game implements Runnable {
         solids.add(new Solid(507, 3281, 10, 398, screen));
         solids.add(new Solid(634, 3281, 10, 398, screen));
 
-        //Left South Corener Trees
+        //South West park trees
         solids.add(new Solid(0, 3504, 86, 592, screen));
-
         //Left Corner Bushes
         solids.add(new Solid(0, 4071, 1031, 25, screen));
         //Minibushes close to water
-        solids.add(new Solid(211, 3561, 25, 5, screen));
+        solids.add(new Solid(213, 3561, 23, 5, screen));
         solids.add(new Solid(420, 3561, 86, 5, screen));
-        solids.add(new Solid(673, 3561, 25, 5, screen));
+        solids.add(new Solid(644, 3561, 54, 5, screen));
+        //Trash Can
+        solids.add(new Solid(86, 3561, 59, 5, screen));
 
         //Water
         solids.add(new Solid(0, 3404, 506, 60, screen));
@@ -285,7 +288,7 @@ public class Game implements Runnable {
 
         solids.add(new Solid(1046, 3428, 78, 669, screen));
 
-        //Cave South
+        //South cave
         //*********************************************Por el momento solo es solido*
         solids.add(new Solid(908, 3464, 138, 130, screen));
         solids.add(new Solid(908, 3594, 24, 15, screen));
@@ -300,23 +303,16 @@ public class Game implements Runnable {
         //Truck
         solids.add(new Solid(2852, 3469, 152, 82, screen));
 
-        //Right South Corner Buildings 
+        //South East
+        //Residential buildings
         solids.add(new Solid(3854, 2752, 243, 1087, screen));
         solids.add(new Solid(3932, 3839, 95, 22, screen));
+        //Trees
+        solids.add(new Solid(3632, 2848, 128, 347, screen));
+        solids.add(new Solid(3653, 2836, 86, 12, screen));
+        solids.add(new Solid(3675, 2817, 42, 19, screen));
 
-        //Right South Corner Trees
-        solids.add(new Solid(3657, 2821, 120, 377, screen));
-
-        //Soccer Court Fence
-        solids.add(new Solid(2122, 2818, 562, 6, screen));
-        solids.add(new Solid(2120, 2818, 2, 404, screen));
-        solids.add(new Solid(2120, 3220, 447, 2, screen));
-        solids.add(new Solid(2665, 3220, 43, 2, screen));
-        //Soccer Goals
-        solids.add(new Solid(2122, 2928, 80, 132, screen));
-        solids.add(new Solid(2606, 2928, 114, 134, screen));
-
-        //School behind soccer court
+        //School
         solids.add(new Solid(2684, 2818, 36, 110, screen));
         solids.add(new Solid(2720, 2818, 314, 370, screen));
         solids.add(new Solid(3034, 2818, 80, 350, screen));
@@ -324,18 +320,31 @@ public class Game implements Runnable {
         solids.add(new Solid(3433, 2818, 29, 225, screen));
         solids.add(new Solid(2779, 3188, 255, 34, screen));
         solids.add(new Solid(3119, 3187, 275, 35, screen));
+        //Trash Can
+        solids.add(new Solid(3184, 3222, 16, 21, screen));
+        //Soccer Court Fence
+        solids.add(new Solid(2122, 2818, 562, 6, screen));
+        solids.add(new Solid(2120, 2818, 2, 404, screen));
+        solids.add(new Solid(2120, 3220, 447, 2, screen));
+        solids.add(new Solid(2665, 3220, 43, 2, screen));
+        //Soccer Goals
+        solids.add(new Solid(2122, 2928, 80, 132, screen));
+        solids.add(new Solid(2606, 2928, 114, 134, screen));        
 
-        //Mansion Bushes
-        solids.add(new Solid(2126, 1682, 40, 835, screen));
-        solids.add(new Solid(2166, 1682, 303, 14, screen));
-        solids.add(new Solid(2469, 1682, 39, 61, screen));
+        //Purple Mansion
+        //Bushes
+        solids.add(new Solid(2126, 1670, 40, 847, screen));
+        solids.add(new Solid(2166, 1670, 303, 26, screen));
+        solids.add(new Solid(2469, 1670, 48, 73, screen));
         solids.add(new Solid(2517, 1670, 153, 93, screen));
         solids.add(new Solid(2576, 1773, 36, 20, screen));
-        solids.add(new Solid(2941, 1670, 153, 93, screen));
+        solids.add(new Solid(2941, 1696, 153, 67, screen));
         solids.add(new Solid(3000, 1773, 36, 20, screen));
-        solids.add(new Solid(3102, 1682, 39, 61, screen));
-        solids.add(new Solid(3141, 1682, 303, 14, screen));
-        solids.add(new Solid(3445, 1682, 34, 834, screen));
+        solids.add(new Solid(3094, 1696, 47, 47, screen));
+        solids.add(new Solid(2941, 1670, 504, 26, screen));
+        solids.add(new Solid(3445, 1670, 34, 846, screen));
+        //Trash Can
+        solids.add(new Solid(3402, 2512, 43, 4, screen));
 
         solids.add(new Solid(2234, 1792, 10, 7, screen));
         solids.add(new Solid(2280, 1944, 10, 7, screen));
@@ -347,9 +356,8 @@ public class Game implements Runnable {
         solids.add(new Solid(3315, 1963, 10, 7, screen));
         solids.add(new Solid(3389, 2101, 10, 7, screen));
         solids.add(new Solid(3315, 2318, 10, 7, screen));
-        solids.add(new Solid(3376, 2472, 10, 7, screen));
-
-        //Mansion house
+        solids.add(new Solid(3377, 2472, 68, 7, screen));
+        //Mansion building
         solids.add(new Solid(2327, 1929, 353, 588, screen));
         solids.add(new Solid(2679, 1929, 256, 474, screen));
         solids.add(new Solid(2936, 1929, 348, 588, screen));
@@ -357,14 +365,14 @@ public class Game implements Runnable {
         solids.add(new Solid(2867, 2403, 70, 31, screen));
 
         //Todo Mart
-        solids.add(new Solid(3550, 2040, 522, 447, screen));
+        solids.add(new Solid(3550, 2033, 522, 454, screen));
         solids.add(new Solid(3550, 2487, 219, 27, screen));
         solids.add(new Solid(3850, 2487, 222, 27, screen));
-        //Fences Todo Mart
-        solids.add(new Solid(3550, 1861, 2, 179, screen));
+        //Fences Todo Mart & Dumpsters
+        solids.add(new Solid(3550, 1861, 2, 172, screen));
         solids.add(new Solid(3550, 1809, 192, 52, screen));
         solids.add(new Solid(3858, 1809, 238, 52, screen));
-        solids.add(new Solid(4048, 1861, 2, 179, screen));
+        solids.add(new Solid(4048, 1861, 2, 172, screen));
 
         //Marketplace
         //Right Store
@@ -376,6 +384,8 @@ public class Game implements Runnable {
         solids.add(new Solid(3819, 1091, 79, 4, screen));
         solids.add(new Solid(4025, 1091, 71, 4, screen));
         solids.add(new Solid(3768, 923, 46, 136, screen));
+        //Trash Can
+        solids.add(new Solid(3780, 1078, 12, 4, screen));  
 
         //Left Store
         solids.add(new Solid(2118, 517, 297, 491, screen));
@@ -385,7 +395,9 @@ public class Game implements Runnable {
         solids.add(new Solid(2375, 1014, 8, 77, screen));
         solids.add(new Solid(2123, 1091, 79, 4, screen));
         solids.add(new Solid(2327, 1091, 88, 4, screen));
-        solids.add(new Solid(2415, 917, 46, 136, screen));
+        solids.add(new Solid(2415, 917, 46, 136, screen));        
+        //Trash Can
+        solids.add(new Solid(2437, 1078, 12, 4, screen));        
 
         //Mall
         solids.add(new Solid(2590, 512, 1048, 384, screen));
@@ -408,15 +420,20 @@ public class Game implements Runnable {
         solids.add(new Solid(3445, 896, 16, 103, screen));
         solids.add(new Solid(3461, 896, 177, 78, screen));
 
-        //Residetial Mini Houses
+        //North East residential
         solids.add(new Solid(2123, 0, 1973, 190, screen));
-        solids.add(new Solid(2123, 190, 207, 21, screen));
-        solids.add(new Solid(2406, 190, 285, 21, screen));
-        solids.add(new Solid(2763, 190, 210, 21, screen));
-        solids.add(new Solid(3046, 190, 206, 21, screen));
-        solids.add(new Solid(3325, 190, 456, 21, screen));
-        solids.add(new Solid(3853, 190, 243, 21, screen));
-
+        solids.add(new Solid(2123, 190, 208, 21, screen));
+        solids.add(new Solid(2401, 190, 295, 21, screen));
+        solids.add(new Solid(2766, 190, 211, 21, screen));
+        solids.add(new Solid(3047, 190, 213, 21, screen));
+        solids.add(new Solid(3330, 190, 460, 21, screen));
+        solids.add(new Solid(3861, 190, 235, 21, screen));
+        //Trash Cans
+        solids.add(new Solid(2114, 214, 12, 4, screen));
+        solids.add(new Solid(2850, 214, 12, 4, screen));
+        solids.add(new Solid(3160, 214, 12, 4, screen));
+        solids.add(new Solid(4066, 214, 12, 4, screen));
+        
         //Blue Skycraper
         solids.add(new Solid(1354, 0, 494, 57, screen));
         solids.add(new Solid(1371, 57, 460, 20, screen));
@@ -429,11 +446,18 @@ public class Game implements Runnable {
         solids.add(new Solid(1546, 183, 12, 27, screen));
         solids.add(new Solid(1642, 183, 12, 27, screen));
 
-        //Transportation Station
+        //Transport station
         solids.add(new Solid(1346, 734, 508, 451, screen));
         solids.add(new Solid(1346, 1185, 220, 19, screen));
         solids.add(new Solid(1646, 1185, 208, 19, screen));
-        //Fence Transportation
+        //Trasn Can
+        solids.add(new Solid(1590, 1335, 19, 7, screen));
+        //Front lights
+        solids.add(new Solid(1371, 1300, 31, 31, screen));
+        solids.add(new Solid(1389, 1274, 18, 7, screen));
+        solids.add(new Solid(1796, 1273, 10, 8, screen));
+        solids.add(new Solid(1816, 1288, 8, 41, screen));
+        //Fence 
         solids.add(new Solid(1346, 657, 4, 77, screen));
         solids.add(new Solid(1346, 517, 4, 44, screen));
         solids.add(new Solid(1350, 517, 500, 2, screen));
@@ -442,16 +466,15 @@ public class Game implements Runnable {
         //Bikes
         solids.add(new Solid(1395, 550, 23, 5, screen));
         solids.add(new Solid(1467, 563, 23, 5, screen));
-        solids.add(new Solid(1433, 571, 34, 5, screen));
+        solids.add(new Solid(1533, 571, 34, 5, screen));
         solids.add(new Solid(1563, 619, 34, 2, screen));
         solids.add(new Solid(1670, 596, 41, 2, screen));
         solids.add(new Solid(1692, 567, 41, 29, screen));
         solids.add(new Solid(1754, 609, 17, 2, screen));
-        //In front lights
-        solids.add(new Solid(1371, 1273, 31, 58, screen));
-        solids.add(new Solid(1816, 1273, 8, 66, screen));
+        //Trash Can
+        solids.add(new Solid(1626, 532, 12, 4, screen));
 
-        //RecycleCo
+        //RecycleCo.
         solids.add(new Solid(153, 841, 154, 15, screen));
         solids.add(new Solid(117, 856, 224, 15, screen));
         solids.add(new Solid(80, 871, 298, 19, screen));
@@ -478,6 +501,8 @@ public class Game implements Runnable {
         solids.add(new Solid(1779, 2126, 52, 18, screen));
         solids.add(new Solid(1369, 2481, 52, 18, screen));
         solids.add(new Solid(1779, 2481, 52, 18, screen));
+        //Trash Can
+        solids.add(new Solid(1484, 1982, 44, 37, screen));
 
         //Solids Street
         solids.add(new Solid(527, 326, 98, 210, screen));
