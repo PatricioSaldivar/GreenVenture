@@ -22,6 +22,7 @@ public class NPCMinigame1 extends Item {
     private int id;
     private boolean talking;
     private Animation alertAnimation;
+    private Animation facing;
 
 
 public NPCMinigame1(int x, int y, int width, int height, Game game, Screen screen, int id) {
@@ -63,6 +64,15 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
     public void setTalking(boolean talking) {
         this.talking = talking;
     }
+
+    public Animation getFacing() {
+        return facing;
+    }
+
+    public void setFacing(Animation facing) {
+        this.facing = facing;
+    }
+    
     
    
     @Override

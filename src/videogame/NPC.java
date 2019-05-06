@@ -35,6 +35,7 @@ public class NPC extends Item {
     private Animation alertAnimation;
     private int randomDist;
     private int distanceTraveled;
+    private Animation facing;
 
     public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
         super(x, y);
@@ -50,6 +51,7 @@ public class NPC extends Item {
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
+        facing = new Animation(Assets.npcAlert,100);
 
     }
 
@@ -113,10 +115,27 @@ public class NPC extends Item {
         return talking;
     }
 
+    public Animation getAlertAnimation() {
+        return alertAnimation;
+    }
+
+    public void setAlertAnimation(Animation alertAnimation) {
+        this.alertAnimation = alertAnimation;
+    }
+
+    public Animation getFacing() {
+        return facing;
+    }
+
+    public void setFacing(Animation facing) {
+        this.facing = facing;
+    }
+
     @Override
     public void tick() {
         alertAnimation.tick();
         if (!talking) {
+            facing.tick();
             switch (direction) {
                 //Moves Up, checks colission
                 case 0:
@@ -189,15 +208,19 @@ public class NPC extends Item {
                     switch (direction) {
                         case 0:
                             randomDist = (int) (Math.random() * (4096-iniY-yMove));
+                             facing = new Animation(Assets.npcAlert,100);
                             break;
                         case 1:
                             randomDist = (int) (Math.random() * (4096 - iniX-xMove));
+                             facing = new Animation(Assets.npcAlert,100);
                             break;
                         case 2:
                             randomDist = (int) (Math.random() * (iniY+yMove));
+                             facing = new Animation(Assets.npcAlert,100);
                             break;
                         case 3:
                             randomDist = (int) (Math.random() * (iniX+xMove));
+                             facing = new Animation(Assets.npcAlert,100);
                             break;
                     }
 

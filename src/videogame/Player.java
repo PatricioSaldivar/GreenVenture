@@ -36,7 +36,7 @@ public class Player extends Item {
     private int paper = 0;
     private int plastic = 0;
     private int aluminum = 0;
-    private int trashUpgrade = 0;                // to save the level of trash price upgrade
+    private int trashUpgrade = 1;                // to save the level of trash price upgrade
     private double speedUpgrade = 0;            // to save the level of speed upgrade
     private double capacityUpgrade = 0;         // to save the level of the capacity upgrade
     private Animation animationUp;
