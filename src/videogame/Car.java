@@ -18,7 +18,7 @@ public class Car extends Solid {
     private int yMove = 0;
     private int iniX;
     private int iniY;
-    private int speed = 2;
+    private int speed = 5;
     private Screen screen;
     private Game game;
     private int direction;

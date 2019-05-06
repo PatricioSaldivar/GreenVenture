@@ -146,7 +146,9 @@ public class Box extends Item {
     public void render(Graphics g) {
         //draws image of box guantlet depending if it goes to the right or left
             g.drawImage(Assets.rightBox, getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(Assets.rightExt,getX()-384,getY(),384,getHeight(),null);
             g.drawImage(Assets.leftBox, leftX, getY(), getWidth(), getHeight(), null);
+             g.drawImage(Assets.leftExt,leftX+width,getY(),384,getHeight(),null);
     }
 
     @Override

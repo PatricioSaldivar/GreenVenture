@@ -51,7 +51,7 @@ public class NPC extends Item {
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
-        facing = new Animation(Assets.npcAlert,100);
+        facing = new Animation(Assets.npcAlert, 100);
 
     }
 
@@ -142,7 +142,15 @@ public class NPC extends Item {
                     yMove += speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
                         if (getPerimetroForSolidsUp().intersects(game.getSolids().get(i).getPerimetroUp(screen.getX(), screen.getY()))) {
-                            yMove-=speed;
+                            yMove -= speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < game.getCrosswalks().size(); i++) {
+                        //Checks collisions with crosswalks when going from top to down and checks if theres a car
+                        if (getPerimetroForSolidsUp().intersects(game.getCrosswalks().get(i).getPerimetroUp(screen.getX(), screen.getY())) && game.getCrosswalks().get(i).isCarIn()) {
+                            yMove += speed;
                             direction = 4;
                             break;
                         }
@@ -158,7 +166,15 @@ public class NPC extends Item {
                     xMove += speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
                         if (getPerimetroForSolidsRight().intersects(game.getSolids().get(i).getPerimetroRight(screen.getX(), screen.getY()))) {
-                            xMove-=speed;
+                            xMove -= speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < game.getCrosswalks().size(); i++) {
+                        //Checks collisions with crosswalks when going from top to down and checks if theres a car
+                        if (getPerimetroForSolidsRight().intersects(game.getCrosswalks().get(i).getPerimetroRight(screen.getX(), screen.getY())) && game.getCrosswalks().get(i).isCarIn()) {
+                            yMove += speed;
                             direction = 4;
                             break;
                         }
@@ -174,11 +190,20 @@ public class NPC extends Item {
                     yMove -= speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
                         if (getPerimetroForSolidsDown().intersects(game.getSolids().get(i).getPerimetroDown(screen.getX(), screen.getY()))) {
-                            yMove+=speed;
+                            yMove += speed;
                             direction = 4;
                             break;
                         }
                     }
+                    for (int i = 0; i < game.getCrosswalks().size(); i++) {
+                        //Checks collisions with crosswalks when going from top to down and checks if theres a car
+                        if (getPerimetroForSolidsDown().intersects(game.getCrosswalks().get(i).getPerimetroDown(screen.getX(), screen.getY())) && game.getCrosswalks().get(i).isCarIn()) {
+                            yMove += speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+
                     distanceTraveled++;
                     if (distanceTraveled > randomDist) {
                         direction = 4;
@@ -190,7 +215,15 @@ public class NPC extends Item {
                     xMove -= speed;
                     for (int i = 0; i < game.getSolids().size(); i++) {
                         if (getPerimetroForSolidsLeft().intersects(game.getSolids().get(i).getPerimetroLeft(screen.getX(), screen.getY()))) {
-                            xMove+=speed;
+                            xMove += speed;
+                            direction = 4;
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < game.getCrosswalks().size(); i++) {
+                        //Checks collisions with crosswalks when going from top to down and checks if theres a car
+                        if (getPerimetroForSolidsLeft().intersects(game.getCrosswalks().get(i).getPerimetroLeft(screen.getX(), screen.getY())) && game.getCrosswalks().get(i).isCarIn()) {
+                            yMove += speed;
                             direction = 4;
                             break;
                         }
@@ -207,20 +240,20 @@ public class NPC extends Item {
                     direction = (int) (Math.random() * 4);
                     switch (direction) {
                         case 0:
-                            randomDist = (int) (Math.random() * (4096-iniY-yMove));
-                             facing = new Animation(Assets.npcAlert,100);
+                            randomDist = (int) (Math.random() * (4096 - iniY - yMove));
+                            facing = new Animation(Assets.npcAlert, 100);
                             break;
                         case 1:
-                            randomDist = (int) (Math.random() * (4096 - iniX-xMove));
-                             facing = new Animation(Assets.npcAlert,100);
+                            randomDist = (int) (Math.random() * (4096 - iniX - xMove));
+                            facing = new Animation(Assets.npcAlert, 100);
                             break;
                         case 2:
-                            randomDist = (int) (Math.random() * (iniY+yMove));
-                             facing = new Animation(Assets.npcAlert,100);
+                            randomDist = (int) (Math.random() * (iniY + yMove));
+                            facing = new Animation(Assets.npcAlert, 100);
                             break;
                         case 3:
-                            randomDist = (int) (Math.random() * (iniX+xMove));
-                             facing = new Animation(Assets.npcAlert,100);
+                            randomDist = (int) (Math.random() * (iniX + xMove));
+                            facing = new Animation(Assets.npcAlert, 100);
                             break;
                     }
 

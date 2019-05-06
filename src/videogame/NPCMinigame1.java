@@ -78,12 +78,12 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
     @Override
     public void tick() {
         alertAnimation.tick();        
-        x= iniX-screen.getX();
-        y= iniY-screen.getY();
     }
 
     @Override
     public void render(Graphics g) {
+        x= iniX-screen.getX();
+        y= iniY-screen.getY();
        g.drawImage(Assets.npcMinigame1, getX(), getY(), getWidth(), getHeight(), null);
        g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-16,16,16,null);
     }

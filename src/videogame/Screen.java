@@ -308,7 +308,7 @@ public class Screen {
             }
         }
         
-        player.render(g);
+        
         for (int i = 0; i < game.getNpcs().size(); i++) {
             game.getNpcs().get(i).render(g);
             if (game.getNpcs().get(i).isTalking()) {
@@ -360,6 +360,8 @@ public class Screen {
             }else
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
         }
+        game.getCar().render(g);
+        player.render(g);
 
         //Displays the top rectangle with information of the player
         if (!game.getKeyManager().pause) {

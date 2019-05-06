@@ -20,6 +20,7 @@ public class Crosswalk extends Item{
     private final int iniX;
     private final int iniY;
     private Screen screen;
+    private boolean carIn = false;
     public Crosswalk(int x, int y, int width, int height, Game game, Screen screen) {
         super(x, y);
         this.width = width;
@@ -50,13 +51,36 @@ public class Crosswalk extends Item{
     public boolean isSomeoneIn() {
         return someoneIn;
     }
+
+    public boolean isCarIn() {
+        return carIn;
+    }
+
+    public void setCarIn(boolean carIn) {
+        this.carIn = carIn;
+    }
+
+    public int getIniX() {
+        return iniX;
+    }
+
+    public int getIniY() {
+        return iniY;
+    }
+    
+    
     
 
     @Override
     public void tick() {
         someoneIn=false;
+        carIn=false;
         x = iniX - screen.getX();
         y = iniY - screen.getY();
+        if(game.getCar().getPerimetro().intersects(getPerimetro())){
+            carIn=true;
+        }
+        
        for(int i=0; i<game.getNpcs().size(); i++){
           if(getPerimetro().intersects(game.getNpcs().get(i).getPerimetro())){
                     someoneIn = true;
@@ -75,6 +99,18 @@ public class Crosswalk extends Item{
     @Override
     public Rectangle getPerimetro() {
          return new Rectangle(getX(), getY(), getWidth(), getHeight());
+    }
+        public Rectangle getPerimetroLeft(int posX, int posY) {
+        return new Rectangle(iniX-posX+width-1,iniY-posY,1,height);
+    }
+        public Rectangle getPerimetroRight(int posX, int posY) {
+        return new Rectangle(iniX-posX,iniY-posY,1,height);
+    }
+            public Rectangle getPerimetroDown(int posX, int posY) {
+        return new Rectangle(iniX-posX,iniY-posY+height-1,width,1);
+    }
+                public Rectangle getPerimetroUp(int posX, int posY) {
+        return new Rectangle(iniX-posX,iniY-posY,width,1);
     }
     
     

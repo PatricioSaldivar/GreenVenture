@@ -24,7 +24,7 @@ public class Player extends Item {
     private int SMoveX = 0;
     private int SMoveY = 0;
     private double money = 20.00;
-    private int speed = 5;
+    private int speed =7;
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
@@ -53,10 +53,10 @@ public class Player extends Item {
         this.height = height;
         this.game = game;
         //The speed of the animation need to be changed depending of the player speed
-        this.animationUp = new Animation(Assets.playerUp,200);
-        this.animationDown = new Animation(Assets.playerDown,200);
-        this.animationRight = new Animation(Assets.playerRight,200);
-        this.animationLeft = new Animation(Assets.playerLeft,200);
+        this.animationUp = new Animation(Assets.playerUp,300);
+        this.animationDown = new Animation(Assets.playerDown,300);
+        this.animationRight = new Animation(Assets.playerRight,300);
+        this.animationLeft = new Animation(Assets.playerLeft,300);
         this.direction = 1;
     }
 
@@ -399,7 +399,7 @@ public class Player extends Item {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getSolids().get(i).x - game.getWidth() / 2 - width / 2;
                     } else {
-                        x = game.getSolids().get(i).x - width;
+                        x = game.getSolids().get(i).x -64 - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from righ to left
@@ -407,7 +407,7 @@ public class Player extends Item {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getSolids().get(i).x + game.getSolids().get(i).getWidth() - game.getWidth() / 2 + width / 2;
                     } else {
-                        x = game.getSolids().get(i).x + game.getSolids().get(i).getWidth();
+                        x = game.getSolids().get(i).x + game.getSolids().get(i).getWidth() - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from top to down
@@ -428,7 +428,42 @@ public class Player extends Item {
                 }
 
             }
+            
+            for(int i=0; i<game.getCrosswalks().size(); i++){
+                //Checks collisions with solids when going from top to down
+                if (getPerimetroForSolidsUp().intersects(game.getCrosswalks().get(i).getPerimetroUp(SMoveX, SMoveY)) && game.getCrosswalks().get(i).isCarIn()) {
+                    if (y == game.getHeight() / 2 - height / 2) {
+                        SMoveY = game.getCrosswalks().get(i).getIniY() - game.getHeight() / 2 - height / 2;
+                    } else {
+                        y = game.getCrosswalks().get(i).getIniY()- 64;
+                    }
+                }
+                //Checks collisions with solids when going from down to top
+                if (getPerimetroForSolidsDown().intersects(game.getCrosswalks().get(i).getPerimetroDown(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                    if (y == game.getHeight() / 2 - height / 2) {
+                        SMoveY = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight() - game.getHeight() / 2 + height / 2 ;
+                    } else {
+                        y = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight();                    }
+                }
+                 if (getPerimetroForSolidsRight().intersects(game.getCrosswalks().get(i).getPerimetroRight(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                    if (x == game.getWidth() / 2 - width / 2) {
+                        SMoveX = game.getCrosswalks().get(i).getIniX() - game.getWidth() / 2 - width / 2;
+                    } else {
+                        x = game.getCrosswalks().get(i).getIniX() -64 - SMoveX;
+                    }
+                }
+                //Checks collisions with solids when going from righ to left
+                if (getPerimetroForSolidsLeft().intersects(game.getCrosswalks().get(i).getPerimetroLeft(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                    if (x == game.getWidth() / 2 - width / 2) {
+                        SMoveX = game.getCrosswalks().get(i).getIniX() + game.getCrosswalks().get(i).getWidth() - game.getWidth() / 2 + width / 2;
+                    } else {
+                        x = game.getCrosswalks().get(i).getIniX() + game.getCrosswalks().get(i).getWidth() - SMoveX;
+                    }
+                }
+            }
+                  
         }
+        
     }
 
     @Override
