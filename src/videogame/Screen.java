@@ -308,8 +308,9 @@ public class Screen {
             }
         }
         
-        player.render(g);
+        
         for (int i = 0; i < game.getNpcs().size(); i++) {
+            game.getSolids().add(new Solid(game.getNpcs().get(i).getX(), game.getNpcs().get(i).getY(),64,64,this));
             game.getNpcs().get(i).render(g);
             if (game.getNpcs().get(i).isTalking()) {
                 talkingNPC = i;
@@ -360,6 +361,8 @@ public class Screen {
             }else
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
         }
+        game.getCar().render(g);
+        player.render(g);
 
         //Displays the top rectangle with information of the player
         if (!game.getKeyManager().pause) {
