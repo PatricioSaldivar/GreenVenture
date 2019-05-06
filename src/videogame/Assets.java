@@ -91,6 +91,7 @@ public class Assets {
     public static BufferedImage todoMartReturn[];           // to store the images fo the TodoMart when Return is selected
     public static BufferedImage todoMartSneakersUp[];       // to store the images fo the TodoMart when Sneakers upgrade is selected
     public static BufferedImage todoMartValueUp[];          // to store the images fo the TodoMart when Trash Value upgrade is selected
+    public static BufferedImage todoMartRoom;               // to store the room background where the player locate before seeing the 
     /**
      * initializing the images of the game
      */
@@ -248,6 +249,7 @@ public class Assets {
         pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
 
         //Main Menu loader
+        
         selectSound = new SoundClip("/global_sounds/select.wav");
         gameStart = new SoundClip("/global_sounds/gameStart.wav");
         mainMenuPlay = new BufferedImage[2];
@@ -323,6 +325,8 @@ public class Assets {
         todoMartValueUp = new BufferedImage[2];  
         todoMartValueUp[0] = ImageLoader.loadImage("/imagesTodoMart/valueUp.png");
         todoMartValueUp[1] = ImageLoader.loadImage("/imagesTodoMart/valueUp2.png");
+        
+        todoMartRoom = ImageLoader.loadImage("/imagesTodoMart/storeRoom.png");
 
     }
 
