@@ -276,11 +276,8 @@ public class Screen {
             for (String line : message.substring(0, conversationTextIndex).split("\n")) {
             g.drawString(line, 128, yPaint + g.getFontMetrics().getHeight()*i );
             i+=2;
+            }
         }
-                
-           
-        }
-
     }
 
     public void render(Graphics g) {
