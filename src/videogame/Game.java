@@ -205,16 +205,16 @@ public class Game implements Runnable {
         solids.add(new Solid(-32, 0, 32, 4096, screen));
         solids.add(new Solid(4096, 0, 32, 4096, screen));
         solids.add(new Solid(0, 4096, 4096, 32, screen));
-        
+
         //North Park
         //Arbol parque norte izquierdo
         solids.add(new Solid(24, 280, 143, 187, screen));
         //Arbol parque norte derecho
         solids.add(new Solid(930, 0, 143, 187, screen));
         //Lights
-        solids.add(new Solid(60, 7,22, 43, screen));
-        solids.add(new Solid(272, 263,22, 43, screen));
-        solids.add(new Solid(272, 477,22, 43, screen));
+        solids.add(new Solid(60, 7, 22, 43, screen));
+        solids.add(new Solid(272, 263, 22, 43, screen));
+        solids.add(new Solid(272, 477, 22, 43, screen));
 
         //Cave North
         solids.add(new Solid(787, 0, 143, 105, screen));
@@ -225,11 +225,11 @@ public class Game implements Runnable {
         solids.add(new Solid(848, 932, 97, 34, screen));
         solids.add(new Solid(861, 901, 71, 79, screen));
         //Lights main plaza
-        solids.add(new Solid(718, 519,22, 41, screen));
-        solids.add(new Solid(718, 1233,22, 41, screen));
-        solids.add(new Solid(1053, 519,22, 41, screen));
-        solids.add(new Solid(1053, 1233,22, 41, screen));
-        
+        solids.add(new Solid(718, 519, 22, 41, screen));
+        solids.add(new Solid(718, 1233, 22, 41, screen));
+        solids.add(new Solid(1053, 519, 22, 41, screen));
+        solids.add(new Solid(1053, 1233, 22, 41, screen));
+
         //Tacos Y Mas
         solids.add(new Solid(0, 1669, 441, 275, screen)); // Restaurant
         solids.add(new Solid(226, 1945, 120, 37, screen)); // Restauran's door
@@ -242,8 +242,8 @@ public class Game implements Runnable {
         solids.add(new Solid(215, 2174, 5, 3, screen));
         solids.add(new Solid(349, 2174, 5, 3, screen));
         //Lights
-        solids.add(new Solid(3, 2143,18, 43, screen));
-        solids.add(new Solid(414,2144,22, 43, screen));
+        solids.add(new Solid(3, 2143, 18, 43, screen));
+        solids.add(new Solid(414, 2144, 22, 43, screen));
 
         //Observatorio
         solids.add(new Solid(65, 2560, 296, 192, screen));
@@ -450,42 +450,111 @@ public class Game implements Runnable {
         //In front lights
         solids.add(new Solid(1371, 1273, 31, 58, screen));
         solids.add(new Solid(1816, 1273, 8, 66, screen));
-        
-        //RecycleCo
-        solids.add(new Solid(153, 841,154, 15, screen));
-        solids.add(new Solid(117, 856,224, 15, screen));
-        solids.add(new Solid(80, 871,298, 19, screen));
-        solids.add(new Solid(5, 890,407, 459, screen));
-        solids.add(new Solid(5, 1349,190, 10, screen));
-        solids.add(new Solid(269, 1349,142, 10, screen));
-        
-        //City Hall
-        solids.add(new Solid(711, 1670,370, 694, screen));
-        //Lights
-        solids.add(new Solid(718, 2465,22, 43, screen));
-        solids.add(new Solid(1053, 2465,22, 43, screen));
-        
-        //Gym
-        solids.add(new Solid(1353, 1671,494, 311, screen));
-        solids.add(new Solid(1528, 1982,35, 82, screen));
-        solids.add(new Solid(1563, 1982,160, 40, screen));
-        solids.add(new Solid(1723, 1982,35, 87, screen));
-        solids.add(new Solid(1376, 2051,39, 75, screen));
-        solids.add(new Solid(1376, 2406,39, 75, screen));
-        solids.add(new Solid(1786, 2051,39, 75, screen));
-        solids.add(new Solid(1786, 2406,39, 75, screen));
-        solids.add(new Solid(1369, 2126,52, 18, screen));
-        solids.add(new Solid(1779, 2126,52, 18, screen));
-        solids.add(new Solid(1369, 2481,52, 18, screen));
-        solids.add(new Solid(1779, 2481,52, 18, screen));
-        
 
-        //Solids for roadChangers
+        //RecycleCo
+        solids.add(new Solid(153, 841, 154, 15, screen));
+        solids.add(new Solid(117, 856, 224, 15, screen));
+        solids.add(new Solid(80, 871, 298, 19, screen));
+        solids.add(new Solid(5, 890, 407, 459, screen));
+        solids.add(new Solid(5, 1349, 190, 10, screen));
+        solids.add(new Solid(269, 1349, 142, 10, screen));
+
+        //City Hall
+        solids.add(new Solid(711, 1670, 370, 694, screen));
+        //Lights
+        solids.add(new Solid(718, 2465, 22, 43, screen));
+        solids.add(new Solid(1053, 2465, 22, 43, screen));
+
+        //Gym
+        solids.add(new Solid(1353, 1671, 494, 311, screen));
+        solids.add(new Solid(1528, 1982, 35, 82, screen));
+        solids.add(new Solid(1563, 1982, 160, 40, screen));
+        solids.add(new Solid(1723, 1982, 35, 87, screen));
+        solids.add(new Solid(1376, 2051, 39, 75, screen));
+        solids.add(new Solid(1376, 2406, 39, 75, screen));
+        solids.add(new Solid(1786, 2051, 39, 75, screen));
+        solids.add(new Solid(1786, 2406, 39, 75, screen));
+        solids.add(new Solid(1369, 2126, 52, 18, screen));
+        solids.add(new Solid(1779, 2126, 52, 18, screen));
+        solids.add(new Solid(1369, 2481, 52, 18, screen));
+        solids.add(new Solid(1779, 2481, 52, 18, screen));
+
+        //Solids Street
+        solids.add(new Solid(527, 326, 98, 210, screen));
+        solids.add(new Solid(527, 646, 98, 82, screen));
+        solids.add(new Solid(527, 841, 98, 533, screen));
+        solids.add(new Solid(527, 1478, 98, 82, screen));
+        solids.add(new Solid(527, 1674, 98, 856, screen));
+        solids.add(new Solid(527, 2630, 98, 82, screen));
+        solids.add(new Solid(0, 646, 433, 82, screen));
+        solids.add(new Solid(0, 1478, 433, 82, screen));
+        solids.add(new Solid(0, 2312, 433, 82, screen));
+        solids.add(new Solid(720, 326, 360, 82, screen));
+        solids.add(new Solid(720, 1478, 360, 82, screen));
+        solids.add(new Solid(720, 2630, 360, 82, screen));
+        solids.add(new Solid(1167, 0, 98, 216, screen));
         solids.add(new Solid(1167, 326, 98, 82, screen));
+        solids.add(new Solid(1167, 518, 98, 856, screen));
+        solids.add(new Solid(1167, 1478, 98, 82, screen));
+        solids.add(new Solid(1167, 1674, 98, 856, screen));
+        solids.add(new Solid(1167, 2630, 98, 82, screen));
+        solids.add(new Solid(1360, 326, 488, 82, screen));
+        solids.add(new Solid(1360, 1478, 488, 82, screen));
+        solids.add(new Solid(1360, 2630, 488, 82, screen));
+        solids.add(new Solid(1935, 0, 98, 216, screen));
+        solids.add(new Solid(1935, 326, 98, 82, screen));
+        solids.add(new Solid(1935, 518, 98, 856, screen));
+        solids.add(new Solid(1935, 1478, 98, 82, screen));
+        solids.add(new Solid(1935, 1674, 98, 856, screen));
+        solids.add(new Solid(1935, 2630, 98, 82, screen));
+        solids.add(new Solid(1935, 2824, 98, 1052, screen));
+        solids.add(new Solid(1935, 3977, 98, 82, screen));
+        solids.add(new Solid(2128, 326, 1968, 82, screen));
+        solids.add(new Solid(2128, 1478, 1968, 82, screen));
+        solids.add(new Solid(2128, 2630, 1968, 82, screen));
+        solids.add(new Solid(2125, 3336, 1638, 82, screen));
+        solids.add(new Solid(2125, 3977, 1970, 82, screen));
+        solids.add(new Solid(3665, 3418, 98, 452, screen));
 
         //CrossWalks
-        //First from left to right north (Complete square)
-        crosswalks.add(new Crosswalk(1095, 310, 57, 138, this, screen));
+        crosswalks.add(new Crosswalk(448, 646, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(448, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(448, 2312, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(527, 576, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(527, 769, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(527, 1407, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(527, 1601, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(527, 2560, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(641, 326, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(641, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(641, 2630, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1088, 326, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1088, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1088, 2630, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1167, 256, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1167, 448, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1167, 1407, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1167, 1601, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1167, 2560, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1281, 326, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1281, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1281, 2630, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1856, 326, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1856, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1856, 2630, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(1935, 256, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 448, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 1407, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 1601, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 2560, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 2752, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(1935, 3905, 98, 64, this, screen));
+        crosswalks.add(new Crosswalk(2048, 3977, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(2048, 3336, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(2048, 2630, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(2048, 1478, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(2048, 326, 64, 82, this, screen));
+        crosswalks.add(new Crosswalk(3665, 3903, 98, 64, this, screen));
 
         //RoadChanges
         int possibleDirections[];
@@ -610,6 +679,7 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
+
             for (int i = 0; i < crosswalks.size(); i++) {
                 crosswalks.get(i).tick();
             }
@@ -622,7 +692,7 @@ public class Game implements Runnable {
             }
 
             car.tick();
-            
+
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
                 if (!npcs.get(i).isTalking()) {
