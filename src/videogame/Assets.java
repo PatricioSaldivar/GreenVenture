@@ -54,6 +54,8 @@ public class Assets {
     public static BufferedImage inTrash[];          // to store the images of the inorganic trash
     public static BufferedImage orTrash[];           // to store the images of the organic trash
     public static SoundClip gloveHit;               // to store the glove hit sound
+    public static BufferedImage leftExt;            //To store the left box extension
+    public static BufferedImage rightExt;           //To store the right box extension
 
     
     //Pause of game Assets
@@ -75,6 +77,7 @@ public class Assets {
 
     //Minigame Pause Assets
     public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
+   
     
     //RecycleCo Assets
     public static BufferedImage recycleCoAluminum[];        // to store the images of the RecycleCo when Aluminum is selected
@@ -196,11 +199,14 @@ public class Assets {
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
         gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
+        leftExt = ImageLoader.loadImage("/images_minigame1/extensionLeft.png");
+        rightExt =ImageLoader.loadImage("/images_minigame1/extensionRight.png");
 
         //Mini-game pause
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame.png");
         minigame1PauseEnd[1] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame2.png");
+        
 
         //Minigame 1 inorganic trash loader
         inTrash = new BufferedImage[19];

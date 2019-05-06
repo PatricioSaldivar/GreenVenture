@@ -399,7 +399,7 @@ public class Player extends Item {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getSolids().get(i).x - game.getWidth() / 2 - width / 2;
                     } else {
-                        x = game.getSolids().get(i).x - width;
+                        x = game.getSolids().get(i).x -64 - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from righ to left
@@ -407,7 +407,7 @@ public class Player extends Item {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getSolids().get(i).x + game.getSolids().get(i).getWidth() - game.getWidth() / 2 + width / 2;
                     } else {
-                        x = game.getSolids().get(i).x + game.getSolids().get(i).getWidth();
+                        x = game.getSolids().get(i).x + game.getSolids().get(i).getWidth() - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from top to down
