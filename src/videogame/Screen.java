@@ -33,6 +33,8 @@ public class Screen {
     private boolean finishedConversationText = false;
     private int conversationTextIndex = 0;
     private Animation coin;
+    private boolean cursorOnPlay = false;
+    private Animation selector;
     /**
      * to create the screen with his attributes
      *
@@ -53,6 +55,7 @@ public class Screen {
         this.player = player;
         this.trash = trash;
         coin = new Animation(Assets.coin, 100);
+        selector = new Animation(Assets.selector,300);
     }
 
     /**
@@ -186,6 +189,16 @@ public class Screen {
         this.conversationTextIndex = conversationTextIndex;
     }
 
+    public boolean isCursorOnPlay() {
+        return cursorOnPlay;
+    }
+
+    public void setCursorOnPlay(boolean cursorOnPlay) {
+        this.cursorOnPlay = cursorOnPlay;
+    }
+
+    
+    
     public void conversation(NPC npc, Player player, Graphics2D g) {
         int yPaint = 416;
         String message;
@@ -225,6 +238,49 @@ public class Screen {
         }
 
     }
+    
+    
+        public void conversationMinigame(NPCMinigame1 npc, Player player, Graphics2D g) {
+        int yPaint = 416;
+        String message;
+        g.setColor(Color.red);
+        g.fillRect(0, 384, 512, 128);
+        g.setColor(Color.BLACK);
+        if (!player.isTalking()) {
+            g.drawImage(Assets.npcMinigame1, 0, 416, 64, 64, null);
+            message = "Hey me podrias ayudar organizando mi basura?\nPodrias usar mi robot de golpes! ";
+            if (!finishedConversationText) {
+                if (conversationTextIndex < message.length()) {
+                    conversationTextIndex++;
+                } else {
+                    finishedConversationText = true;
+                }
+            } else {
+                conversationTextIndex = message.length() - 1;
+            }
+            for (String line : message.substring(0, conversationTextIndex).split("\n")) {
+            g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
+        }
+        } else {
+            message = "Claro! Donde esta ese robot?\nPor el momento no puedo, lo lamento ";
+                conversationTextIndex = message.length() - 1;
+            g.drawImage(Assets.inTrashCan, 0, 416, 64, 64, null);
+            selector.tick();
+            if(cursorOnPlay){
+                 g.drawImage(selector.getCurrentFrame(),120,416+(g.getFontMetrics().getHeight()*1/2),8,8,null);
+            }else{
+                g.drawImage(selector.getCurrentFrame(),120,416+ g.getFontMetrics().getHeight()*5/2,8,8,null);
+            }
+            int i=1;
+            for (String line : message.substring(0, conversationTextIndex).split("\n")) {
+            g.drawString(line, 128, yPaint + g.getFontMetrics().getHeight()*i );
+            i+=2;
+        }
+                
+           
+        }
+
+    }
 
     public void render(Graphics g) {
         
@@ -259,6 +315,9 @@ public class Screen {
             }
         }
         if (player.isConversation()) {
+            if(game.getNpcTrashClassify().isTalking()){
+                conversationMinigame(game.getNpcTrashClassify(),player,g2d);
+            }else
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
         }
 
