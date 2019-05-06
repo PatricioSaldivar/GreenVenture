@@ -5,6 +5,7 @@
  */
 package videogame;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -822,10 +823,10 @@ public class Game implements Runnable {
             }
             if (keyManager.space && pauseIndex == 2) {
 
-                RecycleCo r = new RecycleCo("Store", 512, 512, display, keyManager, this);
+               MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display,keyManager, this);
 
                 Assets.gameStart.play();
-                r.start();
+                MT.start();
                 running = false;
             }
             if (keyManager.space && pauseIndex == 0) {
@@ -865,26 +866,6 @@ public class Game implements Runnable {
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
-            /*
-            g.drawRect(24-screen.getX(),280-screen.getY(),143,187);
-            
-            g.drawRect(930-screen.getX(),0-screen.getY(),143,187);
-             
-            g.drawRect(848-screen.getX(),932-screen.getY(),97,34);
-            g.drawRect(861-screen.getX(),901-screen.getY(),71,79);
-            g.drawRect(0-screen.getX(),1669-screen.getY(),441,275); //Tacos y mas
-            g.drawRect(226-screen.getX(),1945-screen.getY(),120,37); //Tacos y mas door
-            g.drawRect(88-screen.getX(),2068-screen.getY(),5,3);
-            g.drawRect(215-screen.getX(),2068-screen.getY(),5,3);
-            g.drawRect(349-screen.getX(),2068-screen.getY(),5,3);
-            g.drawRect(88-screen.getX(),2174-screen.getY(),5,3);
-            g.drawRect(215-screen.getX(),2174-screen.getY(),5,3);
-            g.drawRect(349-screen.getX(),2174-screen.getY(),5,3);//              
-            g.drawRect(73-screen.getX(), 1944-screen.getY(), 88, 37); //vending
-            g.drawRect(0-screen.getX(), 1944-screen.getY(), 10, 37);//left building column
-            
-            
-             */
             //g.fillArc(0,0,200,200,20,20);
             bs.show();
             g.dispose();
