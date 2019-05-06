@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import static java.lang.Math.abs;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -312,10 +313,49 @@ public class Screen {
             game.getNpcs().get(i).render(g);
             if (game.getNpcs().get(i).isTalking()) {
                 talkingNPC = i;
+                int dX;
+                int dY;
+                dX = game.getPlayer().getX()- game.getNpcs().get(i).getX();
+                dY = game.getPlayer().getY()- game.getNpcs().get(i).getY();
+                
+                if(abs(dX)>abs(dY)){
+                    if(dY>0){
+                        //Facing down
+                        game.getNpcs().get(i).setFacing(coin);
+                    }else
+                        //Facing up
+                        game.getNpcs().get(i).setFacing(coin);
+                }else if(dX>0){
+                    //Facing Right
+                    game.getNpcs().get(i).setFacing(coin);
+                    
+                }else{
+                    //Facing Left
+                    game.getNpcs().get(i).setFacing(coin);
+                }       
             }
         }
         if (player.isConversation()) {
             if(game.getNpcTrashClassify().isTalking()){
+                int dX;
+                int dY;
+                dX = game.getPlayer().getX()- game.getNpcTrashClassify().getX();
+                dY = game.getPlayer().getY()- game.getNpcTrashClassify().getY();  
+                if(abs(dX)>abs(dY)){
+                    if(dY>0){
+                        //Facing down
+                        game.getNpcTrashClassify().setFacing(coin);
+                    }else
+                        //Facing up
+                        game.getNpcTrashClassify().setFacing(coin);
+                }else if(dX>0){
+                    //Facing Right
+                    game.getNpcTrashClassify().setFacing(coin);
+                    
+                }else{
+                    //Facing Left
+                    game.getNpcTrashClassify().setFacing(coin);
+                }
                 conversationMinigame(game.getNpcTrashClassify(),player,g2d);
             }else
             conversation(game.getNpcs().get(talkingNPC), player, g2d);

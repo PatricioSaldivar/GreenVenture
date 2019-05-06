@@ -59,7 +59,7 @@ public class TodoMart implements Runnable {
         this.room = room;
         this.sneakersUpPrice = pow(2, game.getPlayer().getSpeedUpgrade()) * sneakersUpPrice;
         this.backPackUpPrice = pow(2, game.getPlayer().getCapacityUpgrade()) * backPackUpPrice;
-        this.trashValueUpPrice = pow(2, game.getPlayer().getTrashUpgrade()) * trashValueUpPrice;
+        this.trashValueUpPrice = pow(2, game.getPlayer().getTrashUpgrade()-1) * trashValueUpPrice;
 
         //Adds font from fonts package
         try {
