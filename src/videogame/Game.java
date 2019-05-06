@@ -186,7 +186,6 @@ public class Game implements Runnable {
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
-        
         /*
         //Boundaries of Map
         solids.add(new Solid(0, -32, 4096, 32, screen));
@@ -319,85 +318,79 @@ public class Game implements Runnable {
         //CrossWalks
         //First from left to right north (Complete square)
         crosswalks.add(new Crosswalk(1095, 310, 57, 138, this, screen));
-*/
+         */
         //RoadChanges
         int possibleDirections[];
-       
+
         possibleDirections = new int[2];
         possibleDirections[0] = 1;
         possibleDirections[1] = 3;
         roadChanges.add(new roadChange(1142, 310, 148, 148, screen, possibleDirections));
-                
+
         possibleDirections = new int[1];
         possibleDirections[0] = 2;
         roadChanges.add(new roadChange(502, 310, 148, 148, screen, possibleDirections));
-                
+
         possibleDirections = new int[2];
         possibleDirections[0] = 2;
         possibleDirections[1] = 3;
         roadChanges.add(new roadChange(502, 630, 148, 148, screen, possibleDirections));
-        
-            
+
         possibleDirections = new int[2];
         possibleDirections[0] = 4;
         possibleDirections[1] = 2;
         roadChanges.add(new roadChange(502, 1462, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 2;
         possibleDirections[1] = 3;
         roadChanges.add(new roadChange(502, 2294, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[1];
         possibleDirections[0] = 4;
         roadChanges.add(new roadChange(502, 2614, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 4;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(1142, 1462, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 4;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(1142, 2614, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 3;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(1910, 310, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 4;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(1910, 1462, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 4;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(1910, 2614, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[1];
         possibleDirections[0] = 1;
         roadChanges.add(new roadChange(1910, 3958, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[1];
         possibleDirections[0] = 1;
         roadChanges.add(new roadChange(1910, 3319, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[1];
         possibleDirections[0] = 3;
         roadChanges.add(new roadChange(3637, 3319, 148, 148, screen, possibleDirections));
-        
+
         possibleDirections = new int[2];
         possibleDirections[0] = 3;
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(3637, 3948, 148, 148, screen, possibleDirections));
-        
-        
-        
-        
-        
 
     }
 
@@ -495,11 +488,42 @@ public class Game implements Runnable {
             npcTrashClassify.tick();
             player.tick();
 
-            //If player intersects the npc and press space the minigame starts
-            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
-                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
-                mct.start();
-                running = false;
+            //If player intersects the npc and press space the minigame starts, but first they start a conversation
+            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
+                if (keyManager.space && !keyManager.helperSpace) {
+                    if (!player.isConversation()) {
+                        npcTrashClassify.setTalking(true);
+                        player.setConversation(true);
+                        screen.setFinishedConversationText(false);
+                        screen.setConversationTextIndex(0);
+                    } else if (player.isPick() && player.isConversation()) {
+                        if (!player.isTalking()) {
+                            if (!screen.isFinishedConversationText()) {
+                                screen.setFinishedConversationText(true);
+                            } else {
+                                player.setTalking(true);
+                                screen.setConversationTextIndex(0);
+                                screen.setFinishedConversationText(false);
+                            }
+                        } else {
+
+                            player.setConversation(false);
+                            npcTrashClassify.setTalking(false);
+                            player.setTalking(false);
+                            if (screen.isCursorOnPlay()) {
+                                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                                mct.start();
+                                running = false;
+                            }
+
+                        }
+
+                    }
+                }
+                if ((!keyManager.helperUp && keyManager.up) || (!keyManager.helperDown && keyManager.down)) {
+                    screen.setCursorOnPlay(!screen.isCursorOnPlay());
+                }
+
             }
 
         } else {
@@ -527,7 +551,7 @@ public class Game implements Runnable {
                 pauseIndex = keyManager.pauseSelector;
             }
             if (keyManager.space && pauseIndex == 1) {
-                TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
+                TodoMart tm = new TodoMart("TodoMart", 512, 512, display, keyManager, this);
                 Assets.gameStart.play();
                 tm.start();
                 running = false;
@@ -540,7 +564,7 @@ public class Game implements Runnable {
             }
             if (keyManager.space && pauseIndex == 2) {
 
-                RecycleCo r = new RecycleCo("Store", 512,512, display,keyManager,this);
+                RecycleCo r = new RecycleCo("Store", 512, 512, display, keyManager, this);
 
                 Assets.gameStart.play();
                 r.start();
@@ -552,8 +576,10 @@ public class Game implements Runnable {
 
                 try {
                     s.tick();
+
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Game.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 

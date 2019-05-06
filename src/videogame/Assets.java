@@ -91,6 +91,11 @@ public class Assets {
     public static BufferedImage todoMartReturn[];           // to store the images fo the TodoMart when Return is selected
     public static BufferedImage todoMartSneakersUp[];       // to store the images fo the TodoMart when Sneakers upgrade is selected
     public static BufferedImage todoMartValueUp[];          // to store the images fo the TodoMart when Trash Value upgrade is selected
+    
+    //Select cursor
+    public static BufferedImage selector[];
+    
+    
     /**
      * initializing the images of the game
      */
@@ -323,6 +328,11 @@ public class Assets {
         todoMartValueUp = new BufferedImage[2];  
         todoMartValueUp[0] = ImageLoader.loadImage("/imagesTodoMart/valueUp.png");
         todoMartValueUp[1] = ImageLoader.loadImage("/imagesTodoMart/valueUp2.png");
+        
+        //Selector
+        selector = new BufferedImage[2];
+        selector[0] = ImageLoader.loadImage("/images/selector1.png");
+        selector[1] = ImageLoader.loadImage("/images/selector2.png");
 
     }
 
