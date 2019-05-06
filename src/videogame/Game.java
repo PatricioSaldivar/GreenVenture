@@ -422,17 +422,17 @@ public class Game implements Runnable {
 
         //North East residential
         solids.add(new Solid(2123, 0, 1973, 190, screen));
-        solids.add(new Solid(2123, 190, 207, 21, screen));
-        solids.add(new Solid(2406, 190, 285, 21, screen));
-        solids.add(new Solid(2763, 190, 210, 21, screen));
-        solids.add(new Solid(3046, 190, 214, 21, screen));
+        solids.add(new Solid(2123, 190, 208, 21, screen));
+        solids.add(new Solid(2401, 190, 295, 21, screen));
+        solids.add(new Solid(2766, 190, 211, 21, screen));
+        solids.add(new Solid(3047, 190, 213, 21, screen));
         solids.add(new Solid(3330, 190, 460, 21, screen));
         solids.add(new Solid(3861, 190, 235, 21, screen));
         //Trash Cans
-        solids.add(new Solid(2131, 213, 12, 4, screen));
-        solids.add(new Solid(2847, 213, 12, 4, screen));
-        solids.add(new Solid(3160, 213, 12, 4, screen));
-        solids.add(new Solid(4069, 213, 12, 4, screen));
+        solids.add(new Solid(2114, 214, 12, 4, screen));
+        solids.add(new Solid(2850, 214, 12, 4, screen));
+        solids.add(new Solid(3160, 214, 12, 4, screen));
+        solids.add(new Solid(4066, 214, 12, 4, screen));
         
         //Blue Skycraper
         solids.add(new Solid(1354, 0, 494, 57, screen));
@@ -452,6 +452,11 @@ public class Game implements Runnable {
         solids.add(new Solid(1646, 1185, 208, 19, screen));
         //Trasn Can
         solids.add(new Solid(1590, 1335, 19, 7, screen));
+        //Front lights
+        solids.add(new Solid(1371, 1300, 31, 31, screen));
+        solids.add(new Solid(1389, 1274, 18, 7, screen));
+        solids.add(new Solid(1796, 1273, 10, 8, screen));
+        solids.add(new Solid(1816, 1288, 8, 41, screen));
         //Fence 
         solids.add(new Solid(1346, 657, 4, 77, screen));
         solids.add(new Solid(1346, 517, 4, 44, screen));
@@ -461,16 +466,13 @@ public class Game implements Runnable {
         //Bikes
         solids.add(new Solid(1395, 550, 23, 5, screen));
         solids.add(new Solid(1467, 563, 23, 5, screen));
-        solids.add(new Solid(1433, 571, 34, 5, screen));
+        solids.add(new Solid(1533, 571, 34, 5, screen));
         solids.add(new Solid(1563, 619, 34, 2, screen));
         solids.add(new Solid(1670, 596, 41, 2, screen));
         solids.add(new Solid(1692, 567, 41, 29, screen));
         solids.add(new Solid(1754, 609, 17, 2, screen));
         //Trash Can
         solids.add(new Solid(1626, 532, 12, 4, screen));
-        //In front lights
-        solids.add(new Solid(1371, 1273, 31, 58, screen));
-        solids.add(new Solid(1816, 1273, 8, 66, screen));
 
         //RecycleCo.
         solids.add(new Solid(153, 841, 154, 15, screen));
