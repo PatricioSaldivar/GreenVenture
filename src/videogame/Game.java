@@ -885,7 +885,7 @@ public class Game implements Runnable {
             
             
              */
-
+            //g.fillArc(0,0,200,200,20,20);
             bs.show();
             g.dispose();
         }
