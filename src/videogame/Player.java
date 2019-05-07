@@ -24,7 +24,7 @@ public class Player extends Item {
     private Game game;
     private int SMoveX = 0;
     private int SMoveY = 0;
-    private double money = 20.00;
+    private double money = 100.00;
     private int speed =5;
     private int capacity = 10;
     private int inventory = 0;
@@ -45,6 +45,7 @@ public class Player extends Item {
     private Animation animationRight;
     private Animation animationLeft;
     private int direction; // 1 = Down , 2 = Up, 3 = Right, 4 = Left
+    private ArrayList<Integer> trashContainersLeft;
     
 
 
@@ -58,7 +59,11 @@ public class Player extends Item {
         this.animationDown = new Animation(Assets.playerDown,300);
         this.animationRight = new Animation(Assets.playerRight,300);
         this.animationLeft = new Animation(Assets.playerLeft,300);
+        trashContainersLeft = new ArrayList<Integer>();
         this.direction = 1;
+                for(int i=0; i<16; i++){
+            trashContainersLeft.add(i);
+        }
     }
 
     /**
@@ -295,6 +300,15 @@ public class Player extends Item {
     public void setCapacityUpgrade(double capacityUpgrade) {
         this.capacityUpgrade = capacityUpgrade;
     }
+
+    public ArrayList<Integer> getTrashContainersLeft() {
+        return trashContainersLeft;
+    }
+
+    public void setTrashContainersLeft(ArrayList<Integer> trashContainersLeft) {
+        this.trashContainersLeft = trashContainersLeft;
+    }
+    
     
     
 

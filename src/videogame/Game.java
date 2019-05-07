@@ -671,8 +671,26 @@ public class Game implements Runnable {
         possibleNPCs[1] = 1;
         possibleNPCs[2] = 2;
         
-        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,possibleNPCs));
-        trashContainers.get(0).setUnlocked(true);
+        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1615, 530, 34, 54,screen,0,false)); 
+        trashContainers.add(new TrashContainer(2103, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(2839, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(4055, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1583, 1331, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(2426, 1074, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(3769, 1074, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(23, 1975, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1476, 2012, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(3391, 2507, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(125, 3555, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(3175, 3233, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(3556, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3654, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3851, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3951, 1821, 96, 86,screen,0,true));
         
     }
 
@@ -724,6 +742,7 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
+           
 
             for (int i = 0; i < crosswalks.size(); i++) {
                 crosswalks.get(i).tick();
@@ -774,7 +793,7 @@ public class Game implements Runnable {
 
                 }
             }
-
+                       
             npcTrashClassify.tick();
             player.tick();
 
