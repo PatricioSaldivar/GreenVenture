@@ -33,6 +33,8 @@ public class Assets {
     public static BufferedImage playerFacingLeft;
     public static BufferedImage trashcanOwned;
     public static BufferedImage trashcanDefault;
+    public static BufferedImage dumpOwned;
+    public static BufferedImage dumpDefault;
 
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
@@ -60,9 +62,7 @@ public class Assets {
     public static BufferedImage leftExt;            //To store the left box extension
     public static BufferedImage rightExt;           //To store the right box extension
 
-    
     //Pause of game Assets
-
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
     public static BufferedImage pausaSave[];                // to store the image of the pause when Save is selected
     public static BufferedImage pausaStats[];               // to store the image of the pause when Stats is selected
@@ -80,8 +80,7 @@ public class Assets {
 
     //Minigame Pause Assets
     public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
-   
-    
+
     //RecycleCo Assets
     public static BufferedImage recycleCoAluminum[];        // to store the images of the RecycleCo when Aluminum is selected
     public static BufferedImage recycleCoElectronics[];     // to store the images of the RecycleCo when Electronics is selected
@@ -90,7 +89,7 @@ public class Assets {
     public static BufferedImage recycleCoPaper[];           // to store the images of the RecycleCo when Papaer is selected
     public static BufferedImage recycleCoPlastic[];         // to store the images of the RecycleCo when Plastic is selected
     public static BufferedImage recycleCoReturn[];          // to store the images of the RecycleCo Return is selected
-    
+
     //TodoXMart Assets
     public static BufferedImage todoMartBackPackUp[];       // to store the images fo the TodoMart when BackPack upgrade is selected
     public static BufferedImage todoMartBinUp[];            // to store the images fo the TodoMart when Bins upgrade is selected
@@ -99,10 +98,10 @@ public class Assets {
     public static BufferedImage todoMartValueUp[];          // to store the images fo the TodoMart when Trash Value upgrade is selected
 
     public static BufferedImage todoMartRoom;               // to store the room background where the player locate before seeing the 
-    
+
     //Select cursor
     public static BufferedImage selector[];
-    
+
     /**
      * initializing the images of the game
      */
@@ -111,9 +110,10 @@ public class Assets {
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
-        trashcanOwned =  ImageLoader.loadImage("/images/trashcanOwned.png");
-        trashcanDefault= ImageLoader.loadImage("/images/trashcanDefault.png");
-        
+        trashcanOwned = ImageLoader.loadImage("/images/trashcanOwned.png");
+        trashcanDefault = ImageLoader.loadImage("/images/trashcanDefault.png");
+        dumpOwned = ImageLoader.loadImage("/images/dumpOwned.png");
+        dumpDefault = ImageLoader.loadImage("/images/dumpDefault.png");
 
         pickTrash = new SoundClip("/global_sounds/pickTrash.wav");
         pickDenied = new SoundClip("/global_sounds/pickDenied.wav");
@@ -124,24 +124,23 @@ public class Assets {
         playerLeft = new BufferedImage[2];
         playerRight = new BufferedImage[2];
         for (int i = 0; i < 2; i++) {
-                playerDown[i] = playerSprites.crop(i*2* 72 + 8, 32, 56, 64);
+            playerDown[i] = playerSprites.crop(i * 2 * 72 + 8, 32, 56, 64);
         }
-                playerFacingDown = playerSprites.crop(72 + 8, 32, 56, 64);
+        playerFacingDown = playerSprites.crop(72 + 8, 32, 56, 64);
         for (int i = 0; i < 2; i++) {
-                playerLeft[i] = playerSprites.crop(i*2 * 72 + 8, 128, 56, 64);
+            playerLeft[i] = playerSprites.crop(i * 2 * 72 + 8, 128, 56, 64);
         }
-                playerFacingLeft = playerSprites.crop(72 + 8, 128, 56, 64);
-           
+        playerFacingLeft = playerSprites.crop(72 + 8, 128, 56, 64);
+
         for (int i = 0; i < 2; i++) {
-                playerRight[i] = playerSprites.crop(i*2 * 72 + 8, 224, 56, 64);
+            playerRight[i] = playerSprites.crop(i * 2 * 72 + 8, 224, 56, 64);
         }
-                playerFacingRight = playerSprites.crop(72 + 8, 224, 56, 64);
-           
+        playerFacingRight = playerSprites.crop(72 + 8, 224, 56, 64);
+
         for (int i = 0; i < 2; i++) {
-                playerUp[i] = playerSprites.crop(i*2 * 72 + 8, 320, 56, 64);
+            playerUp[i] = playerSprites.crop(i * 2 * 72 + 8, 320, 56, 64);
         }
-                playerFacingUp = playerSprites.crop(72 + 8, 320, 56, 64);
-            
+        playerFacingUp = playerSprites.crop(72 + 8, 320, 56, 64);
 
         //Money coin image loader
         coin = new BufferedImage[6];
@@ -213,13 +212,12 @@ public class Assets {
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
         gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
         leftExt = ImageLoader.loadImage("/images_minigame1/extensionLeft.png");
-        rightExt =ImageLoader.loadImage("/images_minigame1/extensionRight.png");
+        rightExt = ImageLoader.loadImage("/images_minigame1/extensionRight.png");
 
         //Mini-game pause
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame.png");
         minigame1PauseEnd[1] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame2.png");
-        
 
         //Minigame 1 inorganic trash loader
         inTrash = new BufferedImage[19];
@@ -273,7 +271,6 @@ public class Assets {
         pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
 
         //Main Menu loader
-        
         selectSound = new SoundClip("/global_sounds/select.wav");
         gameStart = new SoundClip("/global_sounds/gameStart.wav");
         mainMenuPlay = new BufferedImage[2];
@@ -299,57 +296,57 @@ public class Assets {
         mainMenuInstructionsImage = new BufferedImage[2];
         mainMenuInstructionsImage[0] = ImageLoader.loadImage("/imagesMainMenu/instructions.png");
         mainMenuInstructionsImage[1] = ImageLoader.loadImage("/imagesMainMenu/instructions2.png");
-        
+
         //RecycleCo Loader
-        recycleCoAluminum  = new BufferedImage[2]; 
+        recycleCoAluminum = new BufferedImage[2];
         recycleCoAluminum[0] = ImageLoader.loadImage("/imagesRecycleCo/recAluminum.png");
         recycleCoAluminum[1] = ImageLoader.loadImage("/imagesRecycleCo/recAluminum2.png");
-        
+
         recycleCoElectronics = new BufferedImage[2];
         recycleCoElectronics[0] = ImageLoader.loadImage("/imagesRecycleCo/recElectronics.png");
         recycleCoElectronics[1] = ImageLoader.loadImage("/imagesRecycleCo/recElectronics2.png");
-        
+
         recycleCoGlass = new BufferedImage[2];
         recycleCoGlass[0] = ImageLoader.loadImage("/imagesRecycleCo/recGlass.png");
         recycleCoGlass[1] = ImageLoader.loadImage("/imagesRecycleCo/recGlass2.png");
-        
+
         recycleCoOrganics = new BufferedImage[2];
         recycleCoOrganics[0] = ImageLoader.loadImage("/imagesRecycleCo/recOrganics.png");
         recycleCoOrganics[1] = ImageLoader.loadImage("/imagesRecycleCo/recOrganics2.png");
-        
+
         recycleCoPaper = new BufferedImage[2];
         recycleCoPaper[0] = ImageLoader.loadImage("/imagesRecycleCo/recPaper.png");
         recycleCoPaper[1] = ImageLoader.loadImage("/imagesRecycleCo/recPaper2.png");
-        
+
         recycleCoPlastic = new BufferedImage[2];
         recycleCoPlastic[0] = ImageLoader.loadImage("/imagesRecycleCo/recPlastic.png");
         recycleCoPlastic[1] = ImageLoader.loadImage("/imagesRecycleCo/recPlastic2.png");
-        
+
         recycleCoReturn = new BufferedImage[2];
         recycleCoReturn[0] = ImageLoader.loadImage("/imagesRecycleCo/recReturn.png");
         recycleCoReturn[1] = ImageLoader.loadImage("/imagesRecycleCo/recReturn2.png");
-        
+
         //TodoxMart loader
         todoMartBackPackUp = new BufferedImage[2];
         todoMartBackPackUp[0] = ImageLoader.loadImage("/imagesTodoMart/backpackUp.png");
         todoMartBackPackUp[1] = ImageLoader.loadImage("/imagesTodoMart/backpackUp2.png");
-        
-        todoMartBinUp = new BufferedImage[2] ;    
+
+        todoMartBinUp = new BufferedImage[2];
         todoMartBinUp[0] = ImageLoader.loadImage("/imagesTodoMart/binUp.png");
         todoMartBinUp[1] = ImageLoader.loadImage("/imagesTodoMart/binUp2.png");
-        
+
         todoMartReturn = new BufferedImage[2];
         todoMartReturn[0] = ImageLoader.loadImage("/imagesTodoMart/returnUp.png");
         todoMartReturn[1] = ImageLoader.loadImage("/imagesTodoMart/retrurnUp2.png");
-        
+
         todoMartSneakersUp = new BufferedImage[2];
         todoMartSneakersUp[0] = ImageLoader.loadImage("/imagesTodoMart/sneakerUp.png");
         todoMartSneakersUp[1] = ImageLoader.loadImage("/imagesTodoMart/sneakerUp2.png");
-        
-        todoMartValueUp = new BufferedImage[2];  
+
+        todoMartValueUp = new BufferedImage[2];
         todoMartValueUp[0] = ImageLoader.loadImage("/imagesTodoMart/valueUp.png");
         todoMartValueUp[1] = ImageLoader.loadImage("/imagesTodoMart/valueUp2.png");
-        
+
         todoMartRoom = ImageLoader.loadImage("/imagesTodoMart/storeRoom.png");
 
         //Selector

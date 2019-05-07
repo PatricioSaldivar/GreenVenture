@@ -28,10 +28,10 @@ public class TrashContainer extends Item {
     private int iniX;
     private int iniY;
     private int id;
-    private int npcId[];
-    private int npcTrash[];
+    private int maxTrash;
+    private boolean Dump;
 
-    public TrashContainer(int x, int y, int width, int height, Screen screen, int id, int npcId[]) {
+    public TrashContainer(int x, int y, int width, int height, Screen screen, int id, boolean isDump) {
         super(x, y);
         this.width = width;
         this.height = height;
@@ -45,8 +45,12 @@ public class TrashContainer extends Item {
         iniX = x;
         iniY = y;
         this.id = id;
-        this.npcId = npcId;
-        npcTrash = new int[npcId.length];
+        this.Dump = isDump;
+        if (Dump) {
+            maxTrash = 30;
+        } else {
+            maxTrash = 100;
+        }
 
     }
 
@@ -162,20 +166,16 @@ public class TrashContainer extends Item {
         this.aluminum = aluminum;
     }
 
-    public int[] getNpcId() {
-        return npcId;
+    public boolean isDump() {
+        return Dump;
     }
 
-    public void setNpcId(int[] npcId) {
-        this.npcId = npcId;
+    public void setDump(boolean Dump) {
+        this.Dump = Dump;
     }
 
-    public int[] getNpcTrash() {
-        return npcTrash;
-    }
-
-    public void setNpcTrash(int[] npcTrash) {
-        this.npcTrash = npcTrash;
+    public int getMaxTrash() {
+        return maxTrash;
     }
 
     @Override
@@ -187,10 +187,38 @@ public class TrashContainer extends Item {
 
     @Override
     public void render(Graphics g) {
-        if (unlocked) {
-            g.drawImage(Assets.trashcanOwned, x, y, width, height, null);
+
+        if (!Dump) {
+            if (unlocked) {
+                g.drawImage(Assets.trashcanOwned, x, y, width, height, null);
+            } else {
+                g.drawImage(Assets.trashcanDefault, x, y, width, height, null);
+            }
         } else {
-            g.drawImage(Assets.trashcanDefault, x, y, width, height, null);
+            if (unlocked) {
+                g.drawImage(Assets.dumpOwned, x, y, width, height, null);
+            } else {
+                g.drawImage(Assets.dumpDefault, x, y, width, height, null);
+            }
+
+        }
+    }
+    
+        public void renderForStore(Graphics g, int xScreen, int yScreen) {
+
+        if (!Dump) {
+            if (unlocked) {
+                g.drawImage(Assets.trashcanOwned, iniX-xScreen, iniY-yScreen, width, height, null);
+            } else {
+                g.drawImage(Assets.trashcanDefault, iniX-xScreen, iniY-yScreen, width, height, null);
+            }
+        } else {
+            if (unlocked) {
+                g.drawImage(Assets.dumpOwned, iniX-xScreen, iniY-yScreen, width, height, null);
+            } else {
+                g.drawImage(Assets.dumpDefault, iniX-xScreen, iniY-yScreen, width, height, null);
+            }
+
         }
     }
 
