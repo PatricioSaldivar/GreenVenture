@@ -189,22 +189,22 @@ public class MinigameThrow implements Runnable {
                 }
 
             } else {
-                if (keyManager.down && !keyManager.helperDown) {
+                if (keyManager.down ) {
                     if (power.getPowerY() > 0) {
                         power.setPowerY(-1);
                     }
                 }
-                if (keyManager.up && !keyManager.helperUp) {
+                if (keyManager.up) {
                     if (power.getPowerY() < 20) {
                         power.setPowerY(1);
                     }
                 }
-                if (keyManager.right && !keyManager.helperRight) {
+                if (keyManager.right) {
                     if (power.getPowerX() < 20) {
                         power.setPowerX(1);
                     }
                 }
-                if (keyManager.left && !keyManager.helperLeft) {
+                if (keyManager.left) {
                     if (power.getPowerX() > 0) {
                         power.setPowerX(-1);
                     }

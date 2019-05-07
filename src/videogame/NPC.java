@@ -19,7 +19,6 @@ public class NPC extends Item {
     private int trashMaker;
     private int trashThrown;
     private Game game;
-    private int type;
     private Screen screen;
     private int speed = 1;
     private int direction;
@@ -36,14 +35,18 @@ public class NPC extends Item {
     private int randomDist;
     private int distanceTraveled;
     private Animation facing;
+    private Animation walking;
+    private int trashContainerId;
+    private int trashToTrashContainer=0;
+    private int trashInContainer;
 
-    public NPC(int x, int y, int width, int height, int type, Game game, Screen screen, int id) {
+    public NPC(int x, int y, int width, int height, Game game, Screen screen, int id, int trashContainerId) {
         super(x, y);
         this.width = width;
         this.height = height;
-        this.type = type;
         this.game = game;
         this.screen = screen;
+        this.trashContainerId = trashContainerId;
         iniX = x;
         iniY = y;
         //trashMakerHelper = (int) (Math.random() *(500)+ 50);
@@ -71,9 +74,6 @@ public class NPC extends Item {
         return trashThrown;
     }
 
-    public int getType() {
-        return type;
-    }
 
     public void setWidth(int width) {
         this.width = width;
@@ -93,10 +93,6 @@ public class NPC extends Item {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public void setTalking(boolean talking) {
@@ -129,6 +125,126 @@ public class NPC extends Item {
 
     public void setFacing(Animation facing) {
         this.facing = facing;
+    }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public int getIniX() {
+        return iniX;
+    }
+
+    public void setIniX(int iniX) {
+        this.iniX = iniX;
+    }
+
+    public int getIniY() {
+        return iniY;
+    }
+
+    public void setIniY(int iniY) {
+        this.iniY = iniY;
+    }
+
+    public int getxMove() {
+        return xMove;
+    }
+
+    public void setxMove(int xMove) {
+        this.xMove = xMove;
+    }
+
+    public int getyMove() {
+        return yMove;
+    }
+
+    public void setyMove(int yMove) {
+        this.yMove = yMove;
+    }
+
+    public int getTrashMakerHelper() {
+        return trashMakerHelper;
+    }
+
+    public void setTrashMakerHelper(int trashMakerHelper) {
+        this.trashMakerHelper = trashMakerHelper;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getJustThrowedTrashHelper() {
+        return justThrowedTrashHelper;
+    }
+
+    public void setJustThrowedTrashHelper(int justThrowedTrashHelper) {
+        this.justThrowedTrashHelper = justThrowedTrashHelper;
+    }
+
+    public int getRandomDist() {
+        return randomDist;
+    }
+
+    public void setRandomDist(int randomDist) {
+        this.randomDist = randomDist;
+    }
+
+    public int getDistanceTraveled() {
+        return distanceTraveled;
+    }
+
+    public void setDistanceTraveled(int distanceTraveled) {
+        this.distanceTraveled = distanceTraveled;
+    }
+
+    public Animation getWalking() {
+        return walking;
+    }
+
+    public void setWalking(Animation walking) {
+        this.walking = walking;
+    }
+
+    public int getTrashContainerId() {
+        return trashContainerId;
+    }
+
+    public void setTrashContainerId(int trashContainerId) {
+        this.trashContainerId = trashContainerId;
+    }
+
+    public int getTrashToTrashContainer() {
+        return trashToTrashContainer;
+    }
+
+    public void setTrashToTrashContainer(int trashToTrashContainer) {
+        this.trashToTrashContainer = trashToTrashContainer;
     }
 
     @Override
@@ -235,6 +351,8 @@ public class NPC extends Item {
 
                     break;
                 //Restarts the random movement of each NPC
+                    //**************************************************************************************************
+                //Put real animations
                 case 4:
                     distanceTraveled = 0;
                     direction = (int) (Math.random() * 4);
@@ -270,14 +388,39 @@ public class NPC extends Item {
                 justThrowedTrash = false;
             }
 
-            if (trashThrown < 5) {
+            if (trashThrown < 10) {
                 if (trashMaker > trashMakerHelper) {
+                    if(trashInContainer<trashToTrashContainer){
+                        trashThrown++;
+                        trashInContainer++;
+                        int randType = (int) (Math.random() * 10);
+                        if(randType<2){
+                            //Probability of .2 (0,1)
+                            game.getTrashContainers().get(trashContainerId).setOrganic(game.getTrashContainers().get(trashContainerId).getOrganic()+1);
+                        }else if(randType<4){
+                            //Probability of .2 (2,3)
+                             game.getTrashContainers().get(trashContainerId).setPaper(game.getTrashContainers().get(trashContainerId).getPaper()+1);
+                        }else if(randType<6){
+                            //Probability of .2 (4,5)
+                             game.getTrashContainers().get(trashContainerId).setPlastic(game.getTrashContainers().get(trashContainerId).getPlastic()+1);
+                        }else if(randType<7){
+                            //Probability of .1 (6)
+                             game.getTrashContainers().get(trashContainerId).setElectronics(game.getTrashContainers().get(trashContainerId).getElectronics()+1);
+                        }else if(randType<8){
+                            //Probability of .1 (7)
+                             game.getTrashContainers().get(trashContainerId).setAluminum(game.getTrashContainers().get(trashContainerId).getAluminum()+1);
+                        }else if(randType<10){
+                            //Probability of .2 (8,9)
+                             game.getTrashContainers().get(trashContainerId).setGlass(game.getTrashContainers().get(trashContainerId).getGlass()+1);
+                        }   
+                    }else{
                     int randType = (int) (Math.random() * (27));
                     game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
                     trashMaker = 0;
                     trashThrown++;
                     justThrowedTrash = true;
                     justThrowedTrashHelper = 50;
+                    }
                 }
                 trashMaker++;
             }
@@ -289,7 +432,8 @@ public class NPC extends Item {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        //Add animation
+        g.drawImage(facing.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         if (justThrowedTrash || talking) {
             g.drawImage(alertAnimation.getCurrentFrame(), getX(), getY() - 16, 16, 16, null);
         }

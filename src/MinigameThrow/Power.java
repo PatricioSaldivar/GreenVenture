@@ -9,7 +9,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Rectangle;
+import java.awt.Stroke;
+import java.awt.TexturePaint;
+import videogame.Assets;
 import videogame.Item;
 
 /**
@@ -77,10 +81,13 @@ public class Power extends Item {
     
     g2.drawString("Fuerza Horizontal", 100, 100-g2.getFont().getSize());
      g2.drawString("Fuerza Vertical", 100, 200-g2.getFont().getSize());
-     
-      g2.drawLine(x, y, powerX*5, -powerY*5+512);
-      g2.drawLine(powerX*5, -powerY*5+512, powerX*5 -5 , - powerY*5+512 + 10);
-      g2.drawLine(powerX*5, -powerY*5+512, powerX*5 +5, - powerY*5+512+10);
+     //g2.setStroke(new BasicStroke(3));
+     TexturePaint paint = new TexturePaint(Assets.leftBox,new Rectangle(16,16,16,16));
+     g2.setPaint(paint);
+
+     Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+    g2.setStroke(dashed);
+      g2.drawLine(64, 512-64, powerX*5+64, -powerY*5+512-64);
       
     }
 
