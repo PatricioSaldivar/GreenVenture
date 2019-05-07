@@ -98,7 +98,7 @@ public class PlayerInStore extends Item {
         } else if (getY() <= 0) {
             setY(0);
         }
-
+/*
         for (int i = 0; i < solids.size(); i++) {
             //Checks collisions with solids when going from left to right
             if (getPerimetroForSolidsRight().intersects(solids.get(i).getPerimetroRight(0, 0))) {
@@ -121,7 +121,7 @@ public class PlayerInStore extends Item {
 
             }
 
-        }
+        } */
 
     }
 
