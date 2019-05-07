@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -33,6 +34,7 @@ public class TodoMartRoom implements Runnable{
     private PlayerInStore playablePlayer;   // to store the usable player (this will only works in the store and dont save anything) 
     private Game game;                      // to store the game in which it was before
     private boolean cont = false;           // to continue the game
+    private ArrayList<Solid> solids;        // to store the solids
 
     /**
      * to create title, width and height and set the game is still not running
@@ -51,7 +53,7 @@ public class TodoMartRoom implements Runnable{
         display.setTitle("TodoxMartRoom");
         this.game = game;
         this.player = player;
-        this.playablePlayer = new PlayerInStore(172,386,64,64,this.game);
+        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
         
         //Adds font from fonts package
         try {

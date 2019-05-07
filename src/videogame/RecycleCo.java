@@ -301,6 +301,7 @@ public class RecycleCo implements Runnable {
                 break;
             case 1:
                 if (keyManager.space && !keyManager.helperSpace) {
+                    Assets.moneySound.play();
                     game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPaper()*organicPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getOrganic());
                     game.getPlayer().setOrganic(0);
@@ -309,13 +310,15 @@ public class RecycleCo implements Runnable {
                 break;
             case 2:
                 if (keyManager.space && !keyManager.helperSpace) {
-                  game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getElectronics()*electronicsPrice*game.getPlayer().getTrashUpgrade()));
+                    Assets.moneySound.play();
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getElectronics()*electronicsPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getElectronics());
                     game.getPlayer().setElectronics(0);
                 }
                 break;
             case 3:
                 if (keyManager.space && !keyManager.helperSpace) {
+                    Assets.moneySound.play();
                     game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getAluminum()*aluminumPrice*game.getPlayer().getTrashUpgrade()));
                     game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getAluminum());
                     game.getPlayer().setAluminum(0);
@@ -332,15 +335,17 @@ public class RecycleCo implements Runnable {
                 break;
             case 5:
                 if (keyManager.space && !keyManager.helperSpace) {
-                   game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPlastic()*plasticPrice*game.getPlayer().getTrashUpgrade()));
-               game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getPlastic());
+                    Assets.moneySound.play();
+                    game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getPlastic()*plasticPrice*game.getPlayer().getTrashUpgrade()));
+                    game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getPlastic());
                     game.getPlayer().setPlastic(0);
                 }
                 break;
             case 6:
                 if (keyManager.space && !keyManager.helperSpace) {
+                    Assets.moneySound.play();
                     game.getPlayer().setMoney(game.getPlayer().getMoney()+ (game.getPlayer().getGlass()*glassPrice*game.getPlayer().getTrashUpgrade()));
-               game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getGlass());
+                    game.getPlayer().setInventory( game.getPlayer().getInventory()- game.getPlayer().getGlass());
                     game.getPlayer().setGlass(0);
                 }
                 break;

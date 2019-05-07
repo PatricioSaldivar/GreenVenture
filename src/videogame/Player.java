@@ -46,6 +46,7 @@ public class Player extends Item {
     private Animation animationLeft;
     private int direction; // 1 = Down , 2 = Up, 3 = Right, 4 = Left
     
+    
 
 
     public Player(int x, int y, int width, int height, Game game) {
@@ -296,10 +297,6 @@ public class Player extends Item {
         this.capacityUpgrade = capacityUpgrade;
     }
     
-    
-
-    
-
     @Override
     public void tick() {
         // moving player depending on flags
