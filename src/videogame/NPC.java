@@ -37,8 +37,7 @@ public class NPC extends Item {
     private Animation facing;
     private Animation walking;
     private int trashContainerId;
-    private int trashToTrashContainer=0;
-    private int trashInContainer;
+    private int trashToTrashContainer = 0;
 
     public NPC(int x, int y, int width, int height, Game game, Screen screen, int id, int trashContainerId) {
         super(x, y);
@@ -73,7 +72,6 @@ public class NPC extends Item {
     public int getTrashThrown() {
         return trashThrown;
     }
-
 
     public void setWidth(int width) {
         this.width = width;
@@ -351,7 +349,7 @@ public class NPC extends Item {
 
                     break;
                 //Restarts the random movement of each NPC
-                    //**************************************************************************************************
+                //**************************************************************************************************
                 //Put real animations
                 case 4:
                     distanceTraveled = 0;
@@ -388,39 +386,40 @@ public class NPC extends Item {
                 justThrowedTrash = false;
             }
 
-            if (trashThrown < 10) {
+            if (trashThrown < 3) {
                 if (trashMaker > trashMakerHelper) {
-                    if(trashInContainer<trashToTrashContainer){
-                        trashThrown++;
-                        trashInContainer++;
+                    int randTrashMaker = (int) (Math.random() * 4);
+                    if (randTrashMaker < trashToTrashContainer) {
                         int randType = (int) (Math.random() * 10);
-                        if(randType<2){
-                            //Probability of .2 (0,1)
-                            game.getTrashContainers().get(trashContainerId).setOrganic(game.getTrashContainers().get(trashContainerId).getOrganic()+1);
-                        }else if(randType<4){
-                            //Probability of .2 (2,3)
-                             game.getTrashContainers().get(trashContainerId).setPaper(game.getTrashContainers().get(trashContainerId).getPaper()+1);
-                        }else if(randType<6){
-                            //Probability of .2 (4,5)
-                             game.getTrashContainers().get(trashContainerId).setPlastic(game.getTrashContainers().get(trashContainerId).getPlastic()+1);
-                        }else if(randType<7){
-                            //Probability of .1 (6)
-                             game.getTrashContainers().get(trashContainerId).setElectronics(game.getTrashContainers().get(trashContainerId).getElectronics()+1);
-                        }else if(randType<8){
-                            //Probability of .1 (7)
-                             game.getTrashContainers().get(trashContainerId).setAluminum(game.getTrashContainers().get(trashContainerId).getAluminum()+1);
-                        }else if(randType<10){
-                            //Probability of .2 (8,9)
-                             game.getTrashContainers().get(trashContainerId).setGlass(game.getTrashContainers().get(trashContainerId).getGlass()+1);
-                        }   
-                    }else{
-                    int randType = (int) (Math.random() * (27));
-                    game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
-                    trashMaker = 0;
-                    trashThrown++;
-                    justThrowedTrash = true;
-                    justThrowedTrashHelper = 50;
+                        if (game.getTrashContainers().get(trashContainerId).getHowManyTrash() < game.getTrashContainers().get(trashContainerId).getMaxTrash()) {
+                            if (randType < 2) {
+                                //Probability of .2 (0,1)
+                                game.getTrashContainers().get(trashContainerId).setOrganic(game.getTrashContainers().get(trashContainerId).getOrganic() + 1);
+                            } else if (randType < 4) {
+                                //Probability of .2 (2,3)
+                                game.getTrashContainers().get(trashContainerId).setPaper(game.getTrashContainers().get(trashContainerId).getPaper() + 1);
+                            } else if (randType < 6) {
+                                //Probability of .2 (4,5)
+                                game.getTrashContainers().get(trashContainerId).setPlastic(game.getTrashContainers().get(trashContainerId).getPlastic() + 1);
+                            } else if (randType < 7) {
+                                //Probability of .1 (6)
+                                game.getTrashContainers().get(trashContainerId).setElectronics(game.getTrashContainers().get(trashContainerId).getElectronics() + 1);
+                            } else if (randType < 8) {
+                                //Probability of .1 (7)
+                                game.getTrashContainers().get(trashContainerId).setAluminum(game.getTrashContainers().get(trashContainerId).getAluminum() + 1);
+                            } else if (randType < 10) {
+                                //Probability of .2 (8,9)
+                                game.getTrashContainers().get(trashContainerId).setGlass(game.getTrashContainers().get(trashContainerId).getGlass() + 1);
+                            }
+                        }
+                    } else {
+                        int randType = (int) (Math.random() * (27));
+                        game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
+                        trashThrown++;
+                        justThrowedTrash = true;
+                        justThrowedTrashHelper = 50;
                     }
+                    trashMaker = 0;
                 }
                 trashMaker++;
             }
@@ -435,7 +434,15 @@ public class NPC extends Item {
         //Add animation
         g.drawImage(facing.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         if (justThrowedTrash || talking) {
-            g.drawImage(alertAnimation.getCurrentFrame(), getX(), getY() - 16, 16, 16, null);
+            g.drawImage(alertAnimation.getCurrentFrame(), getX()+16, getY() - 16, 16, 16, null);
+        }
+    }
+    
+        public void renderForStore(Graphics g,int xScreen, int yScreen) {
+        //Add animation
+        g.drawImage(facing.getCurrentFrame(), iniX-xScreen+xMove, iniY-yScreen+yMove, getWidth(), getHeight(), null);
+        if (justThrowedTrash || talking) {
+            g.drawImage(alertAnimation.getCurrentFrame(),iniX-xScreen+xMove+16, iniY-yScreen+yMove-16, 16, 16, null);
         }
     }
 

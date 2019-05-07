@@ -680,9 +680,28 @@ public class Game implements Runnable {
         possibleNPCs[1] = 1;
         possibleNPCs[2] = 2;
 
-        trashContainers.add(new TrashContainer(266, 385, 34, 54, screen, 0, possibleNPCs));
-        trashContainers.get(0).setUnlocked(true);
-
+        
+        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1615, 530, 34, 54,screen,0,false)); 
+        trashContainers.add(new TrashContainer(2103, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(2839, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(4055, 212, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1583, 1331, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(2426, 1074, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(3769, 1074, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(23, 1975, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(1476, 2012, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(3391, 2507, 34, 54,screen,0,false));
+        trashContainers.add(new TrashContainer(125, 3555, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(3175, 3233, 34, 54,screen,0,false));
+        
+        trashContainers.add(new TrashContainer(3556, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3654, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3851, 1821, 96, 86,screen,0,true));
+        trashContainers.add(new TrashContainer(3951, 1821, 96, 86,screen,0,true));
+        
     }
 
     @Override
@@ -731,6 +750,7 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
+
         //ticks the world if the tutorial has been already played
         if (tutorialPlayed) {
             if (!keyManager.pause) {
@@ -760,6 +780,40 @@ public class Game implements Runnable {
                             screen.setConversationTextIndex(0);
                             player.setPick(false);
                         }
+
+                    }
+                    player.setPick(false);
+
+                }
+            }
+                       
+            npcTrashClassify.tick();
+            player.tick();
+
+            //If player intersects the TodoMart door
+            if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
+                TodoMartRoom tmr = new TodoMartRoom("TodoxMartRoom", 512, 512, display, keyManager, this, player);
+                tmr.start();
+                // TodoMart tm = new TodoMart("TodoxMart", 512, 512, display, keyManager, this);
+                //tm.start();
+                running = false;
+            }
+            //If player intersects the RecycleCo door
+            if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
+                RecycleCoRoom rcr = new RecycleCoRoom("RecycleCoRoom", 512, 512, display, keyManager, this, player);
+                rcr.start();
+                running = false;
+            }
+
+            //If player intersects the npc and press space the minigame starts, but first they start a conversation
+            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
+                if (player.isPick()) {
+                    if (!player.isConversation()) {
+                        player.setPick(false);
+                        npcTrashClassify.setTalking(true);
+                        player.setConversation(true);
+                        screen.setFinishedConversationText(false);
+                        screen.setConversationTextIndex(0);
 
                     } else if (player.isPick() && player.isConversation()) {
 
