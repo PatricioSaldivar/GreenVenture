@@ -31,6 +31,8 @@ public class Assets {
     public static BufferedImage playerFacingDown;
     public static BufferedImage playerFacingRight;
     public static BufferedImage playerFacingLeft;
+    public static BufferedImage trashcanOwned;
+    public static BufferedImage trashcanDefault;
 
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
@@ -108,6 +110,9 @@ public class Assets {
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/char.png");
         playerPortait = ImageLoader.loadImage("/images/portrait.png");
+        trashcanOwned =  ImageLoader.loadImage("/images/trashcanOwned.png");
+        trashcanDefault= ImageLoader.loadImage("/images/trashcanDefault.png");
+        
 
         pickTrash = new SoundClip("/global_sounds/pickTrash.wav");
         pickDenied = new SoundClip("/global_sounds/pickDenied.wav");

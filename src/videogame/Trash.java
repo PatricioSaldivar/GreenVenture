@@ -72,6 +72,7 @@ public class Trash extends Item{
         y= iniY-screen.getY();
         
         if(game.getPlayer().intersectsTrash(this) && game.getPlayer().isPick() && !game.getPlayer().isConversation()) {
+            game.getPlayer().setPick(false);
             if(game.getPlayer().getCapacity()>game.getPlayer().getInventory()){
                 game.getPlayer().setInventory(game.getPlayer().getInventory()+1);
                 //Increments the trash acummulators of player depending of trash type
