@@ -36,6 +36,8 @@ public class Screen {
     private Animation coin;
     private boolean cursorOnPlay = false;
     private Animation selector;
+    private boolean trashContainerMessage;
+    private int trashContainerId;
     /**
      * to create the screen with his attributes
      *
@@ -198,7 +200,42 @@ public class Screen {
         this.cursorOnPlay = cursorOnPlay;
     }
 
+    public boolean isTrashContainerMessage() {
+        return trashContainerMessage;
+    }
+
+    public void setTrashContainerMessage(boolean trashContainerMessage) {
+        this.trashContainerMessage = trashContainerMessage;
+    }
+
+    public int getTrashContainerId() {
+        return trashContainerId;
+    }
+
+    public void setTrashContainerId(int trashContainerId) {
+        this.trashContainerId = trashContainerId;
+    }
     
+
+    public void trashContainerMessageText(int id, Graphics2D g){
+        int yPaint=400;
+        String message;
+        g.setColor(Color.lightGray);
+        g.fillRect(0, 384, 512, 128);
+        g.setColor(Color.BLACK);
+        message ="Vaya en este basurero hay:\n"
+                + game.getTrashContainers().get(id).getElectronics()+ "de basura electronicos\n"
+                + game.getTrashContainers().get(id).getAluminum()+"de basura alumino\n"
+                + game.getTrashContainers().get(id).getGlass()+"de basura vidiro\n"
+                + game.getTrashContainers().get(id).getPlastic()+"de basura plastico\n"
+                + game.getTrashContainers().get(id).getPaper()+"de basura paper\n"
+                + game.getTrashContainers().get(id).getOrganic()+"de basura organica\n"
+                + "Tomare lo que pueda caber en mi mochila! ";
+            for (String line : message.split("\n")) {
+            g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
+        }
+        
+    }
     
     public void conversation(NPC npc, Player player, Graphics2D g) {
         int yPaint = 416;
@@ -293,6 +330,14 @@ public class Screen {
         //Draws the background depending of the screen parameter   
         g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), x, y, x2, y2, Color.black, null);
 
+        
+        //Renders TrashContainers
+        for(int i=0; i<game.getTrashContainers().size(); i++){
+            game.getTrashContainers().get(i).tick();
+            game.getTrashContainers().get(i).render(g);
+        }
+        
+        
         // Renders trash * FIX CAMERA AREA*
         for (int i = 0; i < trash.size(); i++) {
             trash.get(i).tick();
@@ -333,7 +378,10 @@ public class Screen {
             }
         }
         if (player.isConversation()) {
-            if(game.getNpcTrashClassify().isTalking()){
+           if(trashContainerMessage){
+              trashContainerMessageText(trashContainerId, g2d);
+               
+           }else if(game.getNpcTrashClassify().isTalking()){
                 int dX;
                 int dY;
                 dX = game.getPlayer().getX()- game.getNpcTrashClassify().getX();

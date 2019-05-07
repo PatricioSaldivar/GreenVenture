@@ -47,6 +47,7 @@ public class Game implements Runnable {
     private ArrayList<roadChange> roadChanges;  // used to change direction of a car
     private Car car;                            // used to create the car
     private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
+    private ArrayList<TrashContainer> trashContainers; //to manage all the trashContainers
 
     /**
      * to create title, width and height and set the game is still not running
@@ -69,6 +70,7 @@ public class Game implements Runnable {
         crosswalks = new ArrayList<>();
         roadChanges = new ArrayList<>();
         storeDoors = new ArrayList<>();
+        trashContainers = new ArrayList<>();
         this.display = display;
         display.setTitle("Ciudad");
 
@@ -179,6 +181,14 @@ public class Game implements Runnable {
         this.car = car;
     }
 
+    public ArrayList<TrashContainer> getTrashContainers() {
+        return trashContainers;
+    }
+
+    public void setTrashContainers(ArrayList<TrashContainer> trashContainers) {
+        this.trashContainers = trashContainers;
+    }
+
     /**
      * initializing the display window of the game
      */
@@ -188,9 +198,9 @@ public class Game implements Runnable {
             player = new Player(40, 40, 64, 64, this);
         }
         screen = new Screen(0, 0, width, height, this, player, trash);
-        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 0));
-        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 1));
-        npcs.add(new NPC(350, 350, 64, 64, 0, this, screen, 2));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
         car = new Car(512, 320, 128, 128, screen, this);
         car.setDirection(2);
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
@@ -330,7 +340,7 @@ public class Game implements Runnable {
         solids.add(new Solid(2665, 3220, 43, 2, screen));
         //Soccer Goals
         solids.add(new Solid(2122, 2928, 80, 132, screen));
-        solids.add(new Solid(2606, 2928, 114, 134, screen));        
+        solids.add(new Solid(2606, 2928, 114, 134, screen));
 
         //Purple Mansion
         //Bushes
@@ -386,7 +396,7 @@ public class Game implements Runnable {
         solids.add(new Solid(4025, 1091, 71, 4, screen));
         solids.add(new Solid(3768, 923, 46, 136, screen));
         //Trash Can
-        solids.add(new Solid(3780, 1078, 12, 4, screen));  
+        solids.add(new Solid(3780, 1078, 12, 4, screen));
 
         //Left Store
         solids.add(new Solid(2118, 517, 297, 491, screen));
@@ -396,9 +406,9 @@ public class Game implements Runnable {
         solids.add(new Solid(2375, 1014, 8, 77, screen));
         solids.add(new Solid(2123, 1091, 79, 4, screen));
         solids.add(new Solid(2327, 1091, 88, 4, screen));
-        solids.add(new Solid(2415, 917, 46, 136, screen));        
+        solids.add(new Solid(2415, 917, 46, 136, screen));
         //Trash Can
-        solids.add(new Solid(2437, 1078, 12, 4, screen));        
+        solids.add(new Solid(2437, 1078, 12, 4, screen));
 
         //Mall
         solids.add(new Solid(2590, 512, 1048, 384, screen));
@@ -434,7 +444,7 @@ public class Game implements Runnable {
         solids.add(new Solid(2850, 214, 12, 4, screen));
         solids.add(new Solid(3160, 214, 12, 4, screen));
         solids.add(new Solid(4066, 214, 12, 4, screen));
-        
+
         //Blue Skycraper
         solids.add(new Solid(1354, 0, 494, 57, screen));
         solids.add(new Solid(1371, 57, 460, 20, screen));
@@ -655,6 +665,15 @@ public class Game implements Runnable {
         possibleDirections[1] = 1;
         roadChanges.add(new roadChange(3637, 3948, 148, 148, screen, possibleDirections));
 
+        int possibleNPCs[];
+        possibleNPCs = new int[3];
+        possibleNPCs[0] = 0;
+        possibleNPCs[1] = 1;
+        possibleNPCs[2] = 2;
+        
+        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,possibleNPCs));
+        trashContainers.get(0).setUnlocked(true);
+        
     }
 
     @Override
@@ -716,17 +735,19 @@ public class Game implements Runnable {
             for (int i = 0; i < storeDoors.size(); i++) {
                 storeDoors.get(i).tick();
             }
-
+            //Movement of car
             car.tick();
-
+            //Checks if the player started a conversation with any NPC
             for (int i = 0; i < npcs.size(); i++) {
                 npcs.get(i).tick();
                 if (!npcs.get(i).isTalking()) {
                     if (npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()) {
+                        npcs.get(i).setTrashToTrashContainer(npcs.get(i).getTrashToTrashContainer() + 1);
                         npcs.get(i).setTalking(true);
                         player.setConversation(true);
                         screen.setFinishedConversationText(false);
                         screen.setConversationTextIndex(0);
+                        player.setPick(false);
                     }
 
                 } else if (player.isPick() && player.isConversation()) {
@@ -749,6 +770,7 @@ public class Game implements Runnable {
                             player.setTalking(false);
                         }
                     }
+                    player.setPick(false);
 
                 }
             }
@@ -773,13 +795,15 @@ public class Game implements Runnable {
 
             //If player intersects the npc and press space the minigame starts, but first they start a conversation
             if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
-                if (keyManager.space && !keyManager.helperSpace) {
+                if (player.isPick()) {
                     if (!player.isConversation()) {
+                        player.setPick(false);
                         npcTrashClassify.setTalking(true);
                         player.setConversation(true);
                         screen.setFinishedConversationText(false);
                         screen.setConversationTextIndex(0);
                     } else if (player.isPick() && player.isConversation()) {
+                        player.setPick(false);
                         if (!player.isTalking()) {
                             if (!screen.isFinishedConversationText()) {
                                 screen.setFinishedConversationText(true);
@@ -807,6 +831,117 @@ public class Game implements Runnable {
                     screen.setCursorOnPlay(!screen.isCursorOnPlay());
                 }
 
+            }
+
+            for (int i = 0; i < trashContainers.size(); i++) {
+                if (player.isPick() && trashContainers.get(i).isUnlocked() && player.getPerimetro().intersects(trashContainers.get(i).getPerimetro())) {
+                    if (!player.isConversation()) {
+                        player.setPick(false);
+                        player.setConversation(true);
+                        screen.setTrashContainerMessage(true);
+                    } else {
+                        player.setConversation(false);
+                        screen.setTrashContainerMessage(false);
+                        //Creats value of delta
+                        int delta = player.getCapacity() - player.getInventory();
+                        if (delta > 0) {
+                            //Adds all the electronics of the trashcan that the player could get in his backpack
+                            if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                if (trashContainers.get(i).getElectronics() >= delta) {
+                                    player.setInventory(player.getInventory() + delta);
+                                    player.setElectronics(player.getElectronics() + delta);
+                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics()-delta);
+                                    
+                                } else {
+                                    player.setInventory(player.getInventory() + trashContainers.get(i).getElectronics());
+                                    player.setElectronics(player.getElectronics() + trashContainers.get(i).getElectronics());
+                                    trashContainers.get(i).setElectronics(0);
+                                }
+                            }
+                            //Adds all the aluminum of the trashcan that the player could get in his backpack
+                            //Resets value of delta
+                            delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getAluminum() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setAluminum(player.getAluminum() + delta);
+                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum()-delta);
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getAluminum());
+                                        player.setAluminum(player.getAluminum() + trashContainers.get(i).getAluminum());
+                                        trashContainers.get(i).setAluminum(0);
+                                    }
+                                }
+                            }
+                            //Adds all the Glass of the trashcan that the player could get in his backpack
+                            //Resets value of delta
+                            delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getGlass() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setGlass(player.getGlass() + delta);
+                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass()-delta);
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getGlass());
+                                        player.setGlass(player.getGlass() + trashContainers.get(i).getGlass());
+                                        trashContainers.get(i).setGlass(0);
+                                    }
+                                }
+                            }
+                            //Adds all the Plastic of the trashcan that the player could get in his backpack
+                            //Resets value of delta
+                            delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getPlastic() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setPlastic(player.getPlastic() + delta);
+                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic()-delta);
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getPlastic());
+                                        player.setPlastic(player.getPlastic() + trashContainers.get(i).getPlastic());
+                                        trashContainers.get(i).setPlastic(0);
+                                    }
+                                }
+                            }
+                            //Adds all the Paper of the trashcan that the player could get in his backpack
+                            //Resets value of delta
+                            delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getPaper() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setPaper(player.getPaper() + delta);
+                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper()-delta);
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getPaper());
+                                        player.setPaper(player.getPaper() + trashContainers.get(i).getPaper());
+                                         trashContainers.get(i).setPaper(0);
+                                    }
+                                }
+                            }
+                            //Adds all the Organic of the trashcan that the player could get in his backpack
+                            //Resets value of delta
+                            delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getOrganic() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setOrganic(player.getOrganic() + delta);
+                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic()-delta);
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getOrganic());
+                                        player.setOrganic(player.getOrganic() + trashContainers.get(i).getOrganic());
+                                        trashContainers.get(i).setOrganic(0);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
 
         } else {
@@ -848,7 +983,7 @@ public class Game implements Runnable {
             }
             if (keyManager.space && pauseIndex == 2) {
 
-               MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display,keyManager, this);
+                MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display, keyManager, this);
 
                 Assets.gameStart.play();
                 MT.start();

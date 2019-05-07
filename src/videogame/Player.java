@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Player extends Item {
     private int SMoveX = 0;
     private int SMoveY = 0;
     private double money = 20.00;
-    private int speed =7;
+    private int speed =5;
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
@@ -154,7 +155,7 @@ public class Player extends Item {
     /**
      * To set the width of the player
      *
-     * @param <code>width</code> value with width
+     * @param width <code>int </code> value with width
      */
     public void setWidth(int width) {
         this.width = width;
@@ -163,7 +164,7 @@ public class Player extends Item {
     /**
      * To set the height of the player
      *
-     * @param <code>height</code> value with height
+     * @param height <code>int</code> value with height
      */
     public void setHeight(int height) {
         this.height = height;
@@ -435,7 +436,7 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getCrosswalks().get(i).getIniY() - game.getHeight() / 2 - height / 2;
                     } else {
-                        y = game.getCrosswalks().get(i).getIniY()- 64;
+                         y = game.getCrosswalks().get(i).y- 64- SMoveY;
                     }
                 }
                 //Checks collisions with solids when going from down to top
@@ -443,7 +444,7 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight() - game.getHeight() / 2 + height / 2 ;
                     } else {
-                        y = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight();                    }
+                        y = game.getCrosswalks().get(i).y + game.getSolids().get(i).getHeight()- SMoveY;                   }
                 }
                  if (getPerimetroForSolidsRight().intersects(game.getCrosswalks().get(i).getPerimetroRight(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
                     if (x == game.getWidth() / 2 - width / 2) {
