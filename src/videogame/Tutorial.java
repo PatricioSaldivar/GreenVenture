@@ -18,8 +18,7 @@ import java.util.ArrayList;
  *
  * @author BonfireStudios
  */
-public class RecycleCoRoom implements Runnable {
-    
+public class Tutorial implements Runnable {
     private BufferStrategy bs;             // to have several buffers when displaying
     private Graphics g;                     // to paint objects
     private Display display;                // to display in the game
@@ -30,11 +29,10 @@ public class RecycleCoRoom implements Runnable {
     private boolean running;                // to set the game
     private KeyManager keyManager;          // to manage the keyboard
     private Font fontx;                     // to manage a custom font
-    private Player player;                  // to store the player(attributes)
-    private PlayerInStore playablePlayer;   // to store the usable player (this will only works in the store and dont save anything) 
-    private Game game;                      // to store the game in which it was before
-    private boolean cont = false;           // to continue the game
-    private ArrayList<Solid> solids;        // to store the solids
+    private Game game;                      // to store the previous game
+    private PlayerInStore playablePlayer;   // to store the tutorial player
+    private ArrayList<Solid> solids;         // to store the solids
+
 
     /**
      * to create title, width and height and set the game is still not running
@@ -43,7 +41,7 @@ public class RecycleCoRoom implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public RecycleCoRoom(String title, int width, int height, Display display, KeyManager keyManager, Game game, Player player) {
+    public Tutorial(String title, int width, int height, Display display, KeyManager keyManager, Game game) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -52,8 +50,7 @@ public class RecycleCoRoom implements Runnable {
         this.display = display;
         display.setTitle("ReycleCoRoom");
         this.game = game;
-        this.player = player;
-        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
+        this.solids = new ArrayList<Solid>();
         
         //Adds font from fonts package
         try {
@@ -94,33 +91,18 @@ public class RecycleCoRoom implements Runnable {
         return fontx;
     }
     
-    public boolean isCont() {
-        return cont;
-    }
-
-    public void setCont(boolean cont) {
-        this.cont = cont;
-    }
-    
-    
-
     /**
      * initializing the display window of the game
      */
     private void init() {
         Assets.init();
-
+        playablePlayer = new PlayerInStore(0,0,64,64,game,solids);
     }
 
     @Override
     public void run() {
-          //If the game is called to resume the init wont be called 
-        if (!cont) {
-            init();
-        } else {
-            keyManager.space = true;
-            keyManager.helperSpace = true;
-        }
+        //If the game is called to resume the init wont be called 
+        init();
         // frames per second
         int fps = 50;
         // time for each tick in nano segs
@@ -156,21 +138,13 @@ public class RecycleCoRoom implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        playablePlayer.tick();
-        if(playablePlayer.getPerimetro().intersects(this.getPerimetroStore())  && (keyManager.space && !keyManager.helperSpace)){
-            RecycleCo rc = new RecycleCo("RecycleCo", 512, 512,display,keyManager,game,this);
-            Assets.gameStart.play();
-            rc.start();
-            running = false;
-        }
-        if(playablePlayer.getPerimetro().intersects(this.getPerimetroWorld())  && (keyManager.space && !keyManager.helperSpace)){
+        playablePlayer.tick();  
+        if(keyManager.space && !keyManager.helperSpace){
             Assets.gameStart.play();
             game.setCont(true);
             game.start();
             running = false;
         }
-    
-             
     }
     
     public Rectangle getPerimetroStore() {
@@ -232,5 +206,6 @@ public class RecycleCoRoom implements Runnable {
             }
         }
     }
+    
     
 }
