@@ -47,6 +47,7 @@ public class Player extends Item {
     private int direction; // 1 = Down , 2 = Up, 3 = Right, 4 = Left
     private ArrayList<Integer> trashContainersLeft;
     
+    
 
 
     public Player(int x, int y, int width, int height, Game game) {
@@ -310,10 +311,6 @@ public class Player extends Item {
     }
     
     
-    
-
-    
-
     @Override
     public void tick() {
         // moving player depending on flags
