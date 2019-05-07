@@ -13,12 +13,12 @@ import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
-
 /**
  *
  * @author BonfireStudios
  */
-public class TodoMartRoom implements Runnable{
+public class RecycleCoRoom implements Runnable {
+    
     private BufferStrategy bs;             // to have several buffers when displaying
     private Graphics g;                     // to paint objects
     private Display display;                // to display in the game
@@ -41,14 +41,14 @@ public class TodoMartRoom implements Runnable{
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public TodoMartRoom(String title, int width, int height, Display display, KeyManager keyManager, Game game, Player player) {
+    public RecycleCoRoom(String title, int width, int height, Display display, KeyManager keyManager, Game game, Player player) {
         this.title = title;
         this.width = width;
         this.height = height;
         running = false;
         this.keyManager = keyManager;
         this.display = display;
-        display.setTitle("TodoxMartRoom");
+        display.setTitle("ReycleCoRoom");
         this.game = game;
         this.player = player;
         this.playablePlayer = new PlayerInStore(172,386,64,64,this.game);
@@ -156,9 +156,9 @@ public class TodoMartRoom implements Runnable{
         keyManager.tick();
         playablePlayer.tick();
         if(playablePlayer.getPerimetro().intersects(this.getPerimetroStore())  && (keyManager.space && !keyManager.helperSpace)){
-            TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,game,this);
+            RecycleCo rc = new RecycleCo("RecycleCo", 512, 512,display,keyManager,game,this);
             Assets.gameStart.play();
-            tm.start();
+            rc.start();
             running = false;
         }
         if(playablePlayer.getPerimetro().intersects(this.getPerimetroWorld())  && (keyManager.space && !keyManager.helperSpace)){
