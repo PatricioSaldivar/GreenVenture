@@ -198,8 +198,8 @@ public class Game implements Runnable {
         keyManager.setPauseMax(4);
 
         //Creates doors to enter to the stores
-        storeDoors.add(new StoreDoor(0, 0, 10, 10, this, screen, 0));           // TodoxMart door
-        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCo. door    
+        storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));           // TodoxMartRoom door
+        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
 
         //Map boundaries
         solids.add(new Solid(0, -32, 4096, 32, screen));
@@ -766,8 +766,8 @@ public class Game implements Runnable {
             }
             //If player intersects the RecycleCo door
             if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
-                RecycleCo rc = new RecycleCo("RecycleCo", 512, 512, display, keyManager, this);
-                rc.start();
+                RecycleCoRoom rcr = new RecycleCoRoom("RecycleCoRoom", 512, 512, display, keyManager, this, player);
+                rcr.start();
                 running = false;
             }
 

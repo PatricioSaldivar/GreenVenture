@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 
 /**
  *
- * @author yeyog
+ * @author BonfireStudios
  */
 public class TodoMart implements Runnable {
     private BufferStrategy bs;             // to have several buffers when displaying

@@ -34,7 +34,7 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
         iniX=x;
         iniY=y;
         this.id = id;
-        alertAnimation = new Animation(Assets.npcAlert,100);
+        alertAnimation = new Animation(Assets.npcDialogue,300);
     }
 
     public int getWidth() {
@@ -85,7 +85,7 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
         x= iniX-screen.getX();
         y= iniY-screen.getY();
        g.drawImage(Assets.npcMinigame1, getX(), getY(), getWidth(), getHeight(), null);
-       g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-16,16,16,null);
+       g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-10,25,25,null);
     }
 
     @Override

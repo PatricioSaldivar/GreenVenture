@@ -15,7 +15,7 @@ import java.io.IOException;
 
 /**
  *
- * @author yeyog
+ * @author BonfireStudios
  */
 public class RecycleCo implements Runnable {
 
@@ -32,6 +32,7 @@ public class RecycleCo implements Runnable {
     private int index = 0;                  // to manage the index of the animations
     private Animation animation;            // to store the animations
     private Game game;                      //To store the game in which it was before
+    private RecycleCoRoom previousRoom;             // to store the previous room
     private int indexHelper = 10;                 // To store an index helper to know when the game need to make noise
     private double glassPrice = 0.03;           // To store the original price
     private double aluminumPrice = 0.04;        // To store the original price
@@ -47,7 +48,7 @@ public class RecycleCo implements Runnable {
      * @param width to set the width of the window
      * @param height to set the height of the window
      */
-    public RecycleCo(String title, int width, int height, Display display, KeyManager keyManager, Game game) {
+    public RecycleCo(String title, int width, int height, Display display, KeyManager keyManager, Game game, RecycleCoRoom room) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -56,6 +57,7 @@ public class RecycleCo implements Runnable {
         this.display = display;
         display.setTitle("RecycleCo");
         this.game = game;
+        this.previousRoom = room;
 
         //Adds font from fonts package
         try {
@@ -291,10 +293,10 @@ public class RecycleCo implements Runnable {
         switch (index) {
             case 0:
                 if (keyManager.space && !keyManager.helperSpace) {
-                game.setCont(true);
-                game.start();
-                running = false;
-
+                    Assets.gameStart.play();
+                    previousRoom.setCont(true);
+                    previousRoom.start();
+                    running = false;
                 }
                 break;
             case 1:

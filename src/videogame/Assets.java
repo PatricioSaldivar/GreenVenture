@@ -39,6 +39,7 @@ public class Assets {
 
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
+    public static BufferedImage npcDialogue[];      // to store the dialogue cloud
     public static BufferedImage npcDown[][];        // to store the NPC going down assets
     public static BufferedImage npcUp[][];          // to store the NPC going up assets
     public static BufferedImage npcRight[][];       // to store the NPC going right assets
@@ -191,7 +192,14 @@ public class Assets {
         npcAlert[2] = ImageLoader.loadImage("/images_NPC/alert3.png");
         npcAlert[3] = ImageLoader.loadImage("/images_NPC/alert4.png");
         npcMinigame1 = ImageLoader.loadImage("/images_NPC/npc.png");
-
+        
+        //NPC dialogue loader
+        npcDialogue = new BufferedImage[4];
+        npcDialogue[0] = ImageLoader.loadImage("/images_NPC/dialogue.png");
+        npcDialogue[1] = ImageLoader.loadImage("/images_NPC/dialogue1.png");
+        npcDialogue[2] = ImageLoader.loadImage("/images_NPC/dialogue2.png");
+        npcDialogue[3] = ImageLoader.loadImage("/images_NPC/dialogue3.png");
+        
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
         orTrashCan = ImageLoader.loadImage("/images_minigame1/binOr.png");
