@@ -213,6 +213,7 @@ public class RecycleCoRoom implements Runnable {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
             g.drawImage(Assets.recycleCoRoom, 0, 0, width, height, null);
+            g.drawImage(Assets.npcFacingRight[18],313,63, 64, 64, null);
             playablePlayer.render(g);
             //Score values por painting
             g.setFont(fontx);
