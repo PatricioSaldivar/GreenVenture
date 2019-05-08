@@ -38,6 +38,9 @@ public class Screen {
     private Animation selector;
     private boolean trashContainerMessage;
     private int trashContainerId;
+    private Animation playerTalking;
+    private Animation npcTalking;
+    private boolean assignAnimationNpc=false;
     /**
      * to create the screen with his attributes
      *
@@ -59,6 +62,7 @@ public class Screen {
         this.trash = trash;
         coin = new Animation(Assets.coin, 100);
         selector = new Animation(Assets.selector,300);
+        playerTalking = new Animation(Assets.playerTalk,200);
     }
 
     /**
@@ -224,6 +228,14 @@ public class Screen {
     public void setTrashContainerId(int trashContainerId) {
         this.trashContainerId = trashContainerId;
     }
+
+    public boolean isAssignAnimationNpc() {
+        return assignAnimationNpc;
+    }
+
+    public void setAssignAnimationNpc(boolean assignAnimationNpc) {
+        this.assignAnimationNpc = assignAnimationNpc;
+    }
     
 
     public void trashContainerMessageText(int id, Graphics2D g){
@@ -253,7 +265,8 @@ public class Screen {
         g.fillRect(0, 384, 512, 128);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
-            g.drawImage(Assets.player, 0, 416, 64, 64, null);
+            playerTalking.tick();
+            g.drawImage(playerTalking.getCurrentFrame(), 0, 416, 64, 64, null);
             message = "¡Hey! No tires la basura al suelo, mejor tírala en un bote,\nno cuesta mucho, y además, ayudas a mantener la ciudad limpia.";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
@@ -275,7 +288,8 @@ public class Screen {
             } else {
                 conversationTextIndex = message.length() - 1;
             }
-            g.drawImage(Assets.inTrashCan, 0, 416, 64, 64, null);
+            npcTalking.tick();
+            g.drawImage(npcTalking.getCurrentFrame(), 0, 416, 64, 64, null);
         }
         if (conversationTextIndex < message.length() && message.charAt(conversationTextIndex) == '\'') {
             conversationTextIndex++;
@@ -294,7 +308,8 @@ public class Screen {
         g.fillRect(0, 384, 512, 128);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
-            g.drawImage(Assets.npcMinigame1, 0, 416, 64, 64, null);
+            playerTalking.tick();
+            g.drawImage(playerTalking.getCurrentFrame(), 0, 416, 64, 64, null);
             message = "Hey me podrias ayudar organizando mi basura?\nPodrias usar mi robot de golpes! ";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
@@ -311,7 +326,8 @@ public class Screen {
         } else {
             message = "Claro! Donde esta ese robot?\nPor el momento no puedo, lo lamento ";
                 conversationTextIndex = message.length() - 1;
-            g.drawImage(Assets.inTrashCan, 0, 416, 64, 64, null);
+                npcTalking.tick();
+            g.drawImage(npcTalking.getCurrentFrame(), 0, 416, 64, 64, null);
             selector.tick();
             if(cursorOnPlay){
                  g.drawImage(selector.getCurrentFrame(),120,416+(g.getFontMetrics().getHeight()*1/2),8,8,null);
@@ -374,17 +390,17 @@ public class Screen {
                 if(abs(dX)>abs(dY)){
                     if(dY>0){
                         //Facing down
-                        game.getNpcs().get(i).setFacing(coin);
+                        game.getNpcs().get(i).setConversation(Assets.npcDown[i][1]);
                     }else
                         //Facing up
-                        game.getNpcs().get(i).setFacing(coin);
+                        game.getNpcs().get(i).setConversation(Assets.npcUp[i][1]);
                 }else if(dX>0){
                     //Facing Right
-                    game.getNpcs().get(i).setFacing(coin);
+                    game.getNpcs().get(i).setConversation(Assets.npcRight[i][1]);
                     
                 }else{
                     //Facing Left
-                    game.getNpcs().get(i).setFacing(coin);
+                    game.getNpcs().get(i).setConversation(Assets.npcLeft[i][1]);
                 }       
             }
         }
@@ -400,21 +416,30 @@ public class Screen {
                 if(abs(dX)>abs(dY)){
                     if(dY>0){
                         //Facing down
-                        game.getNpcTrashClassify().setFacing(coin);
+                        game.getNpcTrashClassify().setConversation(Assets.npcDown[game.getNpcTrashClassify().getId()][1]);
                     }else
                         //Facing up
-                        game.getNpcTrashClassify().setFacing(coin);
+                        game.getNpcTrashClassify().setConversation(Assets.npcUp[game.getNpcTrashClassify().getId()][1]);
                 }else if(dX>0){
                     //Facing Right
-                    game.getNpcTrashClassify().setFacing(coin);
+                    game.getNpcTrashClassify().setConversation(Assets.npcRight[game.getNpcTrashClassify().getId()][1]);
                     
                 }else{
                     //Facing Left
-                    game.getNpcTrashClassify().setFacing(coin);
+                    game.getNpcTrashClassify().setConversation(Assets.npcLeft[game.getNpcTrashClassify().getId()][1]);
                 }
+                if(!assignAnimationNpc){
+               npcTalking = new Animation(Assets.npcTalk[game.getNpcTrashClassify().getId()],200);
+               assignAnimationNpc=true;
+               }
                 conversationMinigame(game.getNpcTrashClassify(),player,g2d);
-            }else
+            }else{
+               if(!assignAnimationNpc){
+               npcTalking = new Animation(Assets.npcTalk[game.getNpcs().get(talkingNPC).getId()],200);
+               assignAnimationNpc=true;
+               }
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
+           }
         }
         game.getCar().render(g);
         player.render(g);

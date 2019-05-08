@@ -7,6 +7,7 @@ package videogame;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -23,6 +24,7 @@ public class NPCMinigame1 extends Item {
     private boolean talking;
     private Animation alertAnimation;
     private Animation facing;
+    private BufferedImage conversation;
 
 
 public NPCMinigame1(int x, int y, int width, int height, Game game, Screen screen, int id) {
@@ -72,6 +74,18 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
     public void setFacing(Animation facing) {
         this.facing = facing;
     }
+
+    public BufferedImage getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(BufferedImage conversation) {
+        this.conversation = conversation;
+    }
+
+    public int getId() {
+        return id;
+    }
     
     
    
@@ -84,7 +98,7 @@ public NPCMinigame1(int x, int y, int width, int height, Game game, Screen scree
     public void render(Graphics g) {
         x= iniX-screen.getX();
         y= iniY-screen.getY();
-       g.drawImage(Assets.npcMinigame1, getX(), getY(), getWidth(), getHeight(), null);
+       g.drawImage(conversation, getX(), getY(), getWidth(), getHeight(), null);
        g.drawImage(alertAnimation.getCurrentFrame(),getX(),getY()-10,25,25,null);
     }
 
