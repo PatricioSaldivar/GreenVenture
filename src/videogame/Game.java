@@ -1030,10 +1030,7 @@ public class Game implements Runnable {
                     pauseIndex = keyManager.pauseSelector;
                 }
                 if (keyManager.space && pauseIndex == 1) {
-                    //TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
-                    //Assets.gameStart.play();
-                    //tm.start();
-                    //running = false;
+                  //Display Stats
 
                 }
                 if (keyManager.space && pauseIndex == 3) {
@@ -1043,11 +1040,9 @@ public class Game implements Runnable {
                     running = false;
                 }
                 if (keyManager.space && pauseIndex == 2) {
+                    //Display Instructions
 
-                    MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display, keyManager, this);
-
-                    Assets.gameStart.play();
-                    MT.start();
+       
                     running = false;
                 }
                 if (keyManager.space && pauseIndex == 0) {
