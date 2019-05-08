@@ -55,7 +55,7 @@ public class NPC extends Item {
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
-        facing = new Animation(Assets.npcUp[id], 100);
+        facing = new Animation(Assets.npcUp[id], 300);
 
     }
 
@@ -368,19 +368,19 @@ public class NPC extends Item {
                     switch (direction) {
                         case 0:
                             randomDist = (int) (Math.random() * (4096 - iniY - yMove));
-                            facing = new Animation(Assets.npcDown[id], 100);
+                            facing = new Animation(Assets.npcDown[id], 300);
                             break;
                         case 1:
                             randomDist = (int) (Math.random() * (4096 - iniX - xMove));
-                            facing = new Animation(Assets.npcRight[id], 100);
+                            facing = new Animation(Assets.npcRight[id], 300);
                             break;
                         case 2:
                             randomDist = (int) (Math.random() * (iniY + yMove));
-                            facing = new Animation(Assets.npcUp[id], 100);
+                            facing = new Animation(Assets.npcUp[id], 300);
                             break;
                         case 3:
                             randomDist = (int) (Math.random() * (iniX + xMove));
-                            facing = new Animation(Assets.npcLeft[id], 100);
+                            facing = new Animation(Assets.npcLeft[id], 300);
                             break;
                     }
 
