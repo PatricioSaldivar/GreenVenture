@@ -52,6 +52,7 @@ public class Assets {
     public static BufferedImage npcUp[][];          // to store the NPC going up assets
     public static BufferedImage npcRight[][];       // to store the NPC going right assets
     public static BufferedImage npcLeft[][];        // to store the NPC going left assets
+    public static BufferedImage npcTalk[][];
     public static BufferedImage npcMinigame1;       // to store the NPC of the minigame1 image
 
     //Minigame 1 Assests
@@ -222,6 +223,7 @@ public class Assets {
         npcLeft = new BufferedImage[20][3];
         npcRight = new BufferedImage[20][3];
         npcUp = new BufferedImage[20][3];
+        npcTalk =new BufferedImage[20][2];
         
         int xCalc = 0, yCalc = 0;
 
@@ -241,6 +243,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[0][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[0][0] = ImageLoader.loadImage("/NPCAssets/closed_0.png");
+        npcTalk[0][1] = ImageLoader.loadImage("/NPCAssets/open_0.png");
         
         // NPC 1 (Female 1)
         xCalc = 1*72;
@@ -258,6 +262,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[1][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[1][0] = ImageLoader.loadImage("/NPCAssets/closed_1.png");
+        npcTalk[1][1] = ImageLoader.loadImage("/NPCAssets/open_1.png");
+        
         
         // NPC 2 (China 1)
         xCalc = 3*72;
@@ -275,6 +282,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[2][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[2][0] = ImageLoader.loadImage("/NPCAssets/closed_2.png");
+        npcTalk[2][1] = ImageLoader.loadImage("/NPCAssets/open_2.png");
+        
         
         // NPC 3 (China 2)
         xCalc = 1*72;
@@ -292,6 +302,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[3][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[3][0] = ImageLoader.loadImage("/NPCAssets/closed_3.png");
+        npcTalk[3][1] = ImageLoader.loadImage("/NPCAssets/open_3.png");
+        
         
         // NPC 4 (Scientist)
         xCalc = 2*72;
@@ -309,6 +322,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[4][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[4][0] = ImageLoader.loadImage("/NPCAssets/closed_4.png");
+        npcTalk[4][1] = ImageLoader.loadImage("/NPCAssets/open_4.png");
+        
         
         // NPC 5 (Boxer)
         xCalc = 3*72;
@@ -326,6 +342,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[5][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[5][0] = ImageLoader.loadImage("/NPCAssets/closed_5.png");
+        npcTalk[5][1] = ImageLoader.loadImage("/NPCAssets/open_5.png");
+        
         
         // NPC 6 (Little Guy)
         xCalc = 0*72;
@@ -343,6 +362,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[6][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[6][0] = ImageLoader.loadImage("/NPCAssets/closed_6.png");
+        npcTalk[6][1] = ImageLoader.loadImage("/NPCAssets/open_6.png");
+        
         
         // NPC 7 (Little Girl)
         xCalc = 1*72;
@@ -360,6 +382,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[7][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[7][0] = ImageLoader.loadImage("/NPCAssets/closed_7.png");
+        npcTalk[7][1] = ImageLoader.loadImage("/NPCAssets/open_7.png");
+        
         
         // NPC 8 (Girl 1)
         xCalc = 2*72;
@@ -377,6 +402,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[8][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[8][0] = ImageLoader.loadImage("/NPCAssets/closed_8.png");
+        npcTalk[8][1] = ImageLoader.loadImage("/NPCAssets/open_8.png");
+        
         
         // NPC 9 (Boy 1)
         xCalc = 3*72;
@@ -394,6 +422,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[9][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[9][0] = ImageLoader.loadImage("/NPCAssets/closed_9.png");
+        npcTalk[9][1] = ImageLoader.loadImage("/NPCAssets/open_9.png");
+        
         
         // NPC 10 (Old)
         xCalc = 0*72;
@@ -411,6 +442,9 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[10][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[10][0] = ImageLoader.loadImage("/NPCAssets/closed_10.png");
+        npcTalk[10][1] = ImageLoader.loadImage("/NPCAssets/open_10.png");
+        
         
         // NPC 11 (Adventure)
         xCalc = 2*72;
@@ -428,6 +462,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[11][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[11][0] = ImageLoader.loadImage("/NPCAssets/closed_11.png");
+        npcTalk[11][1] = ImageLoader.loadImage("/NPCAssets/open_11.png");
         
         // NPC 12 (Geek)
         xCalc = 3*72;
@@ -445,6 +481,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[12][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[12][0] = ImageLoader.loadImage("/NPCAssets/closed_12.png");
+        npcTalk[12][1] = ImageLoader.loadImage("/NPCAssets/open_12.png");
         
         // NPC 13 (Girl 2)
         xCalc = 0*72;
@@ -462,6 +500,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[13][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[13][0] = ImageLoader.loadImage("/NPCAssets/closed_13.png");
+        npcTalk[13][1] = ImageLoader.loadImage("/NPCAssets/open_13.png");
         
         // NPC 14 (Fat 1)
         xCalc = 1*72;
@@ -479,23 +519,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[14][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
-        
-        // NPC 14 (Fat 1)
-        xCalc = 1*72;
-        yCalc = 1*72;
-
-        for (int i = 0; i < 2; i++) {
-            npcDown[14][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
-        }
-        for (int i = 0; i < 2; i++) {
-            npcLeft[14][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
-        }
-        for (int i = 0; i < 2; i++) {
-            npcRight[14][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
-        }
-        for (int i = 0; i < 2; i++) {
-            npcUp[14][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
-        }
+        npcTalk[14][0] = ImageLoader.loadImage("/NPCAssets/closed_14.png");
+        npcTalk[14][1] = ImageLoader.loadImage("/NPCAssets/open_14.png");
         
         // NPC 15 (Girl 3)
         xCalc = 1*72;
@@ -513,6 +538,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[15][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[15][0] = ImageLoader.loadImage("/NPCAssets/closed_15.png");
+        npcTalk[15][1] = ImageLoader.loadImage("/NPCAssets/open_15.png");
         
         // NPC 16 (Female 2)
         xCalc = 0*72;
@@ -530,6 +557,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[16][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[16][0] = ImageLoader.loadImage("/NPCAssets/closed_16.png");
+        npcTalk[16][1] = ImageLoader.loadImage("/NPCAssets/open_16.png");
         
         // NPC 17 (Elvis)
         xCalc = 1*72;
@@ -547,6 +576,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[17][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[17][0] = ImageLoader.loadImage("/NPCAssets/closed_17.png");
+        npcTalk[17][1] = ImageLoader.loadImage("/NPCAssets/open_17.png");
         
         // NPC 18 (Boy 2)
         xCalc = 2*72;
@@ -564,6 +595,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[18][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[18][0] = ImageLoader.loadImage("/NPCAssets/closed_18.png");
+        npcTalk[18][1] = ImageLoader.loadImage("/NPCAssets/open_18.png");
         
         // NPC 19 (Girl 2)
         xCalc = 3*72;
@@ -581,6 +614,8 @@ public class Assets {
         for (int i = 0; i < 2; i++) {
             npcUp[19][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
         }
+        npcTalk[19][0] = ImageLoader.loadImage("/NPCAssets/closed_19.png");
+        npcTalk[19][1] = ImageLoader.loadImage("/NPCAssets/open_19.png");
 
         
         
