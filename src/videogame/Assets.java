@@ -99,6 +99,9 @@ public class Assets {
 
     public static BufferedImage todoMartRoom;               // to store the room background where the player locate before seeing the 
 
+    //Door Assets
+    public static BufferedImage door[];                     // to store the images for the door animation
+    
     //Select cursor
     public static BufferedImage selector[];
 
@@ -353,6 +356,12 @@ public class Assets {
         selector = new BufferedImage[2];
         selector[0] = ImageLoader.loadImage("/images/selector1.png");
         selector[1] = ImageLoader.loadImage("/images/selector2.png");
+        
+        door = new BufferedImage[4];
+        door[0] = ImageLoader.loadImage("/images/door/door1.png");
+        door[1] = ImageLoader.loadImage("/images/door/door2.png");
+        door[2] = ImageLoader.loadImage("/images/door/door3.png");
+        door[3] = ImageLoader.loadImage("/images/door/door4.png");
 
     }
 

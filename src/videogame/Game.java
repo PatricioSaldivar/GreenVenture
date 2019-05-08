@@ -189,6 +189,10 @@ public class Game implements Runnable {
         this.trashContainers = trashContainers;
     }
 
+    public ArrayList<StoreDoor> getStoreDoors() {
+        return storeDoors;
+    }
+
     /**
      * initializing the display window of the game
      */
@@ -208,349 +212,350 @@ public class Game implements Runnable {
         keyManager.setPauseMax(4);
 
         //Creates doors to enter to the stores
-        storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));           // TodoxMartRoom door
+        //storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));           // TodoxMartRoom door
+        storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));     //TodoxMartRoom door
         storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
 
         //Map boundaries
-        solids.add(new Solid(0, -32, 4096, 32, screen));
-        solids.add(new Solid(-32, 0, 32, 4096, screen));
-        solids.add(new Solid(4096, 0, 32, 4096, screen));
-        solids.add(new Solid(0, 4096, 4096, 32, screen));
+        solids.add(new Solid(0, -32, 4096, 32));
+        solids.add(new Solid(-32, 0, 32, 4096));
+        solids.add(new Solid(4096, 0, 32, 4096));
+        solids.add(new Solid(0, 4096, 4096, 32));
 
         //North park
         //Left tree
-        solids.add(new Solid(24, 280, 143, 187, screen));
+        solids.add(new Solid(24, 280, 143, 187));
         //Right Tree
-        solids.add(new Solid(930, 0, 143, 187, screen));
+        solids.add(new Solid(930, 0, 143, 187));
         //Lights
-        solids.add(new Solid(60, 7, 22, 43, screen));
-        solids.add(new Solid(272, 263, 22, 43, screen));
-        solids.add(new Solid(272, 477, 22, 43, screen));
+        solids.add(new Solid(60, 7, 22, 43));
+        solids.add(new Solid(272, 263, 22, 43));
+        solids.add(new Solid(272, 477, 22, 43));
         //Trash Can
-        solids.add(new Solid(277, 386, 12, 4, screen));
+        solids.add(new Solid(277, 386, 12, 4));
         //Cave
-        solids.add(new Solid(787, 0, 143, 105, screen));
-        solids.add(new Solid(787, 105, 23, 23, screen));
-        solids.add(new Solid(887, 105, 43, 23, screen));
+        solids.add(new Solid(787, 0, 143, 105));
+        solids.add(new Solid(787, 105, 23, 23));
+        solids.add(new Solid(887, 105, 43, 23));
 
         //Main plaza
         //Fountain
-        solids.add(new Solid(848, 932, 97, 34, screen));
-        solids.add(new Solid(861, 901, 71, 79, screen));
+        solids.add(new Solid(848, 932, 97, 34));
+        solids.add(new Solid(861, 901, 71, 79));
         //Lights
-        solids.add(new Solid(718, 519, 22, 41, screen));
-        solids.add(new Solid(718, 1233, 22, 41, screen));
-        solids.add(new Solid(1053, 519, 22, 41, screen));
-        solids.add(new Solid(1053, 1233, 22, 41, screen));
+        solids.add(new Solid(718, 519, 22, 41));
+        solids.add(new Solid(718, 1233, 22, 41));
+        solids.add(new Solid(1053, 519, 22, 41));
+        solids.add(new Solid(1053, 1233, 22, 41));
 
         //Tacos Y Mas
-        solids.add(new Solid(0, 1669, 443, 275, screen)); // Restaurant
-        solids.add(new Solid(228, 1944, 118, 37, screen)); //Door
-        solids.add(new Solid(0, 1944, 162, 37, screen)); //Vending & Trash Can
+        solids.add(new Solid(0, 1669, 443, 275)); // Restaurant
+        solids.add(new Solid(228, 1944, 118, 37)); //Door
+        solids.add(new Solid(0, 1944, 162, 37)); //Vending & Trash Can
         //Tables Tacos y Mas
-        solids.add(new Solid(88, 2068, 5, 3, screen));
-        solids.add(new Solid(215, 2068, 5, 3, screen));
-        solids.add(new Solid(349, 2068, 5, 3, screen));
-        solids.add(new Solid(88, 2174, 5, 3, screen));
-        solids.add(new Solid(215, 2174, 5, 3, screen));
-        solids.add(new Solid(349, 2174, 5, 3, screen));
+        solids.add(new Solid(88, 2068, 5, 3));
+        solids.add(new Solid(215, 2068, 5, 3));
+        solids.add(new Solid(349, 2068, 5, 3));
+        solids.add(new Solid(88, 2174, 5, 3));
+        solids.add(new Solid(215, 2174, 5, 3));
+        solids.add(new Solid(349, 2174, 5, 3));
         //Lights
-        solids.add(new Solid(3, 2143, 18, 43, screen));
-        solids.add(new Solid(414, 2144, 22, 43, screen));
+        solids.add(new Solid(3, 2143, 18, 43));
+        solids.add(new Solid(414, 2144, 22, 43));
 
         //Observatory
-        solids.add(new Solid(65, 2560, 296, 192, screen));
-        solids.add(new Solid(84, 2501, 250, 271, screen));
+        solids.add(new Solid(65, 2560, 296, 192));
+        solids.add(new Solid(84, 2501, 250, 271));
 
         //South West park
-        solids.add(new Solid(128, 2840, 25, 95, screen));
-        solids.add(new Solid(106, 2858, 70, 77, screen));
+        solids.add(new Solid(128, 2840, 25, 95));
+        solids.add(new Solid(106, 2858, 70, 77));
 
-        solids.add(new Solid(266, 2840, 25, 95, screen));
-        solids.add(new Solid(244, 2858, 70, 77, screen));
+        solids.add(new Solid(266, 2840, 25, 95));
+        solids.add(new Solid(244, 2858, 70, 77));
 
-        solids.add(new Solid(410, 2840, 25, 95, screen));
-        solids.add(new Solid(388, 2858, 70, 77, screen));
+        solids.add(new Solid(410, 2840, 25, 95));
+        solids.add(new Solid(388, 2858, 70, 77));
 
-        solids.add(new Solid(562, 2840, 25, 95, screen));
-        solids.add(new Solid(539, 2858, 70, 77, screen));
+        solids.add(new Solid(562, 2840, 25, 95));
+        solids.add(new Solid(539, 2858, 70, 77));
 
-        solids.add(new Solid(719, 2840, 25, 95, screen));
-        solids.add(new Solid(696, 2858, 70, 77, screen));
+        solids.add(new Solid(719, 2840, 25, 95));
+        solids.add(new Solid(696, 2858, 70, 77));
 
         //Bridge
-        solids.add(new Solid(507, 3281, 10, 398, screen));
-        solids.add(new Solid(634, 3281, 10, 398, screen));
+        solids.add(new Solid(507, 3281, 10, 398));
+        solids.add(new Solid(634, 3281, 10, 398));
 
         //South West park trees
-        solids.add(new Solid(0, 3504, 86, 592, screen));
+        solids.add(new Solid(0, 3504, 86, 592));
         //Left Corner Bushes
-        solids.add(new Solid(0, 4071, 1031, 25, screen));
+        solids.add(new Solid(0, 4071, 1031, 25));
         //Minibushes close to water
-        solids.add(new Solid(213, 3561, 23, 5, screen));
-        solids.add(new Solid(420, 3561, 86, 5, screen));
-        solids.add(new Solid(644, 3561, 54, 5, screen));
+        solids.add(new Solid(213, 3561, 23, 5));
+        solids.add(new Solid(420, 3561, 86, 5));
+        solids.add(new Solid(644, 3561, 54, 5));
         //Trash Can
-        solids.add(new Solid(86, 3561, 59, 5, screen));
+        solids.add(new Solid(86, 3561, 59, 5));
 
         //Water
-        solids.add(new Solid(0, 3404, 506, 60, screen));
-        solids.add(new Solid(645, 3404, 461, 60, screen));
+        solids.add(new Solid(0, 3404, 506, 60));
+        solids.add(new Solid(645, 3404, 461, 60));
 
-        solids.add(new Solid(1046, 3428, 78, 669, screen));
+        solids.add(new Solid(1046, 3428, 78, 669));
 
         //South cave
         //*********************************************Por el momento solo es solido*
-        solids.add(new Solid(908, 3464, 138, 130, screen));
-        solids.add(new Solid(908, 3594, 24, 15, screen));
-        solids.add(new Solid(1002, 3594, 44, 15, screen));
+        solids.add(new Solid(908, 3464, 138, 130));
+        solids.add(new Solid(908, 3594, 24, 15));
+        solids.add(new Solid(1002, 3594, 44, 15));
 
         //Lake
-        solids.add(new Solid(1124, 3889, 618, 206, screen));
-        solids.add(new Solid(1312, 3286, 429, 603, screen));
-        solids.add(new Solid(1369, 3227, 262, 58, screen));
-        solids.add(new Solid(1711, 3231, 31, 54, screen));
+        solids.add(new Solid(1124, 3889, 618, 206));
+        solids.add(new Solid(1312, 3286, 429, 603));
+        solids.add(new Solid(1369, 3227, 262, 58));
+        solids.add(new Solid(1711, 3231, 31, 54));
 
         //Truck
-        solids.add(new Solid(2852, 3469, 152, 82, screen));
+        solids.add(new Solid(2852, 3469, 152, 82));
 
         //South East
         //Residential buildings
-        solids.add(new Solid(3854, 2752, 243, 1087, screen));
-        solids.add(new Solid(3932, 3839, 95, 22, screen));
+        solids.add(new Solid(3854, 2752, 243, 1087));
+        solids.add(new Solid(3932, 3839, 95, 22));
         //Trees
-        solids.add(new Solid(3632, 2848, 128, 347, screen));
-        solids.add(new Solid(3653, 2836, 86, 12, screen));
-        solids.add(new Solid(3675, 2817, 42, 19, screen));
+        solids.add(new Solid(3632, 2848, 128, 347));
+        solids.add(new Solid(3653, 2836, 86, 12));
+        solids.add(new Solid(3675, 2817, 42, 19));
 
         //School
-        solids.add(new Solid(2684, 2818, 36, 110, screen));
-        solids.add(new Solid(2720, 2818, 314, 370, screen));
-        solids.add(new Solid(3034, 2818, 80, 350, screen));
-        solids.add(new Solid(3119, 2818, 314, 369, screen));
-        solids.add(new Solid(3433, 2818, 29, 225, screen));
-        solids.add(new Solid(2779, 3188, 255, 34, screen));
-        solids.add(new Solid(3119, 3187, 275, 35, screen));
+        solids.add(new Solid(2684, 2818, 36, 110));
+        solids.add(new Solid(2720, 2818, 314, 370));
+        solids.add(new Solid(3034, 2818, 80, 350));
+        solids.add(new Solid(3119, 2818, 314, 369));
+        solids.add(new Solid(3433, 2818, 29, 225));
+        solids.add(new Solid(2779, 3188, 255, 34));
+        solids.add(new Solid(3119, 3187, 275, 35));
         //Trash Can
-        solids.add(new Solid(3184, 3222, 16, 21, screen));
+        solids.add(new Solid(3184, 3222, 16, 21));
         //Soccer Court Fence
-        solids.add(new Solid(2122, 2818, 562, 6, screen));
-        solids.add(new Solid(2120, 2818, 2, 404, screen));
-        solids.add(new Solid(2120, 3220, 447, 2, screen));
-        solids.add(new Solid(2665, 3220, 43, 2, screen));
+        solids.add(new Solid(2122, 2818, 562, 6));
+        solids.add(new Solid(2120, 2818, 2, 404));
+        solids.add(new Solid(2120, 3220, 447, 2));
+        solids.add(new Solid(2665, 3220, 43, 2));
         //Soccer Goals
-        solids.add(new Solid(2122, 2928, 80, 132, screen));
-        solids.add(new Solid(2606, 2928, 114, 134, screen));
+        solids.add(new Solid(2122, 2928, 80, 132));
+        solids.add(new Solid(2606, 2928, 114, 134));
 
         //Purple Mansion
         //Bushes
-        solids.add(new Solid(2126, 1670, 40, 847, screen));
-        solids.add(new Solid(2166, 1670, 303, 26, screen));
-        solids.add(new Solid(2469, 1670, 48, 73, screen));
-        solids.add(new Solid(2517, 1670, 153, 93, screen));
-        solids.add(new Solid(2576, 1773, 36, 20, screen));
-        solids.add(new Solid(2941, 1696, 153, 67, screen));
-        solids.add(new Solid(3000, 1773, 36, 20, screen));
-        solids.add(new Solid(3094, 1696, 47, 47, screen));
-        solids.add(new Solid(2941, 1670, 504, 26, screen));
-        solids.add(new Solid(3445, 1670, 34, 846, screen));
+        solids.add(new Solid(2126, 1670, 40, 847));
+        solids.add(new Solid(2166, 1670, 303, 26));
+        solids.add(new Solid(2469, 1670, 48, 73));
+        solids.add(new Solid(2517, 1670, 153, 93));
+        solids.add(new Solid(2576, 1773, 36, 20));
+        solids.add(new Solid(2941, 1696, 153, 67));
+        solids.add(new Solid(3000, 1773, 36, 20));
+        solids.add(new Solid(3094, 1696, 47, 47));
+        solids.add(new Solid(2941, 1670, 504, 26));
+        solids.add(new Solid(3445, 1670, 34, 846));
         //Trash Can
-        solids.add(new Solid(3402, 2512, 43, 4, screen));
+        solids.add(new Solid(3402, 2512, 43, 4));
 
-        solids.add(new Solid(2234, 1792, 10, 7, screen));
-        solids.add(new Solid(2280, 1944, 10, 7, screen));
-        solids.add(new Solid(2207, 2081, 10, 7, screen));
-        solids.add(new Solid(2281, 2299, 10, 7, screen));
-        solids.add(new Solid(2221, 2454, 10, 7, screen));
+        solids.add(new Solid(2234, 1792, 10, 7));
+        solids.add(new Solid(2280, 1944, 10, 7));
+        solids.add(new Solid(2207, 2081, 10, 7));
+        solids.add(new Solid(2281, 2299, 10, 7));
+        solids.add(new Solid(2221, 2454, 10, 7));
 
-        solids.add(new Solid(3364, 1808, 10, 7, screen));
-        solids.add(new Solid(3315, 1963, 10, 7, screen));
-        solids.add(new Solid(3389, 2101, 10, 7, screen));
-        solids.add(new Solid(3315, 2318, 10, 7, screen));
-        solids.add(new Solid(3377, 2472, 68, 7, screen));
+        solids.add(new Solid(3364, 1808, 10, 7));
+        solids.add(new Solid(3315, 1963, 10, 7));
+        solids.add(new Solid(3389, 2101, 10, 7));
+        solids.add(new Solid(3315, 2318, 10, 7));
+        solids.add(new Solid(3377, 2472, 68, 7));
         //Mansion building
-        solids.add(new Solid(2327, 1929, 353, 588, screen));
-        solids.add(new Solid(2679, 1929, 256, 474, screen));
-        solids.add(new Solid(2936, 1929, 348, 588, screen));
-        solids.add(new Solid(2679, 2403, 69, 31, screen));
-        solids.add(new Solid(2867, 2403, 70, 31, screen));
+        solids.add(new Solid(2327, 1929, 353, 588));
+        solids.add(new Solid(2679, 1929, 256, 474));
+        solids.add(new Solid(2936, 1929, 348, 588));
+        solids.add(new Solid(2679, 2403, 69, 31));
+        solids.add(new Solid(2867, 2403, 70, 31));
 
         //Todo Mart
-        solids.add(new Solid(3550, 2033, 522, 454, screen));
-        solids.add(new Solid(3550, 2487, 219, 27, screen));
-        solids.add(new Solid(3850, 2487, 222, 27, screen));
+        solids.add(new Solid(3550, 2033, 522, 454));
+        solids.add(new Solid(3550, 2487, 219, 27));
+        solids.add(new Solid(3850, 2487, 222, 27));
         //Fences Todo Mart & Dumpsters
-        solids.add(new Solid(3550, 1861, 2, 172, screen));
-        solids.add(new Solid(3550, 1809, 192, 52, screen));
-        solids.add(new Solid(3858, 1809, 238, 52, screen));
-        solids.add(new Solid(4048, 1861, 2, 172, screen));
+        solids.add(new Solid(3550, 1861, 2, 172));
+        solids.add(new Solid(3550, 1809, 192, 52));
+        solids.add(new Solid(3858, 1809, 238, 52));
+        solids.add(new Solid(4048, 1861, 2, 172));
 
         //Marketplace
         //Right Store
-        solids.add(new Solid(3814, 517, 282, 491, screen));
-        solids.add(new Solid(3814, 1008, 72, 6, screen));
-        solids.add(new Solid(4027, 1008, 69, 6, screen));
-        solids.add(new Solid(3846, 1014, 8, 77, screen));
-        solids.add(new Solid(4071, 1014, 8, 77, screen));
-        solids.add(new Solid(3819, 1091, 79, 4, screen));
-        solids.add(new Solid(4025, 1091, 71, 4, screen));
-        solids.add(new Solid(3768, 923, 46, 136, screen));
+        solids.add(new Solid(3814, 517, 282, 491));
+        solids.add(new Solid(3814, 1008, 72, 6));
+        solids.add(new Solid(4027, 1008, 69, 6));
+        solids.add(new Solid(3846, 1014, 8, 77));
+        solids.add(new Solid(4071, 1014, 8, 77));
+        solids.add(new Solid(3819, 1091, 79, 4));
+        solids.add(new Solid(4025, 1091, 71, 4));
+        solids.add(new Solid(3768, 923, 46, 136));
         //Trash Can
-        solids.add(new Solid(3780, 1078, 12, 4, screen));
+        solids.add(new Solid(3780, 1078, 12, 4));
 
         //Left Store
-        solids.add(new Solid(2118, 517, 297, 491, screen));
-        solids.add(new Solid(2118, 1008, 72, 6, screen));
-        solids.add(new Solid(2342, 1008, 73, 6, screen));
-        solids.add(new Solid(2150, 1014, 8, 77, screen));
-        solids.add(new Solid(2375, 1014, 8, 77, screen));
-        solids.add(new Solid(2123, 1091, 79, 4, screen));
-        solids.add(new Solid(2327, 1091, 88, 4, screen));
-        solids.add(new Solid(2415, 917, 46, 136, screen));
+        solids.add(new Solid(2118, 517, 297, 491));
+        solids.add(new Solid(2118, 1008, 72, 6));
+        solids.add(new Solid(2342, 1008, 73, 6));
+        solids.add(new Solid(2150, 1014, 8, 77));
+        solids.add(new Solid(2375, 1014, 8, 77));
+        solids.add(new Solid(2123, 1091, 79, 4));
+        solids.add(new Solid(2327, 1091, 88, 4));
+        solids.add(new Solid(2415, 917, 46, 136));
         //Trash Can
-        solids.add(new Solid(2437, 1078, 12, 4, screen));
+        solids.add(new Solid(2437, 1078, 12, 4));
 
         //Mall
-        solids.add(new Solid(2590, 512, 1048, 384, screen));
-        solids.add(new Solid(2590, 896, 177, 78, screen));
-        solids.add(new Solid(2767, 896, 16, 106, screen));
-        solids.add(new Solid(2783, 896, 133, 30, screen));
-        solids.add(new Solid(2783, 926, 22, 29, screen));
-        solids.add(new Solid(2897, 926, 19, 29, screen));
-        solids.add(new Solid(2916, 896, 18, 106, screen));
-        solids.add(new Solid(2934, 896, 132, 90, screen));
-        solids.add(new Solid(2934, 986, 135, 16, screen));
-        solids.add(new Solid(3046, 102, 23, 24, screen));
-        solids.add(new Solid(3066, 896, 98, 90, screen));
-        solids.add(new Solid(3164, 896, 148, 90, screen));
-        solids.add(new Solid(3161, 986, 151, 16, screen));
-        solids.add(new Solid(3161, 1002, 23, 24, screen));
-        solids.add(new Solid(3312, 896, 133, 30, screen));
-        solids.add(new Solid(3312, 926, 22, 29, screen));
-        solids.add(new Solid(3426, 926, 19, 29, screen));
-        solids.add(new Solid(3445, 896, 16, 103, screen));
-        solids.add(new Solid(3461, 896, 177, 78, screen));
+        solids.add(new Solid(2590, 512, 1048, 384));
+        solids.add(new Solid(2590, 896, 177, 78));
+        solids.add(new Solid(2767, 896, 16, 106));
+        solids.add(new Solid(2783, 896, 133, 30));
+        solids.add(new Solid(2783, 926, 22, 29));
+        solids.add(new Solid(2897, 926, 19, 29));
+        solids.add(new Solid(2916, 896, 18, 106));
+        solids.add(new Solid(2934, 896, 132, 90));
+        solids.add(new Solid(2934, 986, 135, 16));
+        solids.add(new Solid(3046, 102, 23, 24));
+        solids.add(new Solid(3066, 896, 98, 90));
+        solids.add(new Solid(3164, 896, 148, 90));
+        solids.add(new Solid(3161, 986, 151, 16));
+        solids.add(new Solid(3161, 1002, 23, 24));
+        solids.add(new Solid(3312, 896, 133, 30));
+        solids.add(new Solid(3312, 926, 22, 29));
+        solids.add(new Solid(3426, 926, 19, 29));
+        solids.add(new Solid(3445, 896, 16, 103));
+        solids.add(new Solid(3461, 896, 177, 78));
 
         //North East residential
-        solids.add(new Solid(2123, 0, 1973, 190, screen));
-        solids.add(new Solid(2123, 190, 208, 21, screen));
-        solids.add(new Solid(2401, 190, 295, 21, screen));
-        solids.add(new Solid(2766, 190, 211, 21, screen));
-        solids.add(new Solid(3047, 190, 213, 21, screen));
-        solids.add(new Solid(3330, 190, 460, 21, screen));
-        solids.add(new Solid(3861, 190, 235, 21, screen));
+        solids.add(new Solid(2123, 0, 1973, 190));
+        solids.add(new Solid(2123, 190, 208, 21));
+        solids.add(new Solid(2401, 190, 295, 21));
+        solids.add(new Solid(2766, 190, 211, 21));
+        solids.add(new Solid(3047, 190, 213, 21));
+        solids.add(new Solid(3330, 190, 460, 21));
+        solids.add(new Solid(3861, 190, 235, 21));
         //Trash Cans
-        solids.add(new Solid(2114, 214, 12, 4, screen));
-        solids.add(new Solid(2850, 214, 12, 4, screen));
-        solids.add(new Solid(3160, 214, 12, 4, screen));
-        solids.add(new Solid(4066, 214, 12, 4, screen));
+        solids.add(new Solid(2114, 214, 12, 4));
+        solids.add(new Solid(2850, 214, 12, 4));
+        solids.add(new Solid(3160, 214, 12, 4));
+        solids.add(new Solid(4066, 214, 12, 4));
 
         //Blue Skycraper
-        solids.add(new Solid(1354, 0, 494, 57, screen));
-        solids.add(new Solid(1371, 57, 460, 20, screen));
-        solids.add(new Solid(1386, 77, 430, 20, screen));
-        solids.add(new Solid(1408, 97, 386, 20, screen));
-        solids.add(new Solid(1427, 117, 348, 16, screen));
-        solids.add(new Solid(1427, 133, 32, 50, screen));
-        solids.add(new Solid(1743, 133, 32, 50, screen));
-        solids.add(new Solid(1546, 133, 108, 50, screen));
-        solids.add(new Solid(1546, 183, 12, 27, screen));
-        solids.add(new Solid(1642, 183, 12, 27, screen));
+        solids.add(new Solid(1354, 0, 494, 57));
+        solids.add(new Solid(1371, 57, 460, 20));
+        solids.add(new Solid(1386, 77, 430, 20));
+        solids.add(new Solid(1408, 97, 386, 20));
+        solids.add(new Solid(1427, 117, 348, 16));
+        solids.add(new Solid(1427, 133, 32, 50));
+        solids.add(new Solid(1743, 133, 32, 50));
+        solids.add(new Solid(1546, 133, 108, 50));
+        solids.add(new Solid(1546, 183, 12, 27));
+        solids.add(new Solid(1642, 183, 12, 27));
 
         //Transport station
-        solids.add(new Solid(1346, 734, 508, 451, screen));
-        solids.add(new Solid(1346, 1185, 220, 19, screen));
-        solids.add(new Solid(1646, 1185, 208, 19, screen));
+        solids.add(new Solid(1346, 734, 508, 451));
+        solids.add(new Solid(1346, 1185, 220, 19));
+        solids.add(new Solid(1646, 1185, 208, 19));
         //Trasn Can
-        solids.add(new Solid(1590, 1335, 19, 7, screen));
+        solids.add(new Solid(1590, 1335, 19, 7));
         //Front lights
-        solids.add(new Solid(1371, 1300, 31, 31, screen));
-        solids.add(new Solid(1389, 1274, 18, 7, screen));
-        solids.add(new Solid(1796, 1273, 10, 8, screen));
-        solids.add(new Solid(1816, 1288, 8, 41, screen));
+        solids.add(new Solid(1371, 1300, 31, 31));
+        solids.add(new Solid(1389, 1274, 18, 7));
+        solids.add(new Solid(1796, 1273, 10, 8));
+        solids.add(new Solid(1816, 1288, 8, 41));
         //Fence 
-        solids.add(new Solid(1346, 657, 4, 77, screen));
-        solids.add(new Solid(1346, 517, 4, 44, screen));
-        solids.add(new Solid(1350, 517, 500, 2, screen));
-        solids.add(new Solid(1850, 517, 4, 44, screen));
-        solids.add(new Solid(1850, 667, 4, 67, screen));
+        solids.add(new Solid(1346, 657, 4, 77));
+        solids.add(new Solid(1346, 517, 4, 44));
+        solids.add(new Solid(1350, 517, 500, 2));
+        solids.add(new Solid(1850, 517, 4, 44));
+        solids.add(new Solid(1850, 667, 4, 67));
         //Bikes
-        solids.add(new Solid(1395, 550, 23, 5, screen));
-        solids.add(new Solid(1467, 563, 23, 5, screen));
-        solids.add(new Solid(1533, 571, 34, 5, screen));
-        solids.add(new Solid(1563, 619, 34, 2, screen));
-        solids.add(new Solid(1670, 596, 41, 2, screen));
-        solids.add(new Solid(1692, 567, 41, 29, screen));
-        solids.add(new Solid(1754, 609, 17, 2, screen));
+        solids.add(new Solid(1395, 550, 23, 5));
+        solids.add(new Solid(1467, 563, 23, 5));
+        solids.add(new Solid(1533, 571, 34, 5));
+        solids.add(new Solid(1563, 619, 34, 2));
+        solids.add(new Solid(1670, 596, 41, 2));
+        solids.add(new Solid(1692, 567, 41, 29));
+        solids.add(new Solid(1754, 609, 17, 2));
         //Trash Can
-        solids.add(new Solid(1626, 532, 12, 4, screen));
+        solids.add(new Solid(1626, 532, 12, 4));
 
         //RecycleCo.
-        solids.add(new Solid(153, 841, 154, 15, screen));
-        solids.add(new Solid(117, 856, 224, 15, screen));
-        solids.add(new Solid(80, 871, 298, 19, screen));
-        solids.add(new Solid(5, 890, 407, 459, screen));
-        solids.add(new Solid(5, 1349, 190, 10, screen));
-        solids.add(new Solid(269, 1349, 142, 10, screen));
+        solids.add(new Solid(153, 841, 154, 15));
+        solids.add(new Solid(117, 856, 224, 15));
+        solids.add(new Solid(80, 871, 298, 19));
+        solids.add(new Solid(5, 890, 407, 459));
+        solids.add(new Solid(5, 1349, 190, 10));
+        solids.add(new Solid(269, 1349, 142, 10));
 
         //City Hall
-        solids.add(new Solid(711, 1670, 370, 694, screen));
+        solids.add(new Solid(711, 1670, 370, 694));
         //Lights
-        solids.add(new Solid(718, 2465, 22, 43, screen));
-        solids.add(new Solid(1053, 2465, 22, 43, screen));
+        solids.add(new Solid(718, 2465, 22, 43));
+        solids.add(new Solid(1053, 2465, 22, 43));
 
         //Gym
-        solids.add(new Solid(1353, 1671, 494, 311, screen));
-        solids.add(new Solid(1528, 1982, 35, 82, screen));
-        solids.add(new Solid(1563, 1982, 160, 40, screen));
-        solids.add(new Solid(1723, 1982, 35, 87, screen));
-        solids.add(new Solid(1376, 2051, 39, 75, screen));
-        solids.add(new Solid(1376, 2406, 39, 75, screen));
-        solids.add(new Solid(1786, 2051, 39, 75, screen));
-        solids.add(new Solid(1786, 2406, 39, 75, screen));
-        solids.add(new Solid(1369, 2126, 52, 18, screen));
-        solids.add(new Solid(1779, 2126, 52, 18, screen));
-        solids.add(new Solid(1369, 2481, 52, 18, screen));
-        solids.add(new Solid(1779, 2481, 52, 18, screen));
+        solids.add(new Solid(1353, 1671, 494, 311));
+        solids.add(new Solid(1528, 1982, 35, 82));
+        solids.add(new Solid(1563, 1982, 160, 40));
+        solids.add(new Solid(1723, 1982, 35, 87));
+        solids.add(new Solid(1376, 2051, 39, 75));
+        solids.add(new Solid(1376, 2406, 39, 75));
+        solids.add(new Solid(1786, 2051, 39, 75));
+        solids.add(new Solid(1786, 2406, 39, 75));
+        solids.add(new Solid(1369, 2126, 52, 18));
+        solids.add(new Solid(1779, 2126, 52, 18));
+        solids.add(new Solid(1369, 2481, 52, 18));
+        solids.add(new Solid(1779, 2481, 52, 18));
         //Trash Can
-        solids.add(new Solid(1484, 1982, 44, 37, screen));
+        solids.add(new Solid(1484, 1982, 44, 37));
 
         //Solids Street
-        solids.add(new Solid(527, 326, 98, 210, screen));
-        solids.add(new Solid(527, 646, 98, 82, screen));
-        solids.add(new Solid(527, 841, 98, 533, screen));
-        solids.add(new Solid(527, 1478, 98, 82, screen));
-        solids.add(new Solid(527, 1674, 98, 856, screen));
-        solids.add(new Solid(527, 2630, 98, 82, screen));
-        solids.add(new Solid(0, 646, 433, 82, screen));
-        solids.add(new Solid(0, 1478, 433, 82, screen));
-        solids.add(new Solid(0, 2312, 433, 82, screen));
-        solids.add(new Solid(720, 326, 360, 82, screen));
-        solids.add(new Solid(720, 1478, 360, 82, screen));
-        solids.add(new Solid(720, 2630, 360, 82, screen));
-        solids.add(new Solid(1167, 0, 98, 216, screen));
-        solids.add(new Solid(1167, 326, 98, 82, screen));
-        solids.add(new Solid(1167, 518, 98, 856, screen));
-        solids.add(new Solid(1167, 1478, 98, 82, screen));
-        solids.add(new Solid(1167, 1674, 98, 856, screen));
-        solids.add(new Solid(1167, 2630, 98, 82, screen));
-        solids.add(new Solid(1360, 326, 488, 82, screen));
-        solids.add(new Solid(1360, 1478, 488, 82, screen));
-        solids.add(new Solid(1360, 2630, 488, 82, screen));
-        solids.add(new Solid(1935, 0, 98, 216, screen));
-        solids.add(new Solid(1935, 326, 98, 82, screen));
-        solids.add(new Solid(1935, 518, 98, 856, screen));
-        solids.add(new Solid(1935, 1478, 98, 82, screen));
-        solids.add(new Solid(1935, 1674, 98, 856, screen));
-        solids.add(new Solid(1935, 2630, 98, 82, screen));
-        solids.add(new Solid(1935, 2824, 98, 1052, screen));
-        solids.add(new Solid(1935, 3977, 98, 82, screen));
-        solids.add(new Solid(2128, 326, 1968, 82, screen));
-        solids.add(new Solid(2128, 1478, 1968, 82, screen));
-        solids.add(new Solid(2128, 2630, 1968, 82, screen));
-        solids.add(new Solid(2125, 3336, 1638, 82, screen));
-        solids.add(new Solid(2125, 3977, 1970, 82, screen));
-        solids.add(new Solid(3665, 3418, 98, 452, screen));
+        solids.add(new Solid(527, 326, 98, 210));
+        solids.add(new Solid(527, 646, 98, 82));
+        solids.add(new Solid(527, 841, 98, 533));
+        solids.add(new Solid(527, 1478, 98, 82));
+        solids.add(new Solid(527, 1674, 98, 856));
+        solids.add(new Solid(527, 2630, 98, 82));
+        solids.add(new Solid(0, 646, 433, 82));
+        solids.add(new Solid(0, 1478, 433, 82));
+        solids.add(new Solid(0, 2312, 433, 82));
+        solids.add(new Solid(720, 326, 360, 82));
+        solids.add(new Solid(720, 1478, 360, 82));
+        solids.add(new Solid(720, 2630, 360, 82));
+        solids.add(new Solid(1167, 0, 98, 216));
+        solids.add(new Solid(1167, 326, 98, 82));
+        solids.add(new Solid(1167, 518, 98, 856));
+        solids.add(new Solid(1167, 1478, 98, 82));
+        solids.add(new Solid(1167, 1674, 98, 856));
+        solids.add(new Solid(1167, 2630, 98, 82));
+        solids.add(new Solid(1360, 326, 488, 82));
+        solids.add(new Solid(1360, 1478, 488, 82));
+        solids.add(new Solid(1360, 2630, 488, 82));
+        solids.add(new Solid(1935, 0, 98, 216));
+        solids.add(new Solid(1935, 326, 98, 82));
+        solids.add(new Solid(1935, 518, 98, 856));
+        solids.add(new Solid(1935, 1478, 98, 82));
+        solids.add(new Solid(1935, 1674, 98, 856));
+        solids.add(new Solid(1935, 2630, 98, 82));
+        solids.add(new Solid(1935, 2824, 98, 1052));
+        solids.add(new Solid(1935, 3977, 98, 82));
+        solids.add(new Solid(2128, 326, 1968, 82));
+        solids.add(new Solid(2128, 1478, 1968, 82));
+        solids.add(new Solid(2128, 2630, 1968, 82));
+        solids.add(new Solid(2125, 3336, 1638, 82));
+        solids.add(new Solid(2125, 3977, 1970, 82));
+        solids.add(new Solid(3665, 3418, 98, 452));
 
         //CrossWalks
         crosswalks.add(new Crosswalk(448, 646, 64, 82, this, screen));
@@ -670,28 +675,28 @@ public class Game implements Runnable {
         possibleNPCs[0] = 0;
         possibleNPCs[1] = 1;
         possibleNPCs[2] = 2;
-        
-        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1615, 530, 34, 54,screen,0,false)); 
-        trashContainers.add(new TrashContainer(2103, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(2839, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(4055, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1583, 1331, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(2426, 1074, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(3769, 1074, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(23, 1975, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1476, 2012, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(3391, 2507, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(125, 3555, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(3175, 3233, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(3556, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3654, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3851, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3951, 1821, 96, 86,screen,0,true));
-        
+
+        trashContainers.add(new TrashContainer(266, 385, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1615, 530, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2103, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2839, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(4055, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1583, 1331, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(2426, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3769, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(23, 1975, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1476, 2012, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3391, 2507, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(125, 3555, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3175, 3233, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3556, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3654, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3851, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3951, 1821, 96, 86, screen, 0, true));
+
     }
 
     @Override
@@ -742,7 +747,6 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
-           
 
             for (int i = 0; i < crosswalks.size(); i++) {
                 crosswalks.get(i).tick();
@@ -751,9 +755,6 @@ public class Game implements Runnable {
                 roadChanges.get(i).tick();
             }
 
-            for (int i = 0; i < storeDoors.size(); i++) {
-                storeDoors.get(i).tick();
-            }
             //Movement of car
             car.tick();
             //Checks if the player started a conversation with any NPC
@@ -793,12 +794,15 @@ public class Game implements Runnable {
 
                 }
             }
-                       
+
             npcTrashClassify.tick();
             player.tick();
+            for (int i = 0; i < storeDoors.size(); i++) {
+                storeDoors.get(i).tick();
+            }
 
             //If player intersects the TodoMart door
-            if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
+            /*if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
                 TodoMartRoom tmr = new TodoMartRoom("TodoxMartRoom", 512, 512, display, keyManager, this, player);
                 tmr.start();
                 // TodoMart tm = new TodoMart("TodoxMart", 512, 512, display, keyManager, this);
@@ -809,6 +813,11 @@ public class Game implements Runnable {
             if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
                 RecycleCoRoom rcr = new RecycleCoRoom("RecycleCoRoom", 512, 512, display, keyManager, this, player);
                 rcr.start();
+                running = false;
+            }*/
+            if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro())) {
+                TodoMartRoom tmr = new TodoMartRoom("Todo x Mart", 512, 512, display, keyManager, this, player);
+                tmr.start();
                 running = false;
             }
 
@@ -869,8 +878,8 @@ public class Game implements Runnable {
                                 if (trashContainers.get(i).getElectronics() >= delta) {
                                     player.setInventory(player.getInventory() + delta);
                                     player.setElectronics(player.getElectronics() + delta);
-                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics()-delta);
-                                    
+                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics() - delta);
+
                                 } else {
                                     player.setInventory(player.getInventory() + trashContainers.get(i).getElectronics());
                                     player.setElectronics(player.getElectronics() + trashContainers.get(i).getElectronics());
@@ -885,7 +894,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getAluminum() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setAluminum(player.getAluminum() + delta);
-                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum()-delta);
+                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getAluminum());
                                         player.setAluminum(player.getAluminum() + trashContainers.get(i).getAluminum());
@@ -901,7 +910,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getGlass() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setGlass(player.getGlass() + delta);
-                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass()-delta);
+                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getGlass());
                                         player.setGlass(player.getGlass() + trashContainers.get(i).getGlass());
@@ -917,7 +926,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getPlastic() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setPlastic(player.getPlastic() + delta);
-                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic()-delta);
+                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getPlastic());
                                         player.setPlastic(player.getPlastic() + trashContainers.get(i).getPlastic());
@@ -933,11 +942,11 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getPaper() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setPaper(player.getPaper() + delta);
-                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper()-delta);
+                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getPaper());
                                         player.setPaper(player.getPaper() + trashContainers.get(i).getPaper());
-                                         trashContainers.get(i).setPaper(0);
+                                        trashContainers.get(i).setPaper(0);
                                     }
                                 }
                             }
@@ -949,7 +958,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getOrganic() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setOrganic(player.getOrganic() + delta);
-                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic()-delta);
+                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getOrganic());
                                         player.setOrganic(player.getOrganic() + trashContainers.get(i).getOrganic());

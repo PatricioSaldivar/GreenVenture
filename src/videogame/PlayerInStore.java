@@ -64,7 +64,7 @@ public class PlayerInStore extends Item {
 
     @Override
     public void tick() {
-        // moving player depending on flags
+        // Moving player depending on flags
         this.animationDown.tick();
         this.animationUp.tick();
         this.animationRight.tick();
@@ -86,19 +86,22 @@ public class PlayerInStore extends Item {
             setX(getX() - speed);
         }
 
-        // reset x position and y position if colision
+        // Reset x and y position if player gets out of boundaries
         if (getX() + 65 >= game.getWidth()) {
             setX(game.getWidth() - 65);
         } else if (getX() <= 0) {
             setX(0);
         }
-
-        if (getY() + 65 >= game.getHeight()) {
+           
+        if (getY() <= 0) {
+            setY(0);
+        }
+        /*if (getY() + 65 >= game.getHeight()) {
             setY(game.getHeight() - 65);
         } else if (getY() <= 0) {
             setY(0);
-        }
-/*
+        }*/
+
         for (int i = 0; i < solids.size(); i++) {
             //Checks collisions with solids when going from left to right
             if (getPerimetroForSolidsRight().intersects(solids.get(i).getPerimetroRight(0, 0))) {
@@ -121,7 +124,7 @@ public class PlayerInStore extends Item {
 
             }
 
-        } */
+        } 
 
     }
 
