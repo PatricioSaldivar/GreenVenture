@@ -49,7 +49,6 @@ public class Game implements Runnable {
     private Car car;                            // used to create the car
     private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
     private ArrayList<TrashContainer> trashContainers; //to manage all the trashContainers
-    private boolean tutorialEnded = true;          // to manage if the tutorial has been played
     private boolean pauseHelper;
     private Animation pauseHelperAnimation;
     private int indexWas;
@@ -79,29 +78,29 @@ public class Game implements Runnable {
         this.display = display;
         display.setTitle("Ciudad");
 
-        player = new Player(40, 40, 64, 64, this);
+        player = new Player(186, 43, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, player, trash);
         //FALTA POSICIONARLOS
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 1));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 2));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 3, 3));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 4, 4));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 5, 5));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 6, 6));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 7, 7));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 8, 8));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 9, 9));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 10, 10));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 11, 11));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 12, 12));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 13, 13));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 14, 14));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 15, 15));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 16, 15));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 17, 14));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 18, 13));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 19, 12));
+        npcs.add(new NPC(358, 425, 64, 64, this, screen, 0, 0));
+        npcs.add(new NPC(759, 224, 64, 64, this, screen, 1, 1));
+        npcs.add(new NPC(810, 823, 64, 64, this, screen, 2, 2));
+        npcs.add(new NPC(1478, 1376, 64, 64, this, screen, 3, 3));
+        npcs.add(new NPC(2317, 1246, 64, 64, this, screen, 4, 4));
+        npcs.add(new NPC(2696, 1299, 64, 64, this, screen, 5, 5));
+        npcs.add(new NPC(2528, 275, 64, 64, this, screen, 6, 6));
+        npcs.add(new NPC(3312, 1339, 64,64, this, screen, 7, 7));
+        npcs.add(new NPC(1626, 2356, 64, 64, this, screen, 8, 8));
+        npcs.add(new NPC(965, 3199, 64, 64, this, screen, 9, 9));
+        npcs.add(new NPC(2755, 1807, 64, 64, this, screen, 10, 10));
+        npcs.add(new NPC(3519, 3027, 64, 64, this, screen, 11, 11));
+        npcs.add(new NPC(1602, 2980, 64, 64, this, screen, 12, 12));
+        npcs.add(new NPC(1831, 3716, 64, 64, this, screen, 13, 13));
+        npcs.add(new NPC(277, 3825, 64, 64, this, screen, 14, 14));
+        npcs.add(new NPC(408, 3951, 64, 64, this, screen, 15, 15));
+        npcs.add(new NPC(1216, 3712, 64, 64, this, screen, 16, 15));
+        npcs.add(new NPC(705, 3903, 64, 64, this, screen, 17, 14));
+        npcs.add(new NPC(95, 3188, 64, 64, this, screen, 18, 13));
+        npcs.add(new NPC(3819, 1308, 64, 64, this, screen, 19, 12));
         car = new Car(512, 320, 128, 128, screen, this);
         car.setDirection(2);
 
@@ -785,7 +784,7 @@ public class Game implements Runnable {
     private void tick() {
         keyManager.tick();
 
-        if (tutorialEnded) {
+        if (player.isTutorialEnded()) {
             if(!pauseHelper){
             if (!keyManager.pause) {
                 // avancing player with colision

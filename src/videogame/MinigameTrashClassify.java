@@ -284,11 +284,11 @@ public class MinigameTrashClassify implements Runnable {
                 if(endGame){
                    g.setFont(fontx.deriveFont(38f));
                     String message = "Puntaje Final: " + score;
-                    g.drawString( message, (this.getWidth() - ((message.length()/2) * g.getFont().getSize()))/2, this.getHeight()/2);
+                    g.drawString( message, (this.getWidth() -(((message.length()/2)+2) * g.getFont().getSize()))/2, this.getHeight()/2);
                 } else {
                     //Draws Score in display
                     g.getFont().deriveFont(36f);
-                    g.drawString("Puntaje: "+ score,0, 40);
+                    g.drawString("Puntaje: "+ score,12, 40);
                 }
                 
             }
