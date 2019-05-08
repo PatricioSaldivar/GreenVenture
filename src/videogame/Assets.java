@@ -35,6 +35,7 @@ public class Assets {
     public static BufferedImage trashcanDefault;
     public static BufferedImage dumpOwned;
     public static BufferedImage dumpDefault;
+    public static BufferedImage stats[];
 
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
@@ -90,6 +91,7 @@ public class Assets {
     public static SoundClip gameStart;                    // to store the sound of new game or continue game button
     public static SoundClip selectSound;                  // to store the sound of the menu selector
     public static BufferedImage mainMenuInstructionsImage[];
+    public static BufferedImage credits[];
 
     //Minigame Pause Assets
     public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
@@ -889,7 +891,15 @@ public class Assets {
         mainMenuInstructionsImage = new BufferedImage[2];
         mainMenuInstructionsImage[0] = ImageLoader.loadImage("/imagesMainMenu/instructions.png");
         mainMenuInstructionsImage[1] = ImageLoader.loadImage("/imagesMainMenu/instructions2.png");
-
+        
+        stats = new BufferedImage[2];
+        stats[0]=ImageLoader.loadImage("/imagesPause/stats.png");
+        stats[1]=ImageLoader.loadImage("/imagesPause/stats1.png");
+        
+        credits= new BufferedImage[2];
+        credits[0]=ImageLoader.loadImage("/imagesMainMenu/Credits.png");
+        credits[1]=ImageLoader.loadImage("/imagesMainMenu/Credits1.png");
+        
         //RecycleCo Loader
         recycleCoAluminum = new BufferedImage[2];
         recycleCoAluminum[0] = ImageLoader.loadImage("/imagesRecycleCo/recAluminum.png");

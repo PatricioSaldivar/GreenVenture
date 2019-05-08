@@ -50,7 +50,7 @@ public class NPC extends Item {
         this.trashContainerId = trashContainerId;
         iniX = x;
         iniY = y;
-        trashMakerHelper = (int) (Math.random() *(500)+ 50);
+        trashMakerHelper = (int) (Math.random() *(1000)+ 500);
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
@@ -426,7 +426,7 @@ public class NPC extends Item {
                         game.getTrash().add(new Trash(x + screen.getX() + 16, y + screen.getY() + 16, 32, 32, randType, game, screen, id));
                         trashThrown++;
                         justThrowedTrash = true;
-                        justThrowedTrashHelper = 50;
+                        justThrowedTrashHelper = 100;
                     }
                     trashMaker = 0;
                 }
