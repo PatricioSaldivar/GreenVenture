@@ -35,6 +35,7 @@ public class TodoMartRoom implements Runnable{
     private Game game;                      // to store the game in which it was before
     private boolean cont = false;           // to continue the game
     private ArrayList<Solid> solids;        // to store the solids
+    
 
     /**
      * to create title, width and height and set the game is still not running
@@ -53,7 +54,7 @@ public class TodoMartRoom implements Runnable{
         display.setTitle("TodoxMartRoom");
         this.game = game;
         this.player = player;
-        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
+        solids = new ArrayList<>();
         
         //Adds font from fonts package
         try {
@@ -109,7 +110,20 @@ public class TodoMartRoom implements Runnable{
      */
     private void init() {
         Assets.init();
+        
+        //Solids
+        solids.add(new Solid(0, 0, 181, 263));
+        solids.add(new Solid(181, 0, 154, 80));
+        solids.add(new Solid(335, 0, 146, 101));
+        solids.add(new Solid(481, 0, 31, 501));
+        solids.add(new Solid(259, 501, 253, 11));
+        solids.add(new Solid(347, 230, 39, 152));
+        solids.add(new Solid(386, 241, 25, 141));
+        solids.add(new Solid(0, 363, 134, 27));
+        solids.add(new Solid(0, 390, 33, 109));
+        solids.add(new Solid(0, 499, 161, 13));
 
+        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
     }
 
     @Override
@@ -163,8 +177,12 @@ public class TodoMartRoom implements Runnable{
             tm.start();
             running = false;
         }
-        if(playablePlayer.getPerimetro().intersects(this.getPerimetroWorld())  && (keyManager.space && !keyManager.helperSpace)){
+        //Exits player from room
+        if (playablePlayer.getY() > 458) {
             Assets.gameStart.play();
+            //Updates plyaer's position
+            game.getPlayer().setSMoveY(game.getPlayer().getSMoveY()+5);
+            
             game.setCont(true);
             game.start();
             running = false;
@@ -173,12 +191,9 @@ public class TodoMartRoom implements Runnable{
              
     }
     
+    // Gets perimeter of area to activate store menu
     public Rectangle getPerimetroStore() {
         return new Rectangle(0,120,210,215);
-    }
-    
-    public Rectangle getPerimetroWorld() {
-        return new Rectangle(172,450,75,62);
     }
 
     private void render() {

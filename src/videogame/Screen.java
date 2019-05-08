@@ -169,6 +169,15 @@ public class Screen {
         this.player = player;
     }
 
+    public LinkedList<Trash> getTrash() {
+        return trash;
+    }
+
+    public void setTrash(LinkedList<Trash> trash) {
+        this.trash = trash;
+    }
+    
+
     /**
      * To get the rectangle that covers the perimeter of the screen
      *
@@ -330,7 +339,9 @@ public class Screen {
         //Draws the background depending of the screen parameter   
         g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), x, y, x2, y2, Color.black, null);
 
-        
+        for(int i=0; i< game.getStoreDoors().size();i++){
+            game.getStoreDoors().get(i).render(g);
+        }
         //Renders TrashContainers
         for(int i=0; i<game.getTrashContainers().size(); i++){
             game.getTrashContainers().get(i).tick();
