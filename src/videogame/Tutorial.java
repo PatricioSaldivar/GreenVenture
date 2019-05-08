@@ -199,7 +199,7 @@ public class Tutorial implements Runnable {
         switch (contM) {
             case 0:
                 message = "Utiliza las flechas del teclado para moverte\npor el mapa.";
-                g.drawImage(Assets.player, 27, 36, 44, 54, null);
+                g.drawImage(Assets.arrows, 27, 36, 44, 54, null);
                 break;
             case 1:
                 message = "Recoge toda la basura veas con la tecla ESPACIO,\ntienes un límite de basura que puedes\nalmacenar dependiendo de la capacidad\nde tu mochila.";
@@ -227,7 +227,7 @@ public class Tutorial implements Runnable {
                 break;
             case 7:
                 message = "'TodoxMart' es la tienda donde comprar\nlas mejoras.";
-                g.drawImage(Assets.player, 27, 36, 44, 54, null);
+                g.drawImage(Assets.trash[14], 27, 36, 44, 54, null);
                 break;
         }
 

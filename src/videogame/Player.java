@@ -51,6 +51,7 @@ public class Player extends Item {
     private double totalIncome;    //to save the total income generated
     private int progress;       // to save the progress of the city as 
     private int kilometersHelper;
+    private boolean tutorialEnded = false;          // to manage if the tutorial has been played
 
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y);
@@ -357,6 +358,16 @@ public class Player extends Item {
 
     public void setTotalIncome(double totalIncome) {
         this.totalIncome = totalIncome;
+    }
+    
+
+
+    public boolean isTutorialEnded() {
+        return tutorialEnded;
+    }
+
+    public void setTutorialEnded(boolean tutorialEnded) {
+        this.tutorialEnded = tutorialEnded;
     }
     
 

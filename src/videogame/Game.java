@@ -784,6 +784,7 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
+
         if (tutorialEnded) {
             if(!pauseHelper){
             if (!keyManager.pause) {
@@ -1078,7 +1079,7 @@ public class Game implements Runnable {
             
         } else {
             Tutorial trt = new Tutorial("Tutorial", width, height, display, keyManager, this);
-            tutorialEnded = true;
+            player.setTutorialEnded(true);
             trt.start();
             running = false;
         }
