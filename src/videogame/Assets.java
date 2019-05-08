@@ -118,6 +118,12 @@ public class Assets {
     
     //Select cursor
     public static BufferedImage selector[];
+    
+    //Tutorial Assets
+    public static BufferedImage tutorialBackground;          // to store the tutorial background
+    
+    //Text Box Asset
+    public static BufferedImage textBox;                    // to store the text box image
 
     /**
      * initializing the images of the game
@@ -936,11 +942,18 @@ public class Assets {
         selector[0] = ImageLoader.loadImage("/images/selector1.png");
         selector[1] = ImageLoader.loadImage("/images/selector2.png");
         
+        //Tutorial
+        tutorialBackground = ImageLoader.loadImage("/images/tutorial.png");
+        
+        //Text box asset
+        textBox = ImageLoader.loadImage("/images/textBox.png");
+
         door = new BufferedImage[4];
         door[0] = ImageLoader.loadImage("/images/door/door1.png");
         door[1] = ImageLoader.loadImage("/images/door/door2.png");
         door[2] = ImageLoader.loadImage("/images/door/door3.png");
         door[3] = ImageLoader.loadImage("/images/door/door4.png");
+
 
     }
 

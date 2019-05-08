@@ -38,7 +38,7 @@ public class PlayerInStore extends Item {
         this.animationLeft = new Animation(Assets.playerLeft, 200);
         this.solids = solids;
         this.game = game;
-        this.direction = 1;
+        this.direction = 2;
 
     }
 

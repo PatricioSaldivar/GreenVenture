@@ -48,6 +48,7 @@ public class Game implements Runnable {
     private Car car;                            // used to create the car
     private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
     private ArrayList<TrashContainer> trashContainers; //to manage all the trashContainers
+    private boolean tutorialEnded = false;          // to manage if the tutorial has been played
 
     /**
      * to create title, width and height and set the game is still not running
@@ -751,6 +752,7 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
+        if(tutorialEnded){
         if (!keyManager.pause) {
             // avancing player with colision
 
@@ -1029,6 +1031,12 @@ public class Game implements Runnable {
                 }
             }
 
+        }
+       } else {
+            Tutorial trt = new Tutorial("Tutorial",width,height,display,keyManager,this);
+            tutorialEnded = true;
+            trt.start();
+            running = false;
         }
 
     }
