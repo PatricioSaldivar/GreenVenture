@@ -96,8 +96,8 @@ public StoreDoor(int x, int y, int width, int height, Game game, Screen screen, 
      */
     @Override
     public void render(Graphics g) {
+        //Renders corresponding image from the array
         g.drawImage(Assets.door[index], x, y, 77,67,null);
-
     }
 
     /**

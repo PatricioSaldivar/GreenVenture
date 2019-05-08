@@ -97,7 +97,8 @@ public class Assets {
     public static BufferedImage todoMartSneakersUp[];       // to store the images fo the TodoMart when Sneakers upgrade is selected
     public static BufferedImage todoMartValueUp[];          // to store the images fo the TodoMart when Trash Value upgrade is selected
 
-    public static BufferedImage todoMartRoom;               // to store the room background where the player locate before seeing the 
+    public static BufferedImage todoMartRoom;               // to store the room background for todoMart 
+    public static BufferedImage recycleCoRoom;              // to store the room background for recycleCo
 
     //Door Assets
     public static BufferedImage door[];                     // to store the images for the door animation
@@ -350,7 +351,11 @@ public class Assets {
         todoMartValueUp[0] = ImageLoader.loadImage("/imagesTodoMart/valueUp.png");
         todoMartValueUp[1] = ImageLoader.loadImage("/imagesTodoMart/valueUp2.png");
 
+        //Store background
         todoMartRoom = ImageLoader.loadImage("/imagesTodoMart/storeRoom.png");
+        
+        //RecycleCo background
+        recycleCoRoom = ImageLoader.loadImage("/imagesRecycleCo/recycleCo.png");
 
         //Selector
         selector = new BufferedImage[2];

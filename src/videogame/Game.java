@@ -211,10 +211,12 @@ public class Game implements Runnable {
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
-        //Creates doors to enter to the stores
+        //Creates doors to enter stores
         //storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));           // TodoxMartRoom door
+        //storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
         storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));     //TodoxMartRoom door
-        storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
+        storeDoors.add(new StoreDoor(193, 1339, 77, 67, this, screen, 1));         // RecycleCoRoom door    
+        
 
         //Map boundaries
         solids.add(new Solid(0, -32, 4096, 32));
@@ -494,9 +496,9 @@ public class Game implements Runnable {
         solids.add(new Solid(153, 841, 154, 15));
         solids.add(new Solid(117, 856, 224, 15));
         solids.add(new Solid(80, 871, 298, 19));
-        solids.add(new Solid(5, 890, 407, 459));
-        solids.add(new Solid(5, 1349, 190, 10));
-        solids.add(new Solid(269, 1349, 142, 10));
+        solids.add(new Solid(5, 890, 407, 449));
+        solids.add(new Solid(5, 1339, 190, 20));
+        solids.add(new Solid(269, 1339, 143, 20));
 
         //City Hall
         solids.add(new Solid(711, 1670, 370, 694));
@@ -800,24 +802,17 @@ public class Game implements Runnable {
             for (int i = 0; i < storeDoors.size(); i++) {
                 storeDoors.get(i).tick();
             }
-
-            //If player intersects the TodoMart door
-            /*if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
-                TodoMartRoom tmr = new TodoMartRoom("TodoxMartRoom", 512, 512, display, keyManager, this, player);
-                tmr.start();
-                // TodoMart tm = new TodoMart("TodoxMart", 512, 512, display, keyManager, this);
-                //tm.start();
-                running = false;
-            }
-            //If player intersects the RecycleCo door
-            if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro()) && keyManager.space && !keyManager.helperSpace) {
-                RecycleCoRoom rcr = new RecycleCoRoom("RecycleCoRoom", 512, 512, display, keyManager, this, player);
-                rcr.start();
-                running = false;
-            }*/
+            
+            //If player intersects TodoMart door, it enters to new room
             if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro())) {
                 TodoMartRoom tmr = new TodoMartRoom("Todo x Mart", 512, 512, display, keyManager, this, player);
                 tmr.start();
+                running = false;
+            }
+            //If player intersect RecycleCo door, it enters to new room
+            if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro())) {
+                RecycleCoRoom rcr = new RecycleCoRoom("Recycle Co. Room", 512, 512, display, keyManager, this, player);
+                rcr.start();
                 running = false;
             }
 
