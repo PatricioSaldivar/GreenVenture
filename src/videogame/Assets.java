@@ -124,6 +124,13 @@ public class Assets {
     
     //Text Box Asset
     public static BufferedImage textBox;                    // to store the text box image
+    
+    //Car Asset
+    public static BufferedImage carSpriteSheet;          // to store the car
+    public static BufferedImage carUp[];                   // to store the car         
+    public static BufferedImage carDown[];                  // to store the car
+    public static BufferedImage carRight[];             // to store the car
+    public static BufferedImage carLeft[];              // to store the car
 
     /**
      * initializing the images of the game
@@ -953,7 +960,28 @@ public class Assets {
         door[1] = ImageLoader.loadImage("/images/door/door2.png");
         door[2] = ImageLoader.loadImage("/images/door/door3.png");
         door[3] = ImageLoader.loadImage("/images/door/door4.png");
-
+        
+        //Car Assets
+        carSpriteSheet = ImageLoader.loadImage("/imagesCar/car.png");
+        SpriteSheet carSprites = new SpriteSheet(carSpriteSheet);
+        carDown = new BufferedImage[3];
+        carUp = new BufferedImage[3];
+        carLeft = new BufferedImage[3];
+        carRight = new BufferedImage[3];
+        //Get images from spritesheet
+        for (int i = 0; i < 3; i++) {
+            carDown[i] = carSprites.crop(i*156,0, 156,156);
+        }
+        for (int i = 0; i < 3; i++) {
+            carLeft[i] = carSprites.crop(i*156,156,156,156);
+        }
+        for (int i = 0; i < 3; i++) {
+            carRight[i] = carSprites.crop(i*156,312,156,156);
+        }
+        for (int i = 0; i < 3; i++) {
+            carUp[i] = carSprites.crop(i*156,468,156,156);
+        }
+        
 
     }
 
