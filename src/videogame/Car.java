@@ -27,7 +27,16 @@ public class Car extends Solid {
     private Animation down;
     private Animation right;
     private Animation left;
-
+    /**
+     * 
+     * 
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param screen
+     * @param game 
+     */
     Car(int x, int y, int width, int height, Screen screen, Game game) {
         super(x, y, width, height);
         this.game = game;
@@ -40,84 +49,149 @@ public class Car extends Solid {
         left = new Animation(Assets.carLeft,100);
 
     }
-
+    /**
+     * 
+     *
+     * @return game
+     */
     public Game getGame() {
         return game;
     }
-
+    /**
+     * 
+     * 
+     * @param game 
+     */
     public void setGame(Game game) {
         this.game = game;
     }
-
+    /**
+    * 
+    * 
+    * @return xMove 
+    */
     public int getSMoveX() {
         return xMove;
     }
-
+    /**
+     * 
+     * 
+     * @param SMoveX 
+     */
     public void setSMoveX(int SMoveX) {
         this.xMove = SMoveX;
     }
-
+    /**
+     *
+     * @return yMove
+     */
     public int getSMoveY() {
         return yMove;
     }
-
+    /**
+     * 
+     * 
+     * @param SMoveY 
+     */
     public void setSMoveY(int SMoveY) {
         this.yMove = SMoveY;
     }
-
+    /**
+     * 
+     * 
+     * @return direction 
+     */
     public int getDirection() {
         return direction;
     }
-
+    /**
+     * 
+     * @param direction 
+     */
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
+    /**
+     * 
+     * 
+     * @param alreadyChecked 
+     */
     public void setAlreadyChecked(int alreadyChecked) {
         this.alreadyChecked = alreadyChecked;
     }
-
+    /**
+     * 
+     * 
+     * @return xMove 
+     */
     public int getxMove() {
         return xMove;
     }
-
+    /**
+     * 
+     * 
+     * @param xMove 
+     */
     public void setxMove(int xMove) {
         this.xMove = xMove;
     }
-
+    /**
+     * 
+     * 
+     * @return yMove
+     */
     public int getyMove() {
         return yMove;
     }
-
+    /**
+     * 
+     * 
+     * @param yMove 
+     */
     public void setyMove(int yMove) {
         this.yMove = yMove;
     }
-
+    /**
+     * 
+     * 
+     * @return iniX 
+     */
     public int getIniX() {
         return iniX;
     }
-
+    /**
+     * 
+     * @param iniX 
+     */
     public void setIniX(int iniX) {
         this.iniX = iniX;
     }
-
+    /**
+     * 
+     * @return iniY 
+     */
     public int getIniY() {
         return iniY;
     }
-
+    /**
+     * 
+     * @param iniY 
+     */
     public void setIniY(int iniY) {
         this.iniY = iniY;
     }
-
+    /**
+     * 
+     * 
+     * @return  alreadyChecked
+     */
     public int getAlreadyChecked() {
         return alreadyChecked;
     }
     
     
-
     @Override
     public void tick() {
-
         //Movement in roads
         switch (direction) {
             case 1:
@@ -133,6 +207,7 @@ public class Car extends Solid {
                 xMove += speed;
                 break;
         }
+        //Movement with the screen
         x = iniX - screen.getX() + xMove;
         y = iniY - screen.getY() + yMove;
 
