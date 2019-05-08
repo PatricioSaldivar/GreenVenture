@@ -50,6 +50,9 @@ public class Game implements Runnable {
     private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
     private ArrayList<TrashContainer> trashContainers; //to manage all the trashContainers
     private boolean tutorialEnded = true;          // to manage if the tutorial has been played
+    private boolean pauseHelper;
+    private Animation pauseHelperAnimation;
+    private int indexWas;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -782,6 +785,7 @@ public class Game implements Runnable {
     private void tick() {
         keyManager.tick();
         if (tutorialEnded) {
+            if(!pauseHelper){
             if (!keyManager.pause) {
                 // avancing player with colision
 
@@ -800,6 +804,9 @@ public class Game implements Runnable {
                     if (!npcs.get(i).isTalking()) {
                         if (npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()) {
                             npcs.get(i).setTrashToTrashContainer(npcs.get(i).getTrashToTrashContainer() + 1);
+                            if(npcs.get(i).getTrashToTrashContainer()<11){
+                            player.setProgress(player.getProgress()+1);
+                            }
                             npcs.get(i).setTalking(true);
                             player.setConversation(true);
                             screen.setFinishedConversationText(false);
@@ -1029,23 +1036,27 @@ public class Game implements Runnable {
                     }
                     pauseIndex = keyManager.pauseSelector;
                 }
-                if (keyManager.space && pauseIndex == 1) {
+                if (keyManager.space && pauseIndex == 1 && !keyManager.helperSpace) {
                   //Display Stats
+                  pauseHelper=true;
+                  pauseHelperAnimation = new Animation(Assets.carDown,300);
+                  indexWas=1;
 
                 }
-                if (keyManager.space && pauseIndex == 3) {
+                if (keyManager.space && pauseIndex == 3 && !keyManager.helperSpace) {
                     MainMenu m = new MainMenu("MainMenu", 512, 512, display);
                     Assets.gameStart.play();
                     m.start();
                     running = false;
                 }
-                if (keyManager.space && pauseIndex == 2) {
+                if (keyManager.space && pauseIndex == 2 && !keyManager.helperSpace) {
                     //Display Instructions
-
-       
-                    running = false;
+                       pauseHelper=true;
+                 pauseHelperAnimation = new Animation(Assets.recycleCoOrganics,300);
+                 indexWas=2;
+                    
                 }
-                if (keyManager.space && pauseIndex == 0) {
+                if (keyManager.space && pauseIndex == 0 && !keyManager.helperSpace) {
                     Save s = new Save(this, trash, npcs, trashContainers, car);
                     try {
                         s.tick();
@@ -1057,6 +1068,14 @@ public class Game implements Runnable {
                 }
 
             }
+        }else{
+                if(keyManager.space && !keyManager.helperSpace){
+                    pauseHelper=false;
+                    keyManager.pauseSelector=indexWas;
+                    
+                }
+            }
+            
         } else {
             Tutorial trt = new Tutorial("Tutorial", width, height, display, keyManager, this);
             tutorialEnded = true;
@@ -1064,6 +1083,7 @@ public class Game implements Runnable {
             running = false;
         }
 
+    
     }
 
     private void render() {
@@ -1079,11 +1099,15 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
+            if(!pauseHelper){
             g.clearRect(0, 0, width, height);
             screen.render(g); //Draws the screen that follows the player   
             //Draws Pause image when pausing game
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
+            }
+            }else{
+                g.drawImage(pauseHelperAnimation.getCurrentFrame(), 0, 0, width, height, null);
             }
             //g.fillArc(0,0,200,200,20,20);
             bs.show();

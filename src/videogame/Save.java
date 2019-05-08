@@ -63,7 +63,8 @@ public class Save {
 
             // 2. Create a statement
             myStmt = myConn.createStatement();
-            int mon = (int) (g.getPlayer().getMoney());
+            double mon =  (g.getPlayer().getMoney());
+            double totalIncome = (g.getPlayer().getTotalIncome());
             // 3. Execute SQL query
             int conversation = 0;
             if (g.getPlayer().isConversation()) {
@@ -139,7 +140,7 @@ public class Save {
             }
 
             myStmt.executeLargeUpdate("UPDATE Player SET  x=" + g.getPlayer().getX() + ",  y=" + g.getPlayer().getY() + ",  SMoveX=" + g.getPlayer().getSMoveX() + ", SMoveY=" + g.getPlayer().getSMoveY() + ", speed=" + g.getPlayer().getSpeed() + ", capacity=" + g.getPlayer().getCapacity() + ", inventory=" + g.getPlayer().getInventory() + ", glass=" + g.getPlayer().getGlass() + ", paper=" + g.getPlayer().getPaper() + ", plastic=" + g.getPlayer().getPlastic() + ", aluminum=" + g.getPlayer().getAluminum() + ", electronics=" + g.getPlayer().getElectronics()
-                    + ", organic=" + g.getPlayer().getOrganic() + ",  money=" + mon + ",  trashUpgrade=" + g.getPlayer().getTrashUpgrade() + ",  speedUpgrade=" + g.getPlayer().getSpeedUpgrade() + ",  capacityUpgrade=" + g.getPlayer().getCapacityUpgrade() + ",  direction=" + g.getPlayer().getDirection() + ",  kilometers=" + g.getPlayer().getKilometers() + ",  totalTrash=" + g.getPlayer().getTotalTrash() + ",  totalIncome=" + g.getPlayer().getTotalIncome() + ",  progress=" + g.getPlayer().getProgress()
+                    + ", organic=" + g.getPlayer().getOrganic() + ",  money=" + mon + ",  trashUpgrade=" + g.getPlayer().getTrashUpgrade() + ",  speedUpgrade=" + g.getPlayer().getSpeedUpgrade() + ",  capacityUpgrade=" + g.getPlayer().getCapacityUpgrade() + ",  direction=" + g.getPlayer().getDirection() + ",  kilometers=" + g.getPlayer().getKilometers() + ",  totalTrash=" + g.getPlayer().getTotalTrash() + ",  totalIncome=" + totalIncome + " ,  progress=" + g.getPlayer().getProgress()
                     + ",  conversation=" + conversation + ",  talking=" + talking + ",  Trashcan0=" + Trashcan0 + ",  Trashcan1=" + Trashcan1 + ",  Trashcan2=" + Trashcan2 + ",  Trashcan3=" + Trashcan3 + ",  Trashcan4=" + Trashcan4 + ",  Trashcan5=" + Trashcan5 + ",  Trashcan6=" + Trashcan6 + ",  Trashcan7=" + Trashcan7 + ",  Trashcan8=" + Trashcan8 + ",  Trashcan9=" + Trashcan9 + ",  Trashcan10=" + Trashcan10 + ",  Trashcan11=" + Trashcan11 + ",  Trashcan12=" + Trashcan12 + ",  Trashcan13=" + Trashcan13 + ",  Trashcan14=" + Trashcan14 + ",  Trashcan15=" + Trashcan15
                     + " WHERE playerId=1;");
             myStmt.executeLargeUpdate("DELETE from Trash;");

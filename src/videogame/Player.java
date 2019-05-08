@@ -48,7 +48,7 @@ public class Player extends Item {
     private ArrayList<Integer> trashContainersLeft;
     private int kilometers;     //to save the total distance walked
     private int totalTrash;     //to save the total number of items picked
-    private int totalIncome;    //to save the total income generated
+    private double totalIncome;    //to save the total income generated
     private int progress;       // to save the progress of the city as 
     private int kilometersHelper;
 
@@ -102,7 +102,7 @@ public class Player extends Item {
         this.totalTrash = totalTrash;
     }
 
-    public int getTotalIncome() {
+    public double getTotalIncome() {
         return totalIncome;
     }
 
@@ -354,6 +354,11 @@ public class Player extends Item {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public void setTotalIncome(double totalIncome) {
+        this.totalIncome = totalIncome;
+    }
+    
 
     @Override
     public void tick() {

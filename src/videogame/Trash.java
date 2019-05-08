@@ -98,6 +98,7 @@ public class Trash extends Item {
                 //
                 Assets.pickTrash.play();
                 dead = true;
+                game.getPlayer().setTotalTrash(game.getPlayer().getTotalTrash()+1);
             } else {
                 Assets.pickDenied.play();
             }
