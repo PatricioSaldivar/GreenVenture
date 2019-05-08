@@ -121,7 +121,7 @@ public class RecycleCoRoom implements Runnable {
         solids.add(new Solid(453, 152, 59, 360));
         solids.add(new Solid(321, 484, 132, 28));
         
-        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
+        this.playablePlayer = new PlayerInStore(240,430,64,64,game,solids);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class RecycleCoRoom implements Runnable {
     }
     
     public Rectangle getPerimetroStore() {
-        return new Rectangle(0,120,210,215);
+        return new Rectangle(196,150,257,69);
     }
     
     public Rectangle getPerimetroWorld() {

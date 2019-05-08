@@ -51,6 +51,7 @@ public class Tutorial implements Runnable {
     private boolean eraseNPC = false;                   // checks if player already talked to npc so next instruction shows up
     private int nextSlide = 0;                  //checks when message need to appear after case 3
 
+
     /**
      * to create title, width and height and set the game is still not running
      *
@@ -114,6 +115,14 @@ public class Tutorial implements Runnable {
      */
     private void init() {
         Assets.init();
+        solids.add(new Solid(0,0,512,233));
+        solids.add(new Solid(0,422,32,990));
+        solids.add(new Solid(0,0,512,233));
+        //Solids so npc cant get out of the map
+        solids.add(new Solid(0,-10,512,10));
+        solids.add(new Solid(0,512,512,10));
+        solids.add(new Solid(-10,-10,10,532));
+        solids.add(new Solid(512,-10,10,532));
         playablePlayer = new PlayerInStore(width / 2, 448, 64, 64, game, solids);
     }
 
@@ -159,7 +168,7 @@ public class Tutorial implements Runnable {
         String message;
         g.setColor(Color.BLACK);
         g.drawImage(Assets.textBox, 0, 0, 512, 128, null);
-        g.drawImage(Assets.player, 0, 0, 64, 64, null);
+        g.drawImage(Assets.playerFacingDown, 27, 36, 44, 54, null);
         message = "¡Hey! No tires la basura al suelo,\nmejor tírala en un bote,no cuesta mucho,\ny además, ayudas a mantener la\nciudad limpia. ";
         if (iContS < message.length() - 1) {
             iContS++;
@@ -187,31 +196,38 @@ public class Tutorial implements Runnable {
         String message = " ";
         g.setColor(Color.BLACK);
         g.drawImage(Assets.textBox, 0, 0, 512, 128, null);
-        g.drawImage(Assets.player, 0, 0, 64, 64, null);
         switch (contM) {
             case 0:
-                message = "Te mueves con las felchas del teclado.  ";
+                message = "Utiliza las flechas del teclado para moverte\npor el mapa.";
+                g.drawImage(Assets.player, 27, 36, 44, 54, null);
                 break;
             case 1:
-                message = "Recoge basura con la tecla ESPACIO,\ntienes un limite de basura que puedes\nrecoger dependiendo de la capacidad\nde tu mochila ";
+                message = "Recoge toda la basura veas con la tecla ESPACIO,\ntienes un límite de basura que puedes\nalmacenar dependiendo de la capacidad\nde tu mochila.";
+                g.drawImage(Assets.backpack, 27, 36, 44, 54, null);
                 break;
             case 2:
-                message = "Esa persona acaba de tirar basura.\nDile que la tire en el basurero la\nproxima ves que aparezca un simbolo\nde exclamación en su cabeza con la\ntecla ESPACIO.";
+                message = "Esa persona acaba de tirar basura.\nAcércte a él y presiona la tecla ESPACIO para decirle que la que la tire en el basurero.\nLa próxima vez que veas a alguien con este símbolo\nde exclamación en su cabeza dile que no tire la basura en el suelo";
+                g.drawImage(Assets.npcDown[0][0], 27, 36, 44, 54, null);
                 break;
             case 3:
-                message = "Este es un bote, al regañar a\nlas personas, mejoraran sus habitos\ny comenzaran a tirar basura en el bote.";
+                message = "Este es un bote de basura, si le llamas la atenión a\nlas personas, mejorarán sus hábitos\ny comenzarán a tirar basura en el bote.";
+                g.drawImage(Assets.dumpDefault, 27, 36, 44, 54, null);
                 break;
             case 4:
-                message = "Puedes recoger basura de los botes\nverdes que se encuentren a traves\ndel mapa.";
+                message = "Puedes adquirir botes de basura en la tienda\nverdes que se encuentren a traves\ndel mapa.";
+                g.drawImage(Assets.dumpOwned, 27, 36, 44, 54, null);
                 break;
             case 5:
                 message = "Ya que tienes basura puedes ir a\nvenderla en la tienda de reciclaje\nllamada 'RecycleCo'.";
+                g.drawImage(Assets.trash[0], 27, 36, 44, 54, null);
                 break;
             case 6:
                 message = "Una ves que hayas vendido tu basura\nrecibiras dinero, con el puedes comprar\nmejoras para tu jugador.";
+                g.drawImage(Assets.coin[0], 27, 36, 44, 54, null);
                 break;
             case 7:
                 message = "'TodoxMart' es la tienda donde comprar\nlas mejoras.";
+                g.drawImage(Assets.player, 27, 36, 44, 54, null);
                 break;
         }
 
@@ -241,7 +257,6 @@ public class Tutorial implements Runnable {
         keyManager.tick();
         playablePlayer.tick();
         if (index == 2) {
-            npc.tick();
             npc.setJustThrowedTrash(true);
         }
 
@@ -339,15 +354,14 @@ public class Tutorial implements Runnable {
         if (index == 1 && !trashHasBeenCreated) {
             trashHasBeenCreated = true;
             trash.add(new Trash((width / 2), (height / 2), 32, 32, 0, game, game.getScreen(), 100));
-            trash.add(new Trash((width / 2) + 40, (height / 2), 32, 32, 4, game, game.getScreen(), 100));
-            trash.add(new Trash((width / 2) + 80, (height / 2), 32, 32, 6, game, game.getScreen(), 100));
-            trash.add(new Trash((width / 2) + 160, (height / 2), 32, 32, 10, game, game.getScreen(), 100));
+            trash.add(new Trash((width / 2) + 40, (height / 2), 32, 32, 4, game, game.getScreen(), 99));
+            trash.add(new Trash((width / 2) + 80, (height / 2), 32, 32, 6, game, game.getScreen(), 98));
+            trash.add(new Trash((width / 2) + 160, (height / 2), 32, 32, 10, game, game.getScreen(), 97));
         }
         //Creates NPC and tick's it
         if (index == 2 && !npcHasBeenCreated) {
             npcHasBeenCreated = true;
             npc = new NPC(90, 250, 64, 64, game, game.getScreen(), 0, 0);
-            npc.tick();
         }
         
         //Ones the player finish tutorial, the game starts
