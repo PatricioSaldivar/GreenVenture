@@ -15,7 +15,7 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+//
 /**
  *
  * @author BonfireStudios
@@ -104,7 +104,7 @@ public class Tutorial implements Runnable {
     /**
      * To get the custom font
      *
-     * @return an <code>.ttf</code> value with the height
+     * @return an <code>.ttf</code> value with the height +
      */
     public Font getFontx() {
         return fontx;
