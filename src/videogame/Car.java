@@ -135,54 +135,55 @@ public class Car extends Solid {
         this.xMove = xMove;
     }
     /**
+     * Get the GetyYMove
      * 
-     * 
-     * @return yMove
+     * @return yMove and <code> int </code>
      */
     public int getyMove() {
         return yMove;
     }
     /**
+     * Set the yMove
      * 
-     * 
-     * @param yMove 
+     * @param yMove
      */
     public void setyMove(int yMove) {
         this.yMove = yMove;
     }
     /**
+     * Get the Inix
      * 
-     * 
-     * @return iniX 
+     * @return iniX and <code> int </code> 
      */
     public int getIniX() {
         return iniX;
     }
     /**
-     * 
+     * Set the Inix
      * @param iniX 
      */
     public void setIniX(int iniX) {
         this.iniX = iniX;
     }
     /**
+     * Get the IniY
      * 
-     * @return iniY 
+     * @return iniY and <code>int</code> 
      */
     public int getIniY() {
         return iniY;
     }
     /**
-     * 
+     * Set the iniY
      * @param iniY 
      */
     public void setIniY(int iniY) {
         this.iniY = iniY;
     }
     /**
+     * Get the Already checked value
      * 
-     * 
-     * @return  alreadyChecked
+     * @return  alreadyChecked and <code> int </code>
      */
     public int getAlreadyChecked() {
         return alreadyChecked;

@@ -32,53 +32,65 @@ public class Crosswalk extends Item{
         
     }
     /**
-     * 
-     * @return width 
+     * Return the witdth
+     * @return width <code>int</code>
      */
     public int getWidth() {
         return width;
     }
     /**
-     * 
+     * Set the width
      * @param width 
      */
     public void setWidth(int width) {
         this.width = width;
     }
     /**
-     * 
-     * @return height
+     * return the height
+     * @return height <code>int</code>
      */
     public int getHeight() {
         return height;
     }
     /**
-     * 
+     * Set the height
      * @param height 
      */
     public void setHeight(int height) {
         this.height = height;
     }
     /**
-     * 
-     * @return someoneIn
+     * Get the somein value
+     * @return someoneIn <code>boolean</code>
      */
     public boolean isSomeoneIn() {
         return someoneIn;
     }
-
+    /**
+     * Return the Car in value
+     * @return carIn and <code> boolean </code>
+     */
     public boolean isCarIn() {
         return carIn;
     }
-
+    /**
+     * Set the car in value
+     * @param carIn 
+     */
     public void setCarIn(boolean carIn) {
         this.carIn = carIn;
     }
-
+    /**
+     * Return the iniX value
+     * @return iniX and <code>int</code> 
+     */
     public int getIniX() {
         return iniX;
     }
-
+    /**
+     * Return the iniY
+     * @return iniY and <code>int</code>
+     */
     public int getIniY() {
         return iniY;
     }
@@ -88,10 +100,12 @@ public class Crosswalk extends Item{
 
     @Override
     public void tick() {
+        //ticks the inical value
         someoneIn=false;
         carIn=false;
         x = iniX - screen.getX();
         y = iniY - screen.getY();
+        //Stops car
         if(game.getCar().getPerimetro().intersects(getPerimetro())){
             carIn=true;
         }
@@ -110,7 +124,8 @@ public class Crosswalk extends Item{
     public void render(Graphics g) {
         g.fillRect(x, y, width, height);
     }
-
+    
+    //checks intersections
     @Override
     public Rectangle getPerimetro() {
          return new Rectangle(getX(), getY(), getWidth(), getHeight());
