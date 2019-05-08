@@ -31,23 +31,38 @@ public class Crosswalk extends Item{
         iniY = y;
         
     }
-
+    /**
+     * 
+     * @return width 
+     */
     public int getWidth() {
         return width;
     }
-
+    /**
+     * 
+     * @param width 
+     */
     public void setWidth(int width) {
         this.width = width;
     }
-
+    /**
+     * 
+     * @return height
+     */
     public int getHeight() {
         return height;
     }
-
+    /**
+     * 
+     * @param height 
+     */
     public void setHeight(int height) {
         this.height = height;
     }
-
+    /**
+     * 
+     * @return someoneIn
+     */
     public boolean isSomeoneIn() {
         return someoneIn;
     }
