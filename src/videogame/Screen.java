@@ -306,14 +306,14 @@ public class Screen {
     
         public void conversationMinigame(NPCMinigame1 npc, Player player, Graphics2D g) {
         int yPaint = 416;
-        g.setFont(game.getFonty());
+        g.setFont(game.getFonty().deriveFont(24f));
         String message;
         g.drawImage(Assets.textBox,0,384,512,128,null);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
             npcTalking.tick();
              g.drawImage(npcTalking.getCurrentFrame(), 10, 420, 72, 72, null);
-            message = "Hey me podrias ayudar organizando mi basura?\nEs solo clasificarla. ";
+            message = "Hey me podrias ayudar organizando\nmi basura? Es solo clasificarla. ";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;
@@ -327,7 +327,7 @@ public class Screen {
             g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
         }
         } else {
-            message = "Claro! Donde esta ese robot?\nNo puedo, disculpame. ";
+            message = "Claro!\nNo puedo, disculpame. ";
                 conversationTextIndex = message.length() - 1;
                 
                 playerTalking.tick();

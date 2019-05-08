@@ -1040,7 +1040,7 @@ public class Game implements Runnable {
                 if (keyManager.space && pauseIndex == 1 && !keyManager.helperSpace) {
                   //Display Stats
                   pauseHelper=true;
-                  pauseHelperAnimation = new Animation(Assets.carDown,300);
+                  pauseHelperAnimation = new Animation(Assets.stats,300);
                   indexWas=1;
 
                 }
@@ -1053,7 +1053,7 @@ public class Game implements Runnable {
                 if (keyManager.space && pauseIndex == 2 && !keyManager.helperSpace) {
                     //Display Instructions
                        pauseHelper=true;
-                 pauseHelperAnimation = new Animation(Assets.recycleCoOrganics,300);
+                 pauseHelperAnimation = new Animation(Assets.mainMenuInstructionsImage,300);
                  indexWas=2;
                     
                 }
@@ -1109,7 +1109,22 @@ public class Game implements Runnable {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);
             }
             }else{
+                pauseHelperAnimation.tick();
                 g.drawImage(pauseHelperAnimation.getCurrentFrame(), 0, 0, width, height, null);
+                if(indexWas==1){
+                    //364 = max
+                    g.setColor(Color.WHITE);
+                    g.setFont(fonty.deriveFont(24f));
+                    int percnt;
+                    percnt = (int) (player.getProgress()*1.82);
+                    g.fillRect(74, 387, percnt, 12);
+                    g.setColor(Color.BLACK);
+                    g.drawString(""+player.getKilometers()+" km", 156, 166);
+                     g.drawString(""+player.getTotalTrash()+" basuras", 156, 241);
+                    g.drawString(""+player.getTotalIncome()+" pesos", 156, 320);
+                    
+                }
+                
             }
             //g.fillArc(0,0,200,200,20,20);
             bs.show();

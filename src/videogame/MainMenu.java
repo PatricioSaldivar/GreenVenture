@@ -37,6 +37,8 @@ public class MainMenu implements Runnable {
     private int index=0;            // to establish the index of the option to be 
     private boolean displayInst;     // To display Instrucctions
     private boolean displayInstHelper;
+    private boolean displayCred;
+    private boolean displayCredHelper;
     /**
      * to create title, width and height and set the game is still not running
      *
@@ -134,6 +136,10 @@ public class MainMenu implements Runnable {
         keyManager.tick();
         animation.tick();
         if(!displayInst){
+            if(displayCred){
+                index =3;
+                keyManager.pauseSelector=3;
+            }
             if (index != keyManager.pauseSelector) {
                 switch (keyManager.pauseSelector) {
                     case 0:
@@ -190,6 +196,13 @@ public class MainMenu implements Runnable {
            }
           
           if(index==3 && keyManager.space && !keyManager.helperSpace){
+              if(displayCred){
+                  displayCred=false;
+               animation = new Animation(Assets.mainMenuCredits, 300);
+              }else{
+              displayCred = true;
+              animation = new Animation(Assets.credits, 300);
+              }
               
            }
           
