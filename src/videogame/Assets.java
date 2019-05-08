@@ -44,10 +44,15 @@ public class Assets {
     //NPC Assets
     public static BufferedImage npcAlert[];         // to store the alert image
     public static BufferedImage npcDialogue[];      // to store the dialogue cloud
+    public static BufferedImage npcss_1;            // to store NPC spritesheets
+    public static BufferedImage npcss_2;
+    public static BufferedImage npcss_3;
+    public static BufferedImage npcss_4;
     public static BufferedImage npcDown[][];        // to store the NPC going down assets
     public static BufferedImage npcUp[][];          // to store the NPC going up assets
     public static BufferedImage npcRight[][];       // to store the NPC going right assets
     public static BufferedImage npcLeft[][];        // to store the NPC going left assets
+    public static BufferedImage npcTalk[][];
     public static BufferedImage npcMinigame1;       // to store the NPC of the minigame1 image
 
     //Minigame 1 Assests
@@ -207,6 +212,417 @@ public class Assets {
         npcDialogue[1] = ImageLoader.loadImage("/images_NPC/dialogue1.png");
         npcDialogue[2] = ImageLoader.loadImage("/images_NPC/dialogue2.png");
         npcDialogue[3] = ImageLoader.loadImage("/images_NPC/dialogue3.png");
+        
+        npcss_1 = ImageLoader.loadImage("/NPCAssets/NPCSS_1");
+        npcss_2 = ImageLoader.loadImage("/NPCAssets/NPCSS_2");
+        npcss_3 = ImageLoader.loadImage("/NPCAssets/NPCSS_3");
+        npcss_4 = ImageLoader.loadImage("/NPCAssets/NPCSS_4");
+        
+        SpriteSheet npcss1 = new SpriteSheet(npcss_1);
+        SpriteSheet npcss2 = new SpriteSheet(npcss_2);
+        SpriteSheet npcss3 = new SpriteSheet(npcss_3);
+        SpriteSheet npcss4 = new SpriteSheet(npcss_4);
+                
+        npcDown = new BufferedImage[20][3];
+        npcLeft = new BufferedImage[20][3];
+        npcRight = new BufferedImage[20][3];
+        npcUp = new BufferedImage[20][3];
+        npcTalk =new BufferedImage[20][2];
+        
+        int xCalc = 0, yCalc = 0;
+
+        // NPC 0 (Male 1)
+        xCalc = 0*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[0][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[0][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[0][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[0][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[0][0] = ImageLoader.loadImage("/NPCAssets/closed_0.png");
+        npcTalk[0][1] = ImageLoader.loadImage("/NPCAssets/open_0.png");
+        
+        // NPC 1 (Female 1)
+        xCalc = 1*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[1][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[1][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[1][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[1][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[1][0] = ImageLoader.loadImage("/NPCAssets/closed_1.png");
+        npcTalk[1][1] = ImageLoader.loadImage("/NPCAssets/open_1.png");
+        
+        
+        // NPC 2 (China 1)
+        xCalc = 3*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[2][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[2][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[2][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[2][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[2][0] = ImageLoader.loadImage("/NPCAssets/closed_2.png");
+        npcTalk[2][1] = ImageLoader.loadImage("/NPCAssets/open_2.png");
+        
+        
+        // NPC 3 (China 2)
+        xCalc = 1*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[3][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[3][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[3][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[3][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[3][0] = ImageLoader.loadImage("/NPCAssets/closed_3.png");
+        npcTalk[3][1] = ImageLoader.loadImage("/NPCAssets/open_3.png");
+        
+        
+        // NPC 4 (Scientist)
+        xCalc = 2*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[4][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[4][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[4][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[4][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[4][0] = ImageLoader.loadImage("/NPCAssets/closed_4.png");
+        npcTalk[4][1] = ImageLoader.loadImage("/NPCAssets/open_4.png");
+        
+        
+        // NPC 5 (Boxer)
+        xCalc = 3*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[5][i] = npcss1.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[5][i] = npcss1.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[5][i] = npcss1.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[5][i] = npcss1.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[5][0] = ImageLoader.loadImage("/NPCAssets/closed_5.png");
+        npcTalk[5][1] = ImageLoader.loadImage("/NPCAssets/open_5.png");
+        
+        
+        // NPC 6 (Little Guy)
+        xCalc = 0*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[6][i] = npcss2.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[6][i] = npcss2.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[6][i] = npcss2.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[6][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[6][0] = ImageLoader.loadImage("/NPCAssets/closed_6.png");
+        npcTalk[6][1] = ImageLoader.loadImage("/NPCAssets/open_6.png");
+        
+        
+        // NPC 7 (Little Girl)
+        xCalc = 1*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[7][i] = npcss2.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[7][i] = npcss2.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[7][i] = npcss2.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[7][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[7][0] = ImageLoader.loadImage("/NPCAssets/closed_7.png");
+        npcTalk[7][1] = ImageLoader.loadImage("/NPCAssets/open_7.png");
+        
+        
+        // NPC 8 (Girl 1)
+        xCalc = 2*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[8][i] = npcss2.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[8][i] = npcss2.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[8][i] = npcss2.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[8][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[8][0] = ImageLoader.loadImage("/NPCAssets/closed_8.png");
+        npcTalk[8][1] = ImageLoader.loadImage("/NPCAssets/open_8.png");
+        
+        
+        // NPC 9 (Boy 1)
+        xCalc = 3*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[9][i] = npcss2.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[9][i] = npcss2.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[9][i] = npcss2.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[9][i] = npcss2.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[9][0] = ImageLoader.loadImage("/NPCAssets/closed_9.png");
+        npcTalk[9][1] = ImageLoader.loadImage("/NPCAssets/open_9.png");
+        
+        
+        // NPC 10 (Old)
+        xCalc = 0*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[10][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[10][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[10][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[10][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[10][0] = ImageLoader.loadImage("/NPCAssets/closed_10.png");
+        npcTalk[10][1] = ImageLoader.loadImage("/NPCAssets/open_10.png");
+        
+        
+        // NPC 11 (Adventure)
+        xCalc = 2*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[11][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[11][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[11][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[11][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[11][0] = ImageLoader.loadImage("/NPCAssets/closed_11.png");
+        npcTalk[11][1] = ImageLoader.loadImage("/NPCAssets/open_11.png");
+        
+        // NPC 12 (Geek)
+        xCalc = 3*72;
+        yCalc = 0*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[12][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[12][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[12][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[12][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[12][0] = ImageLoader.loadImage("/NPCAssets/closed_12.png");
+        npcTalk[12][1] = ImageLoader.loadImage("/NPCAssets/open_12.png");
+        
+        // NPC 13 (Girl 2)
+        xCalc = 0*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[13][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[13][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[13][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[13][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[13][0] = ImageLoader.loadImage("/NPCAssets/closed_13.png");
+        npcTalk[13][1] = ImageLoader.loadImage("/NPCAssets/open_13.png");
+        
+        // NPC 14 (Fat 1)
+        xCalc = 1*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[14][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[14][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[14][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[14][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[14][0] = ImageLoader.loadImage("/NPCAssets/closed_14.png");
+        npcTalk[14][1] = ImageLoader.loadImage("/NPCAssets/open_14.png");
+        
+        // NPC 15 (Girl 3)
+        xCalc = 1*72;
+        yCalc = 3*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[15][i] = npcss3.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[15][i] = npcss3.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[15][i] = npcss3.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[15][i] = npcss3.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[15][0] = ImageLoader.loadImage("/NPCAssets/closed_15.png");
+        npcTalk[15][1] = ImageLoader.loadImage("/NPCAssets/open_15.png");
+        
+        // NPC 16 (Female 2)
+        xCalc = 0*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[16][i] = npcss4.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[16][i] = npcss4.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[16][i] = npcss4.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[16][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[16][0] = ImageLoader.loadImage("/NPCAssets/closed_16.png");
+        npcTalk[16][1] = ImageLoader.loadImage("/NPCAssets/open_16.png");
+        
+        // NPC 17 (Elvis)
+        xCalc = 1*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[17][i] = npcss4.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[17][i] = npcss4.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[17][i] = npcss4.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[17][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[17][0] = ImageLoader.loadImage("/NPCAssets/closed_17.png");
+        npcTalk[17][1] = ImageLoader.loadImage("/NPCAssets/open_17.png");
+        
+        // NPC 18 (Boy 2)
+        xCalc = 2*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[18][i] = npcss4.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[18][i] = npcss4.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[18][i] = npcss4.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[18][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[18][0] = ImageLoader.loadImage("/NPCAssets/closed_18.png");
+        npcTalk[18][1] = ImageLoader.loadImage("/NPCAssets/open_18.png");
+        
+        // NPC 19 (Girl 2)
+        xCalc = 3*72;
+        yCalc = 1*72;
+
+        for (int i = 0; i < 2; i++) {
+            npcDown[19][i] = npcss4.crop(i*72 +xCalc ,72*0 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcLeft[19][i] = npcss4.crop(i*72 +xCalc ,72*1 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcRight[19][i] = npcss4.crop(i*72 +xCalc ,72*2 + yCalc , 72 , 72);
+        }
+        for (int i = 0; i < 2; i++) {
+            npcUp[19][i] = npcss4.crop(i*72 +xCalc ,72*3 + yCalc , 72 , 72);
+        }
+        npcTalk[19][0] = ImageLoader.loadImage("/NPCAssets/closed_19.png");
+        npcTalk[19][1] = ImageLoader.loadImage("/NPCAssets/open_19.png");
+
+        
+        
         
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
