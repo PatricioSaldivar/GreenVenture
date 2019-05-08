@@ -220,8 +220,8 @@ public class Game implements Runnable {
 
     public ArrayList<StoreDoor> getStoreDoors() {
         return storeDoors;
-
-    public void setScreen(Screen screen) {
+    }
+    public void setScreen(Screen screen){
         this.screen = screen;
 
     }
@@ -231,7 +231,7 @@ public class Game implements Runnable {
      */
     void init() {
         Assets.init();
-        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
+        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 5);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
@@ -790,6 +790,7 @@ public class Game implements Runnable {
                         if (!screen.isFinishedConversationText()) {
                             screen.setFinishedConversationText(true);
                         } else {
+                            screen.setAssignAnimationNpc(false);
                             player.setConversation(false);
                             npcs.get(i).setTalking(false);
                             player.setTalking(false);
@@ -843,6 +844,7 @@ public class Game implements Runnable {
                             player.setConversation(false);
                             npcTrashClassify.setTalking(false);
                             player.setTalking(false);
+                            screen.setAssignAnimationNpc(false);
                             if (screen.isCursorOnPlay()) {
                                 MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
                                 mct.start();
