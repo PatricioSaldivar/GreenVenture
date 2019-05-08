@@ -51,6 +51,7 @@ public class Player extends Item {
     private int totalIncome;
     private int progress;
     
+    
 
 
     public Player(int x, int y, int width, int height, Game game) {
@@ -358,10 +359,6 @@ public class Player extends Item {
     }
     
     
-    
-
-    
-
     @Override
     public void tick() {
         // moving player depending on flags
