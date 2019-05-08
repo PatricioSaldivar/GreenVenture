@@ -52,6 +52,7 @@ public class Game implements Runnable {
     private boolean pauseHelper;
     private Animation pauseHelperAnimation;
     private int indexWas;
+    private boolean playMusic = false;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -266,13 +267,11 @@ public class Game implements Runnable {
         npcTrashClassify = new NPCMinigame1(1514, 2140, 64, 64, this, screen, 5);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
-
         //Creates doors to enter stores
         //storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));           // TodoxMartRoom door
         //storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
         storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));     //TodoxMartRoom door
         storeDoors.add(new StoreDoor(193, 1339, 77, 67, this, screen, 1));         // RecycleCoRoom door    
-
         //Solid of Minigame
         solids.add(new Solid(1530, 2144, 32, 32));
         //Map boundaries
@@ -747,7 +746,8 @@ public class Game implements Runnable {
             keyManager.setPauseMax(4);
             //this code may be used on the return to game function for better eficiency
             keyManager.pause = false;
-
+            Assets.songGame.play();
+            
         }
         // frames per second
         int fps = 50;
@@ -783,7 +783,7 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-
+        Assets.songGame.setLooping(true);
         if (player.isTutorialEnded()) {
             if(!pauseHelper){
             if (!keyManager.pause) {
@@ -886,6 +886,7 @@ public class Game implements Runnable {
                                 screen.setAssignAnimationNpc(false);
                                 if (screen.isCursorOnPlay()) {
                                     MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                                    Assets.songGame.stop();
                                     mct.start();
                                     running = false;
                                 }
@@ -1045,6 +1046,7 @@ public class Game implements Runnable {
                 }
                 if (keyManager.space && pauseIndex == 3 && !keyManager.helperSpace) {
                     MainMenu m = new MainMenu("MainMenu", 512, 512, display);
+                    Assets.songGame.stop();
                     Assets.gameStart.play();
                     m.start();
                     running = false;
@@ -1078,6 +1080,7 @@ public class Game implements Runnable {
             
         } else {
             Tutorial trt = new Tutorial("Tutorial", width, height, display, keyManager, this);
+            Assets.songGame.stop();
             player.setTutorialEnded(true);
             trt.start();
             running = false;

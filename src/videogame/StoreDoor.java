@@ -72,6 +72,10 @@ public StoreDoor(int x, int y, int width, int height, Game game, Screen screen, 
         
         //Updates index for to render animation of door opening
         if(game.getPlayer().getPerimetro().intersects(getPerimetroOpen())){
+            if(index==3){
+            Assets.doorOpen.play();
+            Assets.doorOpen.setLooping(false);
+            }
             indexHelper--;
             if(indexHelper<1 && index<3){
                 index++;

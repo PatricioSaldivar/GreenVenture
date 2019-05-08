@@ -71,7 +71,7 @@ public class Trash extends Item {
     public int getIniY() {
         return iniY;
     }
-
+    
     @Override
     public void tick() {
         x = iniX - screen.getX();

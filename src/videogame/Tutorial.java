@@ -14,7 +14,7 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+//
 /**
  *
  * @author BonfireStudios
@@ -103,7 +103,7 @@ public class Tutorial implements Runnable {
     /**
      * To get the custom font
      *
-     * @return an <code>.ttf</code> value with the height
+     * @return an <code>.ttf</code> value with the height +
      */
     public Font getFontx() {
         return fontx;
@@ -114,6 +114,7 @@ public class Tutorial implements Runnable {
      */
     private void init() {
         Assets.init();
+        Assets.songGame.play();
         solids.add(new Solid(0,0,512,233));
         solids.add(new Solid(0,422,32,990));
         solids.add(new Solid(0,0,512,233));
@@ -238,6 +239,7 @@ public class Tutorial implements Runnable {
             }
         } else {
             if (keyManager.space && !keyManager.helperSpace) {
+                Assets.selectSound.play();
                 indexInstruction++;
                 iContS = 0;
                 showMessage = false;
@@ -367,6 +369,7 @@ public class Tutorial implements Runnable {
         //Ones the player finish tutorial, the game starts
         if(index > 7){
             Assets.gameStart.play();
+            Assets.songGame.stop();
             game.setCont(true);
             game.start();
             running = false;

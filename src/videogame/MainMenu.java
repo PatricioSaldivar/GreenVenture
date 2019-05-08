@@ -91,6 +91,7 @@ public class MainMenu implements Runnable {
         keyManager.setPauseMax(5);
         displayInst=false;
         displayInstHelper=false;
+        Assets.mainMenuMusic.play();
 
     }
 
@@ -167,6 +168,7 @@ public class MainMenu implements Runnable {
     }
            if(index==0 && keyManager.space && !keyManager.helperSpace){
             Game g = new Game("Juego", 512,512, display,keyManager);
+            Assets.mainMenuMusic.stop();
             Assets.gameStart.play();
             g.start();
             running=false;

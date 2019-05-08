@@ -135,6 +135,7 @@ public class MinigameTrashClassify implements Runnable {
      */
     private void init() {
         Assets.init();
+        Assets.miniMusic.play();
         //creates organinc an inorganic trash cans
         inTrashCan = new TrashCan(64, 384, 128, 128, false, this);
         orTrashCan = new TrashCan(getWidth() - 192, 384, 128, 128, true, this);
@@ -207,12 +208,47 @@ public class MinigameTrashClassify implements Runnable {
                 } else {
                     if (boxGuantlets.getPerimetro().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
                       if(!trash.get(i).isMovingRight() && !trash.get(i).isMoved() ) {
-                        Assets.gloveHit.play();
+                          if(trash.get(i).getImageIndex() < 4){
+                              Assets.glassHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 3 && trash.get(i).getImageIndex() < 8){
+                              Assets.alHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 7 && trash.get(i).getImageIndex() < 11){
+                              Assets.palsticHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 10 && trash.get(i).getImageIndex() < 14){
+                              Assets.paperHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 13 && trash.get(i).getImageIndex() < 18){
+                              Assets.elecHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 18){
+                              Assets.orgHit.play();
+                          }
+                        
                     }
                         trash.get(i).setMovingRight(true);
                     } else if (boxGuantlets.getPerimetroLeft().intersects(trash.get(i).getPerimetro()) && !boxGuantlets.isBoxReturn()) {
                         if(!trash.get(i).isMovingLeft() && !trash.get(i).isMoved()) {
-                        Assets.gloveHit.play();
+                         if(trash.get(i).getImageIndex() < 4){
+                              Assets.glassHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 3 && trash.get(i).getImageIndex() < 8){
+                              Assets.alHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 7 && trash.get(i).getImageIndex() < 11){
+                              Assets.palsticHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 10 && trash.get(i).getImageIndex() < 14){
+                              Assets.paperHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 13 && trash.get(i).getImageIndex() < 18){
+                              Assets.elecHit.play();
+                          }
+                          if(trash.get(i).getImageIndex() > 18){
+                              Assets.orgHit.play();
+                          }
                     }
                         trash.get(i).setMovingLeft(true);
                        
@@ -232,6 +268,7 @@ public class MinigameTrashClassify implements Runnable {
             endGameHelper++;
                 //Resume the game
                 if(endGameHelper>150){
+                Assets.miniMusic.stop();
                 game.setCont(true);
                 game.start();
                 running = false;

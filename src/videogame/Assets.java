@@ -37,6 +37,9 @@ public class Assets {
     public static BufferedImage dumpDefault;
     public static BufferedImage stats[];
 
+    public static SoundClip songGame;                 // to store the game song    Song From: https://www.jamendo.com/track/1193990/recycle-system
+
+
     //Money Asset
     public static BufferedImage coin[];             // to store the coin animation asset
     public static BufferedImage backpack;           // to store the backpack image
@@ -73,6 +76,16 @@ public class Assets {
     public static SoundClip gloveHit;               // to store the glove hit sound
     public static BufferedImage leftExt;            //To store the left box extension
     public static BufferedImage rightExt;           //To store the right box extension
+    public static SoundClip alHit;               // to store the glove hit sound
+    public static SoundClip elecHit;               // to store the glove hit sound
+    public static SoundClip glassHit;               // to store the glove hit sound
+    public static SoundClip orgHit;               // to store the glove hit sound
+    public static SoundClip paperHit;               // to store the glove hit sound
+    public static SoundClip palsticHit;               // to store the glove hit sound
+    public static SoundClip miniMusic;
+    
+    
+    
 
     //Pause of game Assets
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
@@ -91,7 +104,11 @@ public class Assets {
     public static SoundClip gameStart;                    // to store the sound of new game or continue game button
     public static SoundClip selectSound;                  // to store the sound of the menu selector
     public static BufferedImage mainMenuInstructionsImage[];
+
     public static BufferedImage credits[];
+
+    public static SoundClip mainMenuMusic;                // to store the music form main menu Credits: https://www.bensound.com/royalty-free-music/track/once-again 
+
 
     //Minigame Pause Assets
     public static BufferedImage minigame1PauseEnd[];      // to store the image of the Minigame1 pause when end is selected
@@ -117,6 +134,7 @@ public class Assets {
 
     //Door Assets
     public static BufferedImage door[];                     // to store the images for the door animation
+    public static SoundClip doorOpen;                       // to store the sound of the door when open
     
     //Select cursor
     public static BufferedImage selector[];
@@ -149,7 +167,7 @@ public class Assets {
         dumpOwned = ImageLoader.loadImage("/images/dumpOwned.png");
         dumpDefault = ImageLoader.loadImage("/images/dumpDefault.png");
         playerHud = ImageLoader.loadImage("/images/player_hud.png");
-
+        songGame = new SoundClip("/musicBack/gameSong.wav");
         pickTrash = new SoundClip("/global_sounds/pickTrash.wav");
         pickDenied = new SoundClip("/global_sounds/pickDenied.wav");
         playerSpriteSheet = ImageLoader.loadImage("/images/player_spritesheet.png");
@@ -807,12 +825,19 @@ public class Assets {
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
         gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
         leftExt = ImageLoader.loadImage("/images_minigame1/extensionLeft.png");
-        rightExt = ImageLoader.loadImage("/images_minigame1/extensionRight.png");
+        rightExt = ImageLoader.loadImage("/images_minigame1/extensionRight.png"); 
+        alHit = new SoundClip("/sounds_minigame1/aluminumHit.wav");               
+        elecHit = new SoundClip("/sounds_minigame1/electronicHit.wav");               
+        glassHit = new SoundClip("/sounds_minigame1/glassHit.wav");               
+        orgHit = new SoundClip("/sounds_minigame1/organicHit.wav");               
+        paperHit = new SoundClip("/sounds_minigame1/paperHit.wav");               
+        palsticHit = new SoundClip("/sounds_minigame1/plasticHit.wav"); 
 
         //Mini-game pause
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame.png");
         minigame1PauseEnd[1] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame2.png");
+        miniMusic = new SoundClip("/musicBack/minigameSong.wav");
 
         //Minigame 1 inorganic trash loader
         inTrash = new BufferedImage[19];
@@ -866,6 +891,7 @@ public class Assets {
         pausaMenuInstructions[1] = ImageLoader.loadImage("/imagesPause/instructionsHover2.png");
 
         //Main Menu loader
+        mainMenuMusic = new SoundClip("/musicBack/menuSong.wav");
         selectSound = new SoundClip("/global_sounds/select.wav");
         gameStart = new SoundClip("/global_sounds/gameStart.wav");
         mainMenuPlay = new BufferedImage[2];
@@ -972,6 +998,7 @@ public class Assets {
         door[1] = ImageLoader.loadImage("/images/door/door2.png");
         door[2] = ImageLoader.loadImage("/images/door/door3.png");
         door[3] = ImageLoader.loadImage("/images/door/door4.png");
+        doorOpen = new SoundClip("/images/door/door.wav");
         
         //Car Assets
         carSpriteSheet = ImageLoader.loadImage("/imagesCar/car.png");
