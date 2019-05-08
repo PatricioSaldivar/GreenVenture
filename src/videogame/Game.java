@@ -231,7 +231,7 @@ public class Game implements Runnable {
      */
     void init() {
         Assets.init();
-        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 5);
+        npcTrashClassify = new NPCMinigame1(1514, 2140, 64, 64, this, screen, 5);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
@@ -241,7 +241,8 @@ public class Game implements Runnable {
         storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));     //TodoxMartRoom door
         storeDoors.add(new StoreDoor(193, 1339, 77, 67, this, screen, 1));         // RecycleCoRoom door    
         
-
+        //Solid of Minigame
+        solids.add(new Solid(1530, 2144, 32, 32));
         //Map boundaries
         solids.add(new Solid(0, -32, 4096, 32));
         solids.add(new Solid(-32, 0, 32, 4096));
@@ -1047,7 +1048,6 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
             screen.render(g); //Draws the screen that follows the player   
-            npcTrashClassify.render(g);
             //Draws Pause image when pausing game
             if (keyManager.pause) {
                 g.drawImage(animation.getCurrentFrame(), 0, 0, width, height, null);

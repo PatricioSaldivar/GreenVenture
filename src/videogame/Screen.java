@@ -62,7 +62,7 @@ public class Screen {
         this.trash = trash;
         coin = new Animation(Assets.coin, 100);
         selector = new Animation(Assets.selector,300);
-        playerTalking = new Animation(Assets.playerTalk,200);
+        playerTalking = new Animation(Assets.playerTalk,250);
     }
 
     /**
@@ -241,8 +241,7 @@ public class Screen {
     public void trashContainerMessageText(int id, Graphics2D g){
         int yPaint=400;
         String message;
-        g.setColor(Color.lightGray);
-        g.fillRect(0, 384, 512, 128);
+       g.drawImage(Assets.playerHud,0,384,512,128,null);
         g.setColor(Color.BLACK);
         message ="Vaya en este basurero hay:\n"
                 + game.getTrashContainers().get(id).getElectronics()+ "de basura electronicos\n"
@@ -261,8 +260,7 @@ public class Screen {
     public void conversation(NPC npc, Player player, Graphics2D g) {
         int yPaint = 416;
         String message;
-        g.setColor(Color.red);
-        g.fillRect(0, 384, 512, 128);
+        g.drawImage(Assets.playerHud,0,384,512,128,null);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
             playerTalking.tick();
@@ -304,8 +302,7 @@ public class Screen {
         public void conversationMinigame(NPCMinigame1 npc, Player player, Graphics2D g) {
         int yPaint = 416;
         String message;
-        g.setColor(Color.red);
-        g.fillRect(0, 384, 512, 128);
+        g.drawImage(Assets.playerHud,0,384,512,128,null);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
             playerTalking.tick();
@@ -387,23 +384,26 @@ public class Screen {
                 dX = game.getPlayer().getX()- game.getNpcs().get(i).getX();
                 dY = game.getPlayer().getY()- game.getNpcs().get(i).getY();
                 
-                if(abs(dX)>abs(dY)){
-                    if(dY>0){
-                        //Facing down
-                        game.getNpcs().get(i).setConversation(Assets.npcDown[i][1]);
-                    }else
-                        //Facing up
-                        game.getNpcs().get(i).setConversation(Assets.npcUp[i][1]);
-                }else if(dX>0){
-                    //Facing Right
-                    game.getNpcs().get(i).setConversation(Assets.npcRight[i][1]);
+                
+                    if(dY>32){
+                        //Facing Right
+                        game.getNpcs().get(i).setConversation(Assets.npcFacingDown[i]);
+                    }else if(dY<-32)
+                        //Facing Left
+                        game.getNpcs().get(i).setConversation(Assets.npcFacingUp[i]);
+                if(dX>32){
+                    //Facing Up
+                    game.getNpcs().get(i).setConversation(Assets.npcFacingRight[i]);
                     
-                }else{
-                    //Facing Left
-                    game.getNpcs().get(i).setConversation(Assets.npcLeft[i][1]);
+                }else if(dX<-32){
+                    //Facing Down
+                    game.getNpcs().get(i).setConversation(Assets.npcFacingLeft[i]);
                 }       
             }
         }
+       
+        game.getCar().render(g);
+        
         if (player.isConversation()) {
            if(trashContainerMessage){
               trashContainerMessageText(trashContainerId, g2d);
@@ -413,56 +413,54 @@ public class Screen {
                 int dY;
                 dX = game.getPlayer().getX()- game.getNpcTrashClassify().getX();
                 dY = game.getPlayer().getY()- game.getNpcTrashClassify().getY();  
-                if(abs(dX)>abs(dY)){
-                    if(dY>0){
-                        //Facing down
-                        game.getNpcTrashClassify().setConversation(Assets.npcDown[game.getNpcTrashClassify().getId()][1]);
-                    }else
-                        //Facing up
-                        game.getNpcTrashClassify().setConversation(Assets.npcUp[game.getNpcTrashClassify().getId()][1]);
-                }else if(dX>0){
+  
+                    if(dY>32){
+                        //Facing Down
+                        game.getNpcTrashClassify().setConversation(Assets.npcFacingDown[game.getNpcTrashClassify().getId()]);
+                    }else if(dY<-32){
+                        //Facing Up
+                        game.getNpcTrashClassify().setConversation(Assets.npcFacingUp[game.getNpcTrashClassify().getId()]);
+                    }
+                 if(dX>32){
                     //Facing Right
-                    game.getNpcTrashClassify().setConversation(Assets.npcRight[game.getNpcTrashClassify().getId()][1]);
+                    game.getNpcTrashClassify().setConversation(Assets.npcFacingRight[game.getNpcTrashClassify().getId()]);
                     
-                }else{
+                }else if (dX<-32){
                     //Facing Left
-                    game.getNpcTrashClassify().setConversation(Assets.npcLeft[game.getNpcTrashClassify().getId()][1]);
+                    game.getNpcTrashClassify().setConversation(Assets.npcFacingLeft[game.getNpcTrashClassify().getId()]);
                 }
+                
                 if(!assignAnimationNpc){
-               npcTalking = new Animation(Assets.npcTalk[game.getNpcTrashClassify().getId()],200);
+               npcTalking = new Animation(Assets.npcTalk[game.getNpcTrashClassify().getId()],250);
                assignAnimationNpc=true;
                }
                 conversationMinigame(game.getNpcTrashClassify(),player,g2d);
             }else{
                if(!assignAnimationNpc){
-               npcTalking = new Animation(Assets.npcTalk[game.getNpcs().get(talkingNPC).getId()],200);
+               npcTalking = new Animation(Assets.npcTalk[game.getNpcs().get(talkingNPC).getId()],250);
                assignAnimationNpc=true;
                }
             conversation(game.getNpcs().get(talkingNPC), player, g2d);
            }
         }
-        game.getCar().render(g);
+         game.getNpcTrashClassify().render(g);
         player.render(g);
 
         //Displays the top rectangle with information of the player
-        if (!game.getKeyManager().pause) {
-            g2d.setColor(new Color(249, 171, 85));
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 7 * 0.1f));
-            g2d.fillRect(0, 0, game.getWidth(), RectangleInfoHeight);
-            g2d.drawImage(Assets.playerPortait, 0, 0, 48, RectangleInfoHeight, null);
-            g2d.setColor(Color.black);
-            g2d.drawRect(0, 0, game.getWidth(), RectangleInfoHeight);
+        if (!game.getKeyManager().pause) {       
+            g.drawImage(Assets.playerHud,0, 0, game.getWidth(), RectangleInfoHeight,null); 
+            g2d.drawImage(Assets.playerTalk[0], 12, 6, 36, 36, null);
             g2d.setColor(new Color(114, 24, 23));
             g2d.setFont(game.getFontx());
             DecimalFormat dform = new DecimalFormat("0.00");
             String message = ": " + dform.format(player.getMoney());
             coin.tick();
-            g.drawImage(coin.getCurrentFrame(), 112,12, 24, RectangleInfoHeight/2, null);
-            g2d.drawString(message, 136, RectangleInfoHeight * 2 / 3);
+            g.drawImage(coin.getCurrentFrame(), 76,12, 24, RectangleInfoHeight/2, null);
+            g2d.drawString(message, 100, RectangleInfoHeight * 2 / 3);
             g2d.setFont(game.getFontx());
-             g.drawImage(Assets.backpack, 272,12, 24, RectangleInfoHeight/2, null);
+             g.drawImage(Assets.backpack, 344,12, 24, RectangleInfoHeight/2, null);
             message = player.getInventory() + "/" + player.getCapacity();
-            g2d.drawString(message, 304, RectangleInfoHeight * 2 / 3);
+            g2d.drawString(message, 376, RectangleInfoHeight * 2 / 3);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
         }
     }
