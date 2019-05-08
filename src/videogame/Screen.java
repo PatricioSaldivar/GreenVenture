@@ -169,6 +169,15 @@ public class Screen {
         this.player = player;
     }
 
+    public LinkedList<Trash> getTrash() {
+        return trash;
+    }
+
+    public void setTrash(LinkedList<Trash> trash) {
+        this.trash = trash;
+    }
+    
+
     /**
      * To get the rectangle that covers the perimeter of the screen
      *

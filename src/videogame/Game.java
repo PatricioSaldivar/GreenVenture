@@ -74,6 +74,35 @@ public class Game implements Runnable {
         this.display = display;
         display.setTitle("Ciudad");
 
+        player = new Player(40, 40, 64, 64, this);
+        screen = new Screen(0, 0, width, height, this, player, trash);
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
+        car = new Car(512, 320, 128, 128, screen, this);
+        car.setDirection(2);
+
+        trashContainers.add(new TrashContainer(266, 385, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1615, 530, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2103, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2839, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(4055, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1583, 1331, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(2426, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3769, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(23, 1975, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1476, 2012, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3391, 2507, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(125, 3555, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3175, 3233, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3556, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3654, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3851, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3951, 1821, 96, 86, screen, 0, true));
+
         //Adds font from fonts package
         try {
             fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
@@ -189,20 +218,15 @@ public class Game implements Runnable {
         this.trashContainers = trashContainers;
     }
 
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+    }
+
     /**
      * initializing the display window of the game
      */
-    private void init() {
+    void init() {
         Assets.init();
-        if (!loaded) {
-            player = new Player(40, 40, 64, 64, this);
-        }
-        screen = new Screen(0, 0, width, height, this, player, trash);
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
-        car = new Car(512, 320, 128, 128, screen, this);
-        car.setDirection(2);
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
@@ -670,28 +694,6 @@ public class Game implements Runnable {
         possibleNPCs[0] = 0;
         possibleNPCs[1] = 1;
         possibleNPCs[2] = 2;
-        
-        trashContainers.add(new TrashContainer(266, 385, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1615, 530, 34, 54,screen,0,false)); 
-        trashContainers.add(new TrashContainer(2103, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(2839, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(4055, 212, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1583, 1331, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(2426, 1074, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(3769, 1074, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(23, 1975, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(1476, 2012, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(3391, 2507, 34, 54,screen,0,false));
-        trashContainers.add(new TrashContainer(125, 3555, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(3175, 3233, 34, 54,screen,0,false));
-        
-        trashContainers.add(new TrashContainer(3556, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3654, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3851, 1821, 96, 86,screen,0,true));
-        trashContainers.add(new TrashContainer(3951, 1821, 96, 86,screen,0,true));
-        
     }
 
     @Override
@@ -742,7 +744,6 @@ public class Game implements Runnable {
         keyManager.tick();
         if (!keyManager.pause) {
             // avancing player with colision
-           
 
             for (int i = 0; i < crosswalks.size(); i++) {
                 crosswalks.get(i).tick();
@@ -793,7 +794,7 @@ public class Game implements Runnable {
 
                 }
             }
-                       
+
             npcTrashClassify.tick();
             player.tick();
 
@@ -869,8 +870,8 @@ public class Game implements Runnable {
                                 if (trashContainers.get(i).getElectronics() >= delta) {
                                     player.setInventory(player.getInventory() + delta);
                                     player.setElectronics(player.getElectronics() + delta);
-                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics()-delta);
-                                    
+                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics() - delta);
+
                                 } else {
                                     player.setInventory(player.getInventory() + trashContainers.get(i).getElectronics());
                                     player.setElectronics(player.getElectronics() + trashContainers.get(i).getElectronics());
@@ -885,7 +886,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getAluminum() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setAluminum(player.getAluminum() + delta);
-                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum()-delta);
+                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getAluminum());
                                         player.setAluminum(player.getAluminum() + trashContainers.get(i).getAluminum());
@@ -901,7 +902,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getGlass() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setGlass(player.getGlass() + delta);
-                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass()-delta);
+                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getGlass());
                                         player.setGlass(player.getGlass() + trashContainers.get(i).getGlass());
@@ -917,7 +918,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getPlastic() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setPlastic(player.getPlastic() + delta);
-                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic()-delta);
+                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getPlastic());
                                         player.setPlastic(player.getPlastic() + trashContainers.get(i).getPlastic());
@@ -933,11 +934,11 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getPaper() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setPaper(player.getPaper() + delta);
-                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper()-delta);
+                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getPaper());
                                         player.setPaper(player.getPaper() + trashContainers.get(i).getPaper());
-                                         trashContainers.get(i).setPaper(0);
+                                        trashContainers.get(i).setPaper(0);
                                     }
                                 }
                             }
@@ -949,7 +950,7 @@ public class Game implements Runnable {
                                     if (trashContainers.get(i).getOrganic() >= delta) {
                                         player.setInventory(player.getInventory() + delta);
                                         player.setOrganic(player.getOrganic() + delta);
-                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic()-delta);
+                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic() - delta);
                                     } else {
                                         player.setInventory(player.getInventory() + trashContainers.get(i).getOrganic());
                                         player.setOrganic(player.getOrganic() + trashContainers.get(i).getOrganic());
@@ -1009,9 +1010,7 @@ public class Game implements Runnable {
                 running = false;
             }
             if (keyManager.space && pauseIndex == 0) {
-
-                Save s = new Save(this);
-
+                Save s = new Save(this,trash, npcs, trashContainers, car);
                 try {
                     s.tick();
 
