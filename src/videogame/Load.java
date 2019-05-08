@@ -100,14 +100,14 @@ public class Load {
                 player.setAluminum(myRs.getInt(12));
                 player.setElectronics(myRs.getInt(13));
                 player.setOrganic(myRs.getInt(14));
-                player.setMoney(myRs.getInt(15));
+                player.setMoney(myRs.getDouble(15));
                 player.setTrashUpgrade(myRs.getInt(16));
                 player.setSpeedUpgrade(myRs.getInt(17));
                 player.setCapacityUpgrade(myRs.getInt(18));
                 player.setDirection(myRs.getInt(19));
                 player.setKilometers(myRs.getInt(20));
                 player.setTotalTrash(myRs.getInt(21));
-                player.setTotalIncome(myRs.getInt(22));
+                player.setTotalIncome(myRs.getDouble(22));
                 player.setProgress(myRs.getInt(23));
                 if (myRs.getInt(24) == 1) {
                     player.setConversation(true);
@@ -170,6 +170,7 @@ public class Load {
                     list.add(15);
                 }
             }
+            player.setTutorialEnded(true);
             game.setPlayer(player);
             screen = new Screen(0, 0, 512,512, game, player, trash);
             

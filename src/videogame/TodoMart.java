@@ -382,15 +382,23 @@ public class TodoMart implements Runnable {
                 g.setFont(fontx);
                 g.setColor(Color.BLACK);
                 g.getFont().isBold();
-                g.getFont().deriveFont(16f);
+                
                 //Draws messages
                 g.drawImage(coinAnimation.getCurrentFrame(), 10, 470, 30, 30, null);
                 DecimalFormat dform = new DecimalFormat("0.00");
                 g.drawString("" + dform.format(game.getPlayer().getMoney()), 45, 492);
+
                 g.drawString("$" + dform.format(sneakersUpPrice), 352, 170);
                 g.drawString("$" + dform.format(backPackUpPrice), 352, 250);
                 g.drawString("$" + dform.format(trashValueUpPrice), 352, 330);
                 g.drawString("$" + dform.format(binsUpPrice), 352, 410);
+                g.setFont(g.getFont().deriveFont(12f));
+                g.drawString("Mejora tu velocidad un 100%", 160, 150);
+                g.drawString("Convierte un bote a reciclable", 160, 390);
+                g.drawString("Multiplica X2 el valor", 160, 310);
+                 g.drawString("de la basura", 160, 310+ g.getFontMetrics().getHeight());
+                g.drawString("Aumenta un 100% la capacidad", 160, 230);
+                g.drawString("de tu mochila", 160, 230 + g.getFontMetrics().getHeight());
             }
             bs.show();
             g.dispose();

@@ -820,7 +820,7 @@ public class Assets {
         //Minigame 1 loader
         inTrashCan = ImageLoader.loadImage("/images_minigame1/binIn.png");
         orTrashCan = ImageLoader.loadImage("/images_minigame1/binOr.png");
-        minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.jpg");
+        minigameWallpaper = ImageLoader.loadImage("/images_minigame1/minigame_wallpaper.png");
         rightBox = ImageLoader.loadImage("/images_minigame1/box_right.png");
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
         gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
@@ -966,7 +966,7 @@ public class Assets {
 
         todoMartReturn = new BufferedImage[2];
         todoMartReturn[0] = ImageLoader.loadImage("/imagesTodoMart/returnUp.png");
-        todoMartReturn[1] = ImageLoader.loadImage("/imagesTodoMart/retrurnUp2.png");
+        todoMartReturn[1] = ImageLoader.loadImage("/imagesTodoMart/returnUp2.png");
 
         todoMartSneakersUp = new BufferedImage[2];
         todoMartSneakersUp[0] = ImageLoader.loadImage("/imagesTodoMart/sneakerUp.png");

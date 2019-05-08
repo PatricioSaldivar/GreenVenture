@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
@@ -194,40 +193,41 @@ public class Tutorial implements Runnable {
 
     public void tutorialMessage(int contM) {
         int iPosy = 20;
+        g.setFont(g.getFont().deriveFont(16f));
         String message = " ";
         g.setColor(Color.BLACK);
         g.drawImage(Assets.textBox, 0, 0, 512, 128, null);
         switch (contM) {
             case 0:
-                message = "Utiliza las flechas del teclado para moverte\npor el mapa.";
+                message = "Utiliza las flechas del teclado para moverte\npor el mapa. ";
                 g.drawImage(Assets.arrows, 27, 36, 44, 54, null);
                 break;
             case 1:
-                message = "Recoge toda la basura veas con la tecla ESPACIO,\ntienes un límite de basura que puedes\nalmacenar dependiendo de la capacidad\nde tu mochila.";
+                message = "Recoge toda la basura veas con la tecla ESPACIO,\ntienes un límite de basura que puedes\nalmacenar dependiendo de la capacidad\nde tu mochila. ";
                 g.drawImage(Assets.backpack, 27, 36, 44, 54, null);
                 break;
             case 2:
-                message = "Esa persona acaba de tirar basura.\nAcércte a él y presiona la tecla ESPACIO para decirle que la que la tire en el basurero.\nLa próxima vez que veas a alguien con este símbolo\nde exclamación en su cabeza dile que no tire la basura en el suelo";
+                message = "Esa persona acaba de tirar basura.\nAcércte a él y presiona la tecla ESPACIO\npara decirle que la tire en el basurero.\nLa próxima vez que veas a alguien con este\nsímbolo de exclamación en su cabeza\ndile que no tire la basura en el suelo ";
                 g.drawImage(Assets.npcDown[0][0], 27, 36, 44, 54, null);
                 break;
             case 3:
-                message = "Este es un bote de basura, si le llamas la atenión a\nlas personas, mejorarán sus hábitos\ny comenzarán a tirar basura en el bote.";
-                g.drawImage(Assets.dumpDefault, 27, 36, 44, 54, null);
+                message = "Este es un bote de basura, si le llamas la\natención a las personas, mejorarán sus hábitos\ny comenzarán a tirar basura en el bote. ";
+                g.drawImage(Assets.trashcanDefault, 27, 36, 44, 54, null);
                 break;
             case 4:
-                message = "Puedes adquirir botes de basura en la tienda\nverdes que se encuentren a traves\ndel mapa.";
-                g.drawImage(Assets.dumpOwned, 27, 36, 44, 54, null);
+                message = "Puedes sustituir los botes de basura\npor reciclabes al comprarlos en la tienda.\n En los botes reciclables (verdes) puedes\nrecoger la basura que esta en los botes verdes ";
+                g.drawImage(Assets.trashcanOwned, 27, 36, 44, 54, null);
                 break;
             case 5:
-                message = "Ya que tienes basura puedes ir a\nvenderla en la tienda de reciclaje\nllamada 'RecycleCo'.";
+                message = "Ya que tienes basura puedes ir a\nvenderla en la tienda de reciclaje\nllamada 'RecycleCo'. ";
                 g.drawImage(Assets.trash[0], 27, 36, 44, 54, null);
                 break;
             case 6:
-                message = "Una ves que hayas vendido tu basura\nrecibiras dinero, con el puedes comprar\nmejoras para tu jugador.";
+                message = "Una ves que hayas vendido tu basura\nrecibiras dinero, con el puedes comprar\nmejoras para tu jugador. ";
                 g.drawImage(Assets.coin[0], 27, 36, 44, 54, null);
                 break;
             case 7:
-                message = "'TodoxMart' es la tienda donde comprar\nlas mejoras.";
+                message = "'TodoxMart' es la tienda donde comprar\nlas mejoras. ";
                 g.drawImage(Assets.trash[14], 27, 36, 44, 54, null);
                 break;
         }
@@ -407,8 +407,7 @@ public class Tutorial implements Runnable {
             //Score values por painting
             g.setFont(fontx);
             g.setColor(Color.BLACK);
-            g.getFont().isBold();
-            g.setFont(g.getFont().deriveFont(20f));
+            g.setFont(g.getFont().deriveFont(16f));
             //Shows message every time the before 
             if (indexInstruction < 8 && showMessage) {
                 this.tutorialMessage(indexInstruction);
