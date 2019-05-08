@@ -14,19 +14,19 @@ import java.awt.Rectangle;
  */
 public class Car extends Solid {
 
-    private int xMove = 0;
-    private int yMove = 0;
-    private int iniX;
-    private int iniY;
-    private int speed = 10;
-    private Screen screen;
-    private Game game;
-    private int direction;
-    private int alreadyChecked = -1;
-    private Animation up;
-    private Animation down;
-    private Animation right;
-    private Animation left;
+    private int xMove = 0;              // store xmove
+    private int yMove = 0;              // store ymove
+    private int iniX;                   // store iniX
+    private int iniY;                   // store iniY
+    private int speed = 10;             // store speed
+    private Screen screen;              // store scren
+    private Game game;                  // store game
+    private int direction;              // store direction
+    private int alreadyChecked = -1;    // store alreakdy checed
+    private Animation up;               // store animation
+    private Animation down;             // store animation
+    private Animation right;            // store animation
+    private Animation left;             // store animation
     /**
      * 
      * 
@@ -50,87 +50,86 @@ public class Car extends Solid {
 
     }
     /**
-     * 
+     *Gets the game 
      *
-     * @return game
+     * @return game and <code>game</code> 
      */
     public Game getGame() {
         return game;
     }
     /**
+     * Set the game
      * 
-     * 
-     * @param game 
+     * @param game <code>game</code>
      */
     public void setGame(Game game) {
         this.game = game;
     }
     /**
+    * Get the xMove
     * 
-    * 
-    * @return xMove 
+    * @return xMove and <code>int</code>
     */
     public int getSMoveX() {
         return xMove;
     }
     /**
+     * set SMoveX
      * 
-     * 
-     * @param SMoveX 
+     * @param SMoveX <code>int</code> 
      */
     public void setSMoveX(int SMoveX) {
         this.xMove = SMoveX;
     }
     /**
-     *
-     * @return yMove
+     * Gets the SMoveY
+     * @return yMove and <code>int</code>
      */
     public int getSMoveY() {
         return yMove;
     }
     /**
-     * 
-     * 
-     * @param SMoveY 
+     * Sets the sMoveY 
+     * @param SMoveY <code>int</code>
      */
     public void setSMoveY(int SMoveY) {
         this.yMove = SMoveY;
     }
     /**
+     * Get the direction
      * 
-     * 
-     * @return direction 
+     * @return direction and <code>int</code> 
      */
     public int getDirection() {
         return direction;
     }
     /**
-     * 
-     * @param direction 
+     * Set the direction
+     * @param direction <code>int</code>
      */
     public void setDirection(int direction) {
         this.direction = direction;
     }
     /**
+     * Set the alreadyChecked
      * 
-     * 
-     * @param alreadyChecked 
+     * @param alreadyChecked <code>int</int>
      */
     public void setAlreadyChecked(int alreadyChecked) {
         this.alreadyChecked = alreadyChecked;
     }
     /**
+     * Get the xMove
      * 
-     * 
-     * @return xMove 
+     * @return xMove and <code>int</code> 
      */
     public int getxMove() {
         return xMove;
     }
     /**
+     * Set the xMove
      * 
-     * 
-     * @param xMove 
+     * @param xMove<code>int</code>
      */
     public void setxMove(int xMove) {
         this.xMove = xMove;

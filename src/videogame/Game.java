@@ -887,6 +887,7 @@ public class Game implements Runnable {
                                 screen.setAssignAnimationNpc(false);
                                 if (screen.isCursorOnPlay()) {
                                     MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                                    Assets.songGame.stop();
                                     mct.start();
                                     running = false;
                                 }
@@ -1046,6 +1047,7 @@ public class Game implements Runnable {
                 }
                 if (keyManager.space && pauseIndex == 3 && !keyManager.helperSpace) {
                     MainMenu m = new MainMenu("MainMenu", 512, 512, display);
+                    Assets.songGame.stop();
                     Assets.gameStart.play();
                     m.start();
                     running = false;

@@ -37,9 +37,9 @@ public class TodoMart implements Runnable {
     private Game game;                      // to store the game in which it was before
     private TodoMartRoom room;              // to store the room in which it was before
     private int indexHelper = 10;           // to store an index helper to know when the game need to make 
-    private double sneakersUpPrice = 4;         // to store the price of the sneakers upgrade
-    private double backPackUpPrice = 1;         // to store the price of the backpack upgrade
-    private double trashValueUpPrice = 1;       // to store the price of the trash value upgrade
+    private double sneakersUpPrice = 10;         // to store the price of the sneakers upgrade
+    private double backPackUpPrice = 2;         // to store the price of the backpack upgrade
+    private double trashValueUpPrice = 3;       // to store the price of the trash value upgrade
     private double binsUpPrice = 30;             // to store the price of the bins upgrade
     private int showTrashcan = 0;
     private boolean movingToTrashcan = false;

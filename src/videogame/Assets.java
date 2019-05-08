@@ -76,6 +76,16 @@ public class Assets {
     public static SoundClip gloveHit;               // to store the glove hit sound
     public static BufferedImage leftExt;            //To store the left box extension
     public static BufferedImage rightExt;           //To store the right box extension
+    public static SoundClip alHit;               // to store the glove hit sound
+    public static SoundClip elecHit;               // to store the glove hit sound
+    public static SoundClip glassHit;               // to store the glove hit sound
+    public static SoundClip orgHit;               // to store the glove hit sound
+    public static SoundClip paperHit;               // to store the glove hit sound
+    public static SoundClip palsticHit;               // to store the glove hit sound
+    public static SoundClip miniMusic;
+    
+    
+    
 
     //Pause of game Assets
     public static BufferedImage pausaMainMenu[];            // to store the image of the pause when MainMenu is selected
@@ -815,12 +825,19 @@ public class Assets {
         leftBox = ImageLoader.loadImage("/images_minigame1/box_left.png");
         gloveHit = new SoundClip("/sounds_minigame1/glovePunch.wav");
         leftExt = ImageLoader.loadImage("/images_minigame1/extensionLeft.png");
-        rightExt = ImageLoader.loadImage("/images_minigame1/extensionRight.png");
+        rightExt = ImageLoader.loadImage("/images_minigame1/extensionRight.png"); 
+        alHit = new SoundClip("/sounds_minigame1/aluminumHit.wav");               
+        elecHit = new SoundClip("/sounds_minigame1/electronicHit.wav");               
+        glassHit = new SoundClip("/sounds_minigame1/glassHit.wav");               
+        orgHit = new SoundClip("/sounds_minigame1/organicHit.wav");               
+        paperHit = new SoundClip("/sounds_minigame1/paperHit.wav");               
+        palsticHit = new SoundClip("/sounds_minigame1/plasticHit.wav"); 
 
         //Mini-game pause
         minigame1PauseEnd = new BufferedImage[2];
         minigame1PauseEnd[0] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame.png");
         minigame1PauseEnd[1] = ImageLoader.loadImage("/images_minigame1/pauseMiniGame2.png");
+        miniMusic = new SoundClip("/musicBack/minigameSong.wav");
 
         //Minigame 1 inorganic trash loader
         inTrash = new BufferedImage[19];

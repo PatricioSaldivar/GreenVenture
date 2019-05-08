@@ -113,6 +113,14 @@ public class TrashMinigameClassify extends Item {
     public boolean isMoved() {
         return moved;
     }
+
+    public int getImageIndex() {
+        return imageIndex;
+    }
+
+    public void setImageIndex(int imageIndex) {
+        this.imageIndex = imageIndex;
+    }
     
     
 
