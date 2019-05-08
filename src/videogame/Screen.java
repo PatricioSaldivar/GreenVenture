@@ -239,20 +239,21 @@ public class Screen {
     
 
     public void trashContainerMessageText(int id, Graphics2D g){
-        int yPaint=400;
+        int yPaint=392;
         String message;
-       g.drawImage(Assets.playerHud,0,384,512,128,null);
+        g.setFont(game.getFonty().deriveFont(16f));
+       g.drawImage(Assets.textBox,0,384,512,128,null);
         g.setColor(Color.BLACK);
-        message ="Vaya en este basurero hay:\n"
-                + game.getTrashContainers().get(id).getElectronics()+ "de basura electronicos\n"
-                + game.getTrashContainers().get(id).getAluminum()+"de basura alumino\n"
-                + game.getTrashContainers().get(id).getGlass()+"de basura vidiro\n"
-                + game.getTrashContainers().get(id).getPlastic()+"de basura plastico\n"
-                + game.getTrashContainers().get(id).getPaper()+"de basura paper\n"
-                + game.getTrashContainers().get(id).getOrganic()+"de basura organica\n"
+        message ="Vaya en este basurero hay:\n\n"
+                + game.getTrashContainers().get(id).getElectronics()+   " de basura electronicos    "
+                + game.getTrashContainers().get(id).getAluminum()+      " de basura alumino\n"
+                + game.getTrashContainers().get(id).getGlass()+         " de basura vidiro          "
+                + game.getTrashContainers().get(id).getPlastic()+       " de basura plastico\n"
+                + game.getTrashContainers().get(id).getPaper()+         " de basura paper          "
+                + game.getTrashContainers().get(id).getOrganic()+       " de basura organica\n\n"
                 + "Tomare lo que pueda caber en mi mochila! ";
             for (String line : message.split("\n")) {
-            g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
+            g.drawString(line, 32, yPaint += g.getFontMetrics().getHeight());
         }
         
     }
@@ -260,12 +261,14 @@ public class Screen {
     public void conversation(NPC npc, Player player, Graphics2D g) {
         int yPaint = 416;
         String message;
-        g.drawImage(Assets.playerHud,0,384,512,128,null);
+        g.setFont(game.getFonty().deriveFont(24f));
+        
+        g.drawImage(Assets.textBox,0,384,512,128,null);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
             playerTalking.tick();
-            g.drawImage(playerTalking.getCurrentFrame(), 0, 416, 64, 64, null);
-            message = "¡Hey! No tires la basura al suelo, mejor tírala en un bote,\nno cuesta mucho, y además, ayudas a mantener la ciudad limpia.";
+            g.drawImage(playerTalking.getCurrentFrame(), 10, 420, 72, 72, null);
+            message = "¡Hey! No tires la basura al suelo!\nTirala a un bote de basura\na la proxima. ";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;
@@ -276,7 +279,7 @@ public class Screen {
                 conversationTextIndex = message.length() - 1;
             }
         } else {
-            message = "Oh vaya, una disculpa, no lo volveré a hacer.\nMe da gusto ver que hay gente que busca generar un cambio.";
+            message = "Oh vaya, una disculpa, no lo\n volveré a hacer. ";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;
@@ -287,7 +290,9 @@ public class Screen {
                 conversationTextIndex = message.length() - 1;
             }
             npcTalking.tick();
-            g.drawImage(npcTalking.getCurrentFrame(), 0, 416, 64, 64, null);
+            g.drawImage(npcTalking.getCurrentFrame(), 10, 420, 72, 72, null);
+            
+            
         }
         if (conversationTextIndex < message.length() && message.charAt(conversationTextIndex) == '\'') {
             conversationTextIndex++;
@@ -301,13 +306,14 @@ public class Screen {
     
         public void conversationMinigame(NPCMinigame1 npc, Player player, Graphics2D g) {
         int yPaint = 416;
+        g.setFont(game.getFonty());
         String message;
-        g.drawImage(Assets.playerHud,0,384,512,128,null);
+        g.drawImage(Assets.textBox,0,384,512,128,null);
         g.setColor(Color.BLACK);
         if (!player.isTalking()) {
-            playerTalking.tick();
-            g.drawImage(playerTalking.getCurrentFrame(), 0, 416, 64, 64, null);
-            message = "Hey me podrias ayudar organizando mi basura?\nPodrias usar mi robot de golpes! ";
+            npcTalking.tick();
+             g.drawImage(npcTalking.getCurrentFrame(), 10, 420, 72, 72, null);
+            message = "Hey me podrias ayudar organizando mi basura?\nEs solo clasificarla. ";
             if (!finishedConversationText) {
                 if (conversationTextIndex < message.length()) {
                     conversationTextIndex++;
@@ -321,10 +327,12 @@ public class Screen {
             g.drawString(line, 128, yPaint += g.getFontMetrics().getHeight());
         }
         } else {
-            message = "Claro! Donde esta ese robot?\nPor el momento no puedo, lo lamento ";
+            message = "Claro! Donde esta ese robot?\nNo puedo, disculpame. ";
                 conversationTextIndex = message.length() - 1;
-                npcTalking.tick();
-            g.drawImage(npcTalking.getCurrentFrame(), 0, 416, 64, 64, null);
+                
+                playerTalking.tick();
+                g.drawImage(playerTalking.getCurrentFrame(), 10, 420, 72, 72, null);
+           
             selector.tick();
             if(cursorOnPlay){
                  g.drawImage(selector.getCurrentFrame(),120,416+(g.getFontMetrics().getHeight()*1/2),8,8,null);

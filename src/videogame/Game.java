@@ -36,6 +36,7 @@ public class Game implements Runnable {
     private Screen screen;                      // to manage screen
     private ArrayList<NPC> npcs;                // to manage all items in the game
     private Font fontx;                         // to manage a custom font
+    private Font fonty;                         // to manage a custom font
     private LinkedList<Trash> trash;            // to manage the trash taht is in the game
     private Animation animation;                // to manage the animations of the objects
     private int pauseIndex = 5;                 // to storw the index of the pause selector
@@ -109,7 +110,18 @@ public class Game implements Runnable {
             fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
         } catch (FontFormatException | IOException ex) {
         }
+        
+                try {
+            fonty = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/pixelfont.ttf")).deriveFont(24f);
+        } catch (FontFormatException | IOException ex) {
+        }
 
+    
+
+    }
+
+    public Font getFonty() {
+        return fonty;
     }
 
     public Graphics getG() {
@@ -870,6 +882,7 @@ public class Game implements Runnable {
                         player.setPick(false);
                         player.setConversation(true);
                         screen.setTrashContainerMessage(true);
+                        screen.setTrashContainerId(i);
                     } else {
                         player.setConversation(false);
                         screen.setTrashContainerMessage(false);
