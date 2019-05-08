@@ -18,7 +18,7 @@ public class Car extends Solid {
     private int yMove = 0;
     private int iniX;
     private int iniY;
-    private int speed = 5;
+    private int speed = 10;
     private Screen screen;
     private Game game;
     private int direction;
@@ -64,6 +64,48 @@ public class Car extends Solid {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+    public void setAlreadyChecked(int alreadyChecked) {
+        this.alreadyChecked = alreadyChecked;
+    }
+
+    public int getxMove() {
+        return xMove;
+    }
+
+    public void setxMove(int xMove) {
+        this.xMove = xMove;
+    }
+
+    public int getyMove() {
+        return yMove;
+    }
+
+    public void setyMove(int yMove) {
+        this.yMove = yMove;
+    }
+
+    public int getIniX() {
+        return iniX;
+    }
+
+    public void setIniX(int iniX) {
+        this.iniX = iniX;
+    }
+
+    public int getIniY() {
+        return iniY;
+    }
+
+    public void setIniY(int iniY) {
+        this.iniY = iniY;
+    }
+
+    public int getAlreadyChecked() {
+        return alreadyChecked;
+    }
+    
+    
 
     @Override
     public void tick() {

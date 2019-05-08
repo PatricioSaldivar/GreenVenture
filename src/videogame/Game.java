@@ -74,6 +74,35 @@ public class Game implements Runnable {
         this.display = display;
         display.setTitle("Ciudad");
 
+        player = new Player(40, 40, 64, 64, this);
+        screen = new Screen(0, 0, width, height, this, player, trash);
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
+        car = new Car(512, 320, 128, 128, screen, this);
+        car.setDirection(2);
+
+        trashContainers.add(new TrashContainer(266, 385, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1615, 530, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2103, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(2839, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(4055, 212, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1583, 1331, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(2426, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3769, 1074, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(23, 1975, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(1476, 2012, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(3391, 2507, 34, 54, screen, 0, false));
+        trashContainers.add(new TrashContainer(125, 3555, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3175, 3233, 34, 54, screen, 0, false));
+
+        trashContainers.add(new TrashContainer(3556, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3654, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3851, 1821, 96, 86, screen, 0, true));
+        trashContainers.add(new TrashContainer(3951, 1821, 96, 86, screen, 0, true));
+
         //Adds font from fonts package
         try {
             fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
@@ -191,22 +220,17 @@ public class Game implements Runnable {
 
     public ArrayList<StoreDoor> getStoreDoors() {
         return storeDoors;
+
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+
     }
 
     /**
      * initializing the display window of the game
      */
-    private void init() {
+    void init() {
         Assets.init();
-        if (!loaded) {
-            player = new Player(40, 40, 64, 64, this);
-        }
-        screen = new Screen(0, 0, width, height, this, player, trash);
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
-        car = new Car(512, 320, 128, 128, screen, this);
-        car.setDirection(2);
         npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
@@ -678,27 +702,6 @@ public class Game implements Runnable {
         possibleNPCs[1] = 1;
         possibleNPCs[2] = 2;
 
-        trashContainers.add(new TrashContainer(266, 385, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(1615, 530, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(2103, 212, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(2839, 212, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(4055, 212, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(1583, 1331, 34, 54, screen, 0, false));
-
-        trashContainers.add(new TrashContainer(2426, 1074, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(3769, 1074, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(23, 1975, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(1476, 2012, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(3391, 2507, 34, 54, screen, 0, false));
-        trashContainers.add(new TrashContainer(125, 3555, 34, 54, screen, 0, false));
-
-        trashContainers.add(new TrashContainer(3175, 3233, 34, 54, screen, 0, false));
-
-        trashContainers.add(new TrashContainer(3556, 1821, 96, 86, screen, 0, true));
-        trashContainers.add(new TrashContainer(3654, 1821, 96, 86, screen, 0, true));
-        trashContainers.add(new TrashContainer(3851, 1821, 96, 86, screen, 0, true));
-        trashContainers.add(new TrashContainer(3951, 1821, 96, 86, screen, 0, true));
-
     }
 
     @Override
@@ -1013,9 +1016,7 @@ public class Game implements Runnable {
                 running = false;
             }
             if (keyManager.space && pauseIndex == 0) {
-
-                Save s = new Save(this);
-
+                Save s = new Save(this,trash, npcs, trashContainers, car);
                 try {
                     s.tick();
 

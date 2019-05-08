@@ -50,6 +50,7 @@ public class Player extends Item {
     private int totalTrash;     //to save the total number of items picked
     private int totalIncome;    //to save the total income generated
     private int progress;       // to save the progress of the city as 
+
     
     
 
@@ -78,6 +79,46 @@ public class Player extends Item {
      */
     public int getInventory() {
         return inventory;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public int getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(int kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public int getTotalTrash() {
+        return totalTrash;
+    }
+
+    public void setTotalTrash(int totalTrash) {
+        this.totalTrash = totalTrash;
+    }
+
+    public int getTotalIncome() {
+        return totalIncome;
+    }
+
+    public void setTotalIncome(int totalIncome) {
+        this.totalIncome = totalIncome;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     /**
@@ -312,6 +353,10 @@ public class Player extends Item {
 
     public void setTrashContainersLeft(ArrayList<Integer> trashContainersLeft) {
         this.trashContainersLeft = trashContainersLeft;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
     
     
