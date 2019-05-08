@@ -228,8 +228,8 @@ public class Game implements Runnable {
 
     public ArrayList<StoreDoor> getStoreDoors() {
         return storeDoors;
-
-    public void setScreen(Screen screen) {
+    }
+    public void setScreen(Screen screen){
         this.screen = screen;
 
     }
@@ -239,7 +239,7 @@ public class Game implements Runnable {
      */
     void init() {
         Assets.init();
-        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 10);
+        npcTrashClassify = new NPCMinigame1(1000, 1000, 64, 64, this, screen, 5);
         animation = new Animation(Assets.pausaSave, 300);
         keyManager.setPauseMax(4);
 
@@ -786,6 +786,17 @@ public class Game implements Runnable {
                             screen.setFinishedConversationText(false);
                             screen.setConversationTextIndex(0);
                             player.setPick(false);
+
+                        }
+                    } else {
+                        if (!screen.isFinishedConversationText()) {
+                            screen.setFinishedConversationText(true);
+                        } else {
+                            screen.setAssignAnimationNpc(false);
+                            player.setConversation(false);
+                            npcs.get(i).setTalking(false);
+                            player.setTalking(false);
+
                         }
                 }
             }
@@ -809,39 +820,6 @@ public class Game implements Runnable {
                 running = false;
             }
 
-            //If player intersects the npc and press space the minigame starts, but first they start a conversation
-            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
-                if (player.isPick()) {
-                    if (!player.isConversation()) {
-                        player.setPick(false);
-                        npcTrashClassify.setTalking(true);
-                        player.setConversation(true);
-                        screen.setFinishedConversationText(false);
-                        screen.setConversationTextIndex(0);
-                    } else if (player.isPick() && player.isConversation()) {
-
-                        if (!player.isTalking()) {
-                            if (!screen.isFinishedConversationText()) {
-                                screen.setFinishedConversationText(true);
-                            } else {
-                                player.setTalking(true);
-                                screen.setConversationTextIndex(0);
-                                screen.setFinishedConversationText(false);
-
-                            }
-                        } else {
-                            if (!screen.isFinishedConversationText()) {
-                                screen.setFinishedConversationText(true);
-                            } else {
-                                player.setConversation(false);
-                                npcs.get(i).setTalking(false);
-                                player.setTalking(false);
-                            }
-                        }
-                        player.setPick(false);
-
-                    }
-                }
 
                 npcTrashClassify.tick();
                 player.tick();

@@ -7,6 +7,7 @@ package videogame;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -38,6 +39,7 @@ public class NPC extends Item {
     private Animation walking;
     private int trashContainerId;
     private int trashToTrashContainer = 0;
+    private BufferedImage conversation;
 
     public NPC(int x, int y, int width, int height, Game game, Screen screen, int id, int trashContainerId) {
         super(x, y);
@@ -53,7 +55,7 @@ public class NPC extends Item {
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
-        facing = new Animation(Assets.npcAlert, 100);
+        facing = new Animation(Assets.npcUp[id], 100);
 
     }
 
@@ -245,6 +247,15 @@ public class NPC extends Item {
         this.trashToTrashContainer = trashToTrashContainer;
     }
 
+    public BufferedImage getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(BufferedImage conversation) {
+        this.conversation = conversation;
+    }
+    
+
     @Override
     public void tick() {
         alertAnimation.tick();
@@ -357,19 +368,19 @@ public class NPC extends Item {
                     switch (direction) {
                         case 0:
                             randomDist = (int) (Math.random() * (4096 - iniY - yMove));
-                            facing = new Animation(Assets.npcAlert, 100);
+                            facing = new Animation(Assets.npcDown[id], 100);
                             break;
                         case 1:
                             randomDist = (int) (Math.random() * (4096 - iniX - xMove));
-                            facing = new Animation(Assets.npcAlert, 100);
+                            facing = new Animation(Assets.npcRight[id], 100);
                             break;
                         case 2:
                             randomDist = (int) (Math.random() * (iniY + yMove));
-                            facing = new Animation(Assets.npcAlert, 100);
+                            facing = new Animation(Assets.npcUp[id], 100);
                             break;
                         case 3:
                             randomDist = (int) (Math.random() * (iniX + xMove));
-                            facing = new Animation(Assets.npcAlert, 100);
+                            facing = new Animation(Assets.npcLeft[id], 100);
                             break;
                     }
 
@@ -440,7 +451,11 @@ public class NPC extends Item {
     
         public void renderForStore(Graphics g,int xScreen, int yScreen) {
         //Add animation
+        if(talking){
+          g.drawImage(conversation,iniX-xScreen+xMove, iniY-yScreen+yMove, getWidth(), getHeight(), null);
+        }else{
         g.drawImage(facing.getCurrentFrame(), iniX-xScreen+xMove, iniY-yScreen+yMove, getWidth(), getHeight(), null);
+        }
         if (justThrowedTrash || talking) {
             g.drawImage(alertAnimation.getCurrentFrame(),iniX-xScreen+xMove+16, iniY-yScreen+yMove-16, 16, 16, null);
         }
