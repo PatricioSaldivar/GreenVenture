@@ -30,7 +30,7 @@ public class PlayerInStore extends Item {
         super(x, y);
         this.width = width;
         this.height = height;
-        this.speed = 5;
+        this.speed = 2;
         //The speed of the animation need to be changed depending of the player speed
         this.animationUp = new Animation(Assets.playerUp, 200);
         this.animationDown = new Animation(Assets.playerDown, 200);

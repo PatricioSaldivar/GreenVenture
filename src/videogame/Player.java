@@ -398,9 +398,10 @@ public class Player extends Item {
                         SMoveY = SMoveY - speed;
                     }
                 }
-                kilometersHelper++;
-                if (kilometersHelper > 100) {
+                kilometersHelper+= speed;
+                if (kilometersHelper > 1000000) {
                     kilometers++;
+                    kilometersHelper=0;
                 }
 
             } else if (game.getKeyManager().down) {

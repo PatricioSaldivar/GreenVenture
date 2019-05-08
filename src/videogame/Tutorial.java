@@ -199,7 +199,7 @@ public class Tutorial implements Runnable {
         g.drawImage(Assets.textBox, 0, 0, 512, 128, null);
         switch (contM) {
             case 0:
-                message = "Utiliza las flechas del teclado para moverte\npor el mapa. ";
+                message = "Utiliza las flechas del teclado para moverte\npor el mapa.\nUtiliza la tecla espacio para continuar ";
                 g.drawImage(Assets.arrows, 27, 36, 44, 54, null);
                 break;
             case 1:
@@ -215,7 +215,7 @@ public class Tutorial implements Runnable {
                 g.drawImage(Assets.trashcanDefault, 27, 36, 44, 54, null);
                 break;
             case 4:
-                message = "Puedes sustituir los botes de basura\npor reciclabes al comprarlos en la tienda.\n En los botes reciclables (verdes) puedes\nrecoger la basura que esta en los botes verdes ";
+                message = "Puedes sustituir los botes de basura\npor reciclabes al comprarlos en la tienda.\nEn los botes reciclables (verdes) puedes\nrecoger la basura que esta en los botes verdes ";
                 g.drawImage(Assets.trashcanOwned, 27, 36, 44, 54, null);
                 break;
             case 5:
@@ -404,6 +404,7 @@ public class Tutorial implements Runnable {
                 trash.get(i).render(g);
             }
             playablePlayer.render(g);
+
             //Score values por painting
             g.setFont(fontx);
             g.setColor(Color.BLACK);

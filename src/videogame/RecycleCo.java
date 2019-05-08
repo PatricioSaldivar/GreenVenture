@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -377,27 +378,28 @@ public class RecycleCo implements Runnable {
             //Score values por painting
             g.setFont(fontx);
             g.setColor(Color.BLACK);
+            DecimalFormat dform = new DecimalFormat("0.00");
            
             g.setFont(g.getFont().deriveFont(15f));
             //Draws the prices and the quantity of the trash the player has in his inventory
             //Line 1
             g.drawString("X" + (game.getPlayer().getGlass()), 110, 170);
-            g.drawString("$" + (((glassPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getGlass()), 110, 185);
+            g.drawString("$" + dform.format(((glassPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getGlass()), 110, 185);
             
             g.drawString("X" + (game.getPlayer().getAluminum()), 341, 170);  //x = 350
-            g.drawString("$" + (((aluminumPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getAluminum()), 341, 185);
+            g.drawString("$" + dform.format(((aluminumPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getAluminum()), 341, 185);
             //Line 2
             g.drawString("X" + (game.getPlayer().getPlastic()), 110, 265);
-            g.drawString("$" + (((plasticPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPlastic()), 110, 280);
+            g.drawString("$" + dform.format(((plasticPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPlastic()), 110, 280);
             
             g.drawString("X" + (game.getPlayer().getElectronics()), 341, 265);
-            g.drawString("$" + (((electronicsPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getElectronics()), 341, 280);
+            g.drawString("$" + dform.format(((electronicsPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getElectronics()), 341, 280);
             //Line 3
             g.drawString("X" + (game.getPlayer().getPaper()), 110, 360);
-            g.drawString("$" + (((paperPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPaper()), 110, 375);
+            g.drawString("$" + dform.format(((paperPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getPaper()), 110, 375);
             
             g.drawString("X" + (game.getPlayer().getOrganic()), 341, 360);
-            g.drawString("$" + (((organicPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getOrganic()), 341, 375);
+            g.drawString("$" + dform.format(((organicPrice) * game.getPlayer().getTrashUpgrade()) * game.getPlayer().getOrganic()), 341, 375);
 
             bs.show();
             g.dispose();
