@@ -20,6 +20,8 @@ public class StoreDoor extends Item {
     private int iniX;
     private int iniY;
     private int id;
+    private int indexHelper;
+    private int index;
 
 public StoreDoor(int x, int y, int width, int height, Game game, Screen screen, int id) {
         super(x, y);
@@ -30,6 +32,8 @@ public StoreDoor(int x, int y, int width, int height, Game game, Screen screen, 
         iniX=x;
         iniY=y;
         this.id = id;
+        indexHelper = 10;
+        index = 0;
     }
 
     public int getWidth() {
@@ -63,19 +67,56 @@ public StoreDoor(int x, int y, int width, int height, Game game, Screen screen, 
    
     @Override
     public void tick() {       
-        x = iniX-screen.getX();
-        y = iniY-screen.getY();
+        x = iniX-game.getPlayer().getSMoveX();
+        y = iniY-game.getPlayer().getSMoveY();
+        
+        //Updates index for to render animation of door opening
+        if(game.getPlayer().getPerimetro().intersects(getPerimetroOpen())){
+            indexHelper--;
+            if(indexHelper<1 && index<3){
+                index++;
+                indexHelper=5;
+            }
+        }else{
+            indexHelper--;
+            if(indexHelper<1 && index>0){
+                index--;
+                indexHelper=5;
+            }
+            
+        }
+        
+        
+        
     }
 
+    /**
+     * 
+     * @param g 
+     */
     @Override
     public void render(Graphics g) {
-
+        //Renders corresponding image from the array
+        g.drawImage(Assets.door[index], x, y, 77,67,null);
     }
 
+    /**
+     * To get perimeter of the rectangle that allows to enter the given store
+     * @return Rectangle
+     */
     @Override
     public Rectangle getPerimetro() {
-      return new Rectangle(getX(), getY(), getWidth(), getHeight());
+      return new Rectangle(getX(), getY()-10, getWidth(), 12);
     }
+    /**
+     * To get perimeter of rectangle that activates animation of door
+     * @return Rectangle
+     */
+    public Rectangle getPerimetroOpen() {
+      return new Rectangle(getX(), getY(), getWidth(), 57);
+    }
+    
+    
     
     
 }

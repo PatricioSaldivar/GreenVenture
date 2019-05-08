@@ -53,7 +53,7 @@ public class RecycleCoRoom implements Runnable {
         display.setTitle("ReycleCoRoom");
         this.game = game;
         this.player = player;
-        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
+        solids = new ArrayList<>();
         
         //Adds font from fonts package
         try {
@@ -109,7 +109,19 @@ public class RecycleCoRoom implements Runnable {
      */
     private void init() {
         Assets.init();
-
+        
+        solids.add(new Solid(0, 0, 36, 484));
+        solids.add(new Solid(0, 484, 224, 28));
+        solids.add(new Solid(36, 413, 6, 71));
+        solids.add(new Solid(36, 361, 68, 52));
+        solids.add(new Solid(104, 394, 50, 5));
+        solids.add(new Solid(36, 238, 142, 52));
+        solids.add(new Solid(36, 238, 142, 52));
+        solids.add(new Solid(36, 0, 476, 152));
+        solids.add(new Solid(453, 152, 59, 360));
+        solids.add(new Solid(321, 484, 132, 28));
+        
+        this.playablePlayer = new PlayerInStore(172,386,64,64,game,solids);
     }
 
     @Override
@@ -157,19 +169,24 @@ public class RecycleCoRoom implements Runnable {
     private void tick() {
         keyManager.tick();
         playablePlayer.tick();
+        //Opens Recycle Co. menu when pressing space inside area
         if(playablePlayer.getPerimetro().intersects(this.getPerimetroStore())  && (keyManager.space && !keyManager.helperSpace)){
             RecycleCo rc = new RecycleCo("RecycleCo", 512, 512,display,keyManager,game,this);
             Assets.gameStart.play();
             rc.start();
             running = false;
         }
-        if(playablePlayer.getPerimetro().intersects(this.getPerimetroWorld())  && (keyManager.space && !keyManager.helperSpace)){
+        //Exits player from room
+        if (playablePlayer.getY() > 458) {
             Assets.gameStart.play();
+            //Updates player's position
+            game.getPlayer().setSMoveY(game.getPlayer().getSMoveY()+5);
+            
             game.setCont(true);
             game.start();
             running = false;
         }
-    
+        
              
     }
     
@@ -195,7 +212,7 @@ public class RecycleCoRoom implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
-            g.drawImage(Assets.todoMartRoom, 0, 0, width, height, null);
+            g.drawImage(Assets.recycleCoRoom, 0, 0, width, height, null);
             playablePlayer.render(g);
             //Score values por painting
             g.setFont(fontx);

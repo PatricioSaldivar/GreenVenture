@@ -46,10 +46,11 @@ public class Player extends Item {
     private Animation animationLeft;
     private int direction; // 1 = Down , 2 = Up, 3 = Right, 4 = Left
     private ArrayList<Integer> trashContainersLeft;
-    private int kilometers;
-    private int totalTrash;
-    private int totalIncome;
-    private int progress;
+    private int kilometers;     //to save the total distance walked
+    private int totalTrash;     //to save the total number of items picked
+    private int totalIncome;    //to save the total income generated
+    private int progress;       // to save the progress of the city as 
+
     
     
 

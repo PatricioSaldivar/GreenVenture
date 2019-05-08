@@ -15,12 +15,10 @@ import java.awt.Rectangle;
 public class Solid extends Item{
     private int width;
     private int height;
-    private Screen screen;
-    public Solid(int x, int y, int width, int height, Screen screen){
+    public Solid(int x, int y, int width, int height){
         super(x,y);
         this.width = width;
         this.height = height;
-        this.screen = screen;
     }
 
     public int getWidth() {

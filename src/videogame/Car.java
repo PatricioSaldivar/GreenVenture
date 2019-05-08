@@ -25,7 +25,7 @@ public class Car extends Solid {
     private int alreadyChecked = -1;
 
     Car(int x, int y, int width, int height, Screen screen, Game game) {
-        super(x, y, width, height, screen);
+        super(x, y, width, height);
         this.game = game;
         iniX = x;
         iniY = y;
