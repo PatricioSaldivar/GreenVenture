@@ -131,7 +131,9 @@ public class Assets {
     public static BufferedImage carDown[];                  // to store the car
     public static BufferedImage carRight[];             // to store the car
     public static BufferedImage carLeft[];              // to store the car
-
+    
+    //Arrow Assets
+    public static BufferedImage arrows;                 // to store arrow image
     /**
      * initializing the images of the game
      */
@@ -981,6 +983,9 @@ public class Assets {
         for (int i = 0; i < 3; i++) {
             carUp[i] = carSprites.crop(i*156,468,156,156);
         }
+        
+        //Arrow asset
+        arrows = ImageLoader.loadImage("/images/arrows.png");
         
 
     }
