@@ -23,6 +23,10 @@ public class Car extends Solid {
     private Game game;
     private int direction;
     private int alreadyChecked = -1;
+    private Animation up;
+    private Animation down;
+    private Animation right;
+    private Animation left;
 
     Car(int x, int y, int width, int height, Screen screen, Game game) {
         super(x, y, width, height);
@@ -30,6 +34,10 @@ public class Car extends Solid {
         iniX = x;
         iniY = y;
         this.screen = screen;
+        up = new Animation(Assets.carUp,100);
+        down = new Animation(Assets.carDown,100);
+        right = new Animation(Assets.carRight,100);
+        left = new Animation(Assets.carLeft,100);
 
     }
 
@@ -236,7 +244,21 @@ public class Car extends Solid {
     public void render(Graphics g) {
         x = iniX - screen.getX() + xMove;
         y = iniY - screen.getY() + yMove;
-        g.drawImage(Assets.inTrashCan, getX(), getY(), getWidth(), getHeight(), null);
+        //g.drawImage(Assets.inTrashCan, getX(), getY(), getWidth(), getHeight(), null);
+        switch(direction){
+            case 1:
+                g.drawImage(up.getCurrentFrame(),getX(),getY(),getWidth(),getHeight(),null);
+                break;
+            case 2:
+                g.drawImage(down.getCurrentFrame(),getX(),getY(),getWidth(),getHeight(),null);
+                break;
+            case 3:
+                g.drawImage(left.getCurrentFrame(),getX(),getY(),getWidth(),getHeight(),null);
+                break;
+            case 4:
+                g.drawImage(right.getCurrentFrame(),getX(),getY(),getWidth(),getHeight(),null);
+                break;
+        }
 
     }
 
