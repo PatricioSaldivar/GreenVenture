@@ -50,8 +50,7 @@ public class NPC extends Item {
         this.trashContainerId = trashContainerId;
         iniX = x;
         iniY = y;
-        //trashMakerHelper = (int) (Math.random() *(500)+ 50);
-        trashMakerHelper = 500;
+        trashMakerHelper = (int) (Math.random() *(500)+ 50);
         this.id = id;
         alertAnimation = new Animation(Assets.npcAlert, 100);
         direction = 4;
@@ -360,7 +359,6 @@ public class NPC extends Item {
 
                     break;
                 //Restarts the random movement of each NPC
-                //**************************************************************************************************
                 //Put real animations
                 case 4:
                     distanceTraveled = 0;
@@ -397,7 +395,7 @@ public class NPC extends Item {
                 justThrowedTrash = false;
             }
 
-            if (trashThrown < 3) {
+            if (trashThrown < 10) {
                 if (trashMaker > trashMakerHelper) {
                     int randTrashMaker = (int) (Math.random() * 4);
                     if (randTrashMaker < trashToTrashContainer) {

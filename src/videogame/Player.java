@@ -25,7 +25,7 @@ public class Player extends Item {
     private int SMoveX = 0;
     private int SMoveY = 0;
     private double money = 100.00;
-    private int speed =5;
+    private int speed = 5;
     private int capacity = 10;
     private int inventory = 0;
     private boolean pick = false;
@@ -50,10 +50,7 @@ public class Player extends Item {
     private int totalTrash;     //to save the total number of items picked
     private int totalIncome;    //to save the total income generated
     private int progress;       // to save the progress of the city as 
-
-    
-    
-
+    private int kilometersHelper;
 
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y);
@@ -61,13 +58,13 @@ public class Player extends Item {
         this.height = height;
         this.game = game;
         //The speed of the animation need to be changed depending of the player speed
-        this.animationUp = new Animation(Assets.playerUp,300);
-        this.animationDown = new Animation(Assets.playerDown,300);
-        this.animationRight = new Animation(Assets.playerRight,300);
-        this.animationLeft = new Animation(Assets.playerLeft,300);
+        this.animationUp = new Animation(Assets.playerUp, 300);
+        this.animationDown = new Animation(Assets.playerDown, 300);
+        this.animationRight = new Animation(Assets.playerRight, 300);
+        this.animationLeft = new Animation(Assets.playerLeft, 300);
         trashContainersLeft = new ArrayList<Integer>();
         this.direction = 1;
-                for(int i=0; i<16; i++){
+        for (int i = 0; i < 16; i++) {
             trashContainersLeft.add(i);
         }
     }
@@ -165,7 +162,6 @@ public class Player extends Item {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
 
     /**
      * To get the money
@@ -358,10 +354,10 @@ public class Player extends Item {
     public void setGame(Game game) {
         this.game = game;
     }
-    
-    
+
     @Override
     public void tick() {
+
         // moving player depending on flags
         this.animationDown.tick();
         this.animationUp.tick();
@@ -386,10 +382,12 @@ public class Player extends Item {
                         SMoveY = SMoveY - speed;
                     }
                 }
+                kilometersHelper++;
+                if (kilometersHelper > 100) {
+                    kilometers++;
+                }
 
-            }
-
-            if (game.getKeyManager().down) {
+            } else if (game.getKeyManager().down) {
                 direction = 1;
                 if (getY() < game.getHeight() / 2 - height / 2) {
                     if (getY() + speed >= game.getHeight() / 2 - height / 2) {
@@ -405,9 +403,11 @@ public class Player extends Item {
                         SMoveY = SMoveY + speed;
                     }
                 }
-            }
-
-            if (game.getKeyManager().left) {
+                kilometersHelper++;
+                if (kilometersHelper > 100) {
+                    kilometers++;
+                }
+            } else if (game.getKeyManager().left) {
                 direction = 4;
                 if (getX() > game.getWidth() / 2 - width / 2) {
                     if (getX() - speed <= game.getWidth() / 2 - width / 2) {
@@ -423,9 +423,12 @@ public class Player extends Item {
                         SMoveX = SMoveX - speed;
                     }
                 }
+                kilometersHelper++;
+                if (kilometersHelper > 100) {
+                    kilometers++;
+                }
 
-            }
-            if (game.getKeyManager().right) {
+            } else if (game.getKeyManager().right) {
                 direction = 3;
                 if (getX() < game.getWidth() / 2 - width / 2) {
                     if (getX() + speed >= game.getWidth() / 2 - width / 2) {
@@ -441,6 +444,10 @@ public class Player extends Item {
                         SMoveX = SMoveX + speed;
                     }
                 }
+                kilometersHelper++;
+                if (kilometersHelper > 100) {
+                    kilometers++;
+                }
             }
             // reset x position and y position if colision
             if (getX() + 64 >= game.getWidth()) {
@@ -449,9 +456,9 @@ public class Player extends Item {
                 setX(0);
             }
             //if (getY() + 64 >= game.getHeight()) {
-             //   setY(game.getHeight() - 64);
+            //   setY(game.getHeight() - 64);
             //} else if (getY() <= 0) {
-             //   setY(0);
+            //   setY(0);
             //}
 
             for (int i = 0; i < game.getSolids().size(); i++) {
@@ -460,7 +467,7 @@ public class Player extends Item {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getSolids().get(i).x - game.getWidth() / 2 - width / 2;
                     } else {
-                        x = game.getSolids().get(i).x -64 - SMoveX;
+                        x = game.getSolids().get(i).x - 64 - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from righ to left
@@ -476,7 +483,7 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getSolids().get(i).y - game.getHeight() / 2 - height / 2;
                     } else {
-                        y = game.getSolids().get(i).y- 64- SMoveY;
+                        y = game.getSolids().get(i).y - 64 - SMoveY;
                     }
                 }
                 //Checks collisions with solids when going from down to top
@@ -484,37 +491,38 @@ public class Player extends Item {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getSolids().get(i).y + game.getSolids().get(i).getHeight() - game.getHeight() / 2 + height / 2;
                     } else {
-                        y = game.getSolids().get(i).y + game.getSolids().get(i).getHeight()- SMoveY;
+                        y = game.getSolids().get(i).y + game.getSolids().get(i).getHeight() - SMoveY;
                     }
                 }
 
             }
-            
-            for(int i=0; i<game.getCrosswalks().size(); i++){
+
+            for (int i = 0; i < game.getCrosswalks().size(); i++) {
                 //Checks collisions with solids when going from top to down
                 if (getPerimetroForSolidsUp().intersects(game.getCrosswalks().get(i).getPerimetroUp(SMoveX, SMoveY)) && game.getCrosswalks().get(i).isCarIn()) {
                     if (y == game.getHeight() / 2 - height / 2) {
                         SMoveY = game.getCrosswalks().get(i).getIniY() - game.getHeight() / 2 - height / 2;
                     } else {
-                         y = game.getCrosswalks().get(i).y- 64- SMoveY;
+                        y = game.getCrosswalks().get(i).y - 64 - SMoveY;
                     }
                 }
                 //Checks collisions with solids when going from down to top
-                if (getPerimetroForSolidsDown().intersects(game.getCrosswalks().get(i).getPerimetroDown(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                if (getPerimetroForSolidsDown().intersects(game.getCrosswalks().get(i).getPerimetroDown(SMoveX, SMoveY)) && game.getCrosswalks().get(i).isCarIn()) {
                     if (y == game.getHeight() / 2 - height / 2) {
-                        SMoveY = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight() - game.getHeight() / 2 + height / 2 ;
+                        SMoveY = game.getCrosswalks().get(i).getIniY() + game.getCrosswalks().get(i).getHeight() - game.getHeight() / 2 + height / 2;
                     } else {
-                        y = game.getCrosswalks().get(i).y + game.getSolids().get(i).getHeight()- SMoveY;                   }
+                        y = game.getCrosswalks().get(i).y + game.getSolids().get(i).getHeight() - SMoveY;
+                    }
                 }
-                 if (getPerimetroForSolidsRight().intersects(game.getCrosswalks().get(i).getPerimetroRight(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                if (getPerimetroForSolidsRight().intersects(game.getCrosswalks().get(i).getPerimetroRight(SMoveX, SMoveY)) && game.getCrosswalks().get(i).isCarIn()) {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getCrosswalks().get(i).getIniX() - game.getWidth() / 2 - width / 2;
                     } else {
-                        x = game.getCrosswalks().get(i).getIniX() -64 - SMoveX;
+                        x = game.getCrosswalks().get(i).getIniX() - 64 - SMoveX;
                     }
                 }
                 //Checks collisions with solids when going from righ to left
-                if (getPerimetroForSolidsLeft().intersects(game.getCrosswalks().get(i).getPerimetroLeft(SMoveX, SMoveY))&& game.getCrosswalks().get(i).isCarIn()) {
+                if (getPerimetroForSolidsLeft().intersects(game.getCrosswalks().get(i).getPerimetroLeft(SMoveX, SMoveY)) && game.getCrosswalks().get(i).isCarIn()) {
                     if (x == game.getWidth() / 2 - width / 2) {
                         SMoveX = game.getCrosswalks().get(i).getIniX() + game.getCrosswalks().get(i).getWidth() - game.getWidth() / 2 + width / 2;
                     } else {
@@ -522,42 +530,42 @@ public class Player extends Item {
                     }
                 }
             }
-                  
+
         }
-        
+
     }
 
     @Override
     public void render(Graphics g) {
         //Render down animation
-        if(direction == 1 && game.getKeyManager().down && !conversation){
+        if (direction == 1 && game.getKeyManager().down && !conversation) {
             g.drawImage(animationDown.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        
-        //Render down static
-        }else if(direction == 1){
+
+            //Render down static
+        } else if (direction == 1) {
             g.drawImage(Assets.playerFacingDown, getX(), getY(), getWidth(), getHeight(), null);
         }
-         //Render up animation
-        if(direction == 2  && game.getKeyManager().up && !conversation){
+        //Render up animation
+        if (direction == 2 && game.getKeyManager().up && !conversation) {
             g.drawImage(animationUp.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        
-        //Render up static
-    }else if(direction == 2 ){
+
+            //Render up static
+        } else if (direction == 2) {
             g.drawImage(Assets.playerFacingUp, getX(), getY(), getWidth(), getHeight(), null);
         }
-         //Render right animation
-        if(direction == 3  && game.getKeyManager().right && !conversation){
+        //Render right animation
+        if (direction == 3 && game.getKeyManager().right && !conversation) {
             g.drawImage(animationRight.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        //Render right static
-        }else if(direction == 3){
+            //Render right static
+        } else if (direction == 3) {
             g.drawImage(Assets.playerFacingRight, getX(), getY(), getWidth(), getHeight(), null);
         }
-         //Render left animation
-        if(direction == 4 && game.getKeyManager().left && !conversation){
+        //Render left animation
+        if (direction == 4 && game.getKeyManager().left && !conversation) {
             g.drawImage(animationLeft.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        
-        //Render left static
-        }else if(direction == 4){
+
+            //Render left static
+        } else if (direction == 4) {
             g.drawImage(Assets.playerFacingLeft, getX(), getY(), getWidth(), getHeight(), null);
         }
 
@@ -575,12 +583,12 @@ public class Player extends Item {
     }
 
     public Rectangle getPerimetroForSolidsUp() {
-        return new Rectangle(getX(), getY()+getHeight()-speed, getWidth(),speed);
+        return new Rectangle(getX(), getY() + getHeight() - speed, getWidth(), speed);
 
     }
 
     public Rectangle getPerimetroForSolidsRight() {
-        return new Rectangle(getX()+ getWidth()-speed, getY(), speed, getHeight());
+        return new Rectangle(getX() + getWidth() - speed, getY(), speed, getHeight());
 
     }
 

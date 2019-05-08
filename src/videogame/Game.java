@@ -49,7 +49,7 @@ public class Game implements Runnable {
     private Car car;                            // used to create the car
     private ArrayList<StoreDoor> storeDoors; // to manage the doors for the stores
     private ArrayList<TrashContainer> trashContainers; //to manage all the trashContainers
-    private boolean tutorialEnded = false;          // to manage if the tutorial has been played
+    private boolean tutorialEnded = true;          // to manage if the tutorial has been played
 
     /**
      * to create title, width and height and set the game is still not running
@@ -78,9 +78,27 @@ public class Game implements Runnable {
 
         player = new Player(40, 40, 64, 64, this);
         screen = new Screen(0, 0, width, height, this, player, trash);
+        //FALTA POSICIONARLOS
         npcs.add(new NPC(350, 350, 64, 64, this, screen, 0, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 0));
-        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 0));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 1, 1));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 2, 2));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 3, 3));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 4, 4));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 5, 5));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 6, 6));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 7, 7));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 8, 8));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 9, 9));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 10, 10));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 11, 11));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 12, 12));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 13, 13));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 14, 14));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 15, 15));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 16, 15));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 17, 14));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 18, 13));
+        npcs.add(new NPC(350, 350, 64, 64, this, screen, 19, 12));
         car = new Car(512, 320, 128, 128, screen, this);
         car.setDirection(2);
 
@@ -110,13 +128,11 @@ public class Game implements Runnable {
             fontx = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/FreePixel.ttf")).deriveFont(24f);
         } catch (FontFormatException | IOException ex) {
         }
-        
-                try {
+
+        try {
             fonty = Font.createFont(Font.TRUETYPE_FONT, Font.class.getResourceAsStream("/fonts/pixelfont.ttf")).deriveFont(24f);
         } catch (FontFormatException | IOException ex) {
         }
-
-    
 
     }
 
@@ -234,7 +250,8 @@ public class Game implements Runnable {
     public ArrayList<StoreDoor> getStoreDoors() {
         return storeDoors;
     }
-    public void setScreen(Screen screen){
+
+    public void setScreen(Screen screen) {
         this.screen = screen;
 
     }
@@ -253,7 +270,7 @@ public class Game implements Runnable {
         //storeDoors.add(new StoreDoor(100, 0, 10, 10, this, screen, 1));         // RecycleCoRoom door    
         storeDoors.add(new StoreDoor(3768, 2487, 77, 67, this, screen, 0));     //TodoxMartRoom door
         storeDoors.add(new StoreDoor(193, 1339, 77, 67, this, screen, 1));         // RecycleCoRoom door    
-        
+
         //Solid of Minigame
         solids.add(new Solid(1530, 2144, 32, 32));
         //Map boundaries
@@ -764,88 +781,34 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        if(tutorialEnded){
-        if (!keyManager.pause) {
-            // avancing player with colision
+        if (tutorialEnded) {
+            if (!keyManager.pause) {
+                // avancing player with colision
 
-            for (int i = 0; i < crosswalks.size(); i++) {
-                crosswalks.get(i).tick();
-            }
-            for (int i = 0; i < roadChanges.size(); i++) {
-                roadChanges.get(i).tick();
-            }
-
-            //Movement of car
-            car.tick();
-            //Checks if the player started a conversation with any NPC
-            for (int i = 0; i < npcs.size(); i++) {
-                npcs.get(i).tick();
-                if (!npcs.get(i).isTalking()) {
-                    if (npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()) {
-                        npcs.get(i).setTrashToTrashContainer(npcs.get(i).getTrashToTrashContainer() + 1);
-                        npcs.get(i).setTalking(true);
-                        player.setConversation(true);
-                        screen.setFinishedConversationText(false);
-                        screen.setConversationTextIndex(0);
-                        player.setPick(false);
-                    }
-
-                } else if (player.isPick() && player.isConversation()) {
-
-                    if (!player.isTalking()) {
-                        if (!screen.isFinishedConversationText()) {
-                            screen.setFinishedConversationText(true);
-                        } else {
-                            player.setTalking(true);
-                            screen.setConversationTextIndex(0);
-                            screen.setFinishedConversationText(false);
-
-                        }
-                    } else {
-                        if (!screen.isFinishedConversationText()) {
-                            screen.setFinishedConversationText(true);
-                        } else {
-                            screen.setAssignAnimationNpc(false);
-                            player.setConversation(false);
-                            npcs.get(i).setTalking(false);
-                            player.setTalking(false);
-                        }
-                    }
-                    player.setPick(false);
-
+                for (int i = 0; i < crosswalks.size(); i++) {
+                    crosswalks.get(i).tick();
                 }
-            }
+                for (int i = 0; i < roadChanges.size(); i++) {
+                    roadChanges.get(i).tick();
+                }
 
-            npcTrashClassify.tick();
-            player.tick();
-            for (int i = 0; i < storeDoors.size(); i++) {
-                storeDoors.get(i).tick();
-            }
-            
-            //If player intersects TodoMart door, it enters to new room
-            if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro())) {
-                TodoMartRoom tmr = new TodoMartRoom("Todo x Mart", 512, 512, display, keyManager, this, player);
-                tmr.start();
-                running = false;
-            }
-            //If player intersect RecycleCo door, it enters to new room
-            if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro())) {
-                RecycleCoRoom rcr = new RecycleCoRoom("Recycle Co. Room", 512, 512, display, keyManager, this, player);
-                rcr.start();
-                running = false;
-            }
+                //Movement of car
+                car.tick();
+                //Checks if the player started a conversation with any NPC
+                for (int i = 0; i < npcs.size(); i++) {
+                    npcs.get(i).tick();
+                    if (!npcs.get(i).isTalking()) {
+                        if (npcs.get(i).getPerimetro().intersects(player.getPerimetro()) && npcs.get(i).isJustThrowedTrash() && player.isPick() && !player.isConversation()) {
+                            npcs.get(i).setTrashToTrashContainer(npcs.get(i).getTrashToTrashContainer() + 1);
+                            npcs.get(i).setTalking(true);
+                            player.setConversation(true);
+                            screen.setFinishedConversationText(false);
+                            screen.setConversationTextIndex(0);
+                            player.setPick(false);
+                        }
 
-            //If player intersects the npc and press space the minigame starts, but first they start a conversation
-            if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
-                if (player.isPick()) {
-                    if (!player.isConversation()) {
-                        player.setPick(false);
-                        npcTrashClassify.setTalking(true);
-                        player.setConversation(true);
-                        screen.setFinishedConversationText(false);
-                        screen.setConversationTextIndex(0);
                     } else if (player.isPick() && player.isConversation()) {
-                        player.setPick(false);
+
                         if (!player.isTalking()) {
                             if (!screen.isFinishedConversationText()) {
                                 screen.setFinishedConversationText(true);
@@ -853,200 +816,254 @@ public class Game implements Runnable {
                                 player.setTalking(true);
                                 screen.setConversationTextIndex(0);
                                 screen.setFinishedConversationText(false);
+
                             }
                         } else {
-
-                            player.setConversation(false);
-                            npcTrashClassify.setTalking(false);
-                            player.setTalking(false);
-                            screen.setAssignAnimationNpc(false);
-                            if (screen.isCursorOnPlay()) {
-                                MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
-                                mct.start();
-                                running = false;
+                            if (!screen.isFinishedConversationText()) {
+                                screen.setFinishedConversationText(true);
+                            } else {
+                                screen.setAssignAnimationNpc(false);
+                                player.setConversation(false);
+                                npcs.get(i).setTalking(false);
+                                player.setTalking(false);
                             }
-
                         }
-
-                    }
-                }
-                if ((!keyManager.helperUp && keyManager.up) || (!keyManager.helperDown && keyManager.down)) {
-                    screen.setCursorOnPlay(!screen.isCursorOnPlay());
-                }
-
-            }
-
-            for (int i = 0; i < trashContainers.size(); i++) {
-                if (player.isPick() && trashContainers.get(i).isUnlocked() && player.getPerimetro().intersects(trashContainers.get(i).getPerimetro())) {
-                    if (!player.isConversation()) {
                         player.setPick(false);
-                        player.setConversation(true);
-                        screen.setTrashContainerMessage(true);
-                        screen.setTrashContainerId(i);
-                    } else {
-                        player.setConversation(false);
-                        screen.setTrashContainerMessage(false);
-                        //Creats value of delta
-                        int delta = player.getCapacity() - player.getInventory();
-                        if (delta > 0) {
-                            //Adds all the electronics of the trashcan that the player could get in his backpack
-                            if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                if (trashContainers.get(i).getElectronics() >= delta) {
-                                    player.setInventory(player.getInventory() + delta);
-                                    player.setElectronics(player.getElectronics() + delta);
-                                    trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics() - delta);
-
-                                } else {
-                                    player.setInventory(player.getInventory() + trashContainers.get(i).getElectronics());
-                                    player.setElectronics(player.getElectronics() + trashContainers.get(i).getElectronics());
-                                    trashContainers.get(i).setElectronics(0);
-                                }
-                            }
-                            //Adds all the aluminum of the trashcan that the player could get in his backpack
-                            //Resets value of delta
-                            delta = player.getCapacity() - player.getInventory();
-                            if (delta > 0) {
-                                if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                    if (trashContainers.get(i).getAluminum() >= delta) {
-                                        player.setInventory(player.getInventory() + delta);
-                                        player.setAluminum(player.getAluminum() + delta);
-                                        trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum() - delta);
-                                    } else {
-                                        player.setInventory(player.getInventory() + trashContainers.get(i).getAluminum());
-                                        player.setAluminum(player.getAluminum() + trashContainers.get(i).getAluminum());
-                                        trashContainers.get(i).setAluminum(0);
-                                    }
-                                }
-                            }
-                            //Adds all the Glass of the trashcan that the player could get in his backpack
-                            //Resets value of delta
-                            delta = player.getCapacity() - player.getInventory();
-                            if (delta > 0) {
-                                if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                    if (trashContainers.get(i).getGlass() >= delta) {
-                                        player.setInventory(player.getInventory() + delta);
-                                        player.setGlass(player.getGlass() + delta);
-                                        trashContainers.get(i).setGlass(trashContainers.get(i).getGlass() - delta);
-                                    } else {
-                                        player.setInventory(player.getInventory() + trashContainers.get(i).getGlass());
-                                        player.setGlass(player.getGlass() + trashContainers.get(i).getGlass());
-                                        trashContainers.get(i).setGlass(0);
-                                    }
-                                }
-                            }
-                            //Adds all the Plastic of the trashcan that the player could get in his backpack
-                            //Resets value of delta
-                            delta = player.getCapacity() - player.getInventory();
-                            if (delta > 0) {
-                                if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                    if (trashContainers.get(i).getPlastic() >= delta) {
-                                        player.setInventory(player.getInventory() + delta);
-                                        player.setPlastic(player.getPlastic() + delta);
-                                        trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic() - delta);
-                                    } else {
-                                        player.setInventory(player.getInventory() + trashContainers.get(i).getPlastic());
-                                        player.setPlastic(player.getPlastic() + trashContainers.get(i).getPlastic());
-                                        trashContainers.get(i).setPlastic(0);
-                                    }
-                                }
-                            }
-                            //Adds all the Paper of the trashcan that the player could get in his backpack
-                            //Resets value of delta
-                            delta = player.getCapacity() - player.getInventory();
-                            if (delta > 0) {
-                                if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                    if (trashContainers.get(i).getPaper() >= delta) {
-                                        player.setInventory(player.getInventory() + delta);
-                                        player.setPaper(player.getPaper() + delta);
-                                        trashContainers.get(i).setPaper(trashContainers.get(i).getPaper() - delta);
-                                    } else {
-                                        player.setInventory(player.getInventory() + trashContainers.get(i).getPaper());
-                                        player.setPaper(player.getPaper() + trashContainers.get(i).getPaper());
-                                        trashContainers.get(i).setPaper(0);
-                                    }
-                                }
-                            }
-                            //Adds all the Organic of the trashcan that the player could get in his backpack
-                            //Resets value of delta
-                            delta = player.getCapacity() - player.getInventory();
-                            if (delta > 0) {
-                                if (trashContainers.get(i).getHowManyTrash() > 0) {
-                                    if (trashContainers.get(i).getOrganic() >= delta) {
-                                        player.setInventory(player.getInventory() + delta);
-                                        player.setOrganic(player.getOrganic() + delta);
-                                        trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic() - delta);
-                                    } else {
-                                        player.setInventory(player.getInventory() + trashContainers.get(i).getOrganic());
-                                        player.setOrganic(player.getOrganic() + trashContainers.get(i).getOrganic());
-                                        trashContainers.get(i).setOrganic(0);
-                                    }
-                                }
-                            }
-                        }
 
                     }
                 }
-            }
 
+                npcTrashClassify.tick();
+                player.tick();
+                for (int i = 0; i < storeDoors.size(); i++) {
+                    storeDoors.get(i).tick();
+                }
+
+                //If player intersects TodoMart door, it enters to new room
+                if (player.getPerimetro().intersects(storeDoors.get(0).getPerimetro())) {
+                    TodoMartRoom tmr = new TodoMartRoom("Todo x Mart", 512, 512, display, keyManager, this, player);
+                    tmr.start();
+                    running = false;
+                }
+                //If player intersect RecycleCo door, it enters to new room
+                if (player.getPerimetro().intersects(storeDoors.get(1).getPerimetro())) {
+                    RecycleCoRoom rcr = new RecycleCoRoom("Recycle Co. Room", 512, 512, display, keyManager, this, player);
+                    rcr.start();
+                    running = false;
+                }
+
+                //If player intersects the npc and press space the minigame starts, but first they start a conversation
+                if (player.getPerimetro().intersects(npcTrashClassify.getPerimetro())) {
+                    if (player.isPick()) {
+                        if (!player.isConversation()) {
+                            player.setPick(false);
+                            npcTrashClassify.setTalking(true);
+                            player.setConversation(true);
+                            screen.setFinishedConversationText(false);
+                            screen.setConversationTextIndex(0);
+                        } else if (player.isPick() && player.isConversation()) {
+                            player.setPick(false);
+                            if (!player.isTalking()) {
+                                if (!screen.isFinishedConversationText()) {
+                                    screen.setFinishedConversationText(true);
+                                } else {
+                                    player.setTalking(true);
+                                    screen.setConversationTextIndex(0);
+                                    screen.setFinishedConversationText(false);
+                                }
+                            } else {
+
+                                player.setConversation(false);
+                                npcTrashClassify.setTalking(false);
+                                player.setTalking(false);
+                                screen.setAssignAnimationNpc(false);
+                                if (screen.isCursorOnPlay()) {
+                                    MinigameTrashClassify mct = new MinigameTrashClassify("Minigame", 512, 512, display, keyManager, this);
+                                    mct.start();
+                                    running = false;
+                                }
+
+                            }
+
+                        }
+                    }
+                    if ((!keyManager.helperUp && keyManager.up) || (!keyManager.helperDown && keyManager.down)) {
+                        screen.setCursorOnPlay(!screen.isCursorOnPlay());
+                    }
+
+                }
+
+                for (int i = 0; i < trashContainers.size(); i++) {
+                    if (player.isPick() && trashContainers.get(i).isUnlocked() && player.getPerimetro().intersects(trashContainers.get(i).getPerimetro())) {
+                        if (!player.isConversation()) {
+                            player.setPick(false);
+                            player.setConversation(true);
+                            screen.setTrashContainerMessage(true);
+                            screen.setTrashContainerId(i);
+                        } else {
+                            player.setConversation(false);
+                            screen.setTrashContainerMessage(false);
+                            //Creats value of delta
+                            int delta = player.getCapacity() - player.getInventory();
+                            if (delta > 0) {
+                                //Adds all the electronics of the trashcan that the player could get in his backpack
+                                if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                    if (trashContainers.get(i).getElectronics() >= delta) {
+                                        player.setInventory(player.getInventory() + delta);
+                                        player.setElectronics(player.getElectronics() + delta);
+                                        trashContainers.get(i).setElectronics(trashContainers.get(i).getElectronics() - delta);
+
+                                    } else {
+                                        player.setInventory(player.getInventory() + trashContainers.get(i).getElectronics());
+                                        player.setElectronics(player.getElectronics() + trashContainers.get(i).getElectronics());
+                                        trashContainers.get(i).setElectronics(0);
+                                    }
+                                }
+                                //Adds all the aluminum of the trashcan that the player could get in his backpack
+                                //Resets value of delta
+                                delta = player.getCapacity() - player.getInventory();
+                                if (delta > 0) {
+                                    if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                        if (trashContainers.get(i).getAluminum() >= delta) {
+                                            player.setInventory(player.getInventory() + delta);
+                                            player.setAluminum(player.getAluminum() + delta);
+                                            trashContainers.get(i).setAluminum(trashContainers.get(i).getAluminum() - delta);
+                                        } else {
+                                            player.setInventory(player.getInventory() + trashContainers.get(i).getAluminum());
+                                            player.setAluminum(player.getAluminum() + trashContainers.get(i).getAluminum());
+                                            trashContainers.get(i).setAluminum(0);
+                                        }
+                                    }
+                                }
+                                //Adds all the Glass of the trashcan that the player could get in his backpack
+                                //Resets value of delta
+                                delta = player.getCapacity() - player.getInventory();
+                                if (delta > 0) {
+                                    if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                        if (trashContainers.get(i).getGlass() >= delta) {
+                                            player.setInventory(player.getInventory() + delta);
+                                            player.setGlass(player.getGlass() + delta);
+                                            trashContainers.get(i).setGlass(trashContainers.get(i).getGlass() - delta);
+                                        } else {
+                                            player.setInventory(player.getInventory() + trashContainers.get(i).getGlass());
+                                            player.setGlass(player.getGlass() + trashContainers.get(i).getGlass());
+                                            trashContainers.get(i).setGlass(0);
+                                        }
+                                    }
+                                }
+                                //Adds all the Plastic of the trashcan that the player could get in his backpack
+                                //Resets value of delta
+                                delta = player.getCapacity() - player.getInventory();
+                                if (delta > 0) {
+                                    if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                        if (trashContainers.get(i).getPlastic() >= delta) {
+                                            player.setInventory(player.getInventory() + delta);
+                                            player.setPlastic(player.getPlastic() + delta);
+                                            trashContainers.get(i).setPlastic(trashContainers.get(i).getPlastic() - delta);
+                                        } else {
+                                            player.setInventory(player.getInventory() + trashContainers.get(i).getPlastic());
+                                            player.setPlastic(player.getPlastic() + trashContainers.get(i).getPlastic());
+                                            trashContainers.get(i).setPlastic(0);
+                                        }
+                                    }
+                                }
+                                //Adds all the Paper of the trashcan that the player could get in his backpack
+                                //Resets value of delta
+                                delta = player.getCapacity() - player.getInventory();
+                                if (delta > 0) {
+                                    if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                        if (trashContainers.get(i).getPaper() >= delta) {
+                                            player.setInventory(player.getInventory() + delta);
+                                            player.setPaper(player.getPaper() + delta);
+                                            trashContainers.get(i).setPaper(trashContainers.get(i).getPaper() - delta);
+                                        } else {
+                                            player.setInventory(player.getInventory() + trashContainers.get(i).getPaper());
+                                            player.setPaper(player.getPaper() + trashContainers.get(i).getPaper());
+                                            trashContainers.get(i).setPaper(0);
+                                        }
+                                    }
+                                }
+                                //Adds all the Organic of the trashcan that the player could get in his backpack
+                                //Resets value of delta
+                                delta = player.getCapacity() - player.getInventory();
+                                if (delta > 0) {
+                                    if (trashContainers.get(i).getHowManyTrash() > 0) {
+                                        if (trashContainers.get(i).getOrganic() >= delta) {
+                                            player.setInventory(player.getInventory() + delta);
+                                            player.setOrganic(player.getOrganic() + delta);
+                                            trashContainers.get(i).setOrganic(trashContainers.get(i).getOrganic() - delta);
+                                        } else {
+                                            player.setInventory(player.getInventory() + trashContainers.get(i).getOrganic());
+                                            player.setOrganic(player.getOrganic() + trashContainers.get(i).getOrganic());
+                                            trashContainers.get(i).setOrganic(0);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+            } else {
+                animation.tick();
+                if (pauseIndex != keyManager.pauseSelector) {
+                    switch (keyManager.pauseSelector) {
+                        case 0:
+                            animation = new Animation(Assets.pausaSave, 300);
+                            Assets.selectSound.play();
+
+                            break;
+                        case 1:
+                            animation = new Animation(Assets.pausaStats, 300);
+                            Assets.selectSound.play();
+                            break;
+                        case 2:
+                            animation = new Animation(Assets.pausaMenuInstructions, 300);
+                            Assets.selectSound.play();
+                            break;
+                        case 3:
+                            animation = new Animation(Assets.pausaMainMenu, 300);
+                            Assets.selectSound.play();
+                            break;
+                    }
+                    pauseIndex = keyManager.pauseSelector;
+                }
+                if (keyManager.space && pauseIndex == 1) {
+                    //TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
+                    //Assets.gameStart.play();
+                    //tm.start();
+                    //running = false;
+
+                }
+                if (keyManager.space && pauseIndex == 3) {
+                    MainMenu m = new MainMenu("MainMenu", 512, 512, display);
+                    Assets.gameStart.play();
+                    m.start();
+                    running = false;
+                }
+                if (keyManager.space && pauseIndex == 2) {
+
+                    MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display, keyManager, this);
+
+                    Assets.gameStart.play();
+                    MT.start();
+                    running = false;
+                }
+                if (keyManager.space && pauseIndex == 0) {
+                    Save s = new Save(this, trash, npcs, trashContainers, car);
+                    try {
+                        s.tick();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Game.class
+                                .getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
         } else {
-            animation.tick();
-            if (pauseIndex != keyManager.pauseSelector) {
-                switch (keyManager.pauseSelector) {
-                    case 0:
-                        animation = new Animation(Assets.pausaSave, 300);
-                        Assets.selectSound.play();
-
-                        break;
-                    case 1:
-                        animation = new Animation(Assets.pausaStats, 300);
-                        Assets.selectSound.play();
-                        break;
-                    case 2:
-                        animation = new Animation(Assets.pausaMenuInstructions, 300);
-                        Assets.selectSound.play();
-                        break;
-                    case 3:
-                        animation = new Animation(Assets.pausaMainMenu, 300);
-                        Assets.selectSound.play();
-                        break;
-                }
-                pauseIndex = keyManager.pauseSelector;
-            }
-            if (keyManager.space && pauseIndex == 1) {
-                //TodoMart tm = new TodoMart("TodoMart", 512, 512,display,keyManager,this);
-                //Assets.gameStart.play();
-                //tm.start();
-                //running = false;
-
-            }
-            if (keyManager.space && pauseIndex == 3) {
-                MainMenu m = new MainMenu("MainMenu", 512, 512, display);
-                Assets.gameStart.play();
-                m.start();
-                running = false;
-            }
-            if (keyManager.space && pauseIndex == 2) {
-
-                MinigameThrow MT = new MinigameThrow("Trash Throw", width, height, display, keyManager, this);
-
-                Assets.gameStart.play();
-                MT.start();
-                running = false;
-            }
-            if (keyManager.space && pauseIndex == 0) {
-                Save s = new Save(this,trash, npcs, trashContainers, car);
-                try {
-                    s.tick();
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(Game.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
-       } else {
-            Tutorial trt = new Tutorial("Tutorial",width,height,display,keyManager,this);
+            Tutorial trt = new Tutorial("Tutorial", width, height, display, keyManager, this);
             tutorialEnded = true;
             trt.start();
             running = false;

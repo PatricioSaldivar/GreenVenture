@@ -211,6 +211,7 @@ public class TodoMartRoom implements Runnable{
             g = bs.getDrawGraphics();
             g.clearRect(0, 0, width, height);
             g.drawImage(Assets.todoMartRoom, 0, 0, width, height, null);
+            g.drawImage(Assets.npcFacingRight[13],97,120,64,64,null);
             playablePlayer.render(g);
             //Score values por painting
             g.setFont(fontx);
