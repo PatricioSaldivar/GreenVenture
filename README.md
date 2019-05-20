@@ -4,3 +4,6 @@ La misión de Bonfire Studios es convertirse en el centro del entretenimiento de
 # GreenVenture
 Es un videojuego que pretende sensibilizar y crear conciencia en jóvenes, sobre la preservación del medio ambiente.
 
+# Trailer
+https://www.youtube.com/watch?v=GF9qthlwfGg&feature=youtu.be
+
